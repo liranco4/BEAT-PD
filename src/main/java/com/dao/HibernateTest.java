@@ -7,7 +7,7 @@ import org.hibernate.cfg.Configuration;
 
 
 /**
- * Created by liran on 27/04/17.
+ * Created by liran cohen on 27/04/17.
  */
 public class HibernateTest {
     private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
