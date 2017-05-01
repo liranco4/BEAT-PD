@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
  */
 public class HibernateTest {
     private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
 //   public static void main(String args[]){
 //       Cow cow = new Cow();
 ////       cow.setCowID(3);
@@ -31,17 +32,27 @@ public class HibernateTest {
 ////      System.out.println("retrieving cow from database: " + cow1.toString());
 ////      sessionFactory.close();
 //   }
-   public static String getCowByID2(){
+   public static Cow getCowByID2(){
        Session session = sessionFactory.openSession();
        session.beginTransaction();
        Cow cow1 = session.get(Cow.class,2);
-       return cow1.toString();
+       session.close();
+       return cow1;
    }
 
     public static String getCowByID(int id){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         Cow cow1 = session.get(Cow.class,id);
+        session.close();
         return cow1.toString();
+    }
+
+    public static String uploadCow(Cow i_Cow){
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.save(i_Cow);
+        session.close();
+        return String.format("{success:%s}",i_Cow);
     }
 }

@@ -15,7 +15,7 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
+        <dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>4.3.7.RELEASE</version>
@@ -91,8 +91,28 @@
             <version>1.1</version>
         </dependency>
 		<!-- Hibernate library dependecy end -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.0.pr2</version>
+        </dependency>
 
-	</dependencies>
+        <!-- Just the annotations; use this dependency if you want to attach annotations
+             to classes without connecting them to the code. -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.9.0.pr2</version>
+        </dependency>
+
+        <!-- databinding; ObjectMapper, JsonNode and related classes are here -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.0.pr2</version>
+        </dependency>
+
+    </dependencies>
 	<build>
 		<finalName>BEAT-PT</finalName>
 		<plugins>
@@ -121,10 +141,10 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.0.0</version>
-				<configuration>
-					<reuseForks>false</reuseForks>
-					<forkCount>1</forkCount>
-				</configuration>
+				<!--<configuration>-->
+					<!--<reuseForks>false</reuseForks>-->
+					<!--<forkCount>1</forkCount>-->
+				<!--</configuration>-->
 			</plugin>
 		</plugins>
 

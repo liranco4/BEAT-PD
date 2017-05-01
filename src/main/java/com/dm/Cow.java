@@ -3,13 +3,15 @@ package com.dm;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by liran on 25/04/17.
  */
 @Entity (name = "COW_DETAILS")
-public class Cow {
+public class Cow{
 
     private int cowID;
     private String cowName;
@@ -34,6 +36,6 @@ public class Cow {
     }
     @Override
     public String toString(){
-        return "cow id: "+cowID+" cow name: "+ cowName;
+        return String.format("{cowID:%d,cowName:%s}",cowID,cowName);
     }
 }
