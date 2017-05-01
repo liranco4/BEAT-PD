@@ -1,9 +1,11 @@
 package com.dao;
 
 import com.dm.Cow;
+import net.sf.ehcache.config.ConfigurationFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 
 /**
