@@ -1,3 +1,6 @@
-com/beatpd/controller/SimpleController.class
 com/dm/Cow.class
 com/dao/HibernateTest.class
+com/beatpd/controller/AdminController.class
+com/dm/User.class
+com/beatpd/controller/SimpleController.class
+com/dao/UserModel.class

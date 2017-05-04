@@ -4,6 +4,7 @@ import com.dm.Cow;
 import net.sf.ehcache.config.ConfigurationFactory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.springframework.core.env.ConfigurableEnvironment;
 
@@ -14,11 +15,12 @@ import org.springframework.core.env.ConfigurableEnvironment;
 public class HibernateTest {
     private static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
-//   public static void main(String args[]){
+//   public static void main(String args[]) {
 //       Cow cow = new Cow();
-////       cow.setCowID(3);
-////       cow.setCowName("LALALA");
-//
+//       cow.setCowID(3);
+//       cow.setCowName("LALALA");
+//       uploadCow(cow);
+//   }
 ////
 ////       Session session = sessionFactory.openSession();
 //////       session.beginTransaction();
@@ -52,8 +54,9 @@ public class HibernateTest {
 
     public static String uploadCow(Cow i_Cow){
         Session session = sessionFactory.openSession();
-        session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         session.save(i_Cow);
+        tx.commit();
         session.close();
         return String.format("{success:%s}",i_Cow);
     }

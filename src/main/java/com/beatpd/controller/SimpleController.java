@@ -1,14 +1,13 @@
 package com.beatpd.controller;
 
-import com.dao.HibernateTest;
 
+import com.dao.HibernateTest;
 import com.dm.Cow;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Controller
 @RequestMapping("/BEAT-PD/cow")
