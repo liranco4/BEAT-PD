@@ -1,4 +1,5 @@
 package com.beatpd.controller;
+import com.dao.ModelGenerics;
 import com.dao.UserModel;
 import com.dm.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
     private ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
     private ObjectMapper objectMapper = new ObjectMapper();
+    private ModelGenerics modelGenerics = new ModelGenerics();
+    private UserModel userModel = new UserModel();
 
     @RequestMapping(value = "/Upload/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
@@ -25,7 +28,7 @@ public class AdminController {
 
         try {
             User user = objectMapper.readValue(json, User.class);
-            return UserModel.uploadUser(user);
+            return modelGenerics.uploadObjectToDB(user);
         } catch (Exception e) {
             return String.format("{error:%s}", e.getMessage());
         }
@@ -34,6 +37,6 @@ public class AdminController {
     @RequestMapping(value = "/GET/User?value=", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public String getUserByID(String value) {
-        return UserModel.getUserByLoginName(value);
+        return userModel.getUserByLoginName(value);
     }
 }

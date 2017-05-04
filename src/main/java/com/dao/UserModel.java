@@ -11,24 +11,15 @@ import org.hibernate.cfg.Configuration;
  * Created by liran on 5/4/17.
  */
 
-public class UserModel implements Model{
+public class UserModel extends ModelGenerics {
 
-    public static String uploadUser(User i_User){
-        try {
-            Session session = sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
-            session.save(i_User);
-            transaction.commit();
-            session.close();
-            return String.format("{success:%s}", i_User);
-        }catch (Exception e){
-            return String.format("{error:%s}", e.getMessage());
-        }
+    public String uploadUserToDB(User i_User){
+        return uploadObjectToDB(i_User);
     }
 
-    public static String getUserByLoginName(String i_LoginName) {
+    public String getUserByLoginName(String i_LoginName) {
         try {
-            Session session = sessionFactory.openSession();
+            Session session = getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             User user = session.get(User.class, i_LoginName);
             transaction.commit();

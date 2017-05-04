@@ -1,6 +1,12 @@
 /Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dao/UserModel.java
+/Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/HospitalData.java
+/Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/Activity.java
+/Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/Link.java
+/Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dao/ModelGenerics.java
 /Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/beatpd/controller/AdminController.java
 /Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/beatpd/controller/SimpleController.java
 /Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dao/HibernateTest.java
+/Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/Medicine.java
+/Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/Patient.java
 /Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/User.java
 /Users/liran/Desktop/Git/BEAT-PD/src/main/java/com/dm/Cow.java
