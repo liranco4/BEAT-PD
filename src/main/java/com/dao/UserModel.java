@@ -29,4 +29,10 @@ public class UserModel extends ModelGenerics {
             return String.format("{error:%s}", e.getMessage());
         }
     }
+
+    public static void main(String args[]){
+        User us = new User("אחד","אחד","אחד","אחד");
+        UserModel um = new UserModel();
+        um.uploadUserToDB(us);
+    }
 }

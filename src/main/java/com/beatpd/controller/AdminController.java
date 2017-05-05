@@ -34,7 +34,7 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/GET/User?value=", method = RequestMethod.GET, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "/GET/User", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
     public String getUserByID(String value) {
         return userModel.getUserByLoginName(value);
