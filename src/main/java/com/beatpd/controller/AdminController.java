@@ -24,10 +24,10 @@ public class AdminController {
 
     @RequestMapping(value = "/Upload/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public String uploadUser(@RequestBody String json) {
+    public String uploadUser(@RequestBody User user) {
 
         try {
-            User user = objectMapper.readValue(json, User.class);
+            //User user = objectMapper.readValue(user, User.class);
             return modelGenerics.uploadObjectToDB(user);
         } catch (Exception e) {
             return String.format("{error:%s}", e.getMessage());

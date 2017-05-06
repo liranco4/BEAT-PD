@@ -43,7 +43,6 @@ public class HibernateTest {
        session.close();
        return cow1;
    }
-
     public static String getCowByID(int id){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
