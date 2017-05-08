@@ -13,33 +13,36 @@ public class Medicine {
 
     @Id
     @Column(name = "MED_SERIAL_NUMBER")
-    private String serialNumber;
+    private String medicineSerialNumber;
 
     @Column(name = "MED_NAME")
     private String medicineName;
 
     @Column(name = "MED_LIMITATION")
-    private String limitation;
+    private String medicineLimitation;
 
     @Lob
     @Column(name = "MED_INFO")
     private String info;
 
-    public Medicine(String serialNumber, String medicineName, String limitation, String info) {
-        this.serialNumber = serialNumber;
+    @Override
+    public String toString(){
+        return String.format("{medicineSerialNumber:%s,medicineName:%s,URL:%s.info:%s}", medicineSerialNumber, medicineName, medicineLimitation, info);
+    }
+
+    public Medicine(String medicineSerialNumber, String medicineName, String medicineLimitation, String info) {
+        this.medicineSerialNumber = medicineSerialNumber;
         this.medicineName = medicineName;
-        this.limitation = limitation;
+        this.medicineLimitation = medicineLimitation;
         this.info = info;
     }
 
-    public Medicine(){}
-
-    public String getSerialNumber() {
-        return serialNumber;
+    public String getMedicineSerialNumber() {
+        return medicineSerialNumber;
     }
 
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
+    public void setMedicineSerialNumber(String medicineSerialNumber) {
+        this.medicineSerialNumber = medicineSerialNumber;
     }
 
     public String getMedicineName() {
@@ -50,12 +53,12 @@ public class Medicine {
         this.medicineName = medicineName;
     }
 
-    public String getLimitation() {
-        return limitation;
+    public String getMedicineLimitation() {
+        return medicineLimitation;
     }
 
-    public void setLimitation(String limitation) {
-        this.limitation = limitation;
+    public void setMedicineLimitation(String medicineLimitation) {
+        this.medicineLimitation = medicineLimitation;
     }
 
     public String getInfo() {

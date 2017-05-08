@@ -12,61 +12,58 @@ import javax.persistence.Id;
 public class User {
     @Id
     @Column(name = "LOGIN_NAME")
-    private String loginName;
+    private String userLoginName;
 
     @Column(name = "PASSWORD")
-    private String password;
+    private String userPassword;
 
     @Column(name = "ROLE")
-    private String role;
+    private String userRole;
 
     @Column(name = "LAST_LOGIN")
-    private String lastLogin; //TODO need to change to DateTime
-
-    public User(){}
-
-    public User(String loginName, String password, String role, String lastLogin) {
-        this.loginName = loginName;
-        this.password = password;
-        this.role = role;
-        this.lastLogin = lastLogin;
-    }
-
-    public String getLoginName() {
-        return loginName;
-    }
-
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public String getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(String lastLogin) {
-        this.lastLogin = lastLogin;
-    }
+    private String userLastLogin; //TODO need to change to DateTime
 
     @Override
     public String toString(){
-        return String.format("{loginName:%s,password:%s,role:%s,lastLogin:%s}",loginName,password,role,lastLogin);
+        return String.format("{userLoginName:%s,userPassword:%s,userRole:%s,userLastLogin:%s}", userLoginName, userPassword, userRole, userLastLogin);
     }
 
+    public User(String userLoginName, String userPassword, String userRole, String userLastLogin) {
+        this.userLoginName = userLoginName;
+        this.userPassword = userPassword;
+        this.userRole = userRole;
+        this.userLastLogin = userLastLogin;
+    }
+
+    public String getUserLoginName() {
+        return userLoginName;
+    }
+
+    public void setUserLoginName(String userLoginName) {
+        this.userLoginName = userLoginName;
+    }
+
+    public String getUserPassword() {
+        return userPassword;
+    }
+
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
+    }
+
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getUserLastLogin() {
+        return userLastLogin;
+    }
+
+    public void setUserLastLogin(String userLastLogin) {
+        this.userLastLogin = userLastLogin;
+    }
 }

@@ -12,9 +12,9 @@
 
         <property name="connection.pool_size">2</property>
 
-        <!-- Assume test is the database name -->
+        <!-- Assume test is the databactivityNamename -->
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost/BEAT_PD
+                jdbc:mysql://localhost/BEAT_PD
         </property>
         <property name="hibernate.connection.username">
             root
@@ -25,7 +25,14 @@
         <!--Echo all sql query to stdout -->
         <property name="show_sql">true</property>
 
+        <!--SET DATABASE TO UTF-8 WITH THE FOLLOWING COMMAND IN DB:  create database BEAT_PD character set utf8;
+        THE FOLLOWING ARE HIBERNATE CONNECTION FOR UTF-8-->
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+
         <property name="hbm2ddl.auto">update</property>
+
         <!-- List of XML mapping files -->
         <mapping class="com.dm.User"/>
         <mapping class="com.dm.Patient"/>

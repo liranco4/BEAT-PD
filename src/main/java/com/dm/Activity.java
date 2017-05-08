@@ -15,18 +15,21 @@ public class Activity {
     private String name;
 
     @Column(name = "TYPE")
-    private String type;//TODO need to add enum
+    private String activityType;//TODO need to add enum
 
     @Lob
     @Column(name = "LEMITATION")
-    private String lemitation;
+    private String activityLemitation;
 
-    public Activity(){}
+    @Override
+    public String toString(){
+        return String.format("{name:%s,activityType:%s,activityLemitation:%s}", name, activityType, activityLemitation);
+    }
 
-    public Activity(String name, String type, String lemitation) {
+    public Activity(String name, String activityType, String activityLemitation) {
         this.name = name;
-        this.type = type;
-        this.lemitation = lemitation;
+        this.activityType = activityType;
+        this.activityLemitation = activityLemitation;
     }
 
     public String getName() {
@@ -37,19 +40,19 @@ public class Activity {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getActivityType() {
+        return activityType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setActivityType(String activityType) {
+        this.activityType = activityType;
     }
 
-    public String getLemitation() {
-        return lemitation;
+    public String getActivityLemitation() {
+        return activityLemitation;
     }
 
-    public void setLemitation(String lemitation) {
-        this.lemitation = lemitation;
+    public void setActivityLemitation(String activityLemitation) {
+        this.activityLemitation = activityLemitation;
     }
 }
