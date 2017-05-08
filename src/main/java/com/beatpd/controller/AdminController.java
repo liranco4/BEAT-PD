@@ -28,7 +28,7 @@ public class AdminController {
 
         try {
             //User user = objectMapper.readValue(user, User.class);
-            return modelGenerics.uploadObjectToDB(user);
+            return modelGenerics.addObjectToDB(user);
         } catch (Exception e) {
             return String.format("{error:%s}", e.getMessage());
         }
@@ -37,6 +37,6 @@ public class AdminController {
     @RequestMapping(value = "/GET/User", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
     public String getUserByID(String value) {
-        return userModel.getUserByLoginName(value);
+        return userModel.getUserByUserLoginName(value);
     }
 }

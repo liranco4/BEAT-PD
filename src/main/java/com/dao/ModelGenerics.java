@@ -20,9 +20,9 @@ public class ModelGenerics {
     /**
      *
      * @param i_Object
-     * @return json: on success, on failure: message failure
+     * @return json: on success, on failure: failure message
      */
-    public String uploadObjectToDB(Object i_Object){
+    public String addObjectToDB(Object i_Object){
         try {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
