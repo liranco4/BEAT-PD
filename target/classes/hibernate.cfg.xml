@@ -12,9 +12,13 @@
 
 
 
-        <!-- Assume test is the database name -->
+        <!-- Assume test is the databactivityNamename -->
         <property name="hibernate.connection.url">
+<<<<<<< HEAD
                 jdbc:mysql://localhost/BEAT_PD1
+=======
+                jdbc:mysql://localhost/BEAT_PD
+>>>>>>> 301554410838103cc1a4bea1b79d00ad224b8d22
         </property>
         <property name="hibernate.connection.username">
             root

@@ -15,40 +15,43 @@ public class Link {
     private Long linkID;
 
     @Column(name = "HEADLINE")
-    private String headLine;
+    private String lintkHeadLine;
 
     @Column(name = "URL")
-    private String URL;
+    private String linkURL;
+
+    @Override
+    public String toString(){
+        return String.format("{linkID:%s,linkHeadLine:%s,linkURL:%s}",linkID, lintkHeadLine, linkURL);
+    }
+
+    public Link(Long linkID, String lintkHeadLine, String linkURL) {
+        this.linkID = linkID;
+        this.lintkHeadLine = lintkHeadLine;
+        this.linkURL = linkURL;
+    }
 
     public Long getLinkID() {
         return linkID;
     }
 
-    public Link(Long linkID, String headLine, String URL) {
-        this.linkID = linkID;
-        this.headLine = headLine;
-        this.URL = URL;
-    }
-
-    public Link(){}
-
     public void setLinkID(Long linkID) {
         this.linkID = linkID;
     }
 
-    public String getHeadLine() {
-        return headLine;
+    public String getLintkHeadLine() {
+        return lintkHeadLine;
     }
 
-    public void setHeadLine(String headLine) {
-        this.headLine = headLine;
+    public void setLintkHeadLine(String lintkHeadLine) {
+        this.lintkHeadLine = lintkHeadLine;
     }
 
-    public String getURL() {
-        return URL;
+    public String getLinkURL() {
+        return linkURL;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    public void setLinkURL(String linkURL) {
+        this.linkURL = linkURL;
     }
 }

@@ -10,32 +10,36 @@ import javax.persistence.Id;
 @Entity(name = "HOSPITAL_DATA")
 public class HospitalData {
 
-    public HospitalData(){}
     @Id
     @Column(name = "PATIENT_ID")
-    private String id;
+    private String patientID;
 
     @Column(name = "PATIENT_NAME")
-    private String name;
+    private String patientName;
 
-    public HospitalData(String id, String name) {
-        this.id = id;
-        this.name = name;
+    @Override
+    public String toString(){
+        return String.format("{patientID:%s,patientName:%s}",patientID, patientName);
     }
 
-    public String getId() {
-        return id;
+    public HospitalData(String patientID, String patientName) {
+        this.patientID = patientID;
+        this.patientName = patientName;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getPatientID() {
+        return patientID;
     }
 
-    public String getName() {
-        return name;
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 }

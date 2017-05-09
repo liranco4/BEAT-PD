@@ -7,96 +7,74 @@ import javax.persistence.Id;
 /**
  * Created by liran on 5/4/17.
  */
-@Entity(name = "USER_DETAILS")
+@Entity(name = "PATIENT_DETAILS")
 public class Patient {
     @Id
-    @Column(name = "LOGIN_NAME")
-    private String loginName;
+    @Column(name = "PATIENT_NAME")
+    private String patientName;
 
     @Column(name = "FIRST_NAME")
-    private String firstName;
+    private String patientFirstName;
 
     @Column(name = "LAST_NAME")
-    private String lastName;
+    private String patientLastName;
 
     @Column(name = "STATUS") //TODO ENUM FOR ALL STATUS
-    private String status;
+    private String patientStatus;
 
     @Column(name = "AGE")
-    private String age;
+    private String patientAge;
 
-    @Column(name = "M_SERIAL_NUMBER")
-    private Long serialNumber;
-
-    public Patient(){}
-
-    public Patient(String loginName, String firstName, String lastName, String status, String age, Long serialNumber, String activityName) {
-        this.loginName = loginName;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.status = status;
-        this.age = age;
-        this.serialNumber = serialNumber;
-        this.activityName = activityName;
+    @Override
+    public String toString(){
+        return String.format("{patientName:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge}", patientName, patientFirstName, patientLastName, patientStatus, patientAge);
     }
 
-    public String getLoginName() {
-        return loginName;
+    public Patient(String patientName, String patientFirstName, String patientLastName, String patientStatus, String patientAge) {
+        this.patientName = patientName;
+        this.patientFirstName = patientFirstName;
+        this.patientLastName = patientLastName;
+        this.patientStatus = patientStatus;
+        this.patientAge = patientAge;
     }
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName;
+    public String getPatientName() {
+        return patientName;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getPatientFirstName() {
+        return patientFirstName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getPatientLastName() {
+        return patientLastName;
     }
 
-    public String getStatus() {
-        return status;
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getPatientStatus() {
+        return patientStatus;
     }
 
-    public String getAge() {
-        return age;
+    public void setPatientStatus(String patientStatus) {
+        this.patientStatus = patientStatus;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public String getPatientAge() {
+        return patientAge;
     }
 
-    public Long getSerialNumber() {
-        return serialNumber;
+    public void setPatientAge(String patientAge) {
+        this.patientAge = patientAge;
     }
-
-    public void setSerialNumber(Long serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public String getActivityName() {
-        return activityName;
-    }
-
-    public void setActivityName(String activityName) {
-        this.activityName = activityName;
-    }
-
-    @Column(name = "ACTIVITY_NAME")//TODO NEED TO KNOW WHAT TO DO WITH FOREIGN KEY
-    private String activityName;
-
 }

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <testsuite tests="1" failures="0" name="controller.AppTest" time="0.005" errors="0" skipped="0">
+=======
+<testsuite tests="1" failures="0" name="controller.AppTest" time="0.004" errors="0" skipped="0">
+>>>>>>> 301554410838103cc1a4bea1b79d00ad224b8d22
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_121\jre\bin"/>
@@ -63,5 +67,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
+<<<<<<< HEAD
   <testcase classname="controller.AppTest" name="testApp" time="0.005"/>
+=======
+  <testcase classname="controller.AppTest" name="testApp" time="0.004"/>
+>>>>>>> 301554410838103cc1a4bea1b79d00ad224b8d22
 </testsuite>
