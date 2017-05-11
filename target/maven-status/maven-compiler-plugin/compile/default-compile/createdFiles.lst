@@ -1,9 +1,0 @@
-com/dm/HospitalData.class
-com/beatpd/controller/AdminController.class
-com/dm/User.class
-com/dm/Activity.class
-com/dao/UserModel.class
-com/dm/Patient.class
-com/dao/ModelGenerics.class
-com/dm/Link.class
-com/dm/Medicine.class

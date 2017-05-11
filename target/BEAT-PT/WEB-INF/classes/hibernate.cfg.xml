@@ -10,17 +10,21 @@
             com.mysql.jdbc.Driver
         </property>
 
-        <property name="connection.pool_size">2</property>
+
 
         <!-- Assume test is the databactivityNamename -->
         <property name="hibernate.connection.url">
+<<<<<<< HEAD
+                jdbc:mysql://localhost/BEAT_PD1
+=======
                 jdbc:mysql://localhost/BEAT_PD
+>>>>>>> 301554410838103cc1a4bea1b79d00ad224b8d22
         </property>
         <property name="hibernate.connection.username">
             root
         </property>
         <property name="hibernate.connection.password">
-            1
+            n6655b36
         </property>
         <!--Echo all sql query to stdout -->
         <property name="show_sql">true</property>
@@ -34,12 +38,13 @@
         <property name="hbm2ddl.auto">update</property>
 
         <!-- List of XML mapping files -->
-        <mapping class="com.dm.User"/>
+
         <mapping class="com.dm.Patient"/>
         <mapping class="com.dm.Medicine"/>
         <mapping class="com.dm.Activity"/>
         <mapping class="com.dm.Link"/>
         <mapping class="com.dm.HospitalData"/>
+        <mapping class="com.dm.User"/>
 
     </session-factory>
 </hibernate-configuration>
