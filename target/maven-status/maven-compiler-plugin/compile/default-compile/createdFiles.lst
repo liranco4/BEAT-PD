@@ -1,5 +1,3 @@
-com/dm/Cow.class
-com/dao/HibernateTest.class
 com/dm/HospitalData.class
 com/beatpd/controller/AdminController.class
 com/dm/User.class

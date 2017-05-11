@@ -1,8 +1,8 @@
 package com.dm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 
 /**
  * Created by liran on 5/4/17.
@@ -11,6 +11,8 @@ import javax.persistence.Id;
 @Entity (name = "USER_DETAILS")
 public class User {
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "LOGIN_NAME")
     private String userLoginName;
 
@@ -28,8 +30,8 @@ public class User {
         return String.format("{userLoginName:%s,userPassword:%s,userRole:%s,userLastLogin:%s}", userLoginName, userPassword, userRole, userLastLogin);
     }
 
-    public User(String userLoginName, String userPassword, String userRole, String userLastLogin) {
-        this.userLoginName = userLoginName;
+    public User(String userPassword, String userRole, String userLastLogin) {
+
         this.userPassword = userPassword;
         this.userRole = userRole;
         this.userLastLogin = userLastLogin;
@@ -39,9 +41,6 @@ public class User {
         return userLoginName;
     }
 
-    public void setUserLoginName(String userLoginName) {
-        this.userLoginName = userLoginName;
-    }
 
     public String getUserPassword() {
         return userPassword;

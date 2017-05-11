@@ -1,8 +1,12 @@
 package com.dm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by liran on 5/4/17.
@@ -29,6 +33,22 @@ public class Patient {
     public String toString(){
         return String.format("{patientName:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge}", patientName, patientFirstName, patientLastName, patientStatus, patientAge);
     }
+
+    @ElementCollection
+    @JoinTable(name="PATIENT_AVTIVITIY", joinColumns = @JoinColumn(name = "PATIENT_NAME"))
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    @Column(name = "ACTIVITY_NAME")
+    private Collection<Activity> listOfActivitiy = new ArrayList();
+
+    @ElementCollection
+    @JoinTable(name="PATIENT_MEDICINE", joinColumns = @JoinColumn(name = "PATIENT_NAME"))
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    @Column(name = "MEDICINE_NAME")
+    private Collection<Medicine> listOfMedicine = new ArrayList();
 
     public Patient(String patientName, String patientFirstName, String patientLastName, String patientStatus, String patientAge) {
         this.patientName = patientName;
@@ -76,5 +96,21 @@ public class Patient {
 
     public void setPatientAge(String patientAge) {
         this.patientAge = patientAge;
+    }
+
+    public Collection<Activity> getListOfActivitiy() {
+        return listOfActivitiy;
+    }
+
+    public void setListOfActivitiy(Collection<Activity> listOfActivitiy) {
+        this.listOfActivitiy = listOfActivitiy;
+    }
+
+    public Collection<Medicine> getListOfMedicine() {
+        return listOfMedicine;
+    }
+
+    public void setListOfMedicine(Collection<Medicine> listOfMedicine) {
+        this.listOfMedicine = listOfMedicine;
     }
 }

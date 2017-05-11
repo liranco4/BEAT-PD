@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.dm.Activity;
 import com.dm.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -26,4 +27,5 @@ public class UserModel extends ModelGenerics {
             return String.format("{error:%s}", e.getMessage());
         }
     }
+
 }
