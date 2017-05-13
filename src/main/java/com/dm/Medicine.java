@@ -27,8 +27,10 @@ public class Medicine {
 
     @Override
     public String toString(){
-        return String.format("{medicineSerialNumber:%s,medicineName:%s,URL:%s.info:%s}", medicineSerialNumber, medicineName, medicineLimitation, info);
+        return String.format("{medicineSerialNumber:%s,medicineName:%s,medicineLimitation:%s.info:%s}", medicineSerialNumber, medicineName, medicineLimitation, info);
     }
+
+    public Medicine() {}
 
     public Medicine(String medicineSerialNumber, String medicineName, String medicineLimitation, String info) {
         this.medicineSerialNumber = medicineSerialNumber;

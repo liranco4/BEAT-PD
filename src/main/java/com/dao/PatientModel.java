@@ -6,6 +6,14 @@ import com.dm.Patient;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
+
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 /**
  * Created by liran on 5/11/17.
  */
@@ -14,7 +22,7 @@ public class PatientModel extends ModelGenerics {
         return addObjectToDB(i_Patient);
     }
 
-    public String getPatientByName(String i_PatientName) {
+    public String getPatientByID(String i_PatientName) {
         try {
             Session session = getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
@@ -26,17 +34,20 @@ public class PatientModel extends ModelGenerics {
             return String.format("{error:%s}", e.getMessage());
         }
     }
+
+    public String updatePatientToDB(Patient i_Patient){
+        return updateObjectToDB(i_Patient);
+    }
+
     public static void main(String args[]){
         PatientModel patientModelModel = new PatientModel();
-        Patient patient = new Patient("dd", "ss","dd", "ok", "80");
-        Activity activity1 = new Activity("sport1","sport","fun");
-        Activity activity2 = new Activity("sport2","sport","fun");
-        Medicine medicine1 = new Medicine("123", "advill","none","bla bla");
-        Medicine medicine2 = new Medicine("124", "akamol","none","bla bla");
-        patient.getListOfActivitiy().add(activity1);
-        patient.getListOfActivitiy().add(activity2);
-        patient.getListOfMedicine().add(medicine1);
-        patient.getListOfMedicine().add(medicine2);
-        patientModelModel.addPatientToDB(patient);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Patient patient = mapper.readValue(patientModelModel.getPatientByID("223456789"), Patient.class);
+
+        }catch(Exception e ){
+            System.out.print(e.getMessage());
+        }
+        //patientModelModel.addPatientToDB(patient);
     }
 }

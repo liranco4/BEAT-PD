@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import static java.lang.String.format;
+
 /**
  * Created by liran on 5/4/17.
  */
@@ -29,9 +31,27 @@ public class ModelGenerics {
             session.save(i_Object);
             transaction.commit();
             session.close();
-            return String.format("{success}");
+            return format("{success}");
         } catch(HibernateException e){
-            return String.format("{error:%s}", e.getMessage());
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param i_Object
+     * @return json: on success, on failure: failure message
+     */
+    public String updateObjectToDB(Object i_Object){
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            session.update(i_Object);
+            transaction.commit();
+            session.close();
+            return format("{success}");
+        } catch(HibernateException e){
+            return format("{error:%s}", e.getMessage());
         }
     }
 

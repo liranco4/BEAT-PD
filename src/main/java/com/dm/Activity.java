@@ -32,6 +32,9 @@ public class Activity {
         this.activityLemitation = activityLemitation;
     }
 
+    public Activity() {
+    }
+
     public String getName() {
         return name;
     }

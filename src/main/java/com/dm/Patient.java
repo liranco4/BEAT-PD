@@ -14,8 +14,8 @@ import java.util.Collection;
 @Entity(name = "PATIENT_DETAILS")
 public class Patient {
     @Id
-    @Column(name = "PATIENT_NAME")
-    private String patientName;
+    @Column(name = "PATIENT_ID")
+    private String patientID;
 
     @Column(name = "FIRST_NAME")
     private String patientFirstName;
@@ -31,7 +31,7 @@ public class Patient {
 
     @Override
     public String toString(){
-        return String.format("{patientName:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge}", patientName, patientFirstName, patientLastName, patientStatus, patientAge);
+        return String.format("{patientID:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge:%s}", patientID, patientFirstName, patientLastName, patientStatus, patientAge);
     }
 
     @ElementCollection
@@ -50,20 +50,22 @@ public class Patient {
     @Column(name = "MEDICINE_NAME")
     private Collection<Medicine> listOfMedicine = new ArrayList();
 
-    public Patient(String patientName, String patientFirstName, String patientLastName, String patientStatus, String patientAge) {
-        this.patientName = patientName;
+    public Patient(){}
+
+    public Patient(String patientID, String patientFirstName, String patientLastName, String patientStatus, String patientAge) {
+        this.patientID = patientID;
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.patientStatus = patientStatus;
         this.patientAge = patientAge;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public String getPatientID() {
+        return patientID;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
     public String getPatientFirstName() {
