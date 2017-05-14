@@ -31,7 +31,7 @@ public class Patient {
 
     @Override
     public String toString(){
-        return String.format("{patientID:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge:%s}", patientID, patientFirstName, patientLastName, patientStatus, patientAge);
+        return String.format("{patientID:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge:%s,listOfActivitiy:%s,listOfMedicine:%s}", patientID, patientFirstName, patientLastName, patientStatus, patientAge,listOfActivitiy,listOfMedicine);
     }
 
     @ElementCollection

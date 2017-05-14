@@ -11,8 +11,8 @@ import javax.persistence.*;
 @Entity (name = "USER_DETAILS")
 public class User {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "LOGIN_NAME")
     private String userLoginName;
 
@@ -29,9 +29,9 @@ public class User {
     public String toString(){
         return String.format("{userLoginName:%s,userPassword:%s,userRole:%s,userLastLogin:%s}", userLoginName, userPassword, userRole, userLastLogin);
     }
-
-    public User(String userPassword, String userRole, String userLastLogin) {
-
+    public User(){}
+    public User(String userLoginName, String userPassword, String userRole, String userLastLogin) {
+        this.userLoginName = userLoginName;
         this.userPassword = userPassword;
         this.userRole = userRole;
         this.userLastLogin = userLastLogin;

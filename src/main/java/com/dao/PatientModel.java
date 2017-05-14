@@ -3,11 +3,14 @@ package com.dao;
 import com.dm.Activity;
 import com.dm.Medicine;
 import com.dm.Patient;
+import com.fasterxml.jackson.core.JsonParser;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
+import java.util.Optional;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +30,7 @@ public class PatientModel extends ModelGenerics {
             Session session = getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             Patient patient = session.get(Patient.class, i_PatientName);
+            patient.getListOfMedicine().add(new Medicine("DD","ss","dd","ff"));
             transaction.commit();
             session.close();
             return patient.toString();
@@ -35,19 +39,23 @@ public class PatientModel extends ModelGenerics {
         }
     }
 
-    public String updatePatientToDB(Patient i_Patient){
-        return updateObjectToDB(i_Patient);
-    }
-
-    public static void main(String args[]){
-        PatientModel patientModelModel = new PatientModel();
-        ObjectMapper mapper = new ObjectMapper();
+    public String updatePatientActivitiesAndMedicinesByID(String i_PatientName, Collection  <Activity> activities, Collection <Medicine> medicines) {
         try {
-            Patient patient = mapper.readValue(patientModelModel.getPatientByID("223456789"), Patient.class);
-
-        }catch(Exception e ){
-            System.out.print(e.getMessage());
+            Session session = getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            Patient patient = session.get(Patient.class, i_PatientName);
+            for (Medicine med : medicines){
+                patient.getListOfMedicine().add(med);
+            }
+            for (Activity act : activities){
+                patient.getListOfActivitiy().add(act);
+            }
+            transaction.commit();
+            session.close();
+            return patient.toString();
+        } catch (Exception e) {
+            return String.format("{error:%s}", e.getMessage());
         }
-        //patientModelModel.addPatientToDB(patient);
     }
+
 }

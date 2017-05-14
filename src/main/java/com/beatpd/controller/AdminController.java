@@ -33,6 +33,7 @@ public class AdminController {
 
         try {
             //User user = objectMapper.readValue(user, User.class);
+            System.out.println(user);
             return modelGenerics.addObjectToDB(user);
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());

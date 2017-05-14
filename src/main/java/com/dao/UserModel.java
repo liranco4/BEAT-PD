@@ -1,7 +1,9 @@
 package com.dao;
 
 import com.dm.Activity;
+import com.dm.Patient;
 import com.dm.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -27,5 +29,8 @@ public class UserModel extends ModelGenerics {
             return String.format("{error:%s}", e.getMessage());
         }
     }
+    public String updateUserToDB(User i_Patient){
 
+        return updateObjectToDB(i_Patient);
+    }
 }
