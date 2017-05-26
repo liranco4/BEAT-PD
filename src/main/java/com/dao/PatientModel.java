@@ -50,11 +50,10 @@ public class PatientModel extends ModelGenerics {
         }
     }
 
-    public static void main(String args[]) {
-        //Patient p = new Patient("110", "sds", "sdf", "dsf", "df");
+    public static void main(String args[]) {Patient p = new Patient("110", "sds", "sdf", "dsf", "df");
        PatientModel pm = new PatientModel();
-       //pm.addPatientToDB(p);
-        String s = pm.getPatientByID("110");
-        System.out.print(s);
+       pm.addPatientToDB(p);
+//       String s = pm.getPatientByID("110");
+//       System.out.print(s)
     }
 }
