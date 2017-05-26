@@ -18,6 +18,7 @@ import static javax.persistence.TemporalType.DATE;
  * Created by liran on 5/4/17.
  */
 @Entity(name = "PATIENT_DETAILS")
+@Embeddable
 public class Patient {
     @Id
     @Column(name = "PATIENT_ID")
@@ -46,23 +47,22 @@ public class Patient {
     }
 
     @ElementCollection
-    @JoinTable(name="PATIENT_ACTIVITIY", joinColumns = @JoinColumn(name ="PATIENT_NAME"))
+    @JoinTable(name="PATIENT_ACTIVITIY", joinColumns = {@JoinColumn(name = "PATIENT_NAME")},inverseJoinColumns = {@JoinColumn(name="ACTIVITY_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    @Column(name = "ACTIVITY_NAME")
     private Collection<Activity> listOfActivitiy = new ArrayList();
 
     @ElementCollection
-    @JoinTable(name="PATIENT_MEDICINE", joinColumns = @JoinColumn(name = "PATIENT_NAME"))
+    @JoinTable(name="PATIENT_MEDICINE", joinColumns = {@JoinColumn(name = "PATIENT_NAME")}, inverseJoinColumns ={@JoinColumn(name="MEDICINE_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    @Columns(columns = {@Column(name = "LAST_UPDATE")})
-    @Column(name = "MEDICINE_NAME")
     private Collection<Medicine> listOfMedicine = new ArrayList();
 
-    public Patient(){}
+    public Patient(){
+        this.patientLastUpdate = new Date();
+    }
 
     public Patient(String patientID, String patientFirstName, String patientLastName, String patientStatus, String patientAge) {
         this.patientID = patientID;
