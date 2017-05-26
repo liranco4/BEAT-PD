@@ -1,12 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: controller.AppTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 sec
-=======
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.01 sec
->>>>>>> 301554410838103cc1a4bea1b79d00ad224b8d22
->>>>>>> de2341d6d5936864ff7efb585c436d775c7e67e0

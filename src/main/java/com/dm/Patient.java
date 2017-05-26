@@ -1,12 +1,18 @@
 package com.dm;
 
 import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Columns;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+
+import static javax.persistence.TemporalType.DATE;
+
 
 /**
  * Created by liran on 5/4/17.
@@ -29,13 +35,18 @@ public class Patient {
     @Column(name = "AGE")
     private String patientAge;
 
+    @Column(name = "LAST_UPDATE")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Type(type = "date")
+    private Date patientLastUpdate;
+
     @Override
     public String toString(){
-        return String.format("{patientID:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge:%s,listOfActivitiy:%s,listOfMedicine:%s}", patientID, patientFirstName, patientLastName, patientStatus, patientAge,listOfActivitiy,listOfMedicine);
+        return String.format("{patientID:%s,patientFirstName:%s,patientLastName:%s,patientStatus:%s,patientAge:%s,listOfActivitiy:%s,listOfMedicine:%s, patientLastUpdate:%s}", patientID, patientFirstName, patientLastName, patientStatus, patientAge,listOfActivitiy,listOfMedicine,patientLastUpdate);
     }
 
     @ElementCollection
-    @JoinTable(name="PATIENT_AVTIVITIY", joinColumns = @JoinColumn(name = "PATIENT_NAME"))
+    @JoinTable(name="PATIENT_ACTIVITIY", joinColumns = @JoinColumn(name ="PATIENT_NAME"))
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
@@ -47,6 +58,7 @@ public class Patient {
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    @Columns(columns = {@Column(name = "LAST_UPDATE")})
     @Column(name = "MEDICINE_NAME")
     private Collection<Medicine> listOfMedicine = new ArrayList();
 
@@ -58,6 +70,7 @@ public class Patient {
         this.patientLastName = patientLastName;
         this.patientStatus = patientStatus;
         this.patientAge = patientAge;
+        this.patientLastUpdate = new Date();
     }
 
     public String getPatientID() {
@@ -100,6 +113,14 @@ public class Patient {
         this.patientAge = patientAge;
     }
 
+    public Date getPatientLastUpdate() {
+        return patientLastUpdate;
+    }
+
+    public void setPatientLastUpdate(Date patientLastUpdate) {
+        this.patientLastUpdate = patientLastUpdate;
+    }
+
     public Collection<Activity> getListOfActivitiy() {
         return listOfActivitiy;
     }
@@ -115,4 +136,5 @@ public class Patient {
     public void setListOfMedicine(Collection<Medicine> listOfMedicine) {
         this.listOfMedicine = listOfMedicine;
     }
+
 }

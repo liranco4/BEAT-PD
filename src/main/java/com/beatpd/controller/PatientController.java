@@ -25,7 +25,7 @@ public class PatientController {
     @ResponseBody
     public String updatePatient(@RequestBody Patient patient) {
         try {
-            patientModel.updatePatientActivitiesAndMedicinesByID(patient.getPatientID(), patient.getListOfActivitiy(), patient.getListOfMedicine());
+            patientModel.updatePatientActivitiesAndMedicinesByID(patient);
             return format("{success: update for the following patient: %s}",patient.getPatientID());
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());

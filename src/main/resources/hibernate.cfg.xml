@@ -33,6 +33,7 @@
 
         <property name="hbm2ddl.auto">update</property>
 
+
         <!-- List of XML mapping files -->
         <mapping class="com.dm.User"/>
         <mapping class="com.dm.Patient"/>
