@@ -36,6 +36,7 @@
 
         <!-- List of XML mapping files -->
         <mapping class="com.dm.User"/>
+        <mapping class="com.dm.PatientRecord"/>
         <mapping class="com.dm.Patient"/>
         <mapping class="com.dm.Medicine"/>
         <mapping class="com.dm.Activity"/>

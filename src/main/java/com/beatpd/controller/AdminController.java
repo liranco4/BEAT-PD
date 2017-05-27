@@ -1,6 +1,6 @@
 package com.beatpd.controller;
 import com.dao.ModelGenerics;
-import com.dao.PatientModel;
+import com.dao.PatientRecordModel;
 import com.dao.UserModel;
 import com.dm.Patient;
 import com.dm.User;
@@ -25,7 +25,7 @@ public class AdminController {
     private ObjectMapper objectMapper = new ObjectMapper();
     private ModelGenerics modelGenerics = new ModelGenerics();
     private UserModel userModel = new UserModel();
-    private PatientModel patientModel = new PatientModel();
+    private PatientRecordModel patientRecordModel = new PatientRecordModel();
 
     @RequestMapping(value = "/Add/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
@@ -57,10 +57,5 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/GET/Patient", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
-    @ResponseBody
-    public String getPatientByID(String value) {
-        return patientModel.getPatientByID(value);
-    }
 
 }

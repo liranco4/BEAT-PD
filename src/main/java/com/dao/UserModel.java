@@ -1,9 +1,6 @@
 package com.dao;
 
-import com.dm.Activity;
-import com.dm.Patient;
 import com.dm.User;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
