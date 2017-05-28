@@ -1,6 +1,8 @@
 package com.beatpd.controller;
 
+import com.dao.ActivityModel;
 import com.dao.PatientRecordModel;
+import com.dm.Activity;
 import com.dm.PatientRecord;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,8 +17,9 @@ import static java.lang.String.format;
  */
 @Controller
 @RequestMapping("/BEAT-PD/User/")
-public class UserPatientRecordController {
+public class UserController {
     private PatientRecordModel patientRecordModel = new PatientRecordModel();
+    private ActivityModel activityModel = new ActivityModel();
 
     @RequestMapping(value = "/Update/PatientRecord/ActivitiesAndMedicines", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
     @ResponseBody
@@ -28,4 +31,17 @@ public class UserPatientRecordController {
             return format("{error:%s}", e.getMessage());
         }
     }
+
+    @RequestMapping(value = "/GET/AllActivities/", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getAllActivities() {
+        try {
+            String activities = activityModel.getAllActivityFromDB();
+            return format("{success: The following are all activities: %s}", activities);
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+
 }

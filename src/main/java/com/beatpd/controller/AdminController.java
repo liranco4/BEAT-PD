@@ -2,6 +2,7 @@ package com.beatpd.controller;
 import com.dao.ModelGenerics;
 import com.dao.PatientRecordModel;
 import com.dao.UserModel;
+import com.dm.Activity;
 import com.dm.Patient;
 import com.dm.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -52,6 +53,17 @@ public class AdminController {
 
         try {
             return modelGenerics.addObjectToDB(patient);
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/Add/Activity", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public String addActivity(@RequestBody Activity activity) {
+
+        try {
+            return modelGenerics.addObjectToDB(activity);
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }

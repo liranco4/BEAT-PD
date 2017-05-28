@@ -4,12 +4,12 @@ import com.dm.Activity;
 import com.dm.Medicine;
 import com.dm.Patient;
 import com.dm.PatientRecord;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionException;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by liran on 5/11/17.
@@ -35,12 +35,13 @@ public class PatientRecordModel extends ModelGenerics {
         }
     }
 
-    public static void main(String args[]) {
-        PatientRecord p = new PatientRecord();
-        p.setPatient("2");
-       PatientRecordModel pm = new PatientRecordModel();
-       pm.addPatientActivitiesAndMedicinesByID(p);
-//       String s = pm.getPatientRecordByID("110");
-//       System.out.print(s)
-    }
+//    public static void main(String args[]) {
+////        PatientRecord p = new PatientRecord();
+////        p.setPatient("2");
+////       PatientRecordModel pm = new PatientRecordModel();
+////       pm.addPatientActivitiesAndMedicinesByID(p);
+////       String s = pm.getPatientRecordByID("110");
+////       System.out.print(s)
+//        session.createCriteria(MyEntity.class).list();
+//    }
 }

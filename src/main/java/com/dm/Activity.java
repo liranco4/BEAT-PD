@@ -12,7 +12,7 @@ import javax.persistence.Lob;
 public class Activity {
     @Id
     @Column(name = "ACTIVITY_NAME")
-    private String name;
+    private String activityName;
 
     @Column(name = "TYPE")
     private String activityType;//TODO need to add enum
@@ -23,11 +23,11 @@ public class Activity {
 
     @Override
     public String toString(){
-        return String.format("{name:%s,activityType:%s,activityLemitation:%s}", name, activityType, activityLemitation);
+        return String.format("{activityName:%s,activityType:%s,activityLemitation:%s}", activityName, activityType, activityLemitation);
     }
 
-    public Activity(String name, String activityType, String activityLemitation) {
-        this.name = name;
+    public Activity(String activityName, String activityType, String activityLemitation) {
+        this.activityName = activityName;
         this.activityType = activityType;
         this.activityLemitation = activityLemitation;
     }
@@ -35,12 +35,12 @@ public class Activity {
     public Activity() {
     }
 
-    public String getName() {
-        return name;
+    public String getActivityName() {
+        return activityName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
     }
 
     public String getActivityType() {
@@ -58,4 +58,5 @@ public class Activity {
     public void setActivityLemitation(String activityLemitation) {
         this.activityLemitation = activityLemitation;
     }
+
 }
