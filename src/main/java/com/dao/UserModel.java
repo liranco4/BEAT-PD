@@ -10,10 +10,6 @@ import org.hibernate.Transaction;
 
 public class UserModel extends ModelGenerics {
 
-    public String addUserToDB(User i_User){
-        return addObjectToDB(i_User);
-    }
-
     public String getUserByUserLoginName(String i_LoginName) {
         try {
             Session session = getSessionFactory().openSession();
@@ -25,9 +21,5 @@ public class UserModel extends ModelGenerics {
         } catch (Exception e) {
             return String.format("{error:%s}", e.getMessage());
         }
-    }
-    public String updateUserToDB(User i_Patient){
-
-        return updateObjectToDB(i_Patient);
     }
 }

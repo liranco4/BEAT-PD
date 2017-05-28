@@ -58,5 +58,4 @@ public class Activity {
     public void setActivityLemitation(String activityLemitation) {
         this.activityLemitation = activityLemitation;
     }
-
 }

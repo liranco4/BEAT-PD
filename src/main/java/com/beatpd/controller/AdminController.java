@@ -1,7 +1,5 @@
 package com.beatpd.controller;
-import com.dao.ModelGenerics;
-import com.dao.PatientRecordModel;
-import com.dao.UserModel;
+import com.dao.*;
 import com.dm.Activity;
 import com.dm.Patient;
 import com.dm.User;
@@ -26,6 +24,9 @@ public class AdminController {
     private ObjectMapper objectMapper = new ObjectMapper();
     private ModelGenerics modelGenerics = new ModelGenerics();
     private UserModel userModel = new UserModel();
+    private PatientModel patientModel = new PatientModel();
+    private ActivityModel activityModel = new ActivityModel();
+
     private PatientRecordModel patientRecordModel = new PatientRecordModel();
 
     @RequestMapping(value = "/Add/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
@@ -35,7 +36,7 @@ public class AdminController {
         try {
             //User user = objectMapper.readValue(user, User.class);
             System.out.println(user);
-            return modelGenerics.addObjectToDB(user);
+            return userModel.addObjectToDB(user);
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -52,7 +53,7 @@ public class AdminController {
     public String addPatient(@RequestBody Patient patient) {
 
         try {
-            return modelGenerics.addObjectToDB(patient);
+            return patientModel.addObjectToDB(patient);
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -63,7 +64,7 @@ public class AdminController {
     public String addActivity(@RequestBody Activity activity) {
 
         try {
-            return modelGenerics.addObjectToDB(activity);
+            return activityModel.addObjectToDB(activity);
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }

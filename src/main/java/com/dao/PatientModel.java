@@ -12,7 +12,5 @@ import org.hibernate.Transaction;
  * Created by liran on 5/11/17.
  */
 public class PatientModel extends ModelGenerics {
-    public String addPatientToDB(Patient i_Patient) {
-        return addObjectToDB(i_Patient);
-    }
+
 }
