@@ -37,7 +37,7 @@ public class UserController {
     public String getAllActivities() {
         try {
             String activities = activityModel.getAllActivityFromDB();
-            return format("{activities:%s}", activities);
+            return format("{success: The following are all activities: %s}", activities);
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
