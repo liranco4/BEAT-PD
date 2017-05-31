@@ -23,9 +23,13 @@ public class ActivityModel extends ModelGenerics {
             transaction.commit();
             session.close();
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("[");
             for (Object activity : activities) {
                 stringBuilder.append(activity);
+                stringBuilder.append(",");
             }
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
+            stringBuilder.append("]");
             return stringBuilder.toString();
         } catch (HibernateException e) {
             return e.getMessage();

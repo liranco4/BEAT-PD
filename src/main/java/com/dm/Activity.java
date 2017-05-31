@@ -23,7 +23,7 @@ public class Activity {
 
     @Override
     public String toString(){
-        return String.format("{activityName:%s,activityType:%s,activityLemitation:%s}", activityName, activityType, activityLemitation);
+        return String.format("{activityName:\"%s\",activityType:\"%s\",activityLemitation:\"%s\"}", activityName, activityType, activityLemitation);
     }
 
     public Activity(String activityName, String activityType, String activityLemitation) {

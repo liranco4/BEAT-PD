@@ -6,6 +6,9 @@ import com.dm.Patient;
 import com.dm.PatientRecord;
 import org.hibernate.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.sql.SQLException;
@@ -35,13 +38,19 @@ public class PatientRecordModel extends ModelGenerics {
         }
     }
 
-//    public static void main(String args[]) {
-////        PatientRecord p = new PatientRecord();
-////        p.setPatient("2");
-////       PatientRecordModel pm = new PatientRecordModel();
-////       pm.addPatientActivitiesAndMedicinesByID(p);
-////       String s = pm.getPatientRecordByID("110");
-////       System.out.print(s)
-//        session.createCriteria(MyEntity.class).list();
-//    }
+    public static void main(String args[]) {
+        PatientRecordModel patientRecordModel = new PatientRecordModel();
+        PatientRecord i_PatientRecord = new PatientRecord();
+        try {
+            Session session = patientRecordModel.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            List<Activity> activities = session.createQuery("SELECT activityName FROM PATIENT_RECORD WHERE patientID=1", Activity.class).list();
+            session.save(i_PatientRecord);
+            transaction.commit();
+            session.close();
+            System.out.print(i_PatientRecord.toString());
+        } catch (HibernateException e) {
+            System.out.print(String.format("{error:%s}", e.getMessage()));
+        }
+    }
 }
