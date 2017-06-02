@@ -33,6 +33,7 @@ public class PatientRecord {
     private Date patientLastUpdate;
 
     @ElementCollection
+    @OneToMany
     @JoinTable(name="PATIENT_RECORD_ACTIVITY", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")},inverseJoinColumns = {@JoinColumn(name="ACTIVITY_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
@@ -40,6 +41,7 @@ public class PatientRecord {
     private Collection<Activity> listOfActivitiy = new ArrayList();
 
     @ElementCollection
+    @OneToMany
     @JoinTable(name="PATIENT_RECORD_MEDICINE", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MEDICINE_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
