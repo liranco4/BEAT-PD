@@ -12,7 +12,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by liran on 5/11/17.
@@ -41,16 +44,22 @@ public class PatientRecordModel extends ModelGenerics {
     public static void main(String args[]) {
         PatientRecordModel patientRecordModel = new PatientRecordModel();
         PatientRecord i_PatientRecord = new PatientRecord();
-        try {
-            Session session = patientRecordModel.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            List<Activity> activities = session.createQuery("SELECT activityName FROM PATIENT_RECORD WHERE patientID=1", Activity.class).list();
-            session.save(i_PatientRecord);
-            transaction.commit();
-            session.close();
-            System.out.print(i_PatientRecord.toString());
-        } catch (HibernateException e) {
-            System.out.print(String.format("{error:%s}", e.getMessage()));
-        }
+//        try {
+//            Session session = patientRecordModel.getSessionFactory().openSession();
+//            Transaction transaction = session.beginTransaction();
+//            List<Activity> activities = session.createQuery("SELECT activityName FROM PATIENT_RECORD WHERE patientID=1", Activity.class).list();
+//            session.save(i_PatientRecord);
+//            transaction.commit();
+//            session.close();
+//            System.out.print(i_PatientRecord.toString());
+//        } catch (HibernateException e) {
+//            System.out.print(String.format("{error:%s}", e.getMessage()));
+//        }
+
+        i_PatientRecord.getListOfActivitiy().add(new Activity("ss","ss","ss"));
+        i_PatientRecord.getListOfActivitiy().add(new Activity("s1","ss","ss"));
+        i_PatientRecord.setPatient("2");
+        i_PatientRecord.setPatientLastUpdate(new Date());
+        patientRecordModel.addPatientActivitiesAndMedicinesByID(i_PatientRecord);
     }
 }

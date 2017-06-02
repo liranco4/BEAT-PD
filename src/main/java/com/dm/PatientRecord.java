@@ -1,15 +1,12 @@
 package com.dm;
 
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.Columns;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import java.util.*;
 
 import static javax.persistence.TemporalType.DATE;
 
@@ -32,21 +29,26 @@ public class PatientRecord {
     @Type(type = "date")
     private Date patientLastUpdate;
 
-    @ElementCollection
-    @OneToMany
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name="PATIENT_RECORD_ACTIVITY", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")},inverseJoinColumns = {@JoinColumn(name="ACTIVITY_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<Activity> listOfActivitiy = new ArrayList();
+    private Collection<Activity> listOfActivitiy = new ArrayList<>();
 
-    @ElementCollection
-    @OneToMany
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name="PATIENT_RECORD_MEDICINE", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MEDICINE_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<Medicine> listOfMedicine = new ArrayList();
+    private Collection<Medicine> listOfMedicine = new ArrayList<>();
 
     @Override
     public String toString(){
@@ -81,7 +83,7 @@ public class PatientRecord {
         return listOfActivitiy;
     }
 
-    public void setListOfActivitiy(Collection<Activity> listOfActivitiy) {
+    public void setListOfActivitiy(Set<Activity> listOfActivitiy) {
         this.listOfActivitiy = listOfActivitiy;
     }
 
@@ -89,7 +91,7 @@ public class PatientRecord {
         return listOfMedicine;
     }
 
-    public void setListOfMedicine(Collection<Medicine> listOfMedicine) {
+    public void setListOfMedicine(Set<Medicine> listOfMedicine) {
         this.listOfMedicine = listOfMedicine;
     }
 }
