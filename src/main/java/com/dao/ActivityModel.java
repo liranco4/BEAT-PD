@@ -6,15 +6,28 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import javax.persistence.criteria.CriteriaQuery;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import static java.lang.String.format;
 
 /**
  * Created by liran on 5/28/17.
  */
 public class ActivityModel extends ModelGenerics {
 
-    public String getAllActivityFromDB() {
-        try {
+    private ActivityModel(){}
+
+    private static ActivityModel activityModelInstance;
+
+    public static ActivityModel getActivityModelInstance(){
+        if (activityModelInstance == null)
+            activityModelInstance = new ActivityModel();
+        return activityModelInstance;
+    }
+
+    public Collection<Activity> getAllActivityFromDB() throws HibernateException{
             Session session = getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             CriteriaQuery<Activity> cq = session.getCriteriaBuilder().createQuery(Activity.class);
@@ -22,17 +35,27 @@ public class ActivityModel extends ModelGenerics {
             List<Activity> activities = session.createQuery(cq).getResultList();
             transaction.commit();
             session.close();
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("[");
-            for (Object activity : activities) {
-                stringBuilder.append(activity);
-                stringBuilder.append(",");
-            }
-            stringBuilder.deleteCharAt(stringBuilder.length()-1);
-            stringBuilder.append("]");
-            return stringBuilder.toString();
-        } catch (HibernateException e) {
-            return e.getMessage();
+            return activities;
+    }
+
+    public String getAllActivitiesAsJsonString(Collection<Activity> listOfActivity){
+        try {
+            return getObjectListAsJsonList(listOfActivity);
+        }catch (HibernateException ex){
+            return ex.getMessage();
         }
+    }
+
+    public Collection<Activity> getSelectedActivityByName(List<String> listOfActivityName){
+        Collection<Activity> resultListOfPatientActivity = new ArrayList<>();
+        Collection<Activity> listOfAllActivities = activityModelInstance.getAllActivityFromDB();
+        for(String activityName : listOfActivityName){
+            for(Activity activity: listOfAllActivities){
+                if(activityName.equals(activity.getActivityName())){
+                    resultListOfPatientActivity.add(activity);
+                }
+            }
+        }
+        return resultListOfPatientActivity;
     }
 }

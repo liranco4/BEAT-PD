@@ -22,12 +22,10 @@ import static java.lang.String.format;
 public class AdminController {
     private ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
     private ObjectMapper objectMapper = new ObjectMapper();
-    private ModelGenerics modelGenerics = new ModelGenerics();
-    private UserModel userModel = new UserModel();
-    private PatientModel patientModel = new PatientModel();
-    private ActivityModel activityModel = new ActivityModel();
+    private UserModel userModel = UserModel.getUserModelInstance();
+    private PatientModel patientModel = PatientModel.getPatientModelInstance();
+    private ActivityModel activityModel = ActivityModel.getActivityModelInstance();
 
-    private PatientRecordModel patientRecordModel = new PatientRecordModel();
 
     @RequestMapping(value = "/Add/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
@@ -70,5 +68,14 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/GET/ReportBYPatientID", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getReportBYPatientID(String value) {
 
+        try {
+            return format("{success:%s}",patientModel.getAllUpdatesByPatientID(value));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
 }

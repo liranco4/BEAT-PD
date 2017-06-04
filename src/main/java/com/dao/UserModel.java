@@ -10,6 +10,16 @@ import org.hibernate.Transaction;
 
 public class UserModel extends ModelGenerics {
 
+    private UserModel(){}
+
+    private static UserModel userModelInstance;
+
+    public static UserModel getUserModelInstance(){
+        if(userModelInstance == null)
+            userModelInstance = new UserModel();
+        return userModelInstance;
+    }
+
     public String getUserByUserLoginName(String i_LoginName) {
         try {
             Session session = getSessionFactory().openSession();
