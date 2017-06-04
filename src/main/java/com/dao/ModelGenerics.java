@@ -7,6 +7,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
 import static java.lang.String.format;
 
 /**
@@ -55,4 +59,20 @@ public class ModelGenerics {
         }
     }
 
+    /**
+     *
+     * @param objectList
+     * @return return objectList as Json List
+     */
+    public <T> String getObjectListAsJsonList(Collection<T> objectList){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("[");
+        for (Object object : objectList) {
+            stringBuilder.append(object);
+            stringBuilder.append(",");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.append("]");
+        return stringBuilder.toString();
+    }
 }
