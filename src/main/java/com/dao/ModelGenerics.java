@@ -1,14 +1,16 @@
 package com.dao;
 
-import com.dm.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 import static java.lang.String.format;
@@ -57,6 +59,17 @@ public class ModelGenerics {
         } catch(HibernateException e){
             return format("{error:%s}", e.getMessage());
         }
+    }
+
+    public <T> Collection<T> findAllByClass(Class clazz) throws HibernateException{
+        Session session = getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        CriteriaQuery<T> cq = session.getCriteriaBuilder().createQuery(clazz);
+        cq.from(clazz);
+        List<T> objects = session.createQuery(cq).getResultList();
+        transaction.commit();
+        session.close();
+        return objects;
     }
 
     /**

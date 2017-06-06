@@ -28,22 +28,11 @@ public class ActivityModel extends ModelGenerics {
     }
 
     public Collection<Activity> getAllActivityFromDB() throws HibernateException{
-            Session session = getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            CriteriaQuery<Activity> cq = session.getCriteriaBuilder().createQuery(Activity.class);
-            cq.from(Activity.class);
-            List<Activity> activities = session.createQuery(cq).getResultList();
-            transaction.commit();
-            session.close();
-            return activities;
+        return findAllByClass(Activity.class);
     }
 
     public String getAllActivitiesAsJsonString(Collection<Activity> listOfActivity){
-        try {
-            return getObjectListAsJsonList(listOfActivity);
-        }catch (HibernateException ex){
-            return ex.getMessage();
-        }
+        return getObjectListAsJsonList(listOfActivity);
     }
 
     public Collection<Activity> getSelectedActivityByName(List<String> listOfActivityName){
@@ -58,4 +47,5 @@ public class ActivityModel extends ModelGenerics {
         }
         return resultListOfPatientActivity;
     }
+
 }
