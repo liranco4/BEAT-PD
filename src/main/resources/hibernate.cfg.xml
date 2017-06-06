@@ -42,7 +42,10 @@
         <mapping class="com.dm.Activity"/>
         <mapping class="com.dm.Link"/>
         <mapping class="com.dm.HospitalData"/>
-        <mapping class="com.dm.User"/>
+        <mapping class="com.dm.Habit"/>
+        <mapping class="com.dm.MoodCondition"/>
+        <mapping class="com.dm.SleepCondition"/>
+        <mapping class="com.dm.SleepDisorder"/>
 
     </session-factory>
 </hibernate-configuration>
