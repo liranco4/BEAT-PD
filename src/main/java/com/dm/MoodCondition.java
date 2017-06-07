@@ -23,7 +23,7 @@ public class MoodCondition {
         this.moodConditionName = moodConditionName;
     }
 
-    public MoodCondition(String moodConditionName) {
+    public MoodCondition() {
     }
 
     @Override

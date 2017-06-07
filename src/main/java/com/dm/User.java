@@ -27,7 +27,7 @@ public class User {
 
     @Override
     public String toString(){
-        return String.format("{userLoginName:%s,userPassword:%s,userRole:%s,userLastLogin:%s}", userLoginName, userPassword, userRole, userLastLogin);
+        return String.format("{userLoginName:\"%s\",userPassword:\"%s\",userRole:\"%s\",userLastLogin:\"%s\"}", userLoginName, userPassword, userRole, userLastLogin);
     }
     public User(){}
     public User(String userLoginName, String userPassword, String userRole, String userLastLogin) {

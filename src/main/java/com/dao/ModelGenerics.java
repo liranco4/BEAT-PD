@@ -18,12 +18,20 @@ import static java.lang.String.format;
 /**
  * Created by liran on 5/4/17.
  */
-public class ModelGenerics {
+public class ModelGenerics{
+
+    private static ModelGenerics modelGenericsInstance;
+    private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
+
+    public static ModelGenerics getModelGenericsInstance(){
+        if(modelGenericsInstance == null)
+            modelGenericsInstance = new ModelGenerics();
+        return modelGenericsInstance;
+    }
+
     public SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-
-    private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 
     /**
      *
@@ -84,7 +92,8 @@ public class ModelGenerics {
             stringBuilder.append(object);
             stringBuilder.append(",");
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        if(!objectList.isEmpty())
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
         stringBuilder.append("]");
         return stringBuilder.toString();
     }

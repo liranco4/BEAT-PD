@@ -15,7 +15,9 @@ import static java.lang.String.format;
 /**
  * Created by liran on 5/11/17.
  */
-public class PatientModel extends ModelGenerics {
+public class PatientModel{
+    private ModelGenerics modelGenerics = ModelGenerics.getModelGenericsInstance();
+    private ActivityModel activityModel = ActivityModel.getActivityModelInstance();
 
     private PatientModel(){}
 
@@ -27,12 +29,10 @@ public class PatientModel extends ModelGenerics {
         return patientModelInstance;
     }
 
-    private ActivityModel activityModel = ActivityModel.getActivityModelInstance();
-
     public String getAllUpdatesByPatientID(String i_PatientID){
 
         try {
-            Session session = getSessionFactory().openSession();
+            Session session = modelGenerics.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
 
             Patient patient = session.get(Patient.class, i_PatientID);
@@ -45,7 +45,7 @@ public class PatientModel extends ModelGenerics {
             StringBuilder buildPatientFile = new StringBuilder();
             buildPatientFile.append(format("***********************************************Start-Report-FOR-The-Following-Patient ID: %s ***********************************************\n",i_PatientID));
             buildPatientFile.append(format("%s\n",patient.toString()));
-            buildPatientFile.append(format("%s\n",getObjectListAsJsonList(patientActivities)));
+            buildPatientFile.append(format("%s\n",modelGenerics.getObjectListAsJsonList(patientActivities)));
             buildPatientFile.append(format("***********************************************End-Report-FOR-The-Following-Patient ID: %s *************************************************\n",i_PatientID));
             return buildPatientFile.toString();
         } catch (HibernateException e) {

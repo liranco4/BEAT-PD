@@ -14,10 +14,10 @@ import static java.lang.String.format;
 @Entity(name = "SLEEP_DISORDER")
 public class SleepDisorder {
     @Id
-    @Column(name = "SLEEP_DISORDER")
+    @Column(name = "SLEEP_DISORDER_NAME")
     private String sleepDisorderName;
 
-    public SleepDisorder(String sleepDisorderName) {}
+    public SleepDisorder() {}
 
     public String getSleepDisorderName() {
         return sleepDisorderName;

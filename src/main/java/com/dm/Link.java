@@ -1,13 +1,11 @@
 package com.dm;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by liran on 5/4/17.
  */
+@Entity(name="LINKS")
 public class Link {
     @Id
     @Column(name = "LINK_ID")
@@ -22,9 +20,9 @@ public class Link {
 
     @Override
     public String toString(){
-        return String.format("{linkID:%s,linkHeadLine:%s,linkURL:%s}",linkID, lintkHeadLine, linkURL);
+        return String.format("{linkID:\"%s\",linkHeadLine:\"%s\",linkURL:\"%s\"}",linkID, lintkHeadLine, linkURL);
     }
-
+    public Link(){}
     public Link(Long linkID, String lintkHeadLine, String linkURL) {
         this.linkID = linkID;
         this.lintkHeadLine = lintkHeadLine;

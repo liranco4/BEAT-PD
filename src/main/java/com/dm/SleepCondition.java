@@ -13,10 +13,9 @@ import static java.lang.String.format;
 public class SleepCondition {
     @Id
     @Column(name = "SLEEP_CONDITION_NAME")
-    private String sleepConditionName;
+    private String sleepConditionName;  //TODO add time and quality
 
-    public SleepCondition(String sleepConditionName) {
-    }
+    public SleepCondition(){}
 
     public String getSleepConditionName() {
         return sleepConditionName;

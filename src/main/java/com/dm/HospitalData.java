@@ -22,6 +22,7 @@ public class HospitalData {
         return String.format("{patientID:%s,patientName:%s}",patientID, patientName);
     }
 
+    public HospitalData(){}
     public HospitalData(String patientID, String patientName) {
         this.patientID = patientID;
         this.patientName = patientName;
