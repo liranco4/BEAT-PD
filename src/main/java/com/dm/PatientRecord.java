@@ -50,9 +50,28 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<Medicine> listOfMedicine = new ArrayList<>();
 
+    @JoinTable(name="PATIENT_RECORD_HABITS", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="HABIT_NAME")})
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    private Collection<Habit> listOfHabit = new ArrayList<>();
+
+    @JoinTable(name="PATIENT_RECORD_MOOD_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MOOD_CONDITION_NAME")})
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    private Collection<MoodCondition> listOfMoodCondition = new ArrayList<>();
+
+    @JoinTable(name="PATIENT_RECORD_SLEEP_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="SLEEP_CONDITION_NAME")})
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    private Collection<SleepCondition> listOfSleepCondition = new ArrayList<>();
+
     @Override
     public String toString(){
-        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivitiy:%s,listOfMedicine:%s}", patientRecordID, patientID,patientLastUpdate,listOfActivitiy,listOfMedicine);
+        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivitiy:%s,listOfMedicine:%s,listOfHabit:%s,listOfMoodCondition:%s,listOfSleepCondition:%s}",
+                patientRecordID, patientID,patientLastUpdate,listOfActivitiy,listOfMedicine, listOfHabit, listOfMoodCondition, listOfSleepCondition);
     }
 
     public PatientRecord(){
@@ -93,5 +112,29 @@ public class PatientRecord {
 
     public void setListOfMedicine(Set<Medicine> listOfMedicine) {
         this.listOfMedicine = listOfMedicine;
+    }
+
+    public Collection<Habit> getListOfHabit() {
+        return listOfHabit;
+    }
+
+    public void setListOfHabit(Collection<Habit> listOfHabit) {
+        this.listOfHabit = listOfHabit;
+    }
+
+    public Collection<MoodCondition> getListOfMoodCondition() {
+        return listOfMoodCondition;
+    }
+
+    public void setListOfMoodCondition(Collection<MoodCondition> listOfMoodCondition) {
+        this.listOfMoodCondition = listOfMoodCondition;
+    }
+
+    public Collection<SleepCondition> getListOfSleepCondition() {
+        return listOfSleepCondition;
+    }
+
+    public void setListOfSleepCondition(Collection<SleepCondition> listOfSleepCondition) {
+        this.listOfSleepCondition = listOfSleepCondition;
     }
 }
