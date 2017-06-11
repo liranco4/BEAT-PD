@@ -36,17 +36,61 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "/GET/AllPatientOptions", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @RequestMapping(value = "/GET/AllActivities", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
-    public String getAllPatientOptions() {
+    public String getAllActivities() {
         try {
-            return format("{success: The following are all options,activities:%s,medicines:%s,habits:%s,links:%s,moodConditions:%s,sleepDisorders:%s}",
-                    modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Activity.class)),
-                    modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Medicine.class)),
-                    modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Habit.class)),
-                    modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Link.class)),
-                    modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(MoodCondition.class)),
-                    modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class)));
+            return format("{success: The following are all Activities,activities:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Activity.class)));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllMedicines", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getAllMedicines() {
+        try {
+            return format("{success: The following are all Medicines,medicines:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Medicine.class)));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllHabits", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getAllHabits() {
+        try {
+            return format("{success: The following are all Habits,habits:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Habit.class)));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllLinks", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getAllLinks() {
+        try {
+            return format("{success: The following are all Links,links:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Link.class)));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllMoodConditions", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getAllMoodConditions() {
+        try {
+            return format("{success: The following are all MoodConditions,moodConditions:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(MoodCondition.class)));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllSleepDisorders", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getAllSleepDisorders() {
+        try {
+            return format("{success: The following are all SleepDisorders,sleepDisorders:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }

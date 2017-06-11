@@ -5,3 +5,5 @@ Report for updated patient: https://www.getpostman.com/collections/bddac544be9cd
 Add MoodCondition: https://www.getpostman.com/collections/d9cef1caae77e355183c
 Add SleepDisorder: https://www.getpostman.com/collections/131a0ced94a916a57548
 Add Habit: https://www.getpostman.com/collections/8c4ed66abc1a320d5119
+The following is example for get one table(for other table change to the name in the URL of the class+s: Activities).
+GET all Habits: https://www.getpostman.com/collections/a8bccac067f569746457
