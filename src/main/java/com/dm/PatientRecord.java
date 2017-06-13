@@ -50,18 +50,30 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<Medicine> listOfMedicine = new ArrayList<>();
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name="PATIENT_RECORD_HABITS", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="HABIT_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<Habit> listOfHabit = new ArrayList<>();
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name="PATIENT_RECORD_MOOD_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MOOD_CONDITION_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<MoodCondition> listOfMoodCondition = new ArrayList<>();
 
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
     @JoinTable(name="PATIENT_RECORD_SLEEP_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="SLEEP_CONDITION_NAME")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
@@ -102,7 +114,7 @@ public class PatientRecord {
         return listOfActivitiy;
     }
 
-    public void setListOfActivitiy(Set<Activity> listOfActivitiy) {
+    public void setListOfActivitiy(Collection<Activity> listOfActivitiy) {
         this.listOfActivitiy = listOfActivitiy;
     }
 
@@ -110,7 +122,7 @@ public class PatientRecord {
         return listOfMedicine;
     }
 
-    public void setListOfMedicine(Set<Medicine> listOfMedicine) {
+    public void setListOfMedicine(Collection<Medicine> listOfMedicine) {
         this.listOfMedicine = listOfMedicine;
     }
 

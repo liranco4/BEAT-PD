@@ -14,22 +14,14 @@ public class Activity {
     @Column(name = "ACTIVITY_NAME")
     private String activityName;
 
-    @Column(name = "TYPE")
-    private String activityType;//TODO need to add enum
-
-    @Lob
-    @Column(name = "LEMITATION")
-    private String activityLemitation;
-
     @Override
     public String toString(){
-        return String.format("{activityName:\"%s\",activityType:\"%s\",activityLemitation:\"%s\"}", activityName, activityType, activityLemitation);
+        return String.format("{activityName:\"%s\"}", activityName);
     }
 
-    public Activity(String activityName, String activityType, String activityLemitation) {
+    public Activity(String activityName) {
         this.activityName = activityName;
-        this.activityType = activityType;
-        this.activityLemitation = activityLemitation;
+
     }
 
     public Activity() {
@@ -43,19 +35,4 @@ public class Activity {
         this.activityName = activityName;
     }
 
-    public String getActivityType() {
-        return activityType;
-    }
-
-    public void setActivityType(String activityType) {
-        this.activityType = activityType;
-    }
-
-    public String getActivityLemitation() {
-        return activityLemitation;
-    }
-
-    public void setActivityLemitation(String activityLemitation) {
-        this.activityLemitation = activityLemitation;
-    }
 }

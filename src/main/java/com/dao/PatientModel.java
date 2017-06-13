@@ -36,16 +36,15 @@ public class PatientModel{
             Transaction transaction = session.beginTransaction();
 
             Patient patient = session.get(Patient.class, i_PatientID);
-            List<String> listOfActivityName = session.createNativeQuery(format("select ACTIVITY_NAME from PATIENT_RECORD,PATIENT_RECORD_ACTIVITY where PATIENT_RECORD_ACTIVITY.PATIENT_RECORDS_ID=PATIENT_RECORD.PATIENT_RECORDS_ID and PATIENT_RECORD.PATIENT_ID=%s", i_PatientID)).list();
+            List<Activity> listOfActivityName = session.createNativeQuery(format("select ACTIVITY_NAME from PATIENT_RECORD,PATIENT_RECORD_ACTIVITY where PATIENT_RECORD_ACTIVITY.PATIENT_RECORDS_ID=PATIENT_RECORD.PATIENT_RECORDS_ID and PATIENT_RECORD.PATIENT_ID=%s", i_PatientID)).list();
 
             transaction.commit();//TODO add list of all options
             session.close();
 
-            Collection<Activity> patientActivities = activityModel.getSelectedActivityByName(listOfActivityName);
             StringBuilder buildPatientFile = new StringBuilder();
             buildPatientFile.append(format("***********************************************Start-Report-FOR-The-Following-Patient ID: %s ***********************************************\n",i_PatientID));
             buildPatientFile.append(format("%s\n",patient.toString()));
-            buildPatientFile.append(format("%s\n",modelGenerics.getObjectListAsJsonList(patientActivities)));
+            buildPatientFile.append(format("%s\n",modelGenerics.getObjectListAsJsonList(listOfActivityName)));
             buildPatientFile.append(format("***********************************************End-Report-FOR-The-Following-Patient ID: %s *************************************************\n",i_PatientID));
             return buildPatientFile.toString();
         } catch (HibernateException e) {
