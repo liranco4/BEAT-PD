@@ -25,7 +25,7 @@ public class UserController {
     private ActivityModel activityModel = ActivityModel.getActivityModelInstance();
     private ModelGenerics modelGenerics = ModelGenerics.getModelGenericsInstance();
 
-    @RequestMapping(value = "/Update/PatientRecord/ActivitiesAndMedicines", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @RequestMapping(value = "/Update/PatientRecord", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public String updatePatientRecord(@RequestBody PatientRecord patientRecord) {
         try {
