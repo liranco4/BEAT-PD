@@ -70,20 +70,16 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<MoodCondition> listOfMoodCondition = new ArrayList<>();
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name="PATIENT_RECORD_SLEEP_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="SLEEP_CONDITION_NAME")})
-    @GenericGenerator(name="kaugen" , strategy="increment")
-    @GeneratedValue(generator="kaugen")
-    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<SleepCondition> listOfSleepCondition = new ArrayList<>();
+    @Column(name = "SLEEP_CONDITION_ID")
+    private  Long sleepConditionID;
+
+    @Transient
+    private SleepCondition sleepCondition;
 
     @Override
     public String toString(){
-        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivitiy:%s,listOfMedicine:%s,listOfHabit:%s,listOfMoodCondition:%s,listOfSleepCondition:%s}",
-                patientRecordID, patientID,patientLastUpdate,listOfActivitiy,listOfMedicine, listOfHabit, listOfMoodCondition, listOfSleepCondition);
+        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivitiy:%s,listOfMedicine:%s,listOfHabit:%s,listOfMoodCondition:%s,sleepCondition:%s}",
+                patientRecordID, patientID,patientLastUpdate,listOfActivitiy,listOfMedicine, listOfHabit, listOfMoodCondition, sleepCondition);
     }
 
     public PatientRecord(){
@@ -142,11 +138,19 @@ public class PatientRecord {
         this.listOfMoodCondition = listOfMoodCondition;
     }
 
-    public Collection<SleepCondition> getListOfSleepCondition() {
-        return listOfSleepCondition;
+    public SleepCondition getSleepCondition() {
+        return sleepCondition;
     }
 
-    public void setListOfSleepCondition(Collection<SleepCondition> listOfSleepCondition) {
-        this.listOfSleepCondition = listOfSleepCondition;
+    public void setSleepCondition(SleepCondition sleepCondition) {
+        this.sleepCondition = sleepCondition;
+    }
+
+    public Long getSleepConditionID() {
+        return sleepConditionID;
+    }
+
+    public void setSleepConditionID(Long sleepConditionID) {
+        this.sleepConditionID = sleepConditionID;
     }
 }
