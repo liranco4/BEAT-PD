@@ -104,6 +104,17 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/Add/Medicine", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public String addMedicine(@RequestBody Medicine medicine) {
+
+        try {
+            return modelGenerics.addObjectToDB(medicine);
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
     @RequestMapping(value = "/GET/User", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
     public String getUserByID(String value) {

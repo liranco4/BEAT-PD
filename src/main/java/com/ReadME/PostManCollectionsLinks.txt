@@ -8,3 +8,4 @@ Add Habit: https://www.getpostman.com/collections/8c4ed66abc1a320d5119
 The following is example for get one table(for other table change to the name in the URL of the class+s: Activities).
 GET all Habits: https://www.getpostman.com/collections/a8bccac067f569746457
 Update patient Record: https://www.getpostman.com/collections/8422f493220727631d24
+Add Medicine: https://www.getpostman.com/collections/7f6a91bbc32fa0e6a352
