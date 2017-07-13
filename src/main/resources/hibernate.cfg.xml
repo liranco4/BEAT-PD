@@ -14,13 +14,13 @@
 
         <!-- Assume test is the databactivityNamename -->
         <property name="hibernate.connection.url">
-                jdbc:mysql://localhost/BEAT_PD
+                jdbc:mysql://localhost/beat_pd
         </property>
         <property name="hibernate.connection.username">
             root
         </property>
         <property name="hibernate.connection.password">
-           1
+           n6655b36
         </property>
         <!--Echo all sql query to stdout -->
         <property name="show_sql">true</property>

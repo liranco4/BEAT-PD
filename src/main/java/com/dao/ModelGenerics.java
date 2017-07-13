@@ -82,7 +82,7 @@ public class ModelGenerics{
 
     /**
      *
-     * @param objectList
+     * @param// objectList
      * @return return objectList as Json List
      */
     public <T> String getObjectListAsJsonList(Collection<T> objectList){
