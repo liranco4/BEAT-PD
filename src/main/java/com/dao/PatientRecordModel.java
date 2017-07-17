@@ -51,10 +51,4 @@ public class PatientRecordModel {
         }
     }
 
-    public static void main(String args[]){
-        PatientRecordModel patientRecordModel = new PatientRecordModel();
-        SleepCondition sleepCondition = new SleepCondition();
-
-       // patientRecordModel.addPatientRecord()
-    }
 }
