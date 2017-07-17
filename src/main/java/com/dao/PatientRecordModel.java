@@ -50,5 +50,4 @@ public class PatientRecordModel {
             return format("{error:%s}", e.getStackTrace());
         }
     }
-
 }
