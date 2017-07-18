@@ -9,3 +9,4 @@ The following is example for get one table(for other table change to the name in
 GET all Habits: https://www.getpostman.com/collections/a8bccac067f569746457
 Update patient Record: https://www.getpostman.com/collections/8422f493220727631d24
 Add Medicine: https://www.getpostman.com/collections/7f6a91bbc32fa0e6a352
+Get Patient details by ID: https://www.getpostman.com/collections/b95af3ac668253887f6a
