@@ -5,10 +5,7 @@ import com.dao.ModelGenerics;
 import com.dao.PatientRecordModel;
 import com.dm.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -91,6 +88,16 @@ public class UserController {
     public String getAllSleepDisorders() {
         try {
             return format("{success: The following are all SleepDisorders,sleepDisorders:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class)));
+        } catch (Exception e) {
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/GET/PatientDetails/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public String getPatientDetails( @PathVariable("id") String id) {
+        try {
+            return format("{success:%s}", modelGenerics.retrieveObjectFromDBbyID(Patient.class,id));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
