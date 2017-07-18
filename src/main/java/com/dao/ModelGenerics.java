@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.dm.Patient;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static java.lang.String.format;
+import static jdk.nashorn.internal.objects.Global.println;
 
 /**
  * Created by liran on 5/4/17.
@@ -69,6 +71,52 @@ public class ModelGenerics{
         }
     }
 
+    /**
+     *
+     * @param clazz
+     * @param id
+     * @return object: on success, on failure: failure message
+     */
+    public String retrieveObjectFromDBbyID(Class clazz, String id){
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            Object object = session.get(clazz, id);
+            transaction.commit();
+            session.close();
+            return object.toString();
+        } catch(HibernateException e){
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param clazz
+     * @param id
+     * @return object: on success, on failure: failure message
+     */
+    public String retrieveObjectFromDBbyID(Class clazz, Long id){
+        Object object;
+        try {
+            Session session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            object = session.load(clazz, id);
+            transaction.commit();
+            session.close();
+            return object.toString();
+        } catch(HibernateException e){
+            return format("{error:%s}", e.getMessage());
+        }
+    }
+
+    /**
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws HibernateException
+     */
     public <T> Collection<T> findAllByClass(Class clazz) throws HibernateException{
         Session session = getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
