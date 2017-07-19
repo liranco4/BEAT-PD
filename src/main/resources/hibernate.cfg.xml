@@ -10,7 +10,7 @@
             com.mysql.jdbc.Driver
         </property>
 
-        <property name="connection.pool_size">2</property>
+        <property name="connection.pool_size">100</property>
 
         <!-- Assume test is the databactivityNamename -->
         <property name="hibernate.connection.url">
