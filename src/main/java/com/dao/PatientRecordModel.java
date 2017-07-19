@@ -48,7 +48,7 @@ public class PatientRecordModel {
             session.close();
             return i_PatientRecord.toString();
         } catch (HibernateException e) {
-            return format("{error:%s}", e.getStackTrace());
+            return format("{error:%s}", e.getStackTrace().toString());
         }
     }
 }
