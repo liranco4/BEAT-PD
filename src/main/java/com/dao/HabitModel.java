@@ -22,7 +22,7 @@ public class HabitModel extends ModelGenerics {
     }
 
     public Collection<Habit> getAllHabitFromDB() throws HibernateException {
-        return findAllByClass(Habit.class);
+        return findAllByClass(Habit.class,10);
     }
 
     public String getAllHabitCollectionAsJsonString(Collection<Habit> habitCollection) {

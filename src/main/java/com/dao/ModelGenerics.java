@@ -24,7 +24,6 @@ public class ModelGenerics{
 
     private static ModelGenerics modelGenericsInstance;
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-
     public static ModelGenerics getModelGenericsInstance(){
         if(modelGenericsInstance == null)
             modelGenericsInstance = new ModelGenerics();
@@ -114,17 +113,28 @@ public class ModelGenerics{
      *
      * @param clazz
      * @param <T>
-     * @return
+     * @return all by class name
      * @throws HibernateException
      */
-    public <T> Collection<T> findAllByClass(Class clazz) throws HibernateException{
-        Session session = getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-        CriteriaQuery<T> cq = session.getCriteriaBuilder().createQuery(clazz);
-        cq.from(clazz);
-        List<T> objects = session.createQuery(cq).getResultList();
-        transaction.commit();
-        session.close();
+    public <T> Collection<T> findAllByClass(Class clazz, int amountOfRetries) throws HibernateException{
+        List<T> objects;
+        try {
+            Session session = getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            CriteriaQuery<T> cq = session.getCriteriaBuilder().createQuery(clazz);
+            cq.from(clazz);
+            objects = session.createQuery(cq).getResultList();
+            transaction.commit();
+            session.close();
+        }
+        catch (HibernateException e){
+            if (e.getMessage().contains("ERROR: The last packet successfully received from the server was") && amountOfRetries>0){
+                return findAllByClass(clazz, amountOfRetries);
+            }
+            else{
+                throw e;
+            }
+        }
         return objects;
     }
 

@@ -32,11 +32,11 @@ public class PatientRecordModel {
             Session session = modelGenerics.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             Patient patient = session.get(Patient.class, i_PatientRecord.getPatientID());
-            if(patient == null)
+            if (patient == null)
                 throw new IllegalArgumentException(format("The following patientID:%s doesn't exist", i_PatientRecord.getPatientID()));
 
             //Get SleepCondition ID from DB and save the object
-            if(i_PatientRecord.getSleepCondition() != null) {
+            if (i_PatientRecord.getSleepCondition() != null) {
                 SleepCondition recordSleepCondition = i_PatientRecord.getSleepCondition();
                 SleepCondition sleepCondition = new SleepCondition(recordSleepCondition.getSleepHours(), recordSleepCondition.getSleepQuality(), recordSleepCondition.getSleepDisorders());
                 session.save(sleepCondition);

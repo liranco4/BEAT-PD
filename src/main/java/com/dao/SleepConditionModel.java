@@ -23,7 +23,7 @@ public class SleepConditionModel extends ModelGenerics{
     }
 
     public Collection<SleepCondition> getAllSleepConditionFromDB() throws HibernateException {
-        return findAllByClass(SleepCondition.class);
+        return findAllByClass(SleepCondition.class, 10);
     }
 
     public String getAllSleepConditionsAsJsonString(Collection<SleepCondition> sleepConditions) {

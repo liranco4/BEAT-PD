@@ -37,7 +37,7 @@ public class UserController {
     @ResponseBody
     public String getAllActivities() {
         try {
-            return format("{success: The following are all Activities,activities:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Activity.class)));
+            return format("{success: The following are all Activities,activities:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Activity.class, 10)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -47,7 +47,7 @@ public class UserController {
     @ResponseBody
     public String getAllMedicines() {
         try {
-            return format("{success: The following are all Medicines,medicines:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Medicine.class)));
+            return format("{success: The following are all Medicines,medicines:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Medicine.class, 10)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -57,7 +57,7 @@ public class UserController {
     @ResponseBody
     public String getAllHabits() {
         try {
-            return format("{success: The following are all Habits,habits:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Habit.class)));
+            return format("{success: The following are all Habits,habits:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Habit.class,10)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -67,7 +67,7 @@ public class UserController {
     @ResponseBody
     public String getAllLinks() {
         try {
-            return format("{success: The following are all Links,links:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Link.class)));
+            return format("{success: The following are all Links,links:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Link.class,10)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -77,7 +77,7 @@ public class UserController {
     @ResponseBody
     public String getAllMoodConditions() {
         try {
-            return format("{success: The following are all MoodConditions,moodConditions:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(MoodCondition.class)));
+            return format("{success: The following are all MoodConditions,moodConditions:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(MoodCondition.class,10)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
@@ -87,7 +87,7 @@ public class UserController {
     @ResponseBody
     public String getAllSleepDisorders() {
         try {
-            return format("{success: The following are all SleepDisorders,sleepDisorders:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class)));
+            return format("{success: The following are all SleepDisorders,sleepDisorders:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class,10)));
         } catch (Exception e) {
             return format("{error:%s}", e.getMessage());
         }
