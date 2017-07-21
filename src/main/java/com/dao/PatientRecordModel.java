@@ -27,9 +27,10 @@ public class PatientRecordModel {
         return patientRecordModelInstance;
     }
 
-    public String addPatientRecord(PatientRecord i_PatientRecord) {
+    public String addPatientRecord(PatientRecord i_PatientRecord)throws HibernateException{
+        Session session = null;
         try {
-            Session session = modelGenerics.getSessionFactory().openSession();
+            session = modelGenerics.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
             Patient patient = session.get(Patient.class, i_PatientRecord.getPatientID());
             if (patient == null)
@@ -47,8 +48,9 @@ public class PatientRecordModel {
             transaction.commit();
             session.close();
             return i_PatientRecord.toString();
-        } catch (HibernateException e) {
-            return format("{error:%s}", e.getStackTrace().toString());
+        } finally {
+            if(session!=null)
+                session.close();
         }
     }
 }

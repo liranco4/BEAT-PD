@@ -29,17 +29,16 @@ public class PatientModel{
         return patientModelInstance;
     }
 
-    public String getAllUpdatesByPatientID(String i_PatientID){
-
+    public String getAllUpdatesByPatientID(String i_PatientID)throws HibernateException{
+        Session session = null;
         try {
-            Session session = modelGenerics.getSessionFactory().openSession();
+            session = modelGenerics.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
 
             Patient patient = session.get(Patient.class, i_PatientID);
             List<Activity> listOfActivityName = session.createNativeQuery(format("select ACTIVITY_NAME from PATIENT_RECORD,PATIENT_RECORD_ACTIVITY where PATIENT_RECORD_ACTIVITY.PATIENT_RECORDS_ID=PATIENT_RECORD.PATIENT_RECORDS_ID and PATIENT_RECORD.PATIENT_ID=%s", i_PatientID)).list();
 
             transaction.commit();//TODO add list of all options
-            session.close();
 
             StringBuilder buildPatientFile = new StringBuilder();
             buildPatientFile.append(format("***********************************************Start-Report-FOR-The-Following-Patient ID: %s ***********************************************\n",i_PatientID));
@@ -47,8 +46,9 @@ public class PatientModel{
             buildPatientFile.append(format("%s\n",modelGenerics.getObjectListAsJsonList(listOfActivityName)));
             buildPatientFile.append(format("***********************************************End-Report-FOR-The-Following-Patient ID: %s *************************************************\n",i_PatientID));
             return buildPatientFile.toString();
-        } catch (HibernateException e) {
-            return (format("{error:%s}", e.getMessage()));
+        } finally {
+            if(session!=null)
+                session.close();
         }
     }
 
