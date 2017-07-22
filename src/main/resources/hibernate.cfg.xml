@@ -22,6 +22,7 @@
         <property name="hibernate.connection.password">
            1
         </property>
+        <property name="hibernate.connection.autoReconnect">true</property>
         <!--Echo all sql query to stdout -->
         <property name="show_sql">true</property>
 
@@ -46,6 +47,7 @@
         <mapping class="com.dm.SleepCondition"/>
         <mapping class="com.dm.SleepDisorder"/>
         <mapping class="com.dm.PatientRecord"/>
+        <mapping class="com.dm.KeepAlive"/>
 
     </session-factory>
 </hibernate-configuration>
