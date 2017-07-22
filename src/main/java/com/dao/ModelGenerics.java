@@ -1,11 +1,15 @@
 package com.dao;
 
+import com.dm.KeepAlive;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import javax.persistence.NoResultException;
@@ -24,7 +28,7 @@ public class ModelGenerics{
 
     private static ModelGenerics modelGenericsInstance;
     private SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
-
+    private static boolean keepUpFlag = false;
     public static ModelGenerics getModelGenericsInstance(){
         if(modelGenericsInstance == null)
             modelGenericsInstance = new ModelGenerics();
@@ -109,7 +113,7 @@ public class ModelGenerics{
      * @param id
      * @return object: on success, on failure: failure message
      */
-    public String retrieveObjectFromDBbyID(Class clazz, Long id)throws HibernateException{
+    public String retrieveObjectFromDBbyID(Class clazz, Long id)throws HibernateException, NoResultException{
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -147,6 +151,11 @@ public class ModelGenerics{
             objects = session.createQuery(cq).getResultList();
             transaction.commit();
             LOGGER.log(Level.INFO,format("find all by class: %s succeeded",clazz.getName()));
+            if(!keepUpFlag) {
+                LOGGER.log(Level.INFO, "keep alive is on");
+                keepConnectionToDBUp(1);
+                keepUpFlag = true;
+            }
             return objects;
         }
 //        catch (HibernateException e){
@@ -182,4 +191,24 @@ public class ModelGenerics{
         stringBuilder.append("]");
         return stringBuilder.toString();
     }
+
+    private void keepConnectionToDBUp(long keepAliveID){
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(() -> {
+            while(true) {
+                try{
+                    TimeUnit.MINUTES.sleep(1);
+                    retrieveObjectFromDBbyID(KeepAlive.class, keepAliveID);
+                    LOGGER.log(Level.INFO, "keep alive invoke the DB");
+                    TimeUnit.HOURS.sleep(5);
+                }catch(NoResultException e){
+                    LOGGER.log(Level.INFO, format("error keep alive can't find ID: %d for the following table: %s",keepAliveID,KeepAlive.class.getName()));
+                }
+                catch (HibernateException e){
+                    LOGGER.log(Level.INFO, "error keep alive in hibernate connection");
+                }
+            }
+        });
+    }
+
 }
