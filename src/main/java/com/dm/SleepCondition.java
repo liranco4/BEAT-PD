@@ -19,7 +19,6 @@ import static java.lang.String.format;
  */
 @Entity(name="SLEEP_CONDITION")
 public class SleepCondition {
-    //private static long sequence = 0;
     @Id
     @SequenceGenerator(name = "SLEEP_CONDITION_SEQ", sequenceName = "SLEEP_CONDITION_SEQ")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "SLEEP_CONDITION_SEQ")
@@ -65,6 +64,9 @@ public class SleepCondition {
         return sleepConditionID;
     }
 
+    public void setSleepConditionID(Long sleepConditionID) {
+        this.sleepConditionID = sleepConditionID;
+    }
 
     public Long getSleepHours() {
         return sleepHours;

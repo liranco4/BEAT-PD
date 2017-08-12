@@ -1,6 +1,7 @@
 package com.Security;
 
-import org.mindrot.jbcrypt.BCrypt;
+
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 /**
  * Created by liran on 23/07/17.

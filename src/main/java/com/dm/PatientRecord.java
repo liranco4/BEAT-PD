@@ -8,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import java.util.*;
 
-import static javax.persistence.TemporalType.DATE;
-
 
 /**
  * Created by liran on 5/4/17.
@@ -33,12 +31,11 @@ public class PatientRecord {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name="PATIENT_RECORD_ACTIVITY", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")},inverseJoinColumns = {@JoinColumn(name="ACTIVITY_NAME")})
+    @JoinTable(name="PATIENT_RECORD_ACTIVITY", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")},inverseJoinColumns = {@JoinColumn(name="ACTIVITY_UPDATE_ID")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<Activity> listOfActivitiy = new ArrayList<>();
-
+    private Collection<ActivityUpdate> listOfActivityUpdate = new ArrayList<>();
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -58,7 +55,7 @@ public class PatientRecord {
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<Habit> listOfHabit = new ArrayList<>();
+    private Collection<HabitUpdate> listOfHabitUpdate = new ArrayList<>();
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -78,8 +75,8 @@ public class PatientRecord {
 
     @Override
     public String toString(){
-        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivitiy:%s,listOfMedicine:%s,listOfHabit:%s,listOfMoodCondition:%s,sleepCondition:%s}",
-                patientRecordID, patientID,patientLastUpdate,listOfActivitiy,listOfMedicine, listOfHabit, listOfMoodCondition, sleepCondition);
+        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivityUpdate:%s,listOfMedicine:%s,listOfHabitUpdate:%s,listOfMoodCondition:%s,sleepCondition:%s}",
+                patientRecordID, patientID,patientLastUpdate, listOfActivityUpdate,listOfMedicine, listOfHabitUpdate, listOfMoodCondition, sleepCondition);
     }
 
     public PatientRecord(){
@@ -106,12 +103,12 @@ public class PatientRecord {
         this.patientLastUpdate = patientLastUpdate;
     }
 
-    public Collection<Activity> getListOfActivitiy() {
-        return listOfActivitiy;
+    public Collection<ActivityUpdate> getListOfActivityUpdate() {
+        return listOfActivityUpdate;
     }
 
-    public void setListOfActivitiy(Collection<Activity> listOfActivitiy) {
-        this.listOfActivitiy = listOfActivitiy;
+    public void setListOfActivityUpdate(Collection<ActivityUpdate> listOfActivityUpdate) {
+        this.listOfActivityUpdate = listOfActivityUpdate;
     }
 
     public Collection<Medicine> getListOfMedicine() {
@@ -122,12 +119,12 @@ public class PatientRecord {
         this.listOfMedicine = listOfMedicine;
     }
 
-    public Collection<Habit> getListOfHabit() {
-        return listOfHabit;
+    public Collection<HabitUpdate> getListOfHabitUpdate() {
+        return listOfHabitUpdate;
     }
 
-    public void setListOfHabit(Collection<Habit> listOfHabit) {
-        this.listOfHabit = listOfHabit;
+    public void setListOfHabitUpdate(Collection<HabitUpdate> listOfHabitUpdate) {
+        this.listOfHabitUpdate = listOfHabitUpdate;
     }
 
     public Collection<MoodCondition> getListOfMoodCondition() {

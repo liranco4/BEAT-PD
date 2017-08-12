@@ -48,6 +48,8 @@
         <mapping class="com.dm.SleepDisorder"/>
         <mapping class="com.dm.PatientRecord"/>
         <mapping class="com.dm.KeepAlive"/>
+        <mapping class="com.dm.ActivityUpdate"/>
+        <mapping class="com.dm.HabitUpdate"/>
 
     </session-factory>
 </hibernate-configuration>
