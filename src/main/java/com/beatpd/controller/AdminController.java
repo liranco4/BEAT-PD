@@ -216,4 +216,10 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
+
+    @RequestMapping(value = "/Login", method = RequestMethod.GET )
+    public String Login() {
+        return "redirect:/pages/LoginPage.html";
+    }
+
 }
