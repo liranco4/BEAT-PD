@@ -17,7 +17,6 @@ import static java.lang.String.format;
  */
 public class PatientModel{
     private ModelGenerics modelGenerics = ModelGenerics.getModelGenericsInstance();
-    private ActivityModel activityModel = ActivityModel.getActivityModelInstance();
 
     private PatientModel(){}
 

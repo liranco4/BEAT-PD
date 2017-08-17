@@ -86,7 +86,7 @@ public class ModelGenerics{
      * @param id
      * @return object: on success, on failure: failure message
      */
-    public String retrieveObjectFromDBbyID(Class clazz, String id)throws HibernateException{
+    public Object retrieveObjectFromDBbyID(Class clazz, String id)throws HibernateException{
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -99,7 +99,7 @@ public class ModelGenerics{
             }
             else
                 LOGGER.log(Level.INFO,format("retrieve object: %s from DB by ID: %s succeeded",clazz.getName(),id));
-            return object.toString();
+            return object;
         }
         finally {
             if(session!= null)
@@ -113,7 +113,7 @@ public class ModelGenerics{
      * @param id
      * @return object: on success, on failure: failure message
      */
-    public String retrieveObjectFromDBbyID(Class clazz, Long id)throws HibernateException, NoResultException{
+    public Object retrieveObjectFromDBbyID(Class clazz, Long id)throws HibernateException, NoResultException{
         Session session = null;
         try {
             session = sessionFactory.openSession();
@@ -126,7 +126,7 @@ public class ModelGenerics{
             }
             else
                 LOGGER.log(Level.INFO,format("retrieve object: %s from DB by ID: %d succeeded",clazz.getName(),id));
-            return object.toString();
+            return object;
         } finally {
             if(session!= null)
                 session.close();
@@ -144,7 +144,7 @@ public class ModelGenerics{
         List<T> objects;
         Session session = null;
         try {
-            session= getSessionFactory().openSession();
+            session= sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             CriteriaQuery<T> cq = session.getCriteriaBuilder().createQuery(clazz);
             cq.from(clazz);

@@ -13,23 +13,15 @@ public class UserModel extends ModelGenerics {
     private UserModel(){}
 
     private static UserModel userModelInstance;
-
+    private ModelGenerics modelGenerics = getModelGenericsInstance();
     public static UserModel getUserModelInstance(){
         if(userModelInstance == null)
             userModelInstance = new UserModel();
         return userModelInstance;
     }
 
-    public String getUserByUserLoginName(String i_LoginName) {
-        try {
-            Session session = getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            User user = session.get(User.class, i_LoginName);
-            transaction.commit();
-            session.close();
-            return user.toString();
-        } catch (Exception e) {
-            return String.format("{error:%s}", e.getMessage());
-        }
+    public Boolean checkCredentials(User user) {
+        User userFromDB = (User)modelGenerics.retrieveObjectFromDBbyID(User.class, user.getUserID());
+        return (userFromDB.getUserPassword().equals(user.getUserPassword()) && user.getUserRole().equals(userFromDB.getUserRole()));
     }
 }
