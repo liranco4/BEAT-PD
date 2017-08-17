@@ -152,4 +152,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
+
+
 }

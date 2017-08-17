@@ -25,19 +25,14 @@ import static java.lang.String.format;
 @Controller
 @RequestMapping("/BEAT-PD/Admin/")
 public class AdminController {
-    private ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private UserModel userModel = UserModel.getUserModelInstance();
     private PatientModel patientModel = PatientModel.getPatientModelInstance();
-    private ActivityModel activityModel = ActivityModel.getActivityModelInstance();
     private ModelGenerics modelGenerics = ModelGenerics.getModelGenericsInstance();
-
     @RequestMapping(value = "/Add/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addUser(@RequestBody User user) {
 
         try {
-           return ResponseEntity.ok(userModel.addObjectToDB(user));
+           return ResponseEntity.ok(modelGenerics.addObjectToDB(user));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addUser: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -52,7 +47,7 @@ public class AdminController {
     public ResponseEntity addActivity(@RequestBody Activity activity) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(activity));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(activity));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addActivity: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -67,7 +62,7 @@ public class AdminController {
     public ResponseEntity addHabit(@RequestBody Habit habit) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(habit));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(habit));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addHabit: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -82,7 +77,7 @@ public class AdminController {
     public ResponseEntity addHabit(@RequestBody MoodCondition moodCondition) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(moodCondition));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(moodCondition));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addMoodCondition: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -97,7 +92,7 @@ public class AdminController {
     public ResponseEntity addHabit(@RequestBody Link link) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(link));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(link));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addLink: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -112,7 +107,7 @@ public class AdminController {
     public ResponseEntity addHabit(@RequestBody SleepDisorder sleepDisorder) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(sleepDisorder));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(sleepDisorder));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addSleepDisorder: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -127,7 +122,7 @@ public class AdminController {
     public ResponseEntity addHabit(@RequestBody HospitalData hospitalData) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(hospitalData));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(hospitalData));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addHospitalData: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -142,7 +137,7 @@ public class AdminController {
     public ResponseEntity addMedicine(@RequestBody Medicine medicine) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(medicine));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(medicine));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addMedicine: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -154,9 +149,9 @@ public class AdminController {
 
     @RequestMapping(value = "/GET/User", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity getUserByID(String value) {
+    public ResponseEntity getUserByID(String ID) {
         try {
-            return ResponseEntity.ok(userModel.getUserByUserLoginName(value));
+            return ResponseEntity.ok(modelGenerics.retrieveObjectFromDBbyID(User.class,ID));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getUserByID: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -171,7 +166,7 @@ public class AdminController {
     public ResponseEntity addPatient(@RequestBody Patient patient) {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(patient));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(patient));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in addPatient: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -186,7 +181,7 @@ public class AdminController {
     public ResponseEntity addKeepAlive() {
 
         try {
-            return ResponseEntity.ok(userModel.addObjectToDB(KeepAlive.getKeepAliveInstance()));
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(KeepAlive.getKeepAliveInstance()));
         }catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in keepAlive: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));

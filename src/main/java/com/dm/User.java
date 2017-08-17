@@ -1,8 +1,12 @@
 package com.dm;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.Date;
+
+import static java.lang.String.format;
 
 /**
  * Created by liran on 5/4/17.
@@ -11,10 +15,11 @@ import javax.persistence.*;
 @Entity (name = "USER_DETAILS")
 public class User {
     @Id
-//    @GeneratedValue(generator = "uuid")
-//    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "LOGIN_NAME")
-    private String userLoginName;
+    @Column(name = "ID")
+    private String userID;
+
+    @Column(name = "USER_NAME")
+    private String userName;
 
     @Column(name = "PASSWORD")
     private String userPassword;
@@ -23,24 +28,31 @@ public class User {
     private String userRole;
 
     @Column(name = "LAST_LOGIN")
-    private String userLastLogin; //TODO need to change to DateTime
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @Type(type = "date")
+    private Date userLastLogin;
 
     @Override
     public String toString(){
-        return String.format("{userLoginName:\"%s\",userPassword:\"%s\",userRole:\"%s\",userLastLogin:\"%s\"}", userLoginName, userPassword, userRole, userLastLogin);
+        return format("{userID:\"%s\",userName:\"%s\",userPassword:\"%s\",userRole:\"%s\",userLastLogin:\"%s\"}",userID, userName, userPassword, userRole, userLastLogin);
     }
     public User(){}
-    public User(String userLoginName, String userPassword, String userRole, String userLastLogin) {
-        this.userLoginName = userLoginName;
-        this.userPassword = userPassword;
-        this.userRole = userRole;
-        this.userLastLogin = userLastLogin;
+
+    public String getUserID() {
+        return userID;
     }
 
-    public String getUserLoginName() {
-        return userLoginName;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getUserPassword() {
         return userPassword;
@@ -58,11 +70,11 @@ public class User {
         this.userRole = userRole;
     }
 
-    public String getUserLastLogin() {
+    public Date getUserLastLogin() {
         return userLastLogin;
     }
 
-    public void setUserLastLogin(String userLastLogin) {
+    public void setUserLastLogin(Date userLastLogin) {
         this.userLastLogin = userLastLogin;
     }
 }

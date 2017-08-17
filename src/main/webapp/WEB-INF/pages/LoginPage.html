@@ -1,0 +1,109 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LoginPage</title>
+    <link rel="stylesheet" type="text/css" href="LoginPage.css" />
+    <script
+            src="https://code.jquery.com/jquery-2.1.3.js"
+            integrity="sha256-goy7ystDD5xbXSf+kwL4eV6zOPJCEBD1FBiCElIm+U8="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-2.1.3.min.js"
+            integrity="sha256-ivk71nXhz9nsyFDoYoGf2sbjrR9ddh+XDkCcfZxjvcM="
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<main>
+    <div class="buttons login-button-active" data-action="animated">
+     <button class="login-button">
+            <span class="log-link login-button-active" data-action="animated">Login</span>
+            <span class="login-underline login-button-active" data-action="animated"></span>
+        </button>
+        <button class="signup-button">
+            <span class="sign-link" data-action="animated">Sign Up</span>
+            <span class="signup-underline login-button-active" data-action="animated"></span>
+        </button>
+    </div>
+    <div class="forms">
+        <form class="login-form login-button-active" action="MainPage.html"  data-action="animated"  data-action="animated">
+            <fieldset>
+                <legend>Please, enter your email and password for login.</legend>
+                <label for="login-email">E-mail</label>
+                <input id="login-email" type="email" name="email" required>
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" name="password" required>
+            </fieldset>
+             <input type="submit" value="Login">
+        </form>
+        <form class="signup-form" action="#" method="post" data-action="animated">
+            <fieldset>
+                <legend>Please, enter your email, password and password confirmation for sign up.</legend>
+                <label for="signup-email">E-mail</label>
+                <input id="signup-email" type="email" name="email" required>
+                <label for="signup-password">Password</label>
+                <input id="signup-password" type="password" name="password" required>
+                <label for="signup-confirm-password">Confirm password</label>
+                <input id="signup-confirm-password" type="password" name="password" required>
+            </fieldset>
+            <input type="submit" value="Continue">
+        </form>
+    </div>
+</main>
+
+
+
+</body>
+<script>
+
+var buttons = document.querySelector('.buttons');
+var loginButton = document.querySelector('.log-link');
+var signupButton = document.querySelector('.sign-link');
+var activeElements = document.querySelectorAll('[data-action="animated"]');
+
+buttons.addEventListener('click', switcher);
+
+function switcher(e) {
+  if(e.target == loginButton) {
+    for (var i = 0; i < activeElements.length; i++) {
+      activeElements[i].classList.remove('signup-button-active');
+      activeElements[i].classList.add('login-button-active');
+    }
+  } else if(e.target == signupButton) {
+    for (var i = 0; i < activeElements.length; i++) {
+      activeElements[i].classList.remove('login-button-active');
+      activeElements[i].classList.add('signup-button-active');
+    }
+  }
+}
+
+// OR
+
+/*var loginButton = document.querySelector('.log-link');
+var signupButton = document.querySelector('.sign-link');
+var activeElements = document.getElementsByName('animated');
+var activeLogin = document.querySelector('.log-link');
+
+function OnLoginClick(){
+  location.href = "MainPage.html";
+  for (var i = 0; i < activeElements.length; i++) {
+    activeElements[i].classList.remove('signup-button-active');
+    activeElements[i].classList.add('login-button-active');
+  }
+}
+
+activeLogin.onclick = function() {
+ location.href = "MainPage.html";
+  for (var i = 0; i < activeElements.length; i++) {
+    activeElements[i].classList.remove('login-button-active');
+    activeElements[i].classList.add('signup-button-active');
+  }
+}*/
+
+
+    </script>
+</html>
