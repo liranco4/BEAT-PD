@@ -32,7 +32,7 @@
         <property name="hibernate.connection.characterEncoding">utf8</property>
         <property name="hibernate.connection.useUnicode">true</property>
 
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
 
 
         <!-- List of XML mapping files -->
@@ -50,6 +50,7 @@
         <mapping class="com.dm.KeepAlive"/>
         <mapping class="com.dm.ActivityUpdate"/>
         <mapping class="com.dm.HabitUpdate"/>
+        <mapping class="com.dm.SubMenu"/>
 
     </session-factory>
 </hibernate-configuration>

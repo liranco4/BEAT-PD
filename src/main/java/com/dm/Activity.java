@@ -1,9 +1,16 @@
 package com.dm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Proxy;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import static com.utils.Utils.getObjectListAsJsonList;
 
 /**
  * Created by liran on 5/4/17.
@@ -14,14 +21,13 @@ public class Activity {
     @Column(name = "ACTIVITY_NAME")
     private String activityName;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Column(name = "SUB_MENUS")
+    private List<SubMenu> subMenus = new ArrayList<>();
+
     @Override
     public String toString(){
-        return String.format("{activityName:\"%s\"}", activityName);
-    }
-
-    public Activity(String activityName) {
-        this.activityName = activityName;
-
+        return String.format("{activityName:\"%s\", subMenus:\"%s\"}", activityName, subMenus);
     }
 
     public Activity() {
@@ -35,4 +41,11 @@ public class Activity {
         this.activityName = activityName;
     }
 
+    public List<SubMenu> getSubMenus() {
+        return subMenus;
+    }
+
+    public void setSubMenus(List<SubMenu> subMenus) {
+        this.subMenus = subMenus;
+    }
 }

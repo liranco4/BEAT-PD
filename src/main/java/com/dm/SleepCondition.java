@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
+import static com.utils.Utils.getObjectListAsJsonList;
 import static java.lang.String.format;
 
 /**
@@ -57,7 +58,7 @@ public class SleepCondition {
     @Override
     public String toString(){
         return format("{sleepConditionID:\"%d\",sleepHours:\"%d\",sleepQuality:\"%s\",sleepDisorders:%s}",sleepConditionID,sleepHours,sleepQuality,
-                ModelGenerics.getModelGenericsInstance().getObjectListAsJsonList(sleepDisorders));
+                getObjectListAsJsonList(sleepDisorders));
     }
 
     public Long getSleepConditionID() {

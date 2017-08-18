@@ -1,10 +1,8 @@
 package com.dao;
 
+import com.dm.Activity;
 import com.dm.KeepAlive;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
 import java.util.concurrent.ExecutorService;
@@ -13,7 +11,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import javax.persistence.NoResultException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.Collection;
 import java.util.List;
 
@@ -140,16 +140,17 @@ public class ModelGenerics{
      * @return all by class name
      * @throws HibernateException
      */
-    public <T> Collection<T> findAllByClass(Class clazz, int amountOfRetries) throws HibernateException{
+    public <T> Collection<T> findAllByClass(Class clazz) throws HibernateException{
         List<T> objects;
         Session session = null;
         try {
             session= sessionFactory.openSession();
-            Transaction transaction = session.beginTransaction();
+          Transaction transaction = session.beginTransaction();
+            Hibernate.initialize(Activity.class);
             CriteriaQuery<T> cq = session.getCriteriaBuilder().createQuery(clazz);
             cq.from(clazz);
             objects = session.createQuery(cq).getResultList();
-            transaction.commit();
+           transaction.commit();
             LOGGER.log(Level.INFO,format("find all by class: %s succeeded",clazz.getName()));
             if(!keepUpFlag) {
                 LOGGER.log(Level.INFO, "keep alive is on");
@@ -158,40 +159,39 @@ public class ModelGenerics{
             }
             return objects;
         }
-//        catch (HibernateException e){
-//            if (e.getMessage().contains("ERROR: The last packet successfully received from the server was") && amountOfRetries>0){
-//                LOGGER.log(Level.INFO,format("findAllByClass method retry",clazz.getName()));
-//                return findAllByClass(clazz, amountOfRetries);
-//            }
-//            else{
-//                LOGGER.log(Level.INFO,format("error in findAllByClass by: %s\n%s ",clazz.getName(),e.getStackTrace().toString()));
-//                throw e;
-//            }
-//        }
         finally {
             if(session!=null)
                 session.close();
         }
     }
 
-    /**
-     *
-     * @param objectList
-     * @return return objectList as Json List
-     */
-    public <T> String getObjectListAsJsonList(Collection<T> objectList){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("[");
-        for (Object object : objectList) {
-            stringBuilder.append(object);
-            stringBuilder.append(",");
-        }
-        if(!objectList.isEmpty())
-            stringBuilder.deleteCharAt(stringBuilder.length()-1);
-        stringBuilder.append("]");
-        return stringBuilder.toString();
-    }
+    public  Collection<Activity> findAllByClass() throws HibernateException{
+        List<Activity> objects;
+        Session session = null;
+        try {
+            session= sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Activity> query = builder.createQuery(Activity.class);
+            Root<Activity> root = query.from(Activity.class);
+            query.select(root);
+            Query<Activity> q=session.createQuery(query);
+            objects=q.getResultList();
 
+            transaction.commit();
+            LOGGER.log(Level.INFO,format("find all by class:  succeeded"));
+            if(!keepUpFlag) {
+                LOGGER.log(Level.INFO, "keep alive is on");
+                keepConnectionToDBUp(1);
+                keepUpFlag = true;
+            }
+            return objects;
+        }
+        finally {
+            if(session!=null)
+                session.close();
+        }
+    }
     private void keepConnectionToDBUp(long keepAliveID){
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(() -> {
@@ -211,4 +211,9 @@ public class ModelGenerics{
         });
     }
 
+    public static void main(String args[]){
+            ModelGenerics modelGenrics = ModelGenerics.getModelGenericsInstance();
+        Collection<Activity> ac = modelGenrics.findAllByClass();
+        int x =1;
+    }
 }
