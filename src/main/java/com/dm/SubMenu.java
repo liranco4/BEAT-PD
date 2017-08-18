@@ -11,7 +11,6 @@ import static java.lang.String.format;
  * Created by liran on 17/08/17.
  */
 @Embeddable
-@Proxy(lazy = false)
 public class SubMenu {
     private String subMenu;
     public SubMenu(){}
