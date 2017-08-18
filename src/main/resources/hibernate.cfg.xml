@@ -12,7 +12,7 @@
 
         <property name="connection.pool_size">100</property>
 
-        <!-- Assume test is the databactivityNamename -->
+        <!-- Assume SleepQuality is the databactivityNamename -->
         <property name="hibernate.connection.url">
                 jdbc:mysql://localhost/BEAT_PD?autoReconnect=true
         </property>
@@ -34,8 +34,8 @@
 
         <property name="hbm2ddl.auto">update</property>
 
-
         <!-- List of XML mapping files -->
+        <mapping class="com.dm.SleepQuality"/>
         <mapping class="com.dm.User"/>
         <mapping class="com.dm.Patient"/>
         <mapping class="com.dm.Medicine"/>

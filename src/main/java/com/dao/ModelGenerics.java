@@ -5,20 +5,19 @@ package com.dao;
 
 import com.dm.Activity;
 import com.dm.KeepAlive;
+import com.dm.SleepQuality;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.Collection;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 import static com.utils.SingleLogger.LOGGER;
-import static com.utils.Utils.getObjectListAsJsonList;
 import static java.lang.String.format;
 
 /**

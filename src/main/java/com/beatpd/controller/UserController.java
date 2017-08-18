@@ -135,6 +135,21 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/GET/AllSleepQuality", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity getAllSleepQuality() {
+        try {
+            return ResponseEntity.ok(format("{success: The following are all SleepQuality,sleepQuality:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(SleepQuality.class))));
+        } catch(HibernateException e) {
+            LOGGER.log(Level.INFO, format("error in getAllSleepQuality: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {
+            LOGGER.log(Level.INFO, format("error in getAllSleepQuality: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
     @RequestMapping(value = "/GET/PatientDetails/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
     public ResponseEntity getPatientDetails( @PathVariable("id") String id) {

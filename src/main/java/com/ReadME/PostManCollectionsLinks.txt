@@ -10,6 +10,6 @@ GET all Habits: https://www.getpostman.com/collections/a8bccac067f569746457
 Update patient Record: https://www.getpostman.com/collections/8422f493220727631d24
 Add Medicine: https://www.getpostman.com/collections/7f6a91bbc32fa0e6a352
 Get Patient details by ID: https://www.getpostman.com/collections/b95af3ac668253887f6a
-
+Add SleepQuality: https://www.getpostman.com/collections/006961e33bf80a24ee65
 Login to admin from browser:
 http://localhost:8080/BEAT-PD/Admin/Login
