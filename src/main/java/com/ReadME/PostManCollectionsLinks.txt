@@ -1,4 +1,4 @@
-all activities creation: https://www.getpostman.com/collections/30f722977424f2ba3dee
+all activities creation: https://www.getpostman.com/collections/0cd4488e9c90f388aed2
 add new patient: https://www.getpostman.com/collections/451aea9eeca2e289e14a
 update patient: https://www.getpostman.com/collections/8422f493220727631d24
 Report for updated patient: https://www.getpostman.com/collections/bddac544be9cda08c9ea
