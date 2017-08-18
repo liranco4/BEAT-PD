@@ -27,7 +27,7 @@ public class Activity {
 
     @Override
     public String toString(){
-        return String.format("{activityName:\"%s\", subMenus:\"%s\"}", activityName, subMenus);
+        return String.format("{activityName:\"%s\", subMenus:%s}", activityName, subMenus);
     }
 
     public Activity() {
