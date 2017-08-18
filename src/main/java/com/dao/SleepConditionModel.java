@@ -1,11 +1,11 @@
 package com.dao;
 
 import com.dm.SleepCondition;
-import com.dm.SleepDisorder;
 import org.hibernate.HibernateException;
 
-import java.util.ArrayList;
 import java.util.Collection;
+
+import static com.utils.Utils.getObjectListAsJsonList;
 
 /**
  * Created by liran on 07/06/17.
@@ -23,7 +23,7 @@ public class SleepConditionModel extends ModelGenerics{
     }
 
     public Collection<SleepCondition> getAllSleepConditionFromDB() throws HibernateException {
-        return findAllByClass(SleepCondition.class, 10);
+        return findAllByClass(SleepCondition.class);
     }
 
     public String getAllSleepConditionsAsJsonString(Collection<SleepCondition> sleepConditions) {

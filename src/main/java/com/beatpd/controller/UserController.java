@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.logging.Level;
 
 import static com.utils.SingleLogger.LOGGER;
+import static com.utils.Utils.getObjectListAsJsonList;
 import static java.lang.String.format;
 
 /**
@@ -48,7 +49,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getAllActivities() {
         try {
-            return ResponseEntity.ok(format("{success: The following are all Activities,activities:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Activity.class, 10))));
+            return ResponseEntity.ok(format("{success: The following are all Activities,activities:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(Activity.class))));
         } catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getAllActivities: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -63,7 +64,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getAllMedicines() {
         try {
-            return ResponseEntity.ok(format("{success: The following are all Medicines,medicines:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Medicine.class, 10))));
+            return ResponseEntity.ok(format("{success: The following are all Medicines,medicines:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(Medicine.class))));
         } catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getAllMedicines: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -78,7 +79,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getAllHabits() {
         try {
-            return ResponseEntity.ok(format("{success: The following are all Habits,habits:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Habit.class,10))));
+            return ResponseEntity.ok(format("{success: The following are all Habits,habits:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(Habit.class))));
         } catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getAllHabits: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -93,7 +94,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getAllLinks() {
         try {
-            return ResponseEntity.ok(format("{success: The following are all Links,links:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(Link.class,10))));
+            return ResponseEntity.ok(format("{success: The following are all Links,links:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(Link.class))));
         } catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getAllLinks: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -108,7 +109,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getAllMoodConditions() {
         try {
-            return ResponseEntity.ok(format("{success: The following are all MoodConditions,moodConditions:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(MoodCondition.class,10))));
+            return ResponseEntity.ok(format("{success: The following are all MoodConditions,moodConditions:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(MoodCondition.class))));
         } catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getAllMoodConditions: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
@@ -123,13 +124,28 @@ public class UserController {
     @ResponseBody
     public ResponseEntity getAllSleepDisorders() {
         try {
-            return ResponseEntity.ok(format("{success: The following are all SleepDisorders,sleepDisorders:%s}", modelGenerics.getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class,10))));
+            return ResponseEntity.ok(format("{success: The following are all SleepDisorders,sleepDisorders:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(SleepDisorder.class))));
         } catch(HibernateException e) {
             LOGGER.log(Level.INFO, format("error in getAllSleepDisorders: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {
             LOGGER.log(Level.INFO, format("error in getPatientDetails: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllSleepQuality", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity getAllSleepQuality() {
+        try {
+            return ResponseEntity.ok(format("{success: The following are all SleepQuality,sleepQuality:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(SleepQuality.class))));
+        } catch(HibernateException e) {
+            LOGGER.log(Level.INFO, format("error in getAllSleepQuality: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {
+            LOGGER.log(Level.INFO, format("error in getAllSleepQuality: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }

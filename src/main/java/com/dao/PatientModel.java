@@ -10,6 +10,7 @@ import org.hibernate.Transaction;
 import java.util.Collection;
 import java.util.List;
 
+import static com.utils.Utils.getObjectListAsJsonList;
 import static java.lang.String.format;
 
 /**
@@ -42,17 +43,12 @@ public class PatientModel{
             StringBuilder buildPatientFile = new StringBuilder();
             buildPatientFile.append(format("***********************************************Start-Report-FOR-The-Following-Patient ID: %s ***********************************************\n",i_PatientID));
             buildPatientFile.append(format("%s\n",patient.toString()));
-            buildPatientFile.append(format("%s\n",modelGenerics.getObjectListAsJsonList(listOfActivityName)));
+            buildPatientFile.append(format("%s\n",getObjectListAsJsonList(listOfActivityName)));
             buildPatientFile.append(format("***********************************************End-Report-FOR-The-Following-Patient ID: %s *************************************************\n",i_PatientID));
             return buildPatientFile.toString();
         } finally {
             if(session!=null)
                 session.close();
         }
-    }
-
-    public static void main(String args[]){
-        PatientModel patientModel = PatientModel.getPatientModelInstance();
-        System.out.println(patientModel.getAllUpdatesByPatientID("1"));
     }
 }

@@ -147,6 +147,21 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/Add/SleepQuality", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity addSleepQuality(@RequestBody SleepQuality sleepQuality) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.addObjectToDB(sleepQuality));
+        }catch(HibernateException e) {
+            LOGGER.log(Level.INFO, format("error in addSleepQuality: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
     @RequestMapping(value = "/GET/User", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
     @ResponseBody
     public ResponseEntity getUserByID(String ID) {

@@ -1,8 +1,9 @@
 package com.dm;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.String.format;
 
@@ -15,6 +16,10 @@ public class Habit {
     @Column(name = "HABIT_NAME")
     private String habitName;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @Column(name = "SUB_MENUS")
+    private List<SubMenu> subMenus = new ArrayList<>();
+
     public Habit(){}
     public String getHabitName() {
         return habitName;
@@ -24,8 +29,16 @@ public class Habit {
         this.habitName = habitName;
     }
 
+    public List<SubMenu> getSubMenus() {
+        return subMenus;
+    }
+
+    public void setSubMenus(List<SubMenu> subMenus) {
+        this.subMenus = subMenus;
+    }
+
     @Override
     public String toString(){
-        return format("{habitName:\"%s\"}",habitName);
+        return format("{habitName:\"%s\", subMenus:%s}",habitName, subMenus);
     }
 }

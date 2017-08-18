@@ -5,6 +5,8 @@ import org.hibernate.HibernateException;
 
 import java.util.Collection;
 
+import static com.utils.Utils.getObjectListAsJsonList;
+
 /**
  * Created by liran on 06/06/17.
  */
@@ -22,7 +24,7 @@ public class HabitModel extends ModelGenerics {
     }
 
     public Collection<Habit> getAllHabitFromDB() throws HibernateException {
-        return findAllByClass(Habit.class,10);
+        return findAllByClass(Habit.class);
     }
 
     public String getAllHabitCollectionAsJsonString(Collection<Habit> habitCollection) {
