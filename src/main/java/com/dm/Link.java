@@ -2,6 +2,8 @@ package com.dm;
 
 import javax.persistence.*;
 
+import static java.lang.String.format;
+
 /**
  * Created by liran on 5/4/17.
  */
@@ -13,19 +15,19 @@ public class Link {
     private Long linkID;
 
     @Column(name = "HEADLINE")
-    private String lintkHeadLine;
+    private String linkHeadLine;
 
     @Column(name = "URL")
     private String linkURL;
 
     @Override
     public String toString(){
-        return String.format("{linkID:\"%s\",linkHeadLine:\"%s\",linkURL:\"%s\"}",linkID, lintkHeadLine, linkURL);
+        return format("{linkHeadLine:\"%s\",linkURL:\"%s\"}",linkID, linkHeadLine, linkURL);
     }
     public Link(){}
     public Link(Long linkID, String lintkHeadLine, String linkURL) {
         this.linkID = linkID;
-        this.lintkHeadLine = lintkHeadLine;
+        this.linkHeadLine = lintkHeadLine;
         this.linkURL = linkURL;
     }
 
@@ -37,12 +39,12 @@ public class Link {
         this.linkID = linkID;
     }
 
-    public String getLintkHeadLine() {
-        return lintkHeadLine;
+    public String getLinkHeadLine() {
+        return linkHeadLine;
     }
 
-    public void setLintkHeadLine(String lintkHeadLine) {
-        this.lintkHeadLine = lintkHeadLine;
+    public void setLinkHeadLine(String linkHeadLine) {
+        this.linkHeadLine = linkHeadLine;
     }
 
     public String getLinkURL() {
