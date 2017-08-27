@@ -35,13 +35,13 @@ public class Password {
         System.out.println("Testing BCrypt Password hashing and verification");
         System.out.println("Test password: " + test_passwd);
         System.out.println("Test stored hash: " + test_hash);
-        System.out.println("Hashing test password...");
+        System.out.println("Hashing SleepQuality password...");
         System.out.println();
 
         String computed_hash = hashPassword(test_passwd);
         System.out.println("Test computed hash: " + computed_hash);
         System.out.println();
-        System.out.println("Verifying that hash and stored hash both match for the test password...");
+        System.out.println("Verifying that hash and stored hash both match for the SleepQuality password...");
         System.out.println();
 
         String compare_test = checkPassword(test_passwd, test_hash)
