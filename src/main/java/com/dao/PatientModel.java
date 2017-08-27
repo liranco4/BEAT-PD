@@ -2,17 +2,10 @@ package com.dao;
 
 
 import com.dm.*;
-import com.dm.dbResult.ActivityDBResult;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import static com.utils.Utils.getObjectListAsJsonList;
 import static java.lang.String.format;
 
 /**
@@ -31,7 +24,7 @@ public class PatientModel{
         return patientModelInstance;
     }
 
-    public List<PatientRecord> getAllUpdatesByPatientID(String i_PatientID)throws HibernateException{
+    public List<PatientRecord> getAllUpdatesByPatientID(String i_PatientID) throws HibernateException{
         Session session = null;
         try {
             session = modelGenerics.getSessionFactory().openSession();
