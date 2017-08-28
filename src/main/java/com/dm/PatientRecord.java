@@ -27,7 +27,7 @@ public class PatientRecord {
     @Type(type = "date")
     private Date patientLastUpdate;
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
@@ -37,7 +37,7 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<ActivityUpdate> listOfActivityUpdate = new ArrayList<>();
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
@@ -47,7 +47,7 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<Medicine> listOfMedicine = new ArrayList<>();
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
@@ -57,7 +57,7 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private Collection<HabitUpdate> listOfHabitUpdate = new ArrayList<>();
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
