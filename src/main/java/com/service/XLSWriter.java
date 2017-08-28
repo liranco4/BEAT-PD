@@ -1,4 +1,4 @@
-package com.dao;
+package com.service;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -12,12 +12,16 @@ import org.apache.poi.ss.util.CellUtil;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by liran on 27/08/17.
  */
 public class XLSWriter
 {
+
+
     public static void main(String[] args)
     {
         try
