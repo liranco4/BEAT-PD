@@ -1,11 +1,9 @@
 package com.dm;
 
-import org.hibernate.annotations.Proxy;
-
 import javax.persistence.Embeddable;
-import javax.persistence.Entity;
 
 import static java.lang.String.format;
+
 
 /**
  * Created by liran on 17/08/17.
