@@ -2,12 +2,12 @@ package com.dao;
 
 
 import com.dm.*;
+import com.interfaces.UpdateDM;
 import com.utils.CustomDate;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -15,10 +15,8 @@ import org.hibernate.Transaction;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+
 import static java.lang.String.format;
 
 /**
@@ -73,8 +71,9 @@ public class PatientModel{
          private Sheet sheet;
          private int rowNum = 0;
          private int colNum = 0;
+         private int firstDataLine;
 
-         public XSL(){
+         private XSL(){
             patientRecordList = getAllPatientUpdates();
         }
 
@@ -82,14 +81,22 @@ public class PatientModel{
              return (sheet.getRow(rowNumber)==null);
          }
 
-         public void createNewExcelReport(String filePath) {
+         private void createNewExcelReport(String filePath) {
 
              try {
                  workbook = new HSSFWorkbook();
                  sheet = workbook.createSheet(CustomDate.getDateFormat().format(new Date()));
                  createHeadLines();
 
-                 patientRecordList.forEach(p-> createAndInsertActivityCell(p.getListOfActivityUpdate()));
+                 patientRecordList.forEach(p-> {
+                     createAndInsertSingleCell(0, p.getPatientID());
+                     createAndInsertSingleCell(1, p.getPatientLastUpdate());
+                     createAndInsertUpdateDmCell(p.getListOfActivityUpdate());
+                     createAndInsertUpdateDmCell(p.getListOfHabitUpdate());
+                     //TODO need to add itnterface only for getName to be more ploymorfizem
+
+                 });
+                 firstDataLine = rowNum;
                  try {
                      //Write the workbook to the file system
                      FileOutputStream out = new FileOutputStream(new File(filePath));
@@ -170,6 +177,7 @@ public class PatientModel{
             //Get the second line that was created
             row = sheet.getRow(--rowNum);
             insertSubHeadLines(row, style);
+            firstDataLine = ++rowNum;
 
         }
 
@@ -190,46 +198,97 @@ public class PatientModel{
         }
 
         //support the following fields from PatientRecord: ID, Date, Medicine, MoodCondition
-        private <T> void createAndInsertSingleCell(Row row, int column, T data){
-            Cell cell = row.createCell(column);
-            if(data instanceof String)
-                cell.setCellValue((String) data);
-            else if(data instanceof Date)
-                cell.setCellValue((Date) data);
+        private <T> void createAndInsertSingleCell( int column, T data){
+            Row row;
+            if(firstDataLine == rowNum) {
+                row = sheet.createRow(rowNum++);
+            }
+            else
+            {
+                row = sheet.getRow(firstDataLine);
+            }
+                Cell cell = row.createCell(column);
+                if (data instanceof String)
+                    cell.setCellValue((String) data);
+                else if (data instanceof Date) {
+                    CellStyle cellStyle = workbook.createCellStyle();
+                    CreationHelper createHelper = workbook.getCreationHelper();
+                    cellStyle.setDataFormat(
+                            createHelper.createDataFormat().getFormat("yyyy-MM-dd"));
+                    cell = row.createCell(1);
+                    cell.setCellValue((Date) data);
+                    cell.setCellStyle(cellStyle);
+                    int x =1;
 
+
+                }
         }
 
-         private  void createAndInsertActivityCell(Collection<ActivityUpdate> activityUpdates){
-            Row row;
-             for(ActivityUpdate act :activityUpdates){
-                 //if(sheet.getRow(++rowNum))
-                 row = sheet.createRow(++rowNum);
-                 row.createCell(2).setCellValue(act.getActivityName());
-                 row.createCell(3).setCellValue(act.getActivityDescription());
+         private void createAndInsertUpdateDmCell(Collection<? extends UpdateDM> updateDMS) {
+             Row row;
+             int rowItr,firstCol = 2, secondCol = 3;
+             if(updateDMS instanceof HabitUpdate){
+                 firstCol = 4;
+                 secondCol = 5;
+             }
+             if (firstDataLine == rowNum) {
+                 for (UpdateDM dm : updateDMS) {
+                     row = sheet.createRow(rowNum++);
+                     row.createCell(firstCol).setCellValue(dm.getName());
+                     row.createCell(secondCol).setCellValue(dm.getDescription());
+                 }
+             }
+             else
+             {
+                 rowItr = firstDataLine;
+                 Iterator<? extends UpdateDM> updateDMIterator = updateDMS.iterator();
+                 while(rowItr<rowNum && updateDMIterator.hasNext()){
+                     row = sheet.getRow(rowItr++);
+                     UpdateDM dm = updateDMIterator.next();
+                     row.createCell(firstCol).setCellValue(dm.getName());
+                     row.createCell(secondCol).setCellValue(dm.getDescription());
+                 }
+                 while(updateDMIterator.hasNext()){
+                     row = sheet.createRow(rowNum++);
+                     UpdateDM dm = updateDMIterator.next();
+                     row.createCell(firstCol).setCellValue(dm.getName());
+                     row.createCell(secondCol).setCellValue(dm.getDescription());
+                 }
              }
          }
 
-         private  void createAndInsertHabitCell(Row row, Collection<HabitUpdate> habitUpdates){
-             colNum = 3;
-             habitUpdates.forEach(habit -> {
-                 row.createCell(colNum++).setCellValue(habit.getHabitName());
-                 row.createCell(colNum).setCellValue(habit.getHabitDescription());
-             });
-         }
 
-         private  void createAndInsertSleepConditionCell(Row row, SleepCondition sleepCondition){
+         private  void createAndInsertSleepConditionCell(SleepCondition sleepCondition) {
+             Row row;
+             if (firstDataLine == rowNum) {
+                 row = sheet.createRow(rowNum++);
+                 sleepCondition.getSleepDisorders().forEach(dis ->
+                         sheet.createRow(rowNum++).createCell(7).setCellValue(dis.getSleepDisorderName()));
+             }
+             else
+             {
+                 row = sheet.getRow(firstDataLine);
+                 Row localRow;
+                 int rowItr = firstDataLine;
+                 Iterator<SleepDisorder> sleepDisorderIterator = sleepCondition.getSleepDisorders().iterator();
+                 while(rowItr<rowNum && sleepDisorderIterator.hasNext()){
+                     localRow = sheet.getRow(rowItr++);
+                     SleepDisorder dm = sleepDisorderIterator.next();
+                     localRow.createCell(7).setCellValue(dm.getSleepDisorderName());
+                 }
+                 while(sleepDisorderIterator.hasNext()){
+                     localRow = sheet.createRow(rowNum++);
+                     SleepDisorder dm = sleepDisorderIterator.next();
+                     localRow.createCell(7).setCellValue(dm.getSleepDisorderName());
+                 }
+
+             }
              colNum = 4;
              row.createCell(colNum++).setCellValue(sleepCondition.getSleepConditionName());
              row.createCell(colNum++).setCellValue(sleepCondition.getSleepQuality());
              row.createCell(colNum++).setCellValue(sleepCondition.getSleepHours());
-             sleepCondition.getSleepDisorders().forEach(dis->
-                 sheet.createRow(rowNum++).createCell(colNum).setCellValue(dis.getSleepDisorderName()));
+
          }
-
-
-
-
-
     }
 
 

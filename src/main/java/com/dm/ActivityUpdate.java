@@ -1,5 +1,7 @@
 package com.dm;
 
+import com.interfaces.UpdateDM;
+
 import javax.persistence.*;
 
 import static java.lang.String.format;
@@ -8,7 +10,7 @@ import static java.lang.String.format;
  * Created by liran on 12/08/17.
  */
 @Entity(name="ACTIVITY_UPDATE")
-public class ActivityUpdate {
+public class ActivityUpdate implements UpdateDM{
     @Id
     @SequenceGenerator(name = "ACTIVITY_UPDATE_SEQ", sequenceName = "ACTIVITY_UPDATE_SEQ")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ACTIVITY_UPDATE_SEQ")
@@ -36,7 +38,8 @@ public class ActivityUpdate {
         this.activityUpdateID = activityUpdateID;
     }
 
-    public String getActivityName() {
+    @Override
+    public String getName() {
         return activityName;
     }
 
@@ -44,7 +47,8 @@ public class ActivityUpdate {
         this.activityName = activityName;
     }
 
-    public String getActivityDescription() {
+    @Override
+    public String getDescription() {
         return activityDescription;
     }
 
