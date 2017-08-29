@@ -12,7 +12,7 @@ import static java.lang.String.format;
 @Entity(name="SLEEP_QUALITY")
 public class SleepQuality {
     @Id
-    @Column(name="TEST_NAME")
+    @Column(name="SLEEP_QUALITY_NAME")
     private String sleepQualityName;
     public SleepQuality(){}
 

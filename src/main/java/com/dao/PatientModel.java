@@ -5,15 +5,16 @@ import com.dm.*;
 import com.utils.CustomDate;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -39,9 +40,6 @@ public class PatientModel{
     public List<PatientRecord> getAllPatientUpdates(){
         List<PatientRecord> patientRecords = new ArrayList<>();
         Collection<Patient> patients =  modelGenerics.findAllByClass(Patient.class);
-//        for (Patient patient: patients) {
-//            patientRecords.addAll(getAllUpdatesByPatientID(patient.getPatientID()));
-//        }
         patients.forEach(p -> patientRecords.addAll(getAllUpdatesByPatientID(p.getPatientID())));
         return patientRecords;
     }
@@ -51,7 +49,7 @@ public class PatientModel{
         try {
             session = modelGenerics.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
-            List<PatientRecord> patientRecords = session.createQuery(format("select distinct p from PATIENT_RECORD as p join p.listOfActivityUpdate with p.patientID=%s",i_PatientID)).list();
+            List<PatientRecord> patientRecords = session.createQuery(format("select p from PATIENT_RECORD as p where p.patientID=%s",i_PatientID)).list();
             transaction.commit();
             return patientRecords;
         } finally {
@@ -76,29 +74,72 @@ public class PatientModel{
          private int rowNum = 0;
          private int colNum = 0;
 
-         public XSL(String filePath){
+         public XSL(){
             patientRecordList = getAllPatientUpdates();
-            workbook = new HSSFWorkbook();
-            sheet = workbook.createSheet(CustomDate.getDateFormat().format(new Date()));
         }
 
-        private void createHeadLines(int colAmount, int rowAmount){
-            String[] patienRecordHeadLines = {"Patient ID", "Update date", "Activity", "Habits", "Medicine", "Mood condition","Sleep condition"};
-            Collection<Cell> subHeadLinesCells = new ArrayList<>();
-            int i = 0;
+         private Boolean isRowNumberAlreadyCreated(int rowNumber){
+             return (sheet.getRow(rowNumber)==null);
+         }
+
+         public void createNewExcelReport(String filePath) {
+
+             try {
+                 workbook = new HSSFWorkbook();
+                 sheet = workbook.createSheet(CustomDate.getDateFormat().format(new Date()));
+                 createHeadLines();
+
+                 patientRecordList.forEach(p-> createAndInsertActivityCell(p.getListOfActivityUpdate()));
+                 try {
+                     //Write the workbook to the file system
+                     FileOutputStream out = new FileOutputStream(new File(filePath));
+                     workbook.write(out);
+                     out.close();
+                     System.out.println("CountriesDetails.xlsx has been created successfully");
+                 } catch (Exception e) {
+                     e.printStackTrace();
+                 } finally {
+                     workbook.close();
+                 }
+             }
+             catch (IOException e){
+                 e.printStackTrace();
+             }
+         }
+
+
+
+        private void createHeadLines(){
+            String[] patientRecordHeadLines = {"Patient ID", "Update date", "Activity", "Habits", "Medicine", "Mood condition","Sleep condition"};
+            int colAmount = 14;
+            int rowAmount = 2;
+            Row row;
+            CellStyle style;
+            // Creating a font
+            Font font= workbook.createFont();
+            font.setFontHeightInPoints((short)10);
+            font.setFontName("Arial");
+            font.setBold(true);
+            font.setItalic(false);
+            style=workbook.createCellStyle();;
+            style.setAlignment(HorizontalAlignment.CENTER);
+            // Setting font to style
+            style.setFont(font);
+
             while(rowNum < rowAmount){
-                 Row row = sheet.createRow(rowNum);
+                row = sheet.createRow(rowNum);
+                //row.setRowStyle(style);
                  while(colNum < colAmount) {
                      Cell cell = row.createCell(colNum++);
-                     switch (rowNum) {
-                         case 0: {cell.setCellValue(patienRecordHeadLines[i++]);break;}
-                         case 1: {subHeadLinesCells.add(cell); break;}
+                     if (rowNum == 0) {
+                         cell.setCellStyle(style);
                      }
+                     //sheet.autoSizeColumn(colNum-1);
                  }
-                 rowNum++;
+                colNum = 0;
+                rowNum++;
             }
             colNum = 0;
-
             //edit excel view
             Collection<CellRangeAddress> cellRangeAddresses = new ArrayList<>();
             //ID cell
@@ -121,18 +162,34 @@ public class PatientModel{
             //SleepCondition
             cellRangeAddresses.add(new CellRangeAddress(0,0,8,10));
             cellRangeAddresses.forEach(this::mergeCells);
+
+            for(int i=0;i<patientRecordHeadLines.length;i++){
+                sheet.getRow(0).getCell(i).setCellValue(patientRecordHeadLines[i]);
+
+            }
+            //Get the second line that was created
+            row = sheet.getRow(--rowNum);
+            insertSubHeadLines(row, style);
+
         }
 
         private void mergeCells(CellRangeAddress cellRangeAddress){
             sheet.addMergedRegion(cellRangeAddress);
         }
 
-        private void insertSubHeadLines(){
-            Row row = sheet.createRow(rowNum);
-            //TODO need complete subHeadLines
+        private void insertSubHeadLines(Row row, CellStyle style){
+            String [] patientRecordSubHeadLines = {"Name", "Description","Name", "Description", "Quality","Hours","Disorder"};
+            int column = 2;
+            int headLinesSize = patientRecordSubHeadLines.length+2;
+            while(column< headLinesSize){
+                Cell cell = row.getCell(column);
+                cell.setCellValue(patientRecordSubHeadLines[column-2]);
+                cell.setCellStyle(style);
+                column++;
+            }
         }
 
-        //support ID, Date, Medicine, MoodCondition
+        //support the following fields from PatientRecord: ID, Date, Medicine, MoodCondition
         private <T> void createAndInsertSingleCell(Row row, int column, T data){
             Cell cell = row.createCell(column);
             if(data instanceof String)
@@ -142,12 +199,14 @@ public class PatientModel{
 
         }
 
-         private  void createAndInsertActivityCell(Row row, Collection<ActivityUpdate> activityUpdates){
-             colNum = 2;
-             activityUpdates.forEach(act -> {
-                 row.createCell(colNum++).setCellValue(act.getActivityName());
-                 row.createCell(colNum).setCellValue(act.getActivityDescription());
-             });
+         private  void createAndInsertActivityCell(Collection<ActivityUpdate> activityUpdates){
+            Row row;
+             for(ActivityUpdate act :activityUpdates){
+                 //if(sheet.getRow(++rowNum))
+                 row = sheet.createRow(++rowNum);
+                 row.createCell(2).setCellValue(act.getActivityName());
+                 row.createCell(3).setCellValue(act.getActivityDescription());
+             }
          }
 
          private  void createAndInsertHabitCell(Row row, Collection<HabitUpdate> habitUpdates){
@@ -163,14 +222,11 @@ public class PatientModel{
              row.createCell(colNum++).setCellValue(sleepCondition.getSleepConditionName());
              row.createCell(colNum++).setCellValue(sleepCondition.getSleepQuality());
              row.createCell(colNum++).setCellValue(sleepCondition.getSleepHours());
-             sleepCondition.getSleepDisorders().forEach(dis->row.createCell(colNum++).setCellValue(dis.getSleepDisorderName()));
-
+             sleepCondition.getSleepDisorders().forEach(dis->
+                 sheet.createRow(rowNum++).createCell(colNum).setCellValue(dis.getSleepDisorderName()));
          }
 
-         public boolean createNewExcelReport() {
 
-             return true;
-         }
 
 
 
@@ -210,5 +266,8 @@ public class PatientModel{
 //        for(String w : a){
 //            System.out.println(w);
 //        }
+        XSL xsl = patientModel.new XSL();
+        xsl.createNewExcelReport("test.xlsx");
+
     }
 }
