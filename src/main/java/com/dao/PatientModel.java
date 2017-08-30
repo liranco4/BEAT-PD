@@ -94,9 +94,9 @@ public class PatientModel{
                      createAndInsertUpdateDmCell(p.getListOfActivityUpdate());
                      createAndInsertUpdateDmCell(p.getListOfHabitUpdate());
                      //TODO need to add itnterface only for getName to be more ploymorfizem
-
+                     firstDataLine = rowNum;
                  });
-                 firstDataLine = rowNum;
+
                  try {
                      //Write the workbook to the file system
                      FileOutputStream out = new FileOutputStream(new File(filePath));
@@ -117,7 +117,6 @@ public class PatientModel{
 
 
         private void createHeadLines(){
-            String[] patientRecordHeadLines = {"Patient ID", "Update date", "Activity", "Habits", "Medicine", "Mood condition","Sleep condition"};
             int colAmount = 14;
             int rowAmount = 2;
             Row row;
@@ -170,10 +169,15 @@ public class PatientModel{
             cellRangeAddresses.add(new CellRangeAddress(0,0,8,10));
             cellRangeAddresses.forEach(this::mergeCells);
 
-            for(int i=0;i<patientRecordHeadLines.length;i++){
-                sheet.getRow(0).getCell(i).setCellValue(patientRecordHeadLines[i]);
+            row = sheet.getRow(0);
+            row.getCell(0).setCellValue("Patient ID");
+            row.getCell(1).setCellValue("Update date");
+            row.getCell(2).setCellValue("Activity");
+            row.getCell(4).setCellValue("Habits");
+            row.getCell(6).setCellValue("Medicine");
+            row.getCell(7).setCellValue("Mood condition");
+            row.getCell(8).setCellValue("Sleep condition");
 
-            }
             //Get the second line that was created
             row = sheet.getRow(--rowNum);
             insertSubHeadLines(row, style);
