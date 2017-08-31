@@ -4,6 +4,7 @@ import com.dao.ActivityModel;
 import com.dao.ModelGenerics;
 import com.dao.PatientRecordModel;
 import com.dm.*;
+import com.dm.updateDM.MedicineUpdate;
 import org.hibernate.HibernateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.NoResultException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 
 import static com.utils.SingleLogger.LOGGER;
@@ -168,6 +170,5 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
-
 
 }

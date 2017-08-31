@@ -52,6 +52,7 @@
         <mapping class="com.dm.updateDM.HabitUpdate"/>
         <mapping class="com.dm.updateDM.MedicineUpdate"/>
         <mapping class="com.dm.SubMenu"/>
+        <mapping class="com.dm.updateDM.SleepConditionUpdate"/>
 
     </session-factory>
 </hibernate-configuration>

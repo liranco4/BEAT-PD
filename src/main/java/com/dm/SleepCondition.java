@@ -32,7 +32,7 @@ public class SleepCondition {
     @Column(name = "SLEEP_QUALITY")
     private String sleepQuality;
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch=FetchType.EAGER,cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })

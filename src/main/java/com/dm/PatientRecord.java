@@ -70,10 +70,14 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private List<MoodCondition> listOfMoodCondition = new ArrayList<>();
 
-    @Column(name = "SLEEP_CONDITION_ID")
-    private  Long sleepConditionID;
-
-    @Transient
+    @OneToOne(fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name="PATIENT_RECORD_SLEEP_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="SLEEP_CONDITION_ID")})
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private SleepCondition sleepCondition;
 
     @Override
@@ -146,11 +150,5 @@ public class PatientRecord {
         this.sleepCondition = sleepCondition;
     }
 
-    public Long getSleepConditionID() {
-        return sleepConditionID;
-    }
 
-    public void setSleepConditionID(Long sleepConditionID) {
-        this.sleepConditionID = sleepConditionID;
-    }
 }

@@ -46,7 +46,7 @@ public class PatientRecordModel {
                 throw new IllegalArgumentException(format("The following patientID:%s doesn't exist", i_PatientRecord.getPatientID()));
 
             //Save sleep condition object on SLEEP_CONDITION table
-            addSleepConditionIfExist(i_PatientRecord,session).ifPresent((id)->i_PatientRecord.setSleepConditionID(id));
+            addSleepConditionIfExist(i_PatientRecord,session).ifPresent((id)->i_PatientRecord.setSleepCondition(id));
 
             //Save activity update list on ACTIVITY_UPDATE table
             addUpdateDMIfExist(i_PatientRecord.getListOfActivityUpdate(),session).ifPresent((idList)->i_PatientRecord.setListOfActivityUpdate((List<ActivityUpdate>) idList));
@@ -66,10 +66,11 @@ public class PatientRecordModel {
         }
     }
 
-    private Optional<Long> addSleepConditionIfExist(PatientRecord i_PatientRecord, Session i_Session){
+    private Optional<SleepCondition> addSleepConditionIfExist(PatientRecord i_PatientRecord, Session i_Session){
         if (i_PatientRecord.getSleepCondition() != null) {
-            i_Session.save(i_PatientRecord.getSleepCondition());
-            return Optional.of(i_PatientRecord.getSleepCondition().getSleepConditionID());
+            SleepCondition sleepCondition = i_PatientRecord.getSleepCondition();
+            i_Session.save(sleepCondition);
+            return Optional.of(sleepCondition);
         }
         return Optional.empty();
     }
