@@ -1,5 +1,8 @@
 package com.dm;
 
+import com.dm.updateDM.ActivityUpdate;
+import com.dm.updateDM.HabitUpdate;
+import com.dm.updateDM.MedicineUpdate;
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,27 +38,27 @@ public class PatientRecord {
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<ActivityUpdate> listOfActivityUpdate = new ArrayList<>();
+    private List<ActivityUpdate> listOfActivityUpdate = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name="PATIENT_RECORD_MEDICINE", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MEDICINE_NAME")})
+    @JoinTable(name="PATIENT_RECORD_MEDICINE", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MED_UPDATE_ID")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<Medicine> listOfMedicine = new ArrayList<>();
+    private List<MedicineUpdate> listOfMedicineUpdate = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name="PATIENT_RECORD_HABITS", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="HABIT_NAME")})
+    @JoinTable(name="PATIENT_RECORD_HABITS", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="HABIT_UPDATE_ID")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<HabitUpdate> listOfHabitUpdate = new ArrayList<>();
+    private List<HabitUpdate> listOfHabitUpdate = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
@@ -65,7 +68,7 @@ public class PatientRecord {
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private Collection<MoodCondition> listOfMoodCondition = new ArrayList<>();
+    private List<MoodCondition> listOfMoodCondition = new ArrayList<>();
 
     @Column(name = "SLEEP_CONDITION_ID")
     private  Long sleepConditionID;
@@ -75,8 +78,8 @@ public class PatientRecord {
 
     @Override
     public String toString(){
-        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivityUpdate:%s,listOfMedicine:%s,listOfHabitUpdate:%s,listOfMoodCondition:%s,sleepCondition:%s}",
-                patientRecordID, patientID,patientLastUpdate, listOfActivityUpdate,listOfMedicine, listOfHabitUpdate, listOfMoodCondition, sleepCondition);
+        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivityUpdate:%s,listOfMedicineUpdate:%s,listOfHabitUpdate:%s,listOfMoodCondition:%s,sleepCondition:%s}",
+                patientRecordID, patientID,patientLastUpdate, listOfActivityUpdate, listOfMedicineUpdate, listOfHabitUpdate, listOfMoodCondition, sleepCondition);
     }
 
     public PatientRecord(){
@@ -103,35 +106,35 @@ public class PatientRecord {
         this.patientLastUpdate = patientLastUpdate;
     }
 
-    public Collection<ActivityUpdate> getListOfActivityUpdate() {
+    public List<ActivityUpdate> getListOfActivityUpdate() {
         return listOfActivityUpdate;
     }
 
-    public void setListOfActivityUpdate(Collection<ActivityUpdate> listOfActivityUpdate) {
+    public void setListOfActivityUpdate(List<ActivityUpdate> listOfActivityUpdate) {
         this.listOfActivityUpdate = listOfActivityUpdate;
     }
 
-    public Collection<Medicine> getListOfMedicine() {
-        return listOfMedicine;
+    public List<MedicineUpdate> getListOfMedicineUpdate() {
+        return listOfMedicineUpdate;
     }
 
-    public void setListOfMedicine(Collection<Medicine> listOfMedicine) {
-        this.listOfMedicine = listOfMedicine;
+    public void setListOfMedicineUpdate(List<MedicineUpdate> listOfMedicine) {
+        this.listOfMedicineUpdate = listOfMedicine;
     }
 
-    public Collection<HabitUpdate> getListOfHabitUpdate() {
+    public List<HabitUpdate> getListOfHabitUpdate() {
         return listOfHabitUpdate;
     }
 
-    public void setListOfHabitUpdate(Collection<HabitUpdate> listOfHabitUpdate) {
+    public void setListOfHabitUpdate(List<HabitUpdate> listOfHabitUpdate) {
         this.listOfHabitUpdate = listOfHabitUpdate;
     }
 
-    public Collection<MoodCondition> getListOfMoodCondition() {
+    public List<MoodCondition> getListOfMoodCondition() {
         return listOfMoodCondition;
     }
 
-    public void setListOfMoodCondition(Collection<MoodCondition> listOfMoodCondition) {
+    public void setListOfMoodCondition(List<MoodCondition> listOfMoodCondition) {
         this.listOfMoodCondition = listOfMoodCondition;
     }
 

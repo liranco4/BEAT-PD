@@ -1,6 +1,6 @@
-package com.dm;
+package com.dm.updateDM;
 
-import com.interfaces.UpdateDM;
+import com.interfaces.UpdateDMProxy;
 
 import javax.persistence.*;
 
@@ -10,7 +10,7 @@ import static java.lang.String.format;
  * Created by liran on 12/08/17.
  */
 @Entity(name="ACTIVITY_UPDATE")
-public class ActivityUpdate implements UpdateDM{
+public class ActivityUpdate implements UpdateDMProxy {
     @Id
     @SequenceGenerator(name = "ACTIVITY_UPDATE_SEQ", sequenceName = "ACTIVITY_UPDATE_SEQ")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ACTIVITY_UPDATE_SEQ")
@@ -23,7 +23,7 @@ public class ActivityUpdate implements UpdateDM{
     @Column(name="ACTIVITY_DESCRIPTION")
     private String activityDescription;
 
-    public ActivityUpdate(){};
+    public ActivityUpdate(){}
 
     @Override
     public String toString(){

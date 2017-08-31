@@ -1,5 +1,7 @@
 package com.dm;
 
+import com.interfaces.UpdateDM;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,7 +11,7 @@ import javax.persistence.Lob;
  * Created by liran on 5/4/17.
  */
 @Entity(name = "MEDICINE")
-public class Medicine {
+public class Medicine{
 
     @Id
     @Column(name = "MED_SERIAL_NUMBER")

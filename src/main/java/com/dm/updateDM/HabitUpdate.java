@@ -1,6 +1,6 @@
-package com.dm;
+package com.dm.updateDM;
 
-import com.interfaces.UpdateDM;
+import com.interfaces.UpdateDMProxy;
 
 import javax.persistence.*;
 
@@ -10,7 +10,7 @@ import static java.lang.String.format;
  * Created by liran on 12/08/17.
  */
 @Entity(name="HABIT_UPDATE")
-public class HabitUpdate implements UpdateDM{
+public class HabitUpdate implements UpdateDMProxy {
     @Id
     @SequenceGenerator(name = "HABIT_UPDATE_SEQ", sequenceName = "HABIT_UPDATE_SEQ")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "HABIT_UPDATE_SEQ")

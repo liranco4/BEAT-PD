@@ -48,8 +48,9 @@
         <mapping class="com.dm.SleepDisorder"/>
         <mapping class="com.dm.PatientRecord"/>
         <mapping class="com.dm.KeepAlive"/>
-        <mapping class="com.dm.ActivityUpdate"/>
-        <mapping class="com.dm.HabitUpdate"/>
+        <mapping class="com.dm.updateDM.ActivityUpdate"/>
+        <mapping class="com.dm.updateDM.HabitUpdate"/>
+        <mapping class="com.dm.updateDM.MedicineUpdate"/>
         <mapping class="com.dm.SubMenu"/>
 
     </session-factory>
