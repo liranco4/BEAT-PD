@@ -33,11 +33,11 @@ public class AdminController {
 
         try {
            return ResponseEntity.ok(modelGenerics.addObjectToDB(user));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addUser: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -48,11 +48,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(activity));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addActivity: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -63,11 +63,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(habit));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addHabit: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -78,11 +78,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(moodCondition));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addMoodCondition: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -93,11 +93,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(link));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addLink: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -108,11 +108,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(sleepDisorder));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addSleepDisorder: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -123,11 +123,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(hospitalData));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addHospitalData: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -138,11 +138,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(medicine));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addMedicine: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -153,11 +153,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(sleepQuality));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addSleepQuality: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -167,11 +167,11 @@ public class AdminController {
     public ResponseEntity getUserByID(String ID) {
         try {
             return ResponseEntity.ok(modelGenerics.retrieveObjectFromDBbyID(User.class,ID));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in getUserByID: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -182,11 +182,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(patient));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addPatient: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -197,11 +197,11 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(KeepAlive.getKeepAliveInstance()));
-        }catch(HibernateException e) {
+        }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in keepAlive: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
@@ -213,15 +213,15 @@ public class AdminController {
 
         try {
             return ResponseEntity.ok(format("{success:%s}",patientModel.getAllUpdatesByPatientID(value)));
-        }catch(NoResultException e){
+        }catch(NoResultException e){ e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in getReportBYPatientID: no result was found\n%s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(format("{error:%s}", e.getMessage()));
         }
-        catch(HibernateException e) {
+        catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in getReportBYPatientID: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
-        catch (Exception e) {
+        catch (Exception e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in getReportBYPatientID: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }

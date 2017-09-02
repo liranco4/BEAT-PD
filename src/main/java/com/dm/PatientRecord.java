@@ -3,6 +3,7 @@ package com.dm;
 import com.dm.updateDM.ActivityUpdate;
 import com.dm.updateDM.HabitUpdate;
 import com.dm.updateDM.MedicineUpdate;
+import com.dm.updateDM.SleepDisorderUpdate;
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -70,6 +71,9 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private List<MoodCondition> listOfMoodCondition = new ArrayList<>();
 
+    @Transient
+    private SleepConditionAndDisorder sleepConditionAndDisorder;
+
     @OneToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -80,10 +84,20 @@ public class PatientRecord {
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
     private SleepCondition sleepCondition;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name="PATIENT_RECORD_SLEEP_DISORDER", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="SLEEP_DISORDER_UPDATE_ID")})
+    @GenericGenerator(name="kaugen" , strategy="increment")
+    @GeneratedValue(generator="kaugen")
+    @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
+    private List<SleepDisorderUpdate> sleepDisorderUpdate;
+
     @Override
     public String toString(){
-        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivityUpdate:%s,listOfMedicineUpdate:%s,listOfHabitUpdate:%s,listOfMoodCondition:%s,sleepCondition:%s}",
-                patientRecordID, patientID,patientLastUpdate, listOfActivityUpdate, listOfMedicineUpdate, listOfHabitUpdate, listOfMoodCondition, sleepCondition);
+        return String.format("{patientRecordID:%d,patientID:%s,patientLastUpdate:%s,listOfActivityUpdate:%s,listOfMedicineUpdate:%s,listOfHabitUpdate:%s,listOfMoodCondition:%s,sleepConditionAndDisorder:%s}",
+                patientRecordID, patientID,patientLastUpdate, listOfActivityUpdate, listOfMedicineUpdate, listOfHabitUpdate, listOfMoodCondition, sleepConditionAndDisorder);
     }
 
     public PatientRecord(){
@@ -142,6 +156,14 @@ public class PatientRecord {
         this.listOfMoodCondition = listOfMoodCondition;
     }
 
+    public SleepConditionAndDisorder getSleepConditionAndDisorder() {
+        return sleepConditionAndDisorder;
+    }
+
+    public void setSleepConditionAndDisorder(SleepConditionAndDisorder sleepConditionAndDisorder) {
+        this.sleepConditionAndDisorder = sleepConditionAndDisorder;
+    }
+
     public SleepCondition getSleepCondition() {
         return sleepCondition;
     }
@@ -150,5 +172,11 @@ public class PatientRecord {
         this.sleepCondition = sleepCondition;
     }
 
+    public List<SleepDisorderUpdate> getSleepDisorderUpdate() {
+        return sleepDisorderUpdate;
+    }
 
+    public void setListOfSleepDisorderUpdate(List<SleepDisorderUpdate> sleepDisorderUpdate) {
+        this.sleepDisorderUpdate = sleepDisorderUpdate;
+    }
 }

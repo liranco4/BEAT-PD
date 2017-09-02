@@ -4,6 +4,7 @@ import com.dm.*;
 import com.dm.updateDM.ActivityUpdate;
 import com.dm.updateDM.HabitUpdate;
 import com.dm.updateDM.MedicineUpdate;
+import com.dm.updateDM.SleepDisorderUpdate;
 import com.interfaces.UpdateDM;
 import com.interfaces.UpdateDMProxy;
 import com.utils.CustomDate;
@@ -46,7 +47,10 @@ public class PatientRecordModel {
                 throw new IllegalArgumentException(format("The following patientID:%s doesn't exist", i_PatientRecord.getPatientID()));
 
             //Save sleep condition object on SLEEP_CONDITION table
-            addSleepConditionIfExist(i_PatientRecord,session).ifPresent((id)->i_PatientRecord.setSleepCondition(id));
+            addSleepConditionIfExist(i_PatientRecord,session).ifPresent(i_PatientRecord::setSleepCondition);
+
+            //Save sleepDisorder update list on SLEEP_DISORDER_UPDATE table
+            addUpdateDMIfExist(i_PatientRecord.getSleepConditionAndDisorder().getSleepDisorders(),session).ifPresent((idList)->i_PatientRecord.setListOfSleepDisorderUpdate((List<SleepDisorderUpdate>) idList));
 
             //Save activity update list on ACTIVITY_UPDATE table
             addUpdateDMIfExist(i_PatientRecord.getListOfActivityUpdate(),session).ifPresent((idList)->i_PatientRecord.setListOfActivityUpdate((List<ActivityUpdate>) idList));
@@ -67,8 +71,9 @@ public class PatientRecordModel {
     }
 
     private Optional<SleepCondition> addSleepConditionIfExist(PatientRecord i_PatientRecord, Session i_Session){
-        if (i_PatientRecord.getSleepCondition() != null) {
-            SleepCondition sleepCondition = i_PatientRecord.getSleepCondition();
+        if (i_PatientRecord.getSleepConditionAndDisorder() != null) {
+            SleepConditionAndDisorder value = i_PatientRecord.getSleepConditionAndDisorder();
+            SleepCondition sleepCondition = new SleepCondition(value.getSleepHours(),value.getSleepQuality());
             i_Session.save(sleepCondition);
             return Optional.of(sleepCondition);
         }
@@ -137,7 +142,7 @@ public class PatientRecordModel {
                     createAndInsertDmCell(p.getListOfActivityUpdate());
                     createAndInsertDmCell(p.getListOfHabitUpdate());
                     createAndInsertDmCell(p.getListOfMedicineUpdate());
-                    //createAndInsertSleepConditionCell(p.getSleepCondition());
+                    //createAndInsertSleepConditionCell(p.getSleepConditionAndDisorder());
 
                     firstDataLine = rowNum;
                 });
@@ -208,7 +213,7 @@ public class PatientRecordModel {
             //Medicine
             cellRangeAddresses.add(new CellRangeAddress(0,0,7,8));
 
-            //SleepCondition
+            //SleepConditionAndDisorder
             cellRangeAddresses.add(new CellRangeAddress(0,0,9,11));
             cellRangeAddresses.forEach(this::mergeCells);
 
@@ -317,36 +322,36 @@ public class PatientRecordModel {
         }
 
 
-        private  void createAndInsertSleepConditionCell(SleepCondition sleepCondition) {
+        private  void createAndInsertSleepConditionCell(SleepConditionAndDisorder sleepConditionAndDisorder) {
             Row row;
             int disorderColumn = 11;
             if (firstDataLine == rowNum) {
                 row = sheet.createRow(rowNum++);
-                sleepCondition.getSleepDisorders().forEach(dis ->
-                        sheet.createRow(rowNum++).createCell(disorderColumn).setCellValue(dis.getSleepDisorderName()));
+                sleepConditionAndDisorder.getSleepDisorders().forEach(dis ->
+                        sheet.createRow(rowNum++).createCell(disorderColumn).setCellValue(dis.getName()));
             }
             else
             {
                 row = sheet.getRow(firstDataLine);
                 Row localRow;
                 int rowItr = firstDataLine;
-                Iterator<SleepDisorder> sleepDisorderIterator = sleepCondition.getSleepDisorders().iterator();
+                Iterator<SleepDisorderUpdate> sleepDisorderIterator = sleepConditionAndDisorder.getSleepDisorders().iterator();
                 while(rowItr<rowNum && sleepDisorderIterator.hasNext()){
                     localRow = sheet.getRow(rowItr++);
-                    SleepDisorder dm = sleepDisorderIterator.next();
-                    localRow.createCell(disorderColumn).setCellValue(dm.getSleepDisorderName());
+                    SleepDisorderUpdate dm = sleepDisorderIterator.next();
+                    localRow.createCell(disorderColumn).setCellValue(dm.getName());
                 }
                 while(sleepDisorderIterator.hasNext()){
                     localRow = sheet.createRow(rowNum++);
-                    SleepDisorder dm = sleepDisorderIterator.next();
-                    localRow.createCell(disorderColumn).setCellValue(dm.getSleepDisorderName());
+                    SleepDisorderUpdate dm = sleepDisorderIterator.next();
+                    localRow.createCell(disorderColumn).setCellValue(dm.getName());
                 }
 
             }
             colNum = 4;
-            row.createCell(colNum++).setCellValue(sleepCondition.getSleepConditionName());
-            row.createCell(colNum++).setCellValue(sleepCondition.getSleepQuality());
-            row.createCell(colNum++).setCellValue(sleepCondition.getSleepHours());
+            row.createCell(colNum++).setCellValue(sleepConditionAndDisorder.getSleepConditionName());
+            row.createCell(colNum++).setCellValue(sleepConditionAndDisorder.getSleepQuality());
+            row.createCell(colNum++).setCellValue(sleepConditionAndDisorder.getSleepHours());
 
         }
     }
@@ -387,6 +392,8 @@ public class PatientRecordModel {
 //        }
        XSL xsl = patientModel.new XSL();
        xsl.createNewExcelReport("test.xlsx");
+
+
 
 
 
