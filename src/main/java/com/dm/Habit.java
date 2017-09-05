@@ -16,6 +16,17 @@ public class Habit {
     @Column(name = "HABIT_NAME")
     private String habitName;
 
+    @Column(name = "GROUP_ID")
+    private Long groupID;
+
+    public Long getGroupID() {
+        return groupID;
+    }
+
+    public void setGroupID(Long groupID) {
+        this.groupID = groupID;
+    }
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Column(name = "SUB_MENUS")
     private List<SubMenu> subMenus = new ArrayList<>();
@@ -39,6 +50,6 @@ public class Habit {
 
     @Override
     public String toString(){
-        return format("{habitName:\"%s\", subMenus:%s}",habitName, subMenus);
+        return format("{habitName:\"%s\",groupID:\"%d\",subMenus:%s}",habitName,groupID,subMenus);
     }
 }

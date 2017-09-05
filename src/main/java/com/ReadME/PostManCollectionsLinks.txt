@@ -4,7 +4,7 @@ update patient: https://www.getpostman.com/collections/8422f493220727631d24
 Report for updated patient: https://www.getpostman.com/collections/bddac544be9cda08c9ea
 Add MoodCondition: https://www.getpostman.com/collections/d9cef1caae77e355183c
 Add SleepDisorder: https://www.getpostman.com/collections/131a0ced94a916a57548
-Add Habit: https://www.getpostman.com/collections/8c4ed66abc1a320d5119
+Add Habit: https://www.getpostman.com/collections/c38761a99b962eff428d
 The following is example for get one table(for other table change to the name in the URL of the class+s: Activities).
 GET all Habits: https://www.getpostman.com/collections/a8bccac067f569746457
 Update patient Record: https://www.getpostman.com/collections/8422f493220727631d24
