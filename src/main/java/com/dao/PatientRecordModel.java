@@ -46,11 +46,15 @@ public class PatientRecordModel {
             if (patient == null)
                 throw new IllegalArgumentException(format("The following patientID:%s doesn't exist", i_PatientRecord.getPatientID()));
 
+            final Session finalSession = session;
             //Save sleep condition object on SLEEP_CONDITION table
-            addSleepConditionIfExist(i_PatientRecord,session).ifPresent(i_PatientRecord::setSleepCondition);
+            addSleepConditionIfExist(i_PatientRecord,session).ifPresent(sleepCondition ->{
+                    i_PatientRecord.setSleepCondition(sleepCondition);
+                    //Save sleepDisorder update list on SLEEP_DISORDER_UPDATE table
+                    addUpdateDMIfExist(i_PatientRecord.getSleepConditionAndDisorder().getSleepDisorders(),finalSession).ifPresent((idList)->
+                            i_PatientRecord.setListOfSleepDisorderUpdate((List<SleepDisorderUpdate>) idList));
+            });
 
-            //Save sleepDisorder update list on SLEEP_DISORDER_UPDATE table
-            addUpdateDMIfExist(i_PatientRecord.getSleepConditionAndDisorder().getSleepDisorders(),session).ifPresent((idList)->i_PatientRecord.setListOfSleepDisorderUpdate((List<SleepDisorderUpdate>) idList));
 
             //Save activity update list on ACTIVITY_UPDATE table
             addUpdateDMIfExist(i_PatientRecord.getListOfActivityUpdate(),session).ifPresent((idList)->i_PatientRecord.setListOfActivityUpdate((List<ActivityUpdate>) idList));
