@@ -74,7 +74,7 @@ public class AdminController {
 
     @RequestMapping(value = "/Add/MoodCondition", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity addHabit(@RequestBody MoodCondition moodCondition) {
+    public ResponseEntity addMoodCondition(@RequestBody MoodCondition moodCondition) {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(moodCondition));
@@ -89,7 +89,7 @@ public class AdminController {
 
     @RequestMapping(value = "/Add/Link", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity addHabit(@RequestBody Link link) {
+    public ResponseEntity addLink(@RequestBody Link link) {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(link));
@@ -104,27 +104,13 @@ public class AdminController {
 
     @RequestMapping(value = "/Add/SleepDisorder", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity addHabit(@RequestBody SleepDisorder sleepDisorder) {
+    public ResponseEntity addSleepDisorder(@RequestBody SleepDisorder sleepDisorder) {
 
         try {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(sleepDisorder));
-        }catch(HibernateException e) {     e.printStackTrace();
+        }catch(HibernateException e) {
+            e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addSleepDisorder: %s", e.getStackTrace().toString()));
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
-        }
-        catch (Exception e) {     e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
-        }
-    }
-
-    @RequestMapping(value = "/Add/HospitalData", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    @ResponseBody
-    public ResponseEntity addHabit(@RequestBody HospitalData hospitalData) {
-
-        try {
-            return ResponseEntity.ok(modelGenerics.addObjectToDB(hospitalData));
-        }catch(HibernateException e) {     e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in addHospitalData: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();

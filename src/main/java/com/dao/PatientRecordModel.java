@@ -143,6 +143,7 @@ public class PatientRecordModel {
                 patientRecordList.forEach(p-> {
                     createAndInsertSingleCell(0, p.getPatientID());
                     createAndInsertSingleCell(1, p.getPatientLastUpdate());
+                    createAndInsertDmCell(p.getListOfMoodCondition());
                     createAndInsertDmCell(p.getListOfActivityUpdate());
                     createAndInsertDmCell(p.getListOfHabitUpdate());
                     createAndInsertDmCell(p.getListOfMedicineUpdate());
@@ -290,6 +291,8 @@ public class PatientRecordModel {
             else if(!dmList.isEmpty() && dmList.get(0) instanceof MedicineUpdate){
                 firstCol = 7;
                 secondCol = 8;
+            }else if(!dmList.isEmpty() && dmList.get(0) instanceof MoodCondition){
+                firstCol = 2;
             }
             if (firstDataLine == rowNum) {
                 for (UpdateDM updateDm : dmList) {
