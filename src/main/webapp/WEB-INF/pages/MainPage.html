@@ -1,12 +1,26 @@
 <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="Windows-1255">
 
     <title>MainPage</title>
     <link rel="stylesheet" type="text/css" href="MainPage.css" />
-    <link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    <!--link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.8.3.js" />
+    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.2.14.js" />
+    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui.js" />
+    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui-1.9.2.custom.js" />
+    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui-1.9.2.custom.min.js" />
+    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-3.2.1.js" />-->
+
+
+    <!--script type="text/javascript" src= "../Scripts/jquery-1.8.3.js"></--script>
+    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-1.12.4.js"></script>
+    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-ui.js"></script>
+    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-ui-1.9.2.custom.js"></script>
+    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-ui-1.9.2.custom.min.js"></script>-->
+    <!--link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css" />-->
+    <!--link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />-->
     <script
             src="https://code.jquery.com/jquery-2.1.3.js"
             integrity="sha256-goy7ystDD5xbXSf+kwL4eV6zOPJCEBD1FBiCElIm+U8="
@@ -16,7 +30,15 @@
             integrity="sha256-ivk71nXhz9nsyFDoYoGf2sbjrR9ddh+XDkCcfZxjvcM="
             crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>-->
 
 
     <style>
@@ -57,111 +79,93 @@ tr:nth-child(even) {
         </div>
     </section>
     <section class="pcontent-l">
-        <div class="info">
+        <div class="info" style="height:600px">
             <div class="tabs" data-tabgroup="tab-group">
-                <div class="active"><a href="#information">Activities</a></div>
-                <div><a href="#evaluation">Evaluation</a></div>
-                <div><a href="#client">Client</a></div>
+                <div class="active"><a href="#information">פעילויות</a></div>
+                <div><a href="#evaluation">ביום-יום</a></div>
+                <div><a href="#client">תרופות</a></div>
                 <div><a href="#requeriments">Requeriments</a></div>
-                <div><a href="#files">Files</a></div>
-                <div><a href="#server">Server</a></div>
+                <div><a href="#files">מצב רוח</a></div>
+                <div><a href="#server">לינקים</a></div>
             </div>
-            <section id="tab-group" class="tabgroup">
+            <section id="tab-group" class="tabgroup" onblur="AddNewActivity()">
                 <div id="information" dir="rtl">
                     <h2>רשימת פעילויות</h2>
-                    <div><button type="button">הוסף פעילות חדשה</button></div>
-                    <table dir="rtl" align="right">
+                    <div><button type="button" id="btnAddNewActivity" onclick="AddNewActivity()">הוסף פעילות חדשה</button></div>
+                    <table id ="tblActivities" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">הסר</th>
                             <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right">שם פעילות</th>
                             <th style="text-align:right;;width:200px">תת-תפריט</th>
                         </tr>
-                        <tr>
-                            <td><input type="image" src="remove1.png" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td><input type="image" src="Edit1.ico" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td></td>
-                            <td>
-                                <select style="width:100%">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-                            </td>
-
-
-                        </tr>
-                        <tr>
-                            <td><input type="image" src="remove1.png" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td><input type="image" src="Edit1.ico" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td></td>
-                            <td>
-                                <select style="width:100%">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="image" src="remove1.png" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td><input type="image" src="Edit1.ico" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td></td>
-                            <td>
-                                <select style="width:100%">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td><input type="image" src="remove1.png" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td><input type="image" src="Edit1.ico" alt="Submit" style="width:20px;hight:20px"></td>
-                            <td></td>
-                            <td>
-                                <select style="width:100%">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-                            </td>
-
-                        </tr>
                     </table>
 
 
                 </div>
-                <div id="evaluation">
-                    <h2>Patient Updates</h2>
+
+                <div id="evaluation" dir="rtl">
+                    <h2>ביום-יום</h2>
+                    <div><button type="button" id="btnAddNewHabit" onclick="AddNewHabit()">הוסף </button></div>
+                    <table id ="tblHabit" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                        </tr>
+                    </table>
                 </div>
-                <div id="client">
-                    <h2>Heading 3</h2>
-                    <p>Atque ratione soluta laboriosam illo inventore amet ipsum aliquam assumenda harum provident nam accusantium neque debitis obcaecati maxime officia saepe ad ducimus in quam libero vero quasi. Saepe sit nisi?</p>
+
+
+                <div id="client" dir="rtl">
+                    <h2>תרופות</h2>
+                    <div><button type="button" id="btnAddNewMedicine" onclick="AddNewMedicine()">הוסף </button></div>
+                    <table id ="tblMedicine" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
+
                 </div>
+
+
                 <div id="requeriments">
                     <h2>Heading 4</h2>
                     <p>Quidem perferendis id sapiente cumque ullam repellendus dolorum odit rerum quibusdam tempora voluptatibus ipsum. Maiores laborum velit aperiam dicta quisquam assumenda at esse exercitationem culpa sequi porro minus ipsa aut.</p>
                 </div>
-                <div id="files">
-                    <h2>Heading 5</h2>
-                    <p>Iste eligendi ratione libero impedit quos necessitatibus labore corporis deserunt quo porro hic eius delectus ea ad amet dolore officiis debitis! Libero officia magnam consequuntur dignissimos molestias quia modi repellat.</p>
+
+                <div id="files" dir="rtl">
+                    <h2>מצב-רוח</h2>
+                    <div><button type="button" id="btnAddMood" onclick="AddNewMood()">הוסף </button></div>
+                    <table id ="tblMood" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
                 </div>
-                <div id="server">
-                    <h2>Heading 6</h2>
-                    <p>Iste eligendi ratione libero impedit quos necessitatibus labore corporis deserunt quo porro hic eius delectus ea ad amet dolore officiis debitis! Libero officia magnam consequuntur dignissimos molestias quia modi repellat.</p>
+
+                <div id="server" dir="rtl">
+                    <h2>לינקים</h2>
+                    <div><button type="button" id="btnAddLinks" onclick="AddNewLink()">הוסף </button></div>
+                    <table id ="tblLinks" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">קישור</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
                 </div>
             </section>
         </div>
-        <div class="conversation">
+        <!--div class="conversation">
             <h3>Conversation</h3>
-        </div>
+        </div>-->
     </section>
     <aside class="pcontent-r">
         <div class="history">
@@ -247,7 +251,7 @@ function viewModel() {
 }
 */
 //Fade in/out when toggled
-ko.bindingHandlers.fadeVisible = {
+/*ko.bindingHandlers.fadeVisible = {
     init: function(element, valueAccessor) {
         // Initially set the element to be instantly visible/hidden depending on the value
         var value = valueAccessor();
@@ -259,9 +263,9 @@ ko.bindingHandlers.fadeVisible = {
             duration = allBindingsAccessor().fadeDuration || 500;
         ko.utils.unwrapObservable(value) ? $(element).slideDown() : $(element).slideUp();
     }
-};
+};*/
 
-ko.bindingHandlers.jqButton = {
+/*ko.bindingHandlers.jqButton = {
     init: function(element){
         $(element).button();
     },
@@ -269,7 +273,238 @@ ko.bindingHandlers.jqButton = {
         var currentValue = valueAccessor();
         $(element).button("option", "disabled", currentValue.enable === false);
     }
-};
+};*/
+document.onload = AddNewActivity();
+
+function AddNewActivity()
+{
+
+
+function subMenu () {
+    this.subMenu = "";
+}
+
+function Activity() {
+    this.activityName = "";
+    this.subMenus = "";
+}
+
+ $.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllActivities",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(54,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+var j=0;
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].activityName)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].activityName+"</td>"+
+                            "<td>"+ "<select style='width:100%'>"
+                            for(var j=0;j<mydata2[i].subMenus.length;j++)
+                            {
+                            txt+=
+                              // <option value="volvo">Volvo</option>
+                                "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
+                            }
+
+                             txt += "</select>"+
+                            "</td>"+
+                        "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblActivities").append(txt);
+
+              }
+            }
+        });
+
+
+AddHabit();
+
+}
+
+function AddHabit()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllHabits",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(46,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+var j=0;
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].habitName)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].habitName+"</td>"+
+                            "<td>"+ "<select style='width:100%'>"
+                            for(var j=0;j<mydata2[i].subMenus.length;j++)
+                            {
+                            txt+=
+                              // <option value="volvo">Volvo</option>
+                                "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
+                            }
+
+                             txt += "</select>"+
+                            "</td>"+
+                        "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblHabit").append(txt);
+
+              }
+            }
+        });
+
+AddMedicine();
+}
+function AddMedicine()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllMedicines",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(52,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].medicineName)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].medicineName+"</td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblMedicine").append(txt);
+
+              }
+            }
+        });
+
+        AddMood();
+}
+
+
+function AddMood()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllMoodConditions",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(62,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].moodConditionName)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].moodConditionName+"</td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblMood").append(txt);
+
+              }
+            }
+        });
+        AddLinks();
+}
+
+function AddLinks()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllLinks",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(44,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].linkURL)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].linkHeadLine+"</td>"+
+                            "<td><a target='_blank' href="+mydata2[i].linkURL+">"+mydata2[i].linkURL+"</a></td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblLinks").append(txt);
+
+              }
+            }
+        });
+}
+
+
+
+
+function AddActivitiesToTable(resultData)
+{
+var i= 0;
+}
+
+
 
 //ko.applyBindings(new viewModel());
     </script>
