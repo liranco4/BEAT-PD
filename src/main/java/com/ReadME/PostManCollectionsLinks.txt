@@ -11,5 +11,10 @@ Update patient Record: https://www.getpostman.com/collections/8422f493220727631d
 Add Medicine: https://www.getpostman.com/collections/7f6a91bbc32fa0e6a352
 Get Patient details by ID: https://www.getpostman.com/collections/b95af3ac668253887f6a
 Add SleepQuality: https://www.getpostman.com/collections/006961e33bf80a24ee65
-Login to admin from browser:
-http://localhost:8080/BEAT-PD/Admin/Login
+Login to admin from browser: http://localhost:8080/BEAT-PD/Admin/Login
+
+update it's same on all objects, see example
+update Habit: https://www.getpostman.com/collections/e090a22723b8e7dd0229
+
+delete it's same on all objects, see example:
+https://www.getpostman.com/collections/4e68fea215e08c0fedfb
