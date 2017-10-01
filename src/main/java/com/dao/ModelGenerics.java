@@ -51,7 +51,7 @@ public class ModelGenerics {
             session.save(i_Object);
             transaction.commit();
             LOGGER.log(Level.INFO, "add object to DB succeeded");
-            return format("{success}");
+            return "{success}";
         } finally {
             if (session != null)
                 session.close();
@@ -70,7 +70,26 @@ public class ModelGenerics {
             session.update(i_Object);
             transaction.commit();
             LOGGER.log(Level.INFO, "update object to DB succeeded");
-            return format("{success}");
+            return "{success}";
+        } finally {
+            if (session != null)
+                session.close();
+        }
+    }
+
+    /**
+     * @param i_Object
+     * @return json: on success, on failure: failure message
+     */
+    public String deleteObjectToDB(Object i_Object) throws HibernateException {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            session.delete(i_Object);
+            transaction.commit();
+            LOGGER.log(Level.INFO, "update object to DB succeeded");
+            return "{success}";
         } finally {
             if (session != null)
                 session.close();

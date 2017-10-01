@@ -57,6 +57,36 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/Update/Activity", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateActivity(@RequestBody Activity activity) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(activity));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateActivity: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/Activity", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteActivity(@RequestBody Activity activity) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(activity));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteActivity: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
     @RequestMapping(value = "/Add/Habit", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addHabit(@RequestBody Habit habit) {
@@ -65,6 +95,36 @@ public class AdminController {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(habit));
         }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addHabit: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Update/Habit", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateHabit(@RequestBody Habit habit) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(habit));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateHabit: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/Habit", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteHabit(@RequestBody Habit habit) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(habit));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteHabit: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();
@@ -87,6 +147,36 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/Update/MoodCondition", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateMoodCondition(@RequestBody MoodCondition moodCondition) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(moodCondition));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateMoodCondition: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/MoodCondition", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteMoodCondition(@RequestBody MoodCondition moodCondition) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(moodCondition));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteMoodCondition: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
     @RequestMapping(value = "/Add/Link", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addLink(@RequestBody Link link) {
@@ -95,6 +185,36 @@ public class AdminController {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(link));
         }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addLink: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Update/Link", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateLink(@RequestBody Link link) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(link));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateLink: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/Link", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteMoodCondition(@RequestBody Link link) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(link));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteLink: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();
@@ -118,6 +238,36 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/Update/SleepDisorder", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateSleepDisorder(@RequestBody SleepDisorder sleepDisorder) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(sleepDisorder));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateSleepDisorder: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/SleepDisorder", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteSleepDisorder(@RequestBody SleepDisorder sleepDisorder) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(sleepDisorder));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteSleepDisorder: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
     @RequestMapping(value = "/Add/Medicine", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addMedicine(@RequestBody Medicine medicine) {
@@ -133,6 +283,36 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = "/Update/Medicine", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateMedicine(@RequestBody Medicine medicine) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(medicine));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateMedicine: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/Medicine", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteMedicine(@RequestBody Medicine medicine) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(medicine));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteMedicine: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
     @RequestMapping(value = "/Add/SleepQuality", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addSleepQuality(@RequestBody SleepQuality sleepQuality) {
@@ -141,6 +321,36 @@ public class AdminController {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(sleepQuality));
         }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addSleepQuality: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Update/SleepQuality", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateSleepQuality(@RequestBody SleepQuality sleepQuality) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(sleepQuality));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updateSleepQuality: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/SleepQuality", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteSleepQuality(@RequestBody SleepQuality sleepQuality) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(sleepQuality));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deleteSleepQuality: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();
@@ -170,6 +380,36 @@ public class AdminController {
             return ResponseEntity.ok(modelGenerics.addObjectToDB(patient));
         }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in addPatient: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Update/Patient", method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updatePatient(@RequestBody Patient patient) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(patient));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in updatePatient: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/Patient", method = RequestMethod.DELETE, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deletePatient(@RequestBody Patient patient) {
+
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(patient));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in deletePatient: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();

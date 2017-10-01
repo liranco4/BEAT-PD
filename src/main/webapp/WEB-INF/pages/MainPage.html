@@ -6,6 +6,7 @@
 
     <title>MainPage</title>
     <link rel="stylesheet" type="text/css" href="MainPage.css" />
+
     <!--link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.8.3.js" />
     <link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.2.14.js" />
     <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui.js" />
@@ -58,11 +59,110 @@ tr:nth-child(even) {
     background-color: #E8F5E9;
 }
 </style>
+
+    <style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #2890E6;
+    color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #2890E6;
+    color: white;
+}
+</style>
 </head>
 
 <body>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content" dir="rtl">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <center><h2 id="lblHead">????????</h2></center>
+        </div>
+        <div class="modal-body">
+            <div>
+                ??:<input type="text" id="txtName" name="name"><br>
+                ??-??¯??:<input type="text" id="txtSubMenu" name="submenu">
+                <select id="ddlSubMenu">
+                </select>
+                <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">‰??? ??-??¯??</button>
+                <button type="button" id="btnCLearNewSubMenu" onclick="ClearSubMenu()">?˜‰</button>
+            </div>
+
+
+        </div>
+        <div class="modal-footer" dir="ltr">
+            <div><button type="button" id="btnAddNewActivity1" onclick="AddNewActivityToDB()">‰???</button></div>
+        </div>
+    </div>
+
+</div>
 <div class="wrapper">
-    <h1>BEAT-PD<span>[Production]</span></h1>
+    <h1>BEAT-PD<span></span></h1>
     <section class="psummary">
         <div class="psummary-left">
             <p><span class="entypo-attention"></span>Status</p>
@@ -79,25 +179,25 @@ tr:nth-child(even) {
         </div>
     </section>
     <section class="pcontent-l">
-        <div class="info" style="height:600px">
+        <div class="info" style="height:1000px">
             <div class="tabs" data-tabgroup="tab-group">
-                <div class="active"><a href="#information">פעילויות</a></div>
-                <div><a href="#evaluation">ביום-יום</a></div>
-                <div><a href="#client">תרופות</a></div>
-                <div><a href="#requeriments">Requeriments</a></div>
-                <div><a href="#files">מצב רוח</a></div>
-                <div><a href="#server">לינקים</a></div>
+                <div class="active"><a href="#information" id="ActivitiesTab">????????</a></div>
+                <div><a href="#evaluation"  id="HabitsTab">·???-???</a></div>
+                <div><a href="#client" id="MedicineTab">?¯????</a></div>
+                <div><a href="#requeriments" id="SleepTab">???‰</a></div>
+                <div><a href="#files" id="MoodTab">?ˆ· ¯??</a></div>
+                <div><a href="#server" id="LinksTab">???˜??</a></div>
             </div>
             <section id="tab-group" class="tabgroup" onblur="AddNewActivity()">
                 <div id="information" dir="rtl">
-                    <h2>רשימת פעילויות</h2>
-                    <div><button type="button" id="btnAddNewActivity" onclick="AddNewActivity()">הוסף פעילות חדשה</button></div>
+                    <h2 id="lblSectionActivities">¯???? ????????</h2>
+                    <div><button type="button" id="btnAddNewActivity" onclick="AddNewItem()">‰??? ?????? ?„?‰</button></div>
                     <table id ="tblActivities" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
-                            <th style="text-align:right">שם פעילות</th>
-                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">?? ??????</th>
+                            <th style="text-align:right;;width:200px">??-??¯??</th>
                         </tr>
                     </table>
 
@@ -105,59 +205,88 @@ tr:nth-child(even) {
                 </div>
 
                 <div id="evaluation" dir="rtl">
-                    <h2>ביום-יום</h2>
-                    <div><button type="button" id="btnAddNewHabit" onclick="AddNewHabit()">הוסף </button></div>
-                    <table id ="tblHabit" dir="rtl" align="right">
+                    <h2 id="lblSectionHergelim">·???-???</h2>
+                    <h3>‰‡? ???? ‰????</h3>
+                    <div><button type="button" id="btnAddNewHabitUp" onclick="AddNewItem()">‰??? </button></div>
+                    <table id ="tblHabitUp" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
-                            <th style="text-align:right">שם</th>
-                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;;width:200px">??-??¯??</th>
+                        </tr>
+                    </table>
+                    <div>&nbsp</div>
+                    <div><h3>‰‡? ˆ¯?? ‰????</h3></div>
+                    <div><button type="button" id="btnAddNewHabitDown">‰??? </button></div>
+                    <table id ="tblHabitDown" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;;width:200px">??-??¯??</th>
                         </tr>
                     </table>
                 </div>
 
 
                 <div id="client" dir="rtl">
-                    <h2>תרופות</h2>
-                    <div><button type="button" id="btnAddNewMedicine" onclick="AddNewMedicine()">הוסף </button></div>
+                    <h2>?¯????</h2>
+                    <div><button type="button" id="btnAddNewMedicine" onclick="AddNewItem()">‰??? </button></div>
                     <table id ="tblMedicine" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
-                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">??</th>
                         </tr>
                     </table>
 
                 </div>
 
 
-                <div id="requeriments">
-                    <h2>Heading 4</h2>
-                    <p>Quidem perferendis id sapiente cumque ullam repellendus dolorum odit rerum quibusdam tempora voluptatibus ipsum. Maiores laborum velit aperiam dicta quisquam assumenda at esse exercitationem culpa sequi porro minus ipsa aut.</p>
+                <div id="requeriments" dir="rtl">
+                    <h2>‡???? ???‰</h2>
+                    <div><button type="button" id="btnAddNewSleepQuality" onclick="AddNewItemSleepQuality()">‰??? </button></div>
+                    <table id ="tblSleepQuality" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">??</th>
+                        </tr>
+                    </table>
+                    <div>&nbsp</div>
+                    <div>  <h2>‰?¯??? ???‰</h2></div>
+                    <div><button type="button" id="btnAddNewSleepDisorders" onclick="AddNewItem()">‰??? </button></div>
+                    <table id ="tblSleepDisorders" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">??</th>
+                        </tr>
+                    </table>
                 </div>
 
                 <div id="files" dir="rtl">
-                    <h2>מצב-רוח</h2>
-                    <div><button type="button" id="btnAddMood" onclick="AddNewMood()">הוסף </button></div>
+                    <h2>?ˆ·-¯??</h2>
+                    <div><button type="button" id="btnAddMood" onclick="AddNewItem()">‰??? </button></div>
                     <table id ="tblMood" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
-                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">??</th>
                         </tr>
                     </table>
                 </div>
 
                 <div id="server" dir="rtl">
-                    <h2>לינקים</h2>
-                    <div><button type="button" id="btnAddLinks" onclick="AddNewLink()">הוסף </button></div>
+                    <h2>???˜??</h2>
+                    <div><button type="button" id="btnAddLinks" onclick="AddNewItem()">‰??? </button></div>
                     <table id ="tblLinks" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
-                            <th style="text-align:right">קישור</th>
-                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;width:20px">‰?¯</th>
+                            <th style="text-align:right;width:20px">?¯??</th>
+                            <th style="text-align:right">˜???¯</th>
+                            <th style="text-align:right">??</th>
                         </tr>
                     </table>
                 </div>
@@ -278,16 +407,10 @@ document.onload = AddNewActivity();
 
 function AddNewActivity()
 {
+ //$("#ActivitiesTab")[0].parentElement.classList[0] == "active"
+   //$("#ActivitiesTab");
+    //$("#HabitsTab");
 
-
-function subMenu () {
-    this.subMenu = "";
-}
-
-function Activity() {
-    this.activityName = "";
-    this.subMenus = "";
-}
 
  $.ajax({
             url: "http://localhost:8080/BEAT-PD/User/GET/AllActivities",
@@ -313,7 +436,6 @@ var j=0;
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
                             {
                             txt+=
-                              // <option value="volvo">Volvo</option>
                                 "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
                             }
 
@@ -332,11 +454,11 @@ var j=0;
         });
 
 
-AddHabit();
+AddHabitUp();
 
 }
 
-function AddHabit()
+function AddHabitUp()
 {
 
 $.ajax({
@@ -350,12 +472,15 @@ $.ajax({
                var json = JSON.stringify(eval(jsonStringList));
                var mydata2 = JSON.parse(json);
 var txt = "";
+var txt2 = "";
 var j=0;
               for(var i=0;i<mydata2.length;i++)
               {
                  if(mydata2[i].habitName)
                  {
-                  txt += "<tr>"+
+                   if(mydata2[i].groupID == "0")
+                   {
+                            txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
                             "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
@@ -363,19 +488,47 @@ var j=0;
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
                             {
                             txt+=
-                              // <option value="volvo">Volvo</option>
+
                                 "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
                             }
 
                              txt += "</select>"+
                             "</td>"+
                         "</tr>"
+                    }
+
+                    else if(mydata2[i].groupID == "1")
+                   {
+
+                   txt2 += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].habitName+"</td>"+
+                            "<td>"+ "<select style='width:100%'>"
+                            for(var j=0;j<mydata2[i].subMenus.length;j++)
+                            {
+                            txt2+=
+
+                                "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
+                            }
+
+                             txt2 += "</select>"+
+                            "</td>"+
+                        "</tr>"
+
+                   }
                  }
 
               }
               if(txt != "")
               {
-                        $("#tblHabit").append(txt);
+                        $("#tblHabitUp").append(txt);
+
+              }
+
+               if(txt2 != "")
+              {
+                        $("#tblHabitDown").append(txt2);
 
               }
             }
@@ -494,16 +647,261 @@ var txt = "";
               }
             }
         });
+
+
+        AddSleepQuality();
 }
 
 
 
-
-function AddActivitiesToTable(resultData)
+function AddSleepQuality()
 {
-var i= 0;
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllSleepQuality",
+            cache: false,
+            contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(58,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].sleepQualityName)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].sleepQualityName+"</td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblSleepQuality").append(txt);
+
+              }
+            }
+        });
+
+        AddSleepDisorders();
 }
 
+function AddSleepDisorders()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/User/GET/AllSleepDisorders",
+            cache: false,
+            contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(62,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+               var txt = "";
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].sleepDisorderName)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td>"+mydata2[i].sleepDisorderName+"</td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblSleepDisorders").append(txt);
+
+
+              }
+            }
+        });
+
+
+}
+
+function AddSubMenu()
+{
+   var txtSubMenu = document.getElementById('txtSubMenu');
+
+     $('#ddlSubMenu')
+         .append($("<option></option>")
+                    .text(txtSubMenu.value));
+
+}
+
+function ClearSubMenu()
+{
+   $('#ddlSubMenu')
+    .empty();
+
+}
+
+function subMenu () {
+    this.subMenu = String;
+
+}
+
+function Activity() {
+    this.activityName = String;
+    this.subMenus = [];
+}
+
+
+
+function AddNewActivityToDB()
+{
+var ActivityName =  $("#txtName").val();
+var ac = new Activity();
+ac.activityName = ActivityName;
+
+
+ var SubMenuArr = [];
+$("#ddlSubMenu option").each(function () {
+    SubMenuArr.push($(this).text());
+});
+
+var sm = [new subMenu()];
+for(var i = 0; i< SubMenuArr.length ;i++ )
+{
+sm[i] = new subMenu();
+sm[i].subMenu = SubMenuArr[i];
+}
+
+
+//ac.add(sm);
+ac.subMenus = sm;
+var myJSON = JSON.stringify(ac);
+//var mydata2 = JSON.parse(myJSON);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Add/Activity",
+            cache: false,
+            type: "POST",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+}
+        });
+
+ location.reload();
+}
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+//var btn = document.getElementById("btnAddNewActivity");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+function AddNewItemSleepQuality()
+{
+
+   $("#lblHead").text('‡???? ???‰');
+ modal.style.display = "block";
+
+}
+
+function AddNewItem()
+{
+
+ if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('????????');
+ }
+
+  if($("#HabitsTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('·???-???');
+ }
+
+  if($("#MedicineTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('?¯????');
+ }
+
+   if($("#SleepTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('‰?¯??? ???‰');
+ }
+
+   if($("#MoodTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('?ˆ·-¯??');
+ }
+
+   if($("#LinksTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('???˜??');
+ }
+
+
+    modal.style.display = "block";
+
+}
+
+ // When the user clicks the button, open the modal
+ /*
+btn.onclick = function() {
+
+ if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('????????');
+ }
+
+  if($("#HabitsTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('·???-???');
+ }
+
+   if($("#MedicineTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('?¯????');
+ }
+
+   if($("#SleepTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('???‰');
+ }
+
+   if($("#MoodTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('?ˆ·-¯??');
+ }
+
+   if($("#LinksTab")[0].parentElement.classList[0] == "active")
+ {
+   $("#lblHead").text('???˜??');
+ }
+
+    modal.style.display = "block";
+}
+*/
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 
 //ko.applyBindings(new viewModel());
