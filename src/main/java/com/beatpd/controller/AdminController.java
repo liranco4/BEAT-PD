@@ -453,9 +453,5 @@ public class AdminController {
         }
     }
 
-    @RequestMapping(value = "/Login", method = RequestMethod.GET )
-    public String Login() {
-        return "redirect:/pages/LoginPage.html";
-    }
 
 }
