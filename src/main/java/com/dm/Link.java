@@ -22,7 +22,7 @@ public class Link {
 
     @Override
     public String toString(){
-        return format("{linkHeadLine:\"%s\",linkURL:\"%s\"}",linkID, linkHeadLine, linkURL);
+        return format("{linkHeadLine:\"%s\",linkURL:\"%s\"}", linkHeadLine, linkURL);
     }
     public Link(){}
     public Link(Long linkID, String lintkHeadLine, String linkURL) {

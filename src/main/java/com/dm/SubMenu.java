@@ -14,7 +14,7 @@ public class SubMenu {
     public SubMenu(){}
     @Override
     public String toString(){
-        return format("subMenu:\"%s\"",subMenu);
+        return format("{subMenu:\"%s\"}",subMenu);
     }
 
     public String getSubMenu() {
