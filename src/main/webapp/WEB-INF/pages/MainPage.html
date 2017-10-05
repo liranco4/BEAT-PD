@@ -6,6 +6,11 @@
 
     <title>MainPage</title>
     <link rel="stylesheet" type="text/css" href="MainPage.css" />
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
+=======
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="http://ticket-compare.com/wp-content/themes/ticket-compare/js/jquery.canvasjs.min.js"></script>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
 
     <!--link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.8.3.js" />
     <link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.2.14.js" />
@@ -141,6 +146,7 @@ tr:nth-child(even) {
     <div class="modal-content" dir="rtl">
         <div class="modal-header">
             <span class="close">&times;</span>
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
             <center><h2 id="lblHead">????????</h2></center>
         </div>
         <div class="modal-body">
@@ -151,18 +157,40 @@ tr:nth-child(even) {
                 </select>
                 <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">‰??? ??-??¯??</button>
                 <button type="button" id="btnCLearNewSubMenu" onclick="ClearSubMenu()">?˜‰</button>
+=======
+            <center><h2 id="lblHead"></h2></center>
+        </div>
+        <div class="modal-body">
+            <div>
+                שם:<input type="text" id="txtName" name="name"><br>
+                תת-תפריט:<input type="text" id="txtSubMenu" name="submenu">
+                <select id="ddlSubMenu">
+                </select>
+                <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">הוסף תת-תפריט</button>
+                <button type="button" id="btnCLearNewSubMenu" onclick="ClearSubMenu()">נקה</button>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
             </div>
 
 
         </div>
         <div class="modal-footer" dir="ltr">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
             <div><button type="button" id="btnAddNewActivity1" onclick="AddNewActivityToDB()">‰???</button></div>
+=======
+            <div><button type="button" id="btnAddNewActivity1" onclick="AddNewItemsToDB()">הוסף</button></div>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
         </div>
     </div>
 
 </div>
 <div class="wrapper">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
     <h1>BEAT-PD<span></span></h1>
+=======
+    <h1>BEAT-PD<span>
+    <input type='image' src='medicines12.jpg' style='width:100px;hight:90px;float:right'>
+    </span></h1>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
     <section class="psummary">
         <div class="psummary-left">
             <p><span class="entypo-attention"></span>Status</p>
@@ -179,6 +207,7 @@ tr:nth-child(even) {
         </div>
     </section>
     <section class="pcontent-l">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
         <div class="info" style="height:1000px">
             <div class="tabs" data-tabgroup="tab-group">
                 <div class="active"><a href="#information" id="ActivitiesTab">????????</a></div>
@@ -192,6 +221,21 @@ tr:nth-child(even) {
                 <div id="information" dir="rtl">
                     <h2 id="lblSectionActivities">¯???? ????????</h2>
                     <div><button type="button" id="btnAddNewActivity" onclick="AddNewItem()">‰??? ?????? ?„?‰</button></div>
+=======
+        <div class="info" style="height:700px;">
+            <div class="tabs" data-tabgroup="tab-group">
+                <div class="active"><a href="#information" id="ActivitiesTab">פעילויות</a></div>
+                <div><a href="#evaluation"  id="HabitsTab">ביום-יום</a></div>
+                <div><a href="#client" id="MedicineTab">תרופות</a></div>
+                <div><a href="#requeriments" id="SleepTab">שינה</a></div>
+                <div><a href="#files" id="MoodTab">מצב רוח</a></div>
+                <div><a href="#server" id="LinksTab">לינקים</a></div>
+            </div>
+            <section id="tab-group" class="tabgroup" onblur="AddNewActivity()">
+                <div id="information" dir="rtl">
+                    <h2 id="lblSectionActivities">רשימת פעילויות</h2>
+                    <div><button type="button" id="btnAddNewActivity" onclick="AddNewItem()">הוסף פעילות חדשה</button></div>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                     <table id ="tblActivities" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">‰?¯</th>
@@ -205,6 +249,7 @@ tr:nth-child(even) {
                 </div>
 
                 <div id="evaluation" dir="rtl">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                     <h2 id="lblSectionHergelim">·???-???</h2>
                     <h3>‰‡? ???? ‰????</h3>
                     <div><button type="button" id="btnAddNewHabitUp" onclick="AddNewItem()">‰??? </button></div>
@@ -220,6 +265,24 @@ tr:nth-child(even) {
                     <div><h3>‰‡? ˆ¯?? ‰????</h3></div>
                     <div><button type="button" id="btnAddNewHabitDown">‰??? </button></div>
                     <table id ="tblHabitDown" dir="rtl" align="right">
+=======
+                    <h2 id="lblSectionHergelim">ביום-יום</h2>
+                    <h3>האם שתית היום?</h3>
+                    <div><h6 style="display:none" id="lblType"></h6></div>
+                    <div><button type="button" id="btnAddNewHabitUp" onclick="AddNewItemUp()">הוסף </button></div>
+                    <table id ="tblHabitUp" dir="rtl" align="right" style="overflow-y:scroll">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                        </tr>
+                    </table>
+                    <div>&nbsp</div>
+                    <div><h3>האם צרכת היום?</h3></div>
+                    <div><button type="button" id="btnAddNewHabitDown" onclick="AddNewItemDown()">הוסף </button></div>
+                    <table id ="tblHabitDown" dir="rtl" align="right" style="overflow-y:scroll">
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                         <tr>
                             <th style="text-align:right;width:20px">‰?¯</th>
                             <th style="text-align:right;width:20px">?¯??</th>
@@ -231,8 +294,13 @@ tr:nth-child(even) {
 
 
                 <div id="client" dir="rtl">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                     <h2>?¯????</h2>
                     <div><button type="button" id="btnAddNewMedicine" onclick="AddNewItem()">‰??? </button></div>
+=======
+                    <h2>תרופות</h2>
+                    <div><button type="button" id="btnAddNewMedicine" onclick="AddNewItem()">הוסף </button></div>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                     <table id ="tblMedicine" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">‰?¯</th>
@@ -245,6 +313,7 @@ tr:nth-child(even) {
 
 
                 <div id="requeriments" dir="rtl">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                     <h2>‡???? ???‰</h2>
                     <div><button type="button" id="btnAddNewSleepQuality" onclick="AddNewItemSleepQuality()">‰??? </button></div>
                     <table id ="tblSleepQuality" dir="rtl" align="right">
@@ -262,13 +331,37 @@ tr:nth-child(even) {
                             <th style="text-align:right;width:20px">‰?¯</th>
                             <th style="text-align:right;width:20px">?¯??</th>
                             <th style="text-align:right">??</th>
+=======
+                    <h2>איכות שינה</h2>
+                    <div><button type="button" id="btnAddNewSleepQuality" onclick="AddNewItemSleepQuality()">הוסף </button></div>
+                    <table id ="tblSleepQuality" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
+                    <div>&nbsp</div>
+                    <div>  <h2>הפרעות שינה</h2></div>
+                    <div><button type="button" id="btnAddNewSleepDisorders" onclick="AddNewItem()">הוסף </button></div>
+                    <table id ="tblSleepDisorders" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                         </tr>
                     </table>
                 </div>
 
                 <div id="files" dir="rtl">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                     <h2>?ˆ·-¯??</h2>
                     <div><button type="button" id="btnAddMood" onclick="AddNewItem()">‰??? </button></div>
+=======
+                    <h2>מצב-רוח</h2>
+                    <div><button type="button" id="btnAddMood" onclick="AddNewItem()">הוסף </button></div>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                     <table id ="tblMood" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">‰?¯</th>
@@ -279,8 +372,13 @@ tr:nth-child(even) {
                 </div>
 
                 <div id="server" dir="rtl">
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                     <h2>???˜??</h2>
                     <div><button type="button" id="btnAddLinks" onclick="AddNewItem()">‰??? </button></div>
+=======
+                    <h2>לינקים</h2>
+                    <div><button type="button" id="btnAddLinks" onclick="AddNewItem()">הוסף </button></div>
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                     <table id ="tblLinks" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">‰?¯</th>
@@ -298,10 +396,12 @@ tr:nth-child(even) {
     </section>
     <aside class="pcontent-r">
         <div class="history">
-            <h3>Project History</h3>
+            <h3>Project Activity</h3>
+            <div id="chartContainer" style="height: 100%; width: 100%;"></div>
         </div>
         <div class="team">
             <h3>Team</h3>
+            <div id="chartContainerTeam" style="height: 100%; width: 100%;"></div>
         </div>
     </aside>
 </div> <!-- END Wrapper -->
@@ -403,7 +503,156 @@ function viewModel() {
         $(element).button("option", "disabled", currentValue.enable === false);
     }
 };*/
-document.onload = AddNewActivity();
+
+
+window.onload = function() {
+AddNewActivity();
+ViewProjectChart();
+ViewTeamChart();
+}
+
+
+function ViewTeamChart()
+{
+ //$("#ActivitiesTab")[0].parentElement.classList[0] == "active"
+   //$("#ActivitiesTab");
+    //$("#HabitsTab");
+
+var chart = new CanvasJS.Chart("chartContainerTeam",
+    {
+      title:{
+        text: ""
+      },
+      animationEnabled: true,
+      axisY:{
+        titleFontFamily: "arial",
+        titleFontSize: 14,
+        includeZero: false
+      },
+      toolTip: {
+        shared: true
+      },
+	  data: [
+	  	        {
+
+        type: "bar",
+        name: "ticketbis",
+        showInLegend: true,
+		        dataPoints: [
+        {label:"הליכה", y: 254},
+        {label: "קפה", y: 264},
+        {label: "שחייה", y: 264},
+        {label: "ביקור רופא", y: 290},
+        {label: "Apomorphine", y: 285},
+        {label: "הרבה חלומות", y: 369},
+        {label: "קושי בהרדמות", y: 329}
+		]
+      },
+	  	        {
+
+        type: "bar",
+        name: "ticket2",
+        showInLegend: true,
+		        dataPoints: [
+        {label:"הליכה", y: 465},
+        {label: "קפה", y: 463},
+        {label: "שחייה", y: 463},
+        {label: "ביקור רופא", y: 464},
+        {label: "Apomorphine", y: 464},
+        {label: "הרבה חלומות", y: 503},
+        {label: "קושי בהרדמות", y: 503}
+		]
+      },
+	  	  ],
+      legend:{
+        cursor:"pointer",
+        itemclick:function(e){
+          if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+          	e.dataSeries.visible = false;
+          }
+          else {
+          	e.dataSeries.visible = true;
+          }
+          chart.render();
+        }
+      }
+    });
+
+chart.render();
+
+
+
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
+=======
+}
+
+
+function ViewProjectChart()
+{
+ var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Patients update activity"
+      },
+      animationEnabled: true,
+      axisY:{
+        titleFontFamily: "arial",
+        titleFontSize: 12,
+        includeZero: false
+      },
+      toolTip: {
+        shared: true
+      },
+	  data: [
+	  	        {
+
+        type: "pie",
+        name: "ticketbis",
+        showInLegend: true,
+		        dataPoints: [
+        {label:"הליכה", y: 254},
+        {label: "קפה", y: 264},
+        {label: "שחייה", y: 264},
+        {label: "ביקור רופא", y: 290},
+        {label: "Apomorphine", y: 285},
+        {label: "הרבה חלומות", y: 369},
+        {label: "קושי בהרדמות", y: 329}
+		]
+      },
+	  	        {
+
+        type: "pie",
+        name: "ticket2",
+        showInLegend: true,
+		        dataPoints: [
+        {label:"הליכה", y: 465},
+        {label: "קפה", y: 463},
+        {label: "שחייה", y: 463},
+        {label: "ביקור רופא", y: 464},
+        {label: "Apomorphine", y: 464},
+        {label: "הרבה חלומות", y: 503},
+        {label: "קושי בהרדמות", y: 503}
+		]
+      },
+	  	  ],
+      legend:{
+        cursor:"pointer",
+        itemclick:function(e){
+          if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+          	e.dataSeries.visible = false;
+          }
+          else {
+          	e.dataSeries.visible = true;
+          }
+          chart.render();
+        }
+      }
+    });
+
+chart.render();
+
+
+}
 
 function AddNewActivity()
 {
@@ -412,6 +661,7 @@ function AddNewActivity()
     //$("#HabitsTab");
 
 
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  $.ajax({
             url: "http://localhost:8080/BEAT-PD/User/GET/AllActivities",
             cache: false,
@@ -420,6 +670,7 @@ function AddNewActivity()
               //  alert('test');
               var jsonString = data.responseText;
                jsonStringList =jsonString.substring(54,jsonString.length - 1);
+              // var ttt = eval(jsonStringList);
                var json = JSON.stringify(eval(jsonStringList));
                var mydata2 = JSON.parse(json);
 var txt = "";
@@ -429,7 +680,7 @@ var j=0;
                  if(mydata2[i].activityName)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
                             "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].activityName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
@@ -481,7 +732,11 @@ var j=0;
                    if(mydata2[i].groupID == "0")
                    {
                             txt += "<tr>"+
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                             "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+=======
+                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                             "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
@@ -501,7 +756,11 @@ var j=0;
                    {
 
                    txt2 += "<tr>"+
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
                             "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
+=======
+                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
                             "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
@@ -759,6 +1018,7 @@ function Activity() {
 }
 
 
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
 
 function AddNewActivityToDB()
 {
@@ -767,12 +1027,68 @@ var ac = new Activity();
 ac.activityName = ActivityName;
 
 
+=======
+function Habit() {
+    this.habitName = String;
+    this.groupID = String;
+    this.subMenus = [];
+}
+
+
+
+function AddNewItemsToDB()
+{
+
+ if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
+ {
+   AddNewActivityToDB();
+ }
+
+  if($("#HabitsTab")[0].parentElement.classList[0] == "active")
+  {
+   AddNewHabitToDB();
+  }
+
+  if($("#MedicineTab")[0].parentElement.classList[0] == "active")
+   {
+
+   }
+
+   if($("#SleepTab")[0].parentElement.classList[0] == "active")
+ {
+
+ }
+
+   if($("#MoodTab")[0].parentElement.classList[0] == "active")
+ {
+
+ }
+
+   if($("#LinksTab")[0].parentElement.classList[0] == "active")
+ {
+
+ }
+
+
+
+}
+
+
+function AddNewActivityToDB()
+{
+
+ var ActivityName =  $("#txtName").val();
+var ac = new Activity();
+ac.activityName = ActivityName;
+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  var SubMenuArr = [];
 $("#ddlSubMenu option").each(function () {
     SubMenuArr.push($(this).text());
 });
 
 var sm = [new subMenu()];
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
 for(var i = 0; i< SubMenuArr.length ;i++ )
 {
 sm[i] = new subMenu();
@@ -784,6 +1100,16 @@ sm[i].subMenu = SubMenuArr[i];
 ac.subMenus = sm;
 var myJSON = JSON.stringify(ac);
 //var mydata2 = JSON.parse(myJSON);
+=======
+   for(var i = 0; i< SubMenuArr.length ;i++ )
+  {
+    sm[i] = new subMenu();
+    sm[i].subMenu = SubMenuArr[i];
+   }
+
+ac.subMenus = sm;
+var myJSON = JSON.stringify(ac);
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Add/Activity",
@@ -807,45 +1133,144 @@ var modal = document.getElementById('myModal');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
 function AddNewItemSleepQuality()
 {
 
    $("#lblHead").text('‡???? ???‰');
+=======
+function AddNewHabitToDB()
+{
+var HabitName =  $("#txtName").val();
+var ac = new Habit();
+ac.habitName = HabitName;
+
+  if($("#lblType").text() == 'Up')
+  {
+      ac.groupID = "0";
+  }
+  else
+  {
+      ac.groupID = "1";
+  }
+
+
+ var SubMenuArr = [];
+$("#ddlSubMenu option").each(function () {
+    SubMenuArr.push($(this).text());
+});
+
+var sm = [new subMenu()];
+   for(var i = 0; i< SubMenuArr.length ;i++ )
+  {
+    sm[i] = new subMenu();
+    sm[i].subMenu = SubMenuArr[i];
+   }
+
+
+ac.subMenus = sm;
+var myJSON = JSON.stringify(ac);
+var mydata2 = JSON.parse(myJSON);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Add/Habit",
+            cache: false,
+            type: "POST",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+}
+        });
+      //  AddHabitUp();
+location.reload();
+}
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that opens the modal
+//var btn = document.getElementById("btnAddNewActivity");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+function AddNewItemSleepQuality()
+{
+
+   $("#lblHead").text('איכות שינה');
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  modal.style.display = "block";
 
 }
 
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
+=======
+function AddNewItemUp()
+{
+   $("#lblHead").text('ביום-יום');
+   $("#lblType").text('Up');
+     modal.style.display = "block";
+}
+
+function AddNewItemDown()
+{
+   $("#lblHead").text('ביום-יום');
+    $("#lblType").text('Down');
+     modal.style.display = "block";
+}
+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
 function AddNewItem()
 {
 
  if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('????????');
  }
 
   if($("#HabitsTab")[0].parentElement.classList[0] == "active")
  {
    $("#lblHead").text('·???-???');
+=======
+   $("#lblHead").text('פעילויות');
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
   if($("#MedicineTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('?¯????');
+=======
+   $("#lblHead").text('תרופות');
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
    if($("#SleepTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('‰?¯??? ???‰');
+=======
+   $("#lblHead").text('הפרעות שינה');
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
    if($("#MoodTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('?ˆ·-¯??');
+=======
+   $("#lblHead").text('מצב-רוח');
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('???˜??');
+=======
+   $("#lblHead").text('לינקים');
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
 
@@ -853,6 +1278,7 @@ function AddNewItem()
 
 }
 
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
  // When the user clicks the button, open the modal
  /*
 btn.onclick = function() {
@@ -870,26 +1296,227 @@ btn.onclick = function() {
    if($("#MedicineTab")[0].parentElement.classList[0] == "active")
  {
    $("#lblHead").text('?¯????');
+=======
+
+function DeleteItem(rowId)
+{
+
+ if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
+ {
+   var txt;
+    if (confirm("Are you sure you want to delete?") == true) {
+        // OK
+
+        var RowToDelete = rowId;
+        var acToDelete = new Activity();
+        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        var myJSON = JSON.stringify(acToDelete);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
+            cache: false,
+            type: "DELETE",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+      }
+        });
+
+        location.reload();
+
+
+    } else {
+        //Cancel
+        //DoNothing
+    }
+
+ }
+  if($("#HabitsTab")[0].parentElement.classList[0] == "active")
+ {
+
+   var txt;
+    if (confirm("Are you sure you want to delete?") == true) {
+        // OK
+
+        var RowToDelete = rowId;
+        var haToDelete = new Habit();
+        haToDelete.habitName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        var myJSON = JSON.stringify(haToDelete);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Habit",
+            cache: false,
+            type: "DELETE",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+      }
+        });
+
+        location.reload();
+
+
+    } else {
+        //Cancel
+        //DoNothing
+    }
+
+ }
+
+  if($("#MedicineTab")[0].parentElement.classList[0] == "active")
+ {
+
+   var txt;
+    if (confirm("Are you sure you want to delete?") == true) {
+        // OK
+
+        var RowToDelete = rowId;
+        var haToDelete = new Habit();
+        haToDelete.habitName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        var myJSON = JSON.stringify(haToDelete);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Habit",
+            cache: false,
+            type: "DELETE",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+      }
+        });
+
+
+
+
+    } else {
+        //Cancel
+        //DoNothing
+    }
+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
    if($("#SleepTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('???‰');
+=======
+   $("#lblHead").text('הפרעות שינה');
+   var txt;
+    if (confirm("Are you sure you want to delete?") == true) {
+        // OK
+
+        var RowToDelete = rowId;
+        var acToDelete = new Activity();
+        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        var myJSON = JSON.stringify(acToDelete);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
+            cache: false,
+            type: "DELETE",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+      }
+        });
+
+        location.reload();
+
+
+    } else {
+        //Cancel
+        //DoNothing
+    }
+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
    if($("#MoodTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('?ˆ·-¯??');
+=======
+   $("#lblHead").text('מצב-רוח');
+   var txt;
+    if (confirm("Are you sure you want to delete?") == true) {
+        // OK
+
+        var RowToDelete = rowId;
+        var acToDelete = new Activity();
+        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        var myJSON = JSON.stringify(acToDelete);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
+            cache: false,
+            type: "DELETE",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+      }
+        });
+
+        location.reload();
+
+
+    } else {
+        //Cancel
+        //DoNothing
+    }
+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
  }
 
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
+<<<<<<< a75f89cb31287ed1beafd2da583e2411af329e50
    $("#lblHead").text('???˜??');
  }
 
     modal.style.display = "block";
 }
 */
+=======
+   $("#lblHead").text('לינקים');
+   var txt;
+    if (confirm("Are you sure you want to delete?") == true) {
+        // OK
+
+        var RowToDelete = rowId;
+        var acToDelete = new Activity();
+        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        var myJSON = JSON.stringify(acToDelete);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
+            cache: false,
+            type: "DELETE",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function() {
+      }
+        });
+
+        location.reload();
+
+
+    } else {
+        //Cancel
+        //DoNothing
+    }
+
+ }
+
+
+}
+
+
+
+
+
+
+>>>>>>> 97123b708fbcf45682d26da6987dc98fe367c596
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
