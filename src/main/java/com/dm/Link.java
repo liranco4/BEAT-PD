@@ -10,10 +10,6 @@ import static java.lang.String.format;
 @Entity(name="LINKS")
 public class Link {
     @Id
-    @Column(name = "LINK_ID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long linkID;
-
     @Column(name = "HEADLINE")
     private String linkHeadLine;
 
@@ -25,19 +21,6 @@ public class Link {
         return format("{linkHeadLine:\"%s\",linkURL:\"%s\"}", linkHeadLine, linkURL);
     }
     public Link(){}
-    public Link(Long linkID, String lintkHeadLine, String linkURL) {
-        this.linkID = linkID;
-        this.linkHeadLine = lintkHeadLine;
-        this.linkURL = linkURL;
-    }
-
-    public Long getLinkID() {
-        return linkID;
-    }
-
-    public void setLinkID(Long linkID) {
-        this.linkID = linkID;
-    }
 
     public String getLinkHeadLine() {
         return linkHeadLine;
