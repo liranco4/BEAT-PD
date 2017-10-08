@@ -1,9 +1,6 @@
 package com.dm;
 
-import com.dm.updateDM.ActivityUpdate;
-import com.dm.updateDM.HabitUpdate;
-import com.dm.updateDM.MedicineUpdate;
-import com.dm.updateDM.SleepDisorderUpdate;
+import com.dm.updateDM.*;
 import org.hibernate.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -65,11 +62,11 @@ public class PatientRecord {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name="PATIENT_RECORD_MOOD_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MOOD_CONDITION_NAME")})
+    @JoinTable(name="PATIENT_RECORD_MOOD_CONDITION", joinColumns = {@JoinColumn(name = "PATIENT_RECORDS_ID")}, inverseJoinColumns ={@JoinColumn(name="MOOD_CONDITION_ID")})
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private List<MoodCondition> listOfMoodCondition = new ArrayList<>();
+    private List<MoodConditionUpdate> listOfMoodCondition = new ArrayList<>();
 
     @Transient
     private SleepConditionAndDisorder sleepConditionAndDisorder;
@@ -82,7 +79,7 @@ public class PatientRecord {
     @GenericGenerator(name="kaugen" , strategy="increment")
     @GeneratedValue(generator="kaugen")
     @CollectionId(columns = {@Column(name = "INDEX_ID")}, generator = "kaugen", type=@Type(type="long"))
-    private SleepCondition sleepCondition;
+    private SleepConditionUpdate sleepCondition;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
@@ -148,11 +145,11 @@ public class PatientRecord {
         this.listOfHabitUpdate = listOfHabitUpdate;
     }
 
-    public List<MoodCondition> getListOfMoodCondition() {
+    public List<MoodConditionUpdate> getListOfMoodCondition() {
         return listOfMoodCondition;
     }
 
-    public void setListOfMoodCondition(List<MoodCondition> listOfMoodCondition) {
+    public void setListOfMoodCondition(List<MoodConditionUpdate> listOfMoodCondition) {
         this.listOfMoodCondition = listOfMoodCondition;
     }
 
@@ -164,11 +161,11 @@ public class PatientRecord {
         this.sleepConditionAndDisorder = sleepConditionAndDisorder;
     }
 
-    public SleepCondition getSleepCondition() {
+    public SleepConditionUpdate getSleepCondition() {
         return sleepCondition;
     }
 
-    public void setSleepCondition(SleepCondition sleepCondition) {
+    public void setSleepCondition(SleepConditionUpdate sleepCondition) {
         this.sleepCondition = sleepCondition;
     }
 

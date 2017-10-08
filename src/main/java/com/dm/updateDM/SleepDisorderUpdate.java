@@ -23,7 +23,7 @@ public class SleepDisorderUpdate implements UpdateDM{
     public SleepDisorderUpdate() {}
 
     @Override
-    public String getName() {
+    public String getFirstDetail() {
         return sleepDisorderName;
     }
 

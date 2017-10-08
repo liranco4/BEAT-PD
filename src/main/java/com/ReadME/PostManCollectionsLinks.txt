@@ -7,7 +7,7 @@ Add SleepDisorder: https://www.getpostman.com/collections/131a0ced94a916a57548
 Add Habit: https://www.getpostman.com/collections/c38761a99b962eff428d
 The following is example for get one table(for other table change to the name in the URL of the class+s: Activities).
 GET all Habits: https://www.getpostman.com/collections/a8bccac067f569746457
-Update patient Record: https://www.getpostman.com/collections/8422f493220727631d24
+Update patient Record: https://www.getpostman.com/collections/243f244c10f6a06d4f0e
 Add Medicine: https://www.getpostman.com/collections/7f6a91bbc32fa0e6a352
 Get Patient details by ID: https://www.getpostman.com/collections/b95af3ac668253887f6a
 Add SleepQuality: https://www.getpostman.com/collections/006961e33bf80a24ee65

@@ -1,4 +1,6 @@
-package com.dm;
+package com.dm.updateDM;
+
+import com.interfaces.UpdateDMProxy;
 
 import javax.persistence.*;
 
@@ -9,7 +11,7 @@ import static java.lang.String.format;
  * Created by liran on 02/09/17.
  */
 @Entity(name="SLEEP_CONDITION")
-public class SleepCondition {
+public class SleepConditionUpdate implements UpdateDMProxy{
 
     @Id
     @SequenceGenerator(name = "SLEEP_CONDITION_SEQ", sequenceName = "SLEEP_CONDITION_SEQ")
@@ -23,9 +25,9 @@ public class SleepCondition {
     @Column(name = "SLEEP_QUALITY")
     private String sleepQuality;
 
-    public SleepCondition(){}
+    public SleepConditionUpdate(){}
 
-    public SleepCondition(Long i_SleepHours, String i_SleepQuality){
+    public SleepConditionUpdate(Long i_SleepHours, String i_SleepQuality){
         sleepHours = i_SleepHours;
         sleepQuality = i_SleepQuality;
     }
@@ -42,16 +44,16 @@ public class SleepCondition {
         this.sleepConditionID = sleepConditionID;
     }
 
-    public Long getSleepHours() {
+    public Long getFirstDetail() {
         return sleepHours;
+    }
+
+    public String getSecondDetail() {
+        return sleepQuality;
     }
 
     public void setSleepHours(Long sleepHours) {
         this.sleepHours = sleepHours;
-    }
-
-    public String getSleepQuality() {
-        return sleepQuality;
     }
 
     public void setSleepQuality(String sleepQuality) {

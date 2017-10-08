@@ -39,7 +39,7 @@ public class ActivityUpdate implements UpdateDMProxy {
     }
 
     @Override
-    public String getName() {
+    public String getFirstDetail() {
         return activityName;
     }
 
@@ -48,7 +48,7 @@ public class ActivityUpdate implements UpdateDMProxy {
     }
 
     @Override
-    public String getDescription() {
+    public String getSecondDetail() {
         return activityDescription;
     }
 

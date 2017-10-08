@@ -44,7 +44,7 @@
         <mapping class="com.dm.HospitalData"/>
         <mapping class="com.dm.Habit"/>
         <mapping class="com.dm.MoodCondition"/>
-        <mapping class="com.dm.SleepCondition"/>
+        <mapping class="com.dm.updateDM.SleepConditionUpdate"/>
         <mapping class="com.dm.SleepDisorder"/>
         <mapping class="com.dm.updateDM.SleepDisorderUpdate"/>
         <mapping class="com.dm.PatientRecord"/>
@@ -52,6 +52,7 @@
         <mapping class="com.dm.updateDM.ActivityUpdate"/>
         <mapping class="com.dm.updateDM.HabitUpdate"/>
         <mapping class="com.dm.updateDM.MedicineUpdate"/>
+        <mapping class="com.dm.updateDM.MoodConditionUpdate"/>
         <mapping class="com.dm.SubMenu"/>
 
     </session-factory>

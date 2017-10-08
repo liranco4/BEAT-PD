@@ -1,10 +1,7 @@
 package com.dao;
 
 import com.dm.*;
-import com.dm.updateDM.ActivityUpdate;
-import com.dm.updateDM.HabitUpdate;
-import com.dm.updateDM.MedicineUpdate;
-import com.dm.updateDM.SleepDisorderUpdate;
+import com.dm.updateDM.*;
 import com.interfaces.UpdateDM;
 import com.interfaces.UpdateDMProxy;
 import com.utils.CustomDate;
@@ -64,6 +61,11 @@ public class PatientRecordModel {
 
             //Save Medicine update list on MEDICINE_Update table
             addUpdateDMIfExist(i_PatientRecord.getListOfMedicineUpdate(),session).ifPresent((idList)->i_PatientRecord.setListOfMedicineUpdate((List<MedicineUpdate>) idList));
+
+            //Save MoodCondition update list on MoodCondition table
+            addUpdateDMIfExist(i_PatientRecord.getListOfMoodCondition(),session).ifPresent((idList)->i_PatientRecord.setListOfMoodCondition((List<MoodConditionUpdate>) idList));
+
+
             session.save(i_PatientRecord);
             transaction.commit();
             session.close();
@@ -74,10 +76,10 @@ public class PatientRecordModel {
         }
     }
 
-    private Optional<SleepCondition> addSleepConditionIfExist(PatientRecord i_PatientRecord, Session i_Session){
+    private Optional<SleepConditionUpdate> addSleepConditionIfExist(PatientRecord i_PatientRecord, Session i_Session){
         if (i_PatientRecord.getSleepConditionAndDisorder() != null) {
             SleepConditionAndDisorder value = i_PatientRecord.getSleepConditionAndDisorder();
-            SleepCondition sleepCondition = new SleepCondition(value.getSleepHours(),value.getSleepQuality());
+            SleepConditionUpdate sleepCondition = new SleepConditionUpdate(value.getSleepHours(),value.getSleepQuality());
             i_Session.save(sleepCondition);
             return Optional.of(sleepCondition);
         }
@@ -125,6 +127,7 @@ public class PatientRecordModel {
         private int colNum = 0;
         private int firstDataLine;
 
+
         private XSL(){
             patientRecordList = getAllPatientUpdates();
         }
@@ -139,6 +142,8 @@ public class PatientRecordModel {
                 workbook = new HSSFWorkbook();
                 sheet = workbook.createSheet(CustomDate.getDateFormat().format(new Date()));
                 createHeadLines();
+                CellStyle underlineStyle = workbook.createCellStyle();
+                underlineStyle.setBorderBottom(BorderStyle.MEDIUM);
 
                 patientRecordList.forEach(p-> {
                     createAndInsertSingleCell(0, p.getPatientID());
@@ -148,6 +153,10 @@ public class PatientRecordModel {
                     createAndInsertDmCell(p.getListOfHabitUpdate());
                     createAndInsertDmCell(p.getListOfMedicineUpdate());
                     //createAndInsertSleepConditionCell(p.getSleepConditionAndDisorder());
+
+                    Row row = sheet.getRow(rowNum-1);
+                    row.setRowStyle(underlineStyle);
+                    row.getCell(row.getLastCellNum()-1).setCellStyle(underlineStyle);
 
                     firstDataLine = rowNum;
                 });
@@ -184,6 +193,7 @@ public class PatientRecordModel {
             style.setAlignment(HorizontalAlignment.CENTER);
             // Setting font to style
             style.setFont(font);
+
 
             while(rowNum < rowAmount){
                 row = sheet.createRow(rowNum);
@@ -236,6 +246,7 @@ public class PatientRecordModel {
             insertSubHeadLines(row, style);
             firstDataLine = ++rowNum;
 
+
         }
 
         private void mergeCells(CellRangeAddress cellRangeAddress){
@@ -254,7 +265,7 @@ public class PatientRecordModel {
             }
         }
 
-        //support the following fields from PatientRecord: ID, Date, Medicine, MoodCondition
+        //support the following fields from PatientRecord: ID, Date
         private <T> void createAndInsertSingleCell( int column, T data){
             Row row;
             if(firstDataLine == rowNum) {
@@ -275,10 +286,8 @@ public class PatientRecordModel {
                 cell = row.createCell(1);
                 cell.setCellValue((Date) data);
                 cell.setCellStyle(cellStyle);
-                int x =1;//TODO need to fix the style issue of DATE
-
-
             }
+
         }
 
         private void createAndInsertDmCell(List<? extends UpdateDM> dmList) {
@@ -291,15 +300,26 @@ public class PatientRecordModel {
             else if(!dmList.isEmpty() && dmList.get(0) instanceof MedicineUpdate){
                 firstCol = 7;
                 secondCol = 8;
-            }else if(!dmList.isEmpty() && dmList.get(0) instanceof MoodCondition){
+            }else if(!dmList.isEmpty() && dmList.get(0) instanceof MoodConditionUpdate){
                 firstCol = 2;
             }
             if (firstDataLine == rowNum) {
                 for (UpdateDM updateDm : dmList) {
                     row = sheet.createRow(rowNum++);
-                    row.createCell(firstCol).setCellValue(updateDm.getName());
+                    if (updateDm.getFirstDetail() instanceof String) {
+                        row.createCell(firstCol).setCellValue((String)updateDm.getFirstDetail());
+                    }
+                    else if(updateDm.getFirstDetail() instanceof Long){
+                        row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
+                    }
                     if(updateDm instanceof UpdateDMProxy) {
-                        row.createCell(secondCol).setCellValue(((UpdateDMProxy) updateDm).getDescription());
+                        if (updateDm.getFirstDetail() instanceof String) {
+                            row.createCell(secondCol).setCellValue((String)((UpdateDMProxy) updateDm).getSecondDetail());
+                        }
+                        else if(updateDm.getFirstDetail() instanceof Long){
+                            row.createCell(secondCol).setCellValue((Long)((UpdateDMProxy) updateDm).getSecondDetail());
+                        }
+
                     }
                 }
             }
@@ -310,18 +330,38 @@ public class PatientRecordModel {
                 while(rowItr<rowNum && dmIterator.hasNext()){
                     row = sheet.getRow(rowItr++);
                     UpdateDM updateDm = dmIterator.next();
-                    row.createCell(firstCol).setCellValue(updateDm.getName());
+                    if (updateDm.getFirstDetail() instanceof String) {
+                        row.createCell(firstCol).setCellValue((String)updateDm.getFirstDetail());
+                    }
+                    else if(updateDm.getFirstDetail() instanceof Long){
+                        row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
+                    }
                     if(updateDm instanceof UpdateDMProxy){
-                        row.createCell(secondCol).setCellValue(((UpdateDMProxy) updateDm).getDescription());
+                        if (updateDm.getFirstDetail() instanceof String) {
+                            row.createCell(secondCol).setCellValue((String)((UpdateDMProxy) updateDm).getSecondDetail());
+                        }
+                        else if(updateDm.getFirstDetail() instanceof Long){
+                            row.createCell(secondCol).setCellValue((Long)((UpdateDMProxy) updateDm).getSecondDetail());
+                        }
                     }
 
                 }
                 while(dmIterator.hasNext()){
                     row = sheet.createRow(rowNum++);
                     UpdateDM updateDm = dmIterator.next();
-                    row.createCell(firstCol).setCellValue(updateDm.getName());
+                    if (updateDm.getFirstDetail() instanceof String) {
+                        row.createCell(firstCol).setCellValue((String)updateDm.getFirstDetail());
+                    }
+                    else if(updateDm.getFirstDetail() instanceof Long){
+                        row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
+                    }
                     if(updateDm instanceof UpdateDMProxy){
-                        row.createCell(secondCol).setCellValue(((UpdateDMProxy) updateDm).getDescription());
+                        if (updateDm.getFirstDetail() instanceof String) {
+                            row.createCell(secondCol).setCellValue((String)((UpdateDMProxy) updateDm).getSecondDetail());
+                        }
+                        else if(updateDm.getFirstDetail() instanceof Long){
+                            row.createCell(secondCol).setCellValue((Long)((UpdateDMProxy) updateDm).getSecondDetail());
+                        }
                     }
 
                 }
@@ -335,7 +375,7 @@ public class PatientRecordModel {
             if (firstDataLine == rowNum) {
                 row = sheet.createRow(rowNum++);
                 sleepConditionAndDisorder.getSleepDisorders().forEach(dis ->
-                        sheet.createRow(rowNum++).createCell(disorderColumn).setCellValue(dis.getName()));
+                        sheet.createRow(rowNum++).createCell(disorderColumn).setCellValue(dis.getFirstDetail()));
             }
             else
             {
@@ -346,12 +386,12 @@ public class PatientRecordModel {
                 while(rowItr<rowNum && sleepDisorderIterator.hasNext()){
                     localRow = sheet.getRow(rowItr++);
                     SleepDisorderUpdate dm = sleepDisorderIterator.next();
-                    localRow.createCell(disorderColumn).setCellValue(dm.getName());
+                    localRow.createCell(disorderColumn).setCellValue(dm.getFirstDetail());
                 }
                 while(sleepDisorderIterator.hasNext()){
                     localRow = sheet.createRow(rowNum++);
                     SleepDisorderUpdate dm = sleepDisorderIterator.next();
-                    localRow.createCell(disorderColumn).setCellValue(dm.getName());
+                    localRow.createCell(disorderColumn).setCellValue(dm.getFirstDetail());
                 }
 
             }

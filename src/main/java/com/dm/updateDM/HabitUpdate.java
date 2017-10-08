@@ -39,7 +39,7 @@ public class HabitUpdate implements UpdateDMProxy {
     }
 
     @Override
-    public String getName() {
+    public String getFirstDetail() {
         return habitName;
     }
 
@@ -48,7 +48,7 @@ public class HabitUpdate implements UpdateDMProxy {
     }
 
     @Override
-    public String getDescription() {
+    public String getSecondDetail() {
         return habitDescription;
     }
 

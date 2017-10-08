@@ -1,6 +1,7 @@
 package com.dm.updateDM;
 
 import com.interfaces.UpdateDM;
+import com.interfaces.UpdateDMProxy;
 
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
  * Created by liran on 5/4/17.
  */
 @Entity(name = "MEDICINE_UPDATE")
-public class MedicineUpdate implements UpdateDM{
+public class MedicineUpdate implements UpdateDMProxy{
 
     @Id
     @SequenceGenerator(name = "MED_UPDATE_SEQ", sequenceName = "MED_UPDATE_SEQ")
@@ -39,9 +40,12 @@ public class MedicineUpdate implements UpdateDM{
     }
 
     @Override
-    public String getName() {
+    public String getFirstDetail() {
         return medicineName;
     }
+
+    @Override
+    public String getSecondDetail(){return medicineSerialNumber;}
 
     public void setMedicineName(String medicineName) {
         this.medicineName = medicineName;
