@@ -161,7 +161,7 @@ public class PatientRecord {
         this.sleepConditionAndDisorder = sleepConditionAndDisorder;
     }
 
-    public SleepConditionUpdate getSleepCondition() {
+    public SleepConditionUpdate getSleepConditionUpdate() {
         return sleepCondition;
     }
 

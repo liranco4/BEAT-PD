@@ -5,6 +5,7 @@ import com.dm.updateDM.*;
 import com.interfaces.UpdateDM;
 import com.interfaces.UpdateDMProxy;
 import com.utils.CustomDate;
+import jdk.nashorn.internal.runtime.options.Option;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -15,7 +16,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import static com.utils.SingleLogger.LOGGER;
 import static java.lang.String.format;
 
 /**
@@ -98,14 +102,14 @@ public class PatientRecordModel {
         return Optional.empty();
     }
 
-    public List<PatientRecord> getAllPatientUpdates(){
+    private List<PatientRecord> getAllPatientUpdates(){
         List<PatientRecord> patientRecords = new ArrayList<>();
         Collection<Patient> patients =  modelGenerics.findAllByClass(Patient.class);
         patients.forEach(p -> patientRecords.addAll(getAllUpdatesByPatientID(p.getPatientID())));
         return patientRecords;
     }
 
-    public List<PatientRecord> getAllUpdatesByPatientID(String i_PatientID) throws HibernateException{
+    private List<PatientRecord> getAllUpdatesByPatientID(String i_PatientID) throws HibernateException{
         Session session = null;
         try {
             session = modelGenerics.getSessionFactory().openSession();
@@ -119,6 +123,11 @@ public class PatientRecordModel {
         }
     }
 
+    public void createNewExcelReport(String filePath, Optional<String> patientID){
+        XSL xsl = new XSL();
+        xsl.createNewExcelReport(filePath,patientID);
+    }
+
     private class XSL{
         private List<PatientRecord> patientRecordList;
         private Workbook workbook;
@@ -127,18 +136,19 @@ public class PatientRecordModel {
         private int colNum = 0;
         private int firstDataLine;
 
-
-        private XSL(){
-            patientRecordList = getAllPatientUpdates();
-        }
+        private XSL(){}
 
         private Boolean isRowNumberAlreadyCreated(int rowNumber){
             return (sheet.getRow(rowNumber)==null);
         }
 
-        private void createNewExcelReport(String filePath) {
+        private void createNewExcelReport(String filePath,Optional<String> patientID) {
 
             try {
+               if(patientID.isPresent())
+                patientRecordList = PatientRecordModel.getPatientRecordModelInstance().getAllUpdatesByPatientID(patientID.get());
+               else
+                 patientRecordList =  PatientRecordModel.getPatientRecordModelInstance().getAllPatientUpdates();
                 workbook = new HSSFWorkbook();
                 sheet = workbook.createSheet(CustomDate.getDateFormat().format(new Date()));
                 createHeadLines();
@@ -152,7 +162,8 @@ public class PatientRecordModel {
                     createAndInsertDmCell(p.getListOfActivityUpdate());
                     createAndInsertDmCell(p.getListOfHabitUpdate());
                     createAndInsertDmCell(p.getListOfMedicineUpdate());
-                    //createAndInsertSleepConditionCell(p.getSleepConditionAndDisorder());
+                    createAndInsertDmCell(Collections.singletonList(p.getSleepConditionUpdate()));
+                    createAndInsertDmCell(p.getSleepDisorderUpdate());
 
                     Row row = sheet.getRow(rowNum-1);
                     row.setRowStyle(underlineStyle);
@@ -166,14 +177,16 @@ public class PatientRecordModel {
                     FileOutputStream out = new FileOutputStream(new File(filePath));
                     workbook.write(out);
                     out.close();
-                    System.out.println("CountriesDetails.xlsx has been created successfully");
+                    LOGGER.log(Level.INFO,format("%s.xlsx has been created successfully",filePath));
                 } catch (Exception e) {
+                    LOGGER.log(Level.INFO,"error on write xlsx file");
                     e.printStackTrace();
                 } finally {
                     workbook.close();
                 }
             }
             catch (IOException e){
+                LOGGER.log(Level.INFO,"error start create xlsx file");
                 e.printStackTrace();
             }
         }
@@ -302,6 +315,11 @@ public class PatientRecordModel {
                 secondCol = 8;
             }else if(!dmList.isEmpty() && dmList.get(0) instanceof MoodConditionUpdate){
                 firstCol = 2;
+            }else if(!dmList.isEmpty() && dmList.get(0) instanceof SleepDisorderUpdate){
+                firstCol = 11;
+            }else if (!dmList.isEmpty() && dmList.get(0) instanceof SleepConditionUpdate){
+                firstCol = 9;
+                secondCol = 10;
             }
             if (firstDataLine == rowNum) {
                 for (UpdateDM updateDm : dmList) {
@@ -312,14 +330,14 @@ public class PatientRecordModel {
                     else if(updateDm.getFirstDetail() instanceof Long){
                         row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
                     }
-                    if(updateDm instanceof UpdateDMProxy) {
-                        if (updateDm.getFirstDetail() instanceof String) {
-                            row.createCell(secondCol).setCellValue((String)((UpdateDMProxy) updateDm).getSecondDetail());
+                    if(updateDm instanceof UpdateDMProxy){
+                        UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
+                        if (updateDMProxy.getSecondDetail() instanceof String) {
+                            row.createCell(secondCol).setCellValue((String)updateDMProxy.getSecondDetail());
                         }
-                        else if(updateDm.getFirstDetail() instanceof Long){
-                            row.createCell(secondCol).setCellValue((Long)((UpdateDMProxy) updateDm).getSecondDetail());
+                        else if(updateDMProxy.getSecondDetail() instanceof Long){
+                            row.createCell(secondCol).setCellValue((Long)updateDMProxy.getSecondDetail());
                         }
-
                     }
                 }
             }
@@ -337,11 +355,12 @@ public class PatientRecordModel {
                         row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
                     }
                     if(updateDm instanceof UpdateDMProxy){
-                        if (updateDm.getFirstDetail() instanceof String) {
-                            row.createCell(secondCol).setCellValue((String)((UpdateDMProxy) updateDm).getSecondDetail());
+                        UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
+                        if (updateDMProxy.getSecondDetail() instanceof String) {
+                            row.createCell(secondCol).setCellValue((String)updateDMProxy.getSecondDetail());
                         }
-                        else if(updateDm.getFirstDetail() instanceof Long){
-                            row.createCell(secondCol).setCellValue((Long)((UpdateDMProxy) updateDm).getSecondDetail());
+                        else if(updateDMProxy.getSecondDetail() instanceof Long){
+                            row.createCell(secondCol).setCellValue((Long)updateDMProxy.getSecondDetail());
                         }
                     }
 
@@ -356,11 +375,12 @@ public class PatientRecordModel {
                         row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
                     }
                     if(updateDm instanceof UpdateDMProxy){
-                        if (updateDm.getFirstDetail() instanceof String) {
-                            row.createCell(secondCol).setCellValue((String)((UpdateDMProxy) updateDm).getSecondDetail());
+                        UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
+                        if (updateDMProxy.getSecondDetail() instanceof String) {
+                            row.createCell(secondCol).setCellValue((String)updateDMProxy.getSecondDetail());
                         }
-                        else if(updateDm.getFirstDetail() instanceof Long){
-                            row.createCell(secondCol).setCellValue((Long)((UpdateDMProxy) updateDm).getSecondDetail());
+                        else if(updateDMProxy.getSecondDetail() instanceof Long){
+                            row.createCell(secondCol).setCellValue((Long)updateDMProxy.getSecondDetail());
                         }
                     }
 
@@ -401,49 +421,5 @@ public class PatientRecordModel {
             row.createCell(colNum++).setCellValue(sleepConditionAndDisorder.getSleepHours());
 
         }
-    }
-
-
-
-    public static void main(String args[]){
-        PatientRecordModel patientModel = new PatientRecordModel();
-//        patientModel.getAllUpdatesByPatientID("1");
-//        Link link = new Link();
-//        link.setLinkHeadLine("news");
-//        link.setLinkURL("url of news");
-//        Link link2 = new Link();
-//        link2.setLinkHeadLine("news2");
-//        link2.setLinkURL("url of news2");
-//        ModelGenerics.getModelGenericsInstance().addObjectToDB(link);
-//        ModelGenerics.getModelGenericsInstance().addObjectToDB(link2);
-        //patientModel.getAllUpdatesByPatientID("1")
-//        List<PatientRecord> list =patientModel.getAllUpdatesByPatientID("1");
-//        for(PatientRecord l:list){
-//            for(ActivityUpdate w:l.getListOfActivityUpdate()){
-//                System.out.println(w.getActivityName());
-//            }
-//        }
-//        Collection<String> a = new ArrayList<>();
-//        Collection<String> b = new ArrayList<>();
-//        b.add("1");
-//        b.add("2");
-//        b.add("3");
-//        Collection<String>c = new ArrayList<>();
-//        c.add("5");
-//        c.add("6");
-//        c.add("7");
-//        a.addAll(b);
-//        a.addAll(c);
-//        for(String w : a){
-//            System.out.println(w);
-//        }
-       XSL xsl = patientModel.new XSL();
-       xsl.createNewExcelReport("test.xlsx");
-
-
-
-
-
-
     }
 }

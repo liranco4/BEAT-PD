@@ -44,12 +44,11 @@ public class SleepConditionUpdate implements UpdateDMProxy{
         this.sleepConditionID = sleepConditionID;
     }
 
-    public Long getFirstDetail() {
-        return sleepHours;
-    }
-
-    public String getSecondDetail() {
+    public String getFirstDetail() {
         return sleepQuality;
+    }
+    public Long getSecondDetail() {
+        return sleepHours;
     }
 
     public void setSleepHours(Long sleepHours) {

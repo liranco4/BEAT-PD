@@ -1,19 +1,23 @@
 package com.beatpd.controller;
 import com.dao.*;
 import com.dm.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import org.hibernate.HibernateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.NoResultException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.Optional;
 import java.util.logging.Level;
+
 
 import static com.utils.SingleLogger.LOGGER;
 import static java.lang.String.format;
@@ -27,6 +31,7 @@ import static java.lang.String.format;
 public class AdminController {
     private PatientModel patientModel = PatientModel.getPatientModelInstance();
     private ModelGenerics modelGenerics = ModelGenerics.getModelGenericsInstance();
+    private PatientRecordModel patientRecoedModel = PatientRecordModel.getPatientRecordModelInstance();
     @RequestMapping(value = "/Add/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addUser(@RequestBody User user) {
@@ -433,25 +438,62 @@ public class AdminController {
     }
 
 
-    @RequestMapping(value = "/GET/ReportBYPatientID", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
-    @ResponseBody
-    public ResponseEntity getReportBYPatientID(String value) {
+    @RequestMapping("/GET/PatientReportByID/{ID}")
+    public void downloadPatientReportByID(HttpServletRequest request, HttpServletResponse response )  throws IOException{
+        String patientID = request.getServletPath().split("/")[5];
 
-        try {
-            return ResponseEntity.ok(format("{success:%s}",patientModel.getAllUpdatesByPatientID(value)));
-        }catch(NoResultException e){ e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in getReportBYPatientID: no result was found\n%s", e.getStackTrace().toString()));
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(format("{error:%s}", e.getMessage()));
-        }
-        catch(HibernateException e) {     e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in getReportBYPatientID: %s", e.getStackTrace().toString()));
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
-        }
-        catch (Exception e) {     e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in getReportBYPatientID: %s", e.getStackTrace().toString()));
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        String fileName = format("patients_report.xlsx");
+
+        patientRecoedModel.createNewExcelReport(fileName, Optional.of(patientID));
+        LOGGER.log(Level.INFO,"Downloading file :- " );
+        String downloadFolder = "../BEAT-PD/";
+        Path file = Paths.get(downloadFolder, format("%s.xlsx",fileName));
+        // Check if file exists
+        if (Files.exists(file)) {
+            // set content type
+            response.setContentType("application/xlsx");
+            // add response header
+            response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+            try {
+                //copies all bytes from a file to an output stream
+                Files.copy(file, response.getOutputStream());
+                //flushes output stream
+                response.getOutputStream().flush();
+            } catch (IOException e) {
+                LOGGER.log(Level.INFO,"Error :- " + e.getMessage());
+                response.sendError(500, "Error :- " + e.getMessage());
+            }
+        } else {
+            response.sendError(500, "Sorry File not found!!!!");
+            LOGGER.log(Level.INFO,"Sorry File not found!!!!");
         }
     }
 
-
+    @RequestMapping("/GET/PatientsReport")
+    public void downloadPatientsReport(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        String fileName = format("patients_report.xlsx");
+        patientRecoedModel.createNewExcelReport(fileName, Optional.empty());
+        LOGGER.log(Level.INFO,"Downloading file :- " );
+        String downloadFolder = "../BEAT-PD/";
+        Path file = Paths.get(downloadFolder, fileName);
+        // Check if file exists
+        if (Files.exists(file)) {
+            // set content type
+            response.setContentType("application/xlsx");
+            // add response header
+            response.addHeader("Content-Disposition", "attachment; filename=" + fileName);
+            try {
+                //copies all bytes from a file to an output stream
+                Files.copy(file, response.getOutputStream());
+                //flushes output stream
+                response.getOutputStream().flush();
+            } catch (IOException e) {
+                LOGGER.log(Level.INFO,"Error :- " + e.getMessage());
+                response.sendError(500, "Error :- " + e.getMessage());
+            }
+        } else {
+            response.sendError(500, "Sorry File not found!!!!");
+            LOGGER.log(Level.INFO,"Sorry File not found!!!!");
+        }
+    }
 }
