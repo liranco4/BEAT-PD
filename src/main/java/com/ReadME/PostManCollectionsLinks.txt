@@ -18,3 +18,6 @@ update Habit: https://www.getpostman.com/collections/e090a22723b8e7dd0229
 
 delete it's same on all objects, see example:
 https://www.getpostman.com/collections/4e68fea215e08c0fedfb
+
+Reports:
+https://www.getpostman.com/collections/e0f43f4768875caee10c
