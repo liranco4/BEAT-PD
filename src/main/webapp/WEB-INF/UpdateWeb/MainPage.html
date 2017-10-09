@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta charset="Windows-1255">
+
+
+    <title>MainPage</title>
+    <link rel="stylesheet" type="text/css" href="MainPage.css" />
+    <link rel="stylesheet" type="text/css" href="ModalStyle.css" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="http://ticket-compare.com/wp-content/themes/ticket-compare/js/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript" src="InsertDataToDB.js"></script>
+    <script type="text/javascript" src="DeleteDataFromDB.js"></script>
+    <script type="text/javascript" src="UpdateDataDB.js"></script>
+    <script type="text/javascript" src="GetDataFromDB.js"></script>
+    <script type="text/javascript" src="ProjectClasses.js"></script>
+
+    <script
+            src="https://code.jquery.com/jquery-2.1.3.js"
+            integrity="sha256-goy7ystDD5xbXSf+kwL4eV6zOPJCEBD1FBiCElIm+U8="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-2.1.3.min.js"
+            integrity="sha256-ivk71nXhz9nsyFDoYoGf2sbjrR9ddh+XDkCcfZxjvcM="
+            crossorigin="anonymous"></script>
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content" dir="rtl">
+        <div class="modal-header">
+            <span class="close">&times;</span>
+            <center><h2 id="lblHead"></h2></center>
+        </div>
+        <div class="modal-body">
+            <label for="txtName">שם</label>
+            <input type="text" id="txtName" name="name"><br>
+            <div id="divForLinksUrl">
+                <label for="txtLinkUrl">כתובת אתר:</label>
+                <input type="text" id="txtLinkUrl" name="Url">
+            </div>
+            <div id="ModalBody">
+                         <label for="txtSubMenu">תת-תפריט</label>
+                         <input type="text" id="txtSubMenu" name="submenu">
+                <select id="ddlSubMenu">
+                </select>
+                <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">הוסף תת-תפריט</button>
+                <button type="button" id="btnCLearNewSubMenu" onclick="ClearSubMenu()">נקה</button>
+            </div>
+        </div>
+        <div class="modal-footer" dir="ltr">
+            <div><button type="button" id="btnAddNewActivity1" onclick="AddNewItemsToDB()">הוסף</button></div>
+        </div>
+    </div>
+
+</div>
+    <!--Modal For Medicine-->
+    <div id="MedicineModal" class="modalMedicine">
+        <!-- Modal content -->
+        <div class="modalMedicine-content" dir="rtl">
+            <div class="modalMedicine-header">
+                <span class="closeMedicine">&times;</span>
+                <center><h2 id="lblHeadMedicine">תרופות</h2></center>
+            </div>
+            <div class="modalMedicine-body">
+                <div>
+
+                    <div>
+                        <label for="txtMedicineName">שם תרופה:</label>
+                        <input type="text" id="txtMedicineName" name="mname"  style="width:80px">
+                        <label for="txtMedicineSerial">מספר סידורי:</label>
+                        <input type="text" id="txtMedicineSerial" name="name" style="width:40px">
+                    </div>
+
+                    <div>
+                        <label for="txtMedicineLimitation">הגבלות:</label>
+                        <input type="text" id="txtMedicineLimitation" name="mlimitation" style="width:229px;">
+                    </div>
+
+                    <div>
+                        <label for="txtMedicineInfo">מידע נוסף:</label>
+                        <input type="text" id="txtMedicineInfo" name="minfo" style="width:213px;">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modalMedicine-footer" dir="ltr">
+                <div><button type="button" onclick="AddNewMedicineToDB()" class="button" >הוסף</button></div>
+            </div>
+    </div>
+    </div>
+
+
+
+
+</div>
+<div class="wrapper">
+    <input type='image' src='hit.png' style='width:120px;height:75px;float:right;padding-bottom:0px'>
+    <input type='image' src='soraski.jpg' style='width:200px;float:right;padding-up:0px'>
+    <h1>BEAT-PD<span>
+    </span></h1>
+    <section class="psummary">
+        <div class="psummary-left">
+            <p><span class="entypo-attention"></span>Status</p>
+            <p>Production</p>
+            <p><span class="entypo-hourglass"></span> Priority</p>
+            <p>Admin</p>
+        </div>
+        <div class="psummary-right">
+            <p><span class="entypo-chart-line"></span> Progress</p>
+            <div class="progress">
+                <!-- Very easy to feed via PHP through the field value -->
+                <progress max="100" value="70"></progress>
+                <span>70%</span></div>
+        </div>
+    </section>
+    <section class="pcontent-l">
+        <div class="info" style="height:621px;">
+            <div class="tabs" data-tabgroup="tab-group">
+                <div class="active"><a href="#information" id="ActivitiesTab">פעילויות</a></div>
+                <div><a href="#evaluation"  id="HabitsTab">ביום-יום</a></div>
+                <div><a href="#client" id="MedicineTab">תרופות</a></div>
+                <div><a href="#requeriments" id="SleepTab">שינה</a></div>
+                <div><a href="#files" id="MoodTab">מצב רוח</a></div>
+                <div><a href="#server" id="LinksTab">לינקים</a></div>
+            </div>
+            <section id="tab-group" class="tabgroup" style="overflow-y: scroll;height:600px;" onblur="AddNewActivity()">
+                <div id="information" dir="rtl">
+                    <input type='image' src='Activities.png' style='width:110px;height:65px;float:left;padding-bottom:0px'>
+                    <h2 id="lblSectionActivities">רשימת פעילויות</h2>
+                    <div><button type="button" class='button' id="btnAddNewActivity" onclick="AddNewItem()">הוסף חדש</button></div>
+                    <table id ="tblActivities" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם פעילות</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+                <div id="evaluation" dir="rtl">
+                    <input type='image' src='hergelim.png' style='width:80px;height:70px;float:left;padding-bottom:27px'>
+                    <h2 id="lblSectionHergelim">ביום-יום</h2>
+                    <h3>האם שתית היום?</h3>
+                    <div><h6 style="display:none" id="lblType"></h6></div>
+                    <div><button type="button" id="btnAddNewHabitUp" class='button' onclick="AddNewItemUp()">הוסף חדש</button></div>
+                    <table id ="tblHabitUp" dir="rtl" align="right" style="overflow-y:scroll">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                        </tr>
+                    </table>
+                    <div>&nbsp</div>
+                    <div><h3>האם צרכת היום?</h3></div>
+                    <div><button type="button" id="btnAddNewHabitDown" class='button' onclick="AddNewItemDown()">הוסף חדש </button></div>
+                    <table id ="tblHabitDown" dir="rtl" align="right" style="overflow-y:scroll">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div id="client" dir="rtl">
+                    <input type='image' src='medicines2.png' style='width:70px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>תרופות</h2>
+                    <div><button type="button" id="btnAddNewMedicine" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
+                    <table id ="tblMedicine" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">מספר סידורי</th>
+                            <th style="text-align:right">שם תרופה</th>
+                            <th style="text-align:right">הגבלות</th>
+                            <th style="text-align:right">מידע נוסף</th>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+                <div id="requeriments" dir="rtl">
+                    <input type='image' src='sleep1.png' style='width:70px;height:70px;float:left;padding-bottom:0px'>
+                    <h2>איכות שינה</h2>
+                    <div><button type="button" id="btnAddNewSleepQuality" class='button' onclick="AddNewItemSleepQuality()">הוסף חדש </button></div>
+                    <table id ="tblSleepQuality" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
+                    <div>&nbsp</div>
+                    <div>  <h2>הפרעות שינה</h2></div>
+                    <div><button type="button" id="btnAddNewSleepDisorders" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
+                    <table id ="tblSleepDisorders" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="files" dir="rtl">
+                    <input type='image' src='naughty.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>מצב-רוח</h2>
+                    <div><button type="button" id="btnAddMood" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
+                    <table id ="tblMood" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="server" dir="rtl">
+                    <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>לינקים</h2>
+                    <div><button type="button" id="btnAddLinks" class='button' onclick="AddNewItem()">הוסף חדש</button></div>
+                    <table id ="tblLinks" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right">קישור</th>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </section>
+    <aside class="pcontent-r">
+        <div class="history">
+            <h3>Project Activity</h3>
+            <div id="chartContainer" style="height: 100%; width: 100%;"></div>
+        </div>
+        <div class="team">
+            <h3>Team</h3>
+            <div id="chartContainerTeam" style="height: 100%; width: 100%;"></div>
+        </div>
+    </aside>
+</div> <!-- END Wrapper -->
+<footer>
+    <p><i class="fa fa-coffee"></i> Coded & Designed by <a href="http://www.hit.ac.il/" target="_blank">H.I.T</a> [Truzman Elad & Liran Cohen]</p>
+</footer>
+</body>
+
+
+
+
+/////////////////////////////////////////////Scripts/////////////////////////////////////////////
+<script>
+// Tab Switch
+
+$('.tabgroup > div').hide();
+$('.tabgroup > div:first-of-type').show();
+$('.tabs a').click(function(e){
+  e.preventDefault();
+    var $this = $(this),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+    others.parent().removeClass('active');
+    $this.parent().addClass('active');
+    $(tabgroup).children('div').hide();
+    $(target).show();
+})
+
+
+// MainPage OnLoad
+window.onload = function() {
+AddNewActivity();
+ViewProjectChart();
+ViewTeamChart();
+}
+
+// Add sub menu --> Modal PopUp Button event
+function AddSubMenu()
+{
+   var txtSubMenu = document.getElementById('txtSubMenu');
+     $('#ddlSubMenu')
+         .append($("<option></option>")
+                    .text(txtSubMenu.value));
+}
+
+// Cleat Sub Menu list at Popup Modal
+function ClearSubMenu()
+{
+   $('#ddlSubMenu')
+    .empty();
+}
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+var MedicineModal = document.getElementById('MedicineModal');
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+var spanMedicine = document.getElementsByClassName("closeMedicine")[0];
+
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+       if (event.target == MedicineModal) {
+        MedicineModal.style.display = "none";
+    }
+}
+
+// When the user clicks on <spanMedicine> (x), close the modal
+spanMedicine.onclick = function() {
+    MedicineModal.style.display = "none";
+}
+
+    </script>
+
+//////////////////////////////////////////*********************/////////////////////////////////////////////////
+</html>
