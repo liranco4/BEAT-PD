@@ -1,6 +1,7 @@
 package com.beatpd.controller;
 import com.dao.*;
 import com.dm.*;
+import com.utils.CustomDate;
 import org.hibernate.HibernateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -441,13 +443,12 @@ public class AdminController {
     @RequestMapping("/GET/PatientReportByID/{ID}")
     public void downloadPatientReportByID(HttpServletRequest request, HttpServletResponse response )  throws IOException{
         String patientID = request.getServletPath().split("/")[5];
-
-        String fileName = format("patients_report.xlsx");
-
-        patientRecoedModel.createNewExcelReport(fileName, Optional.of(patientID));
-        LOGGER.log(Level.INFO,"Downloading file :- " );
-        String downloadFolder = "../BEAT-PD/";
-        Path file = Paths.get(downloadFolder, format("%s.xlsx",fileName));
+        LOGGER.log(Level.INFO,format("request report for patientID: %s",patientID));
+        String fileName = format("patients_report_%s.xlsx",CustomDate.getDateFormat().format(new Date()));
+        String downloadFolder = "../BEAT-PD/src/main/resources/reports/";
+        patientRecoedModel.createNewExcelReport(format("%s%s",downloadFolder,fileName), Optional.empty());
+        LOGGER.log(Level.INFO,format("Downloading file :- %s",fileName));
+        Path file = Paths.get(downloadFolder, format("%s",fileName));
         // Check if file exists
         if (Files.exists(file)) {
             // set content type
@@ -463,18 +464,22 @@ public class AdminController {
                 LOGGER.log(Level.INFO,"Error :- " + e.getMessage());
                 response.sendError(500, "Error :- " + e.getMessage());
             }
+            finally {
+                Files.delete(file);
+                LOGGER.log(Level.INFO,format("File deleted successfully: %s",file));
+            }
         } else {
-            response.sendError(500, "Sorry File not found!!!!");
-            LOGGER.log(Level.INFO,"Sorry File not found!!!!");
+            response.sendError(500, "Error: File not found!!!!");
+            LOGGER.log(Level.INFO,"Error: File not found!!!!");
         }
     }
 
     @RequestMapping("/GET/PatientsReport")
     public void downloadPatientsReport(HttpServletRequest request, HttpServletResponse response) throws IOException{
-        String fileName = format("patients_report.xlsx");
-        patientRecoedModel.createNewExcelReport(fileName, Optional.empty());
-        LOGGER.log(Level.INFO,"Downloading file :- " );
-        String downloadFolder = "../BEAT-PD/";
+        String fileName = format("patients_report_%s.xlsx",CustomDate.getDateFormat().format(new Date()));
+        String downloadFolder = "../BEAT-PD/src/main/resources/reports/";
+        patientRecoedModel.createNewExcelReport(format("%s%s",downloadFolder,fileName), Optional.empty());
+        LOGGER.log(Level.INFO,format("Downloading file :- %s",fileName));
         Path file = Paths.get(downloadFolder, fileName);
         // Check if file exists
         if (Files.exists(file)) {
@@ -490,6 +495,10 @@ public class AdminController {
             } catch (IOException e) {
                 LOGGER.log(Level.INFO,"Error :- " + e.getMessage());
                 response.sendError(500, "Error :- " + e.getMessage());
+            }
+            finally {
+                Files.delete(file);
+                LOGGER.log(Level.INFO,format("File deleted successfully: %s",file));
             }
         } else {
             response.sendError(500, "Sorry File not found!!!!");
