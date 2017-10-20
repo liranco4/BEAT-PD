@@ -2,28 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
+    <meta charset="utf-8">
     <meta charset="Windows-1255">
+
 
     <title>MainPage</title>
     <link rel="stylesheet" type="text/css" href="MainPage.css" />
+    <link rel="stylesheet" type="text/css" href="ModalStyle.css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://ticket-compare.com/wp-content/themes/ticket-compare/js/jquery.canvasjs.min.js"></script>
+    <script type="text/javascript" src="InsertDataToDB.js"></script>
+    <script type="text/javascript" src="DeleteDataFromDB.js"></script>
+    <script type="text/javascript" src="UpdateDataDB.js"></script>
+    <script type="text/javascript" src="GetDataFromDB.js"></script>
+    <script type="text/javascript" src="ProjectClasses.js"></script>
 
-    <!--link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.8.3.js" />
-    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-1.2.14.js" />
-    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui.js" />
-    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui-1.9.2.custom.js" />
-    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-ui-1.9.2.custom.min.js" />
-    <link rel="javascript" type="text/javascript" href="../Scripts/jquery-3.2.1.js" />-->
-
-
-    <!--script type="text/javascript" src= "../Scripts/jquery-1.8.3.js"></--script>
-    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-1.12.4.js"></script>
-    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-ui.js"></script>
-    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-ui-1.9.2.custom.js"></script>
-    <script src="C:/Users/elad/Documents/BEAT-PD-ServerSide/src/main/webapp/WEB-INF/Scripts/jquery-ui-1.9.2.custom.min.js"></script>-->
-    <!--link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.10.3/themes/ui-darkness/jquery-ui.css" />-->
-    <!--link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />-->
     <script
             src="https://code.jquery.com/jquery-2.1.3.js"
             integrity="sha256-goy7ystDD5xbXSf+kwL4eV6zOPJCEBD1FBiCElIm+U8="
@@ -41,104 +35,12 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <!--script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/2.3.0/knockout-min.js"></script>-->
 
-
-    <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: right;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #E8F5E9;
-}
-</style>
-
-    <style>
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 1px solid #888;
-    width: 40%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #2890E6;
-    color: white;
-}
-
-.modal-body {padding: 2px 16px;}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #2890E6;
-    color: white;
-}
-</style>
 </head>
 
 <body>
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
     <!-- Modal content -->
     <div class="modal-content" dir="rtl">
         <div class="modal-header">
@@ -146,33 +48,101 @@ tr:nth-child(even) {
             <center><h2 id="lblHead"></h2></center>
         </div>
         <div class="modal-body">
-            <div>
-                ??:<input type="text" id="txtName" name="name"><br>
-                ??-?????:<input type="text" id="txtSubMenu" name="submenu">
+            <label for="txtName">שם</label>
+            <input type="text" id="txtName" name="name"><br>
+            <div id="divForLinksUrl">
+                <label for="txtLinkUrl">כתובת אתר:</label>
+                <input type="text" id="txtLinkUrl" name="Url">
+            </div>
+            <div id="ModalBody">
+                         <label for="txtSubMenu">תת-תפריט</label>
+                         <input type="text" id="txtSubMenu" name="submenu">
                 <select id="ddlSubMenu">
                 </select>
-                <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">???? ??-?????</button>
-                <button type="button" id="btnCLearNewSubMenu" onclick="ClearSubMenu()">?�?</button>
+                <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">הוסף תת-תפריט</button>
+                <button type="button" id="btnCLearNewSubMenu" onclick="ClearSubMenu()">נקה</button>
             </div>
-
-
         </div>
         <div class="modal-footer" dir="ltr">
-            <div><button type="button" id="btnAddNewActivity1" onclick="AddNewItemsToDB()">????</button></div>
+            <div><button type="button" id="btnAddNewActivity1" class="button" onclick="AddNewItemsToDB()">הוסף</button></div>
         </div>
     </div>
 
 </div>
-<div class="wrapper">
+    <!--Modal For Medicine-->
+    <div id="MedicineModal" class="modalMedicine">
+        <!-- Modal content -->
+        <div class="modalMedicine-content" dir="rtl">
+            <div class="modalMedicine-header">
+                <span class="closeMedicine">&times;</span>
+                <center><h2 id="lblHeadMedicine">תרופות</h2></center>
+            </div>
+            <div class="modalMedicine-body">
+                <div>
+
+                    <div>
+                        <label for="txtMedicineName">שם תרופה:</label>
+                        <input type="text" id="txtMedicineName" name="mname"  style="width:80px">
+                        <label for="txtMedicineSerial">מספר סידורי:</label>
+                        <input type="text" id="txtMedicineSerial" name="name" style="width:40px">
+                    </div>
+
+                    <div>
+                        <label for="txtMedicineLimitation">הגבלות:</label>
+                        <input type="text" id="txtMedicineLimitation" name="mlimitation" style="width:229px;">
+                    </div>
+
+                    <div>
+                        <label for="txtMedicineInfo">מידע נוסף:</label>
+                        <input type="text" id="txtMedicineInfo" name="minfo" style="width:213px;">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modalMedicine-footer" dir="ltr">
+                <div><button type="button" onclick="AddNewMedicineToDB()" class="button" >הוסף</button></div>
+            </div>
+    </div>
+    </div>
+
+
+<div id="myUpdateModal" class="modalUpdate">
+    <div class="modalUpdate-content" dir="rtl">
+        <div class="modalUpdate-header">
+            <span class="closeUpdate">&times;</span>
+            <center><h2 id="lblUpdateHead"></h2></center>
+        </div>
+        <div class="modalUpdate-body">
+            <label for="txtUpdateName">שם</label>
+            <input type="text" id="txtUpdateName" name="name"><br>
+
+            <div id="ModalUpdateBody">
+                <label for="txtUpdateSubMenu">תת-תפריט</label>
+                <input type="text" id="txtUpdateSubMenu" name="submenu">
+                <select id="ddlUpdateSubMenu">
+                </select>
+                <button type="button" id="btnAddNewSubInUpdate" onclick="AddSubMenu()">הוסף תת-תפריט</button>
+                <button type="button" id="btnDeleteNewSubMenu" onclick="DeleteSubMenu()">מחק</button>
+            </div>
+        </div>
+        <div class="modalUpdate-footer" dir="ltr">
+            <div><button type="button" id="btnUpdateActivity" class="button" onclick="UpdateItemsToDB()">עדכן</button></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper" id="MainDiv" style="display:none">
+    <input type='image' src='hit.png' style='width:120px;height:75px;float:right;padding-bottom:0px'>
+    <input type='image' src='soraski.jpg' style='width:200px;float:right;padding-up:0px'>
     <h1>BEAT-PD<span>
-    <input type='image' src='medicines12.jpg' style='width:100px;hight:90px;float:right'>
     </span></h1>
     <section class="psummary">
         <div class="psummary-left">
             <p><span class="entypo-attention"></span>Status</p>
-            <p>Development</p>
+            <p>Production</p>
             <p><span class="entypo-hourglass"></span> Priority</p>
-            <p>Urgent</p>
+            <p>Admin</p>
         </div>
         <div class="psummary-right">
             <p><span class="entypo-chart-line"></span> Progress</p>
@@ -183,123 +153,129 @@ tr:nth-child(even) {
         </div>
     </section>
     <section class="pcontent-l">
-        <div class="info" style="height:700px;">
-            <div class="tabs" data-tabgroup="tab-group">
-                <div class="active"><a href="#information" id="ActivitiesTab">????????</a></div>
-                <div><a href="#evaluation"  id="HabitsTab">????-???</a></div>
-                <div><a href="#client" id="MedicineTab">??????</a></div>
-                <div><a href="#requeriments" id="SleepTab">????</a></div>
-                <div><a href="#files" id="MoodTab">??? ???</a></div>
-                <div><a href="#server" id="LinksTab">???�??</a></div>
+        <div class="info" style="height:621px;">
+            <div class="tabs" data-tab data-options="deep_linking: true" data-tabgroup="tab-group">
+                <div class="active" id="tabsId"><a href="#activity" id="ActivitiesTab" onclick="UpdateActivityUrl()">פעילויות</a></div>
+                <div><a href="#habit" id="HabitsTab" onclick="UpdateHabitUrl()">ביום-יום</a></div>
+                <div><a href="#medicine"  id="MedicineTab" onclick="UpdateMedicineUrl()">תרופות</a></div>
+                <div><a href="#sleep" id="SleepTab" onclick="UpdateSleepUrl()">שינה</a></div>
+                <div><a href="#mood"  id="MoodTab" onclick="UpdateMoodUrl()">מצב רוח</a></div>
+                <div><a href="#link" id="LinksTab" onclick="UpdateLinkUrl()">לינקים</a></div>
             </div>
-            <section id="tab-group" class="tabgroup" onblur="AddNewActivity()">
-                <div id="information" dir="rtl">
-                    <h2 id="lblSectionActivities">????? ????????</h2>
-                    <div><button type="button" id="btnAddNewActivity" onclick="AddNewItem()">???? ?????? ????</button></div>
+            <section id="tab-group" class="tabgroup" style="overflow-y: scroll;height:600px;" onblur="AddNewActivity()">
+                <div id="activity" dir="rtl">
+                    <input type='image' src='Activities.png' style='width:110px;height:65px;float:left;padding-bottom:0px'>
+                    <h2 id="lblSectionActivities">רשימת פעילויות</h2>
+                    <div><button type="button" class='button' id="btnAddNewActivity" onclick="AddNewItem()">הוסף חדש</button></div>
                     <table id ="tblActivities" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">?? ??????</th>
-                            <th style="text-align:right;;width:200px">??-?????</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם פעילות</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
                         </tr>
                     </table>
 
 
                 </div>
 
-                <div id="evaluation" dir="rtl">
-                    <h2 id="lblSectionHergelim">????-???</h2>
-                    <h3>??? ???? ?????</h3>
+                <div id="habit" dir="rtl">
+                    <input type='image' src='hergelim.png' style='width:80px;height:70px;float:left;padding-bottom:27px'>
+                    <h2 id="lblSectionHergelim">ביום-יום</h2>
+                    <h3>האם שתית היום?</h3>
                     <div><h6 style="display:none" id="lblType"></h6></div>
-                    <div><button type="button" id="btnAddNewHabitUp" onclick="AddNewItemUp()">???? </button></div>
+                    <div><button type="button" id="btnAddNewHabitUp" class='button' onclick="AddNewItemUp()">הוסף חדש</button></div>
                     <table id ="tblHabitUp" dir="rtl" align="right" style="overflow-y:scroll">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">??</th>
-                            <th style="text-align:right;;width:200px">??-?????</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
                         </tr>
                     </table>
                     <div>&nbsp</div>
-                    <div><h3>??? ???? ?????</h3></div>
-                    <div><button type="button" id="btnAddNewHabitDown" onclick="AddNewItemDown()">???? </button></div>
+                    <div><h3>האם צרכת היום?</h3></div>
+                    <div><button type="button" id="btnAddNewHabitDown" class='button' onclick="AddNewItemDown()">הוסף חדש </button></div>
                     <table id ="tblHabitDown" dir="rtl" align="right" style="overflow-y:scroll">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">??</th>
-                            <th style="text-align:right;;width:200px">??-?????</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right;;width:200px">תת-תפריט</th>
                         </tr>
                     </table>
                 </div>
 
 
-                <div id="client" dir="rtl">
-                    <h2>??????</h2>
-                    <div><button type="button" id="btnAddNewMedicine" onclick="AddNewItem()">???? </button></div>
+                <div id="medicine" dir="rtl">
+                    <input type='image' src='medicines2.png' style='width:70px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>תרופות</h2>
+                    <div><button type="button" id="btnAddNewMedicine" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
                     <table id ="tblMedicine" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">מספר סידורי</th>
+                            <th style="text-align:right">שם תרופה</th>
+                            <th style="text-align:right">הגבלות</th>
+                            <th style="text-align:right">מידע נוסף</th>
                         </tr>
                     </table>
 
                 </div>
 
 
-                <div id="requeriments" dir="rtl">
-                    <h2>????? ????</h2>
-                    <div><button type="button" id="btnAddNewSleepQuality" onclick="AddNewItemSleepQuality()">???? </button></div>
+                <div id="sleep" dir="rtl">
+                    <input type='image' src='sleep1.png' style='width:70px;height:70px;float:left;padding-bottom:0px'>
+                    <h2>איכות שינה</h2>
+                    <div><button type="button" id="btnAddNewSleepQuality" class='button' onclick="AddNewItemSleepQuality()">הוסף חדש </button></div>
                     <table id ="tblSleepQuality" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
                         </tr>
                     </table>
                     <div>&nbsp</div>
-                    <div>  <h2>?????? ????</h2></div>
-                    <div><button type="button" id="btnAddNewSleepDisorders" onclick="AddNewItem()">???? </button></div>
+                    <div>  <h2>הפרעות שינה</h2></div>
+                    <div><button type="button" id="btnAddNewSleepDisorders" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
                     <table id ="tblSleepDisorders" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
                         </tr>
                     </table>
                 </div>
 
-                <div id="files" dir="rtl">
-                    <h2>???-???</h2>
-                    <div><button type="button" id="btnAddMood" onclick="AddNewItem()">???? </button></div>
+                <div id="mood" dir="rtl">
+                    <input type='image' src='naughty.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>מצב-רוח</h2>
+                    <div><button type="button" id="btnAddMood" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
                     <table id ="tblMood" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
                         </tr>
                     </table>
                 </div>
 
-                <div id="server" dir="rtl">
-                    <h2>???�??</h2>
-                    <div><button type="button" id="btnAddLinks" onclick="AddNewItem()">???? </button></div>
+                <div id="link" dir="rtl">
+                    <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>לינקים</h2>
+                    <div><button type="button" id="btnAddLinks" class='button' onclick="AddNewItem()">הוסף חדש</button></div>
                     <table id ="tblLinks" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">???</th>
-                            <th style="text-align:right;width:20px">????</th>
-                            <th style="text-align:right">�????</th>
-                            <th style="text-align:right">??</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right">שם</th>
+                            <th style="text-align:right">קישור</th>
                         </tr>
                     </table>
                 </div>
             </section>
         </div>
-        <!--div class="conversation">
-            <h3>Conversation</h3>
-        </div>-->
     </section>
     <aside class="pcontent-r">
         <div class="history">
@@ -315,9 +291,15 @@ tr:nth-child(even) {
 <footer>
     <p><i class="fa fa-coffee"></i> Coded & Designed by <a href="http://www.hit.ac.il/" target="_blank">H.I.T</a> [Truzman Elad & Liran Cohen]</p>
 </footer>
-
 </body>
+
+
+
+
+
 <script>
+// Tab Switch
+
 $('.tabgroup > div').hide();
 $('.tabgroup > div:first-of-type').show();
 $('.tabs a').click(function(e){
@@ -332,981 +314,149 @@ $('.tabs a').click(function(e){
     $(target).show();
 })
 
+  var Token = "";
 
-/*//The Patient Model Table
-var workersData = [
-new Employee({firstname: "Joe", lastname: "Page", age: "21"}), new Employee({ firstname: "Todd", lastname: "Chapman", age: "43"}), new Employee({firstname: "Lenard", lastname: "Haggard", age: "37"}), new Employee({ firstname: "John", lastname: "Armstrong", age: "28"}), new Employee({ firstname: "Mark", lastname: "Ramirez", age: "27"}), new Employee({ firstname: "Cameron", lastname: "Philips", age: "34"}), new Employee({ firstname: "Andre", lastname: "Spencer", age: "41"}), new Employee({ firstname: "Heath", lastname: "Person", age: "33"}), new Employee({ firstname: "Mark", lastname: "Greenwood", age: "24"}), new Employee({ firstname: "Allen", lastname: "Spencer", age: "33"})];
-
-var alpha = 5;
-
-$("#thebutton").click(function(){
-  alpha++;
-})
-
-function Employee(data) {
-    this.fname = data.firstname;
-    this.lname = data.lastname;
-    this.age = data.age;
-}
-//The ViewModel
-function viewModel() {
-    // Data
-    var self = this;
-    self.allEmployees = ko.observableArray(workersData);
-    self.showSortControls = ko.observable(false);
-    self.fnameToAdd = ko.observable("");
-    self.lnameToAdd = ko.observable("");
-    self.ageToAdd = ko.observable("");
-  self.alpha = ko.observable(alpha);
-
-    // Operations
-    this.sortByFname = function() {
-        this.allEmployees.sort(function(a, b) {
-            return a.fname < b.fname ? -1 : 1;
-        });
-    };
-    this.sortByLname = function() {
-        this.allEmployees.sort(function(a, b) {
-            return a.lname < b.lname ? -1 : 1;
-        });
-    };
-    this.sortByAge = function() {
-        this.allEmployees.sort(function(a, b) {
-            return a.age < b.age ? -1 : 1;
-        });
-    };
-    this.removeLine = function() { self.allEmployees.remove(this) };
-    this.addItem = function () {
-        if ((this.fnameToAdd() != "") && (this.allEmployees.indexOf(this.fnameToAdd()) < 0)) {
-            this.allEmployees.push(new Employee({firstname: this.fnameToAdd(), lastname: this.lnameToAdd(), age: this.ageToAdd()}));
-        }
-        this.fnameToAdd("");
-        this.lnameToAdd("");
-        this.ageToAdd("");
-    };
-}
-*/
-//Fade in/out when toggled
-/*ko.bindingHandlers.fadeVisible = {
-    init: function(element, valueAccessor) {
-        // Initially set the element to be instantly visible/hidden depending on the value
-        var value = valueAccessor();
-        $(element).toggle(ko.utils.unwrapObservable(value)); // Use "unwrapObservable" so we can handle values that may or may not be observable
-    },
-    update: function(element, valueAccessor, allBindingsAccessor) {
-        // Whenever the value subsequently changes, slowly fade the element in or out
-        var value = valueAccessor(),
-            duration = allBindingsAccessor().fadeDuration || 500;
-        ko.utils.unwrapObservable(value) ? $(element).slideDown() : $(element).slideUp();
-    }
-};*/
-
-/*ko.bindingHandlers.jqButton = {
-    init: function(element){
-        $(element).button();
-    },
-    update: function(element, valueAccessor) {
-        var currentValue = valueAccessor();
-        $(element).button("option", "disabled", currentValue.enable === false);
-    }
-};*/
-
-
+// MainPage OnLoad
 window.onload = function() {
+
+        var thisurl =window.location.href;
+        Token = thisurl.substring(thisurl.indexOf('?')+ 1 , thisurl.lenght);
+
+    if(CheckTokenValidation())
+    {
+
+ $("#MainDiv").css('display','block');
+ var activeTab = window.location.hash;
+ ////////////////******stay in the same tab after refresh page or insert\delete Data************//////////////
+if(activeTab.length){
+var old_url = window.location.href;
+var TabToGoBack = old_url.substring(old_url.indexOf('#'), old_url.lenght );
+
+   switch(TabToGoBack)
+   {
+    case '#activity':
+            var $this = $("#ActivitiesTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+    break;
+      case '#habit':
+            var $this = $("#HabitsTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+   break;
+         case '#medicine':
+            var $this = $("#MedicineTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+   break;
+         case '#sleep':
+            var $this = $("#SleepTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+   break;
+         case '#mood':
+            var $this = $("#MoodTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+     break;
+         case '#link':
+            var $this = $("#LinksTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+
+
+   }
+
+  $('.tabs' + activeTab ).show().siblings().hide();
+  // also make sure you set your active class to the corresponding tab menu here
+}
+
+//Fill All Tables
 AddNewActivity();
+AddHabitUp();
+AddMedicine();
+AddMood();
+AddLinks();
+AddSleepQuality();
+AddSleepDisorders();
+
+//Fill charts in right window
 ViewProjectChart();
 ViewTeamChart();
+
 }
 
-
-function ViewTeamChart()
+else
 {
-
-var chart = new CanvasJS.Chart("chartContainerTeam",
-    {
-      title:{
-        text: ""
-      },
-      animationEnabled: true,
-      axisY:{
-        titleFontFamily: "arial",
-        titleFontSize: 14,
-        includeZero: false
-      },
-      toolTip: {
-        shared: true
-      },
-	  data: [
-	  	        {
-
-        type: "bar",
-        name: "ticketbis",
-        showInLegend: true,
-		        dataPoints: [
-        {label:"?????", y: 254},
-        {label: "�??", y: 264},
-        {label: "?????", y: 264},
-        {label: "??�?? ????", y: 290},
-        {label: "Apomorphine", y: 285},
-        {label: "???? ??????", y: 369},
-        {label: "�??? ???????", y: 329}
-		]
-      },
-	  	        {
-
-        type: "bar",
-        name: "ticket2",
-        showInLegend: true,
-		        dataPoints: [
-        {label:"?????", y: 465},
-        {label: "�??", y: 463},
-        {label: "?????", y: 463},
-        {label: "??�?? ????", y: 464},
-        {label: "Apomorphine", y: 464},
-        {label: "???? ??????", y: 503},
-        {label: "�??? ???????", y: 503}
-		]
-      },
-	  	  ],
-      legend:{
-        cursor:"pointer",
-        itemclick:function(e){
-          if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-          	e.dataSeries.visible = false;
-          }
-          else {
-          	e.dataSeries.visible = true;
-          }
-          chart.render();
-        }
-      }
-    });
-
-chart.render();
-
-
+   alert('שם משתמש או סיסמא לא תקינים');
+    location.href  = 'LoginPage.html';
+}
 
 }
 
-
-function ViewProjectChart()
+function CheckTokenValidation()
 {
- var chart = new CanvasJS.Chart("chartContainer",
-    {
-      title:{
-        text: "Patients update activity"
-      },
-      animationEnabled: true,
-      axisY:{
-        titleFontFamily: "arial",
-        titleFontSize: 12,
-        includeZero: false
-      },
-      toolTip: {
-        shared: true
-      },
-	  data: [
-	  	        {
-
-        type: "pie",
-        name: "ticketbis",
-        showInLegend: true,
-		        dataPoints: [
-        {label:"?????", y: 254},
-        {label: "�??", y: 264},
-        {label: "?????", y: 264},
-        {label: "??�?? ????", y: 290},
-        {label: "Apomorphine", y: 285},
-        {label: "???? ??????", y: 369},
-        {label: "�??? ???????", y: 329}
-		]
-      },
-	  	        {
-
-        type: "pie",
-        name: "ticket2",
-        showInLegend: true,
-		        dataPoints: [
-        {label:"?????", y: 465},
-        {label: "�??", y: 463},
-        {label: "?????", y: 463},
-        {label: "??�?? ????", y: 464},
-        {label: "Apomorphine", y: 464},
-        {label: "???? ??????", y: 503},
-        {label: "�??? ???????", y: 503}
-		]
-      },
-	  	  ],
-      legend:{
-        cursor:"pointer",
-        itemclick:function(e){
-          if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-          	e.dataSeries.visible = false;
-          }
-          else {
-          	e.dataSeries.visible = true;
-          }
-          chart.render();
-        }
-      }
-    });
-
-chart.render();
-
+//check if Token is true
+return 1;
 
 }
 
-function AddNewActivity()
-{
- //$("#ActivitiesTab")[0].parentElement.classList[0] == "active"
-   //$("#ActivitiesTab");
-    //$("#HabitsTab");
-
-
- $.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllActivities",
-            cache: false,
-           contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(54,jsonString.length - 1);
-              // var ttt = eval(jsonStringList);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-var txt = "";
-var j=0;
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].activityName)
-                 {
-                  txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].activityName+"</td>"+
-                            "<td>"+ "<select style='width:100%'>"
-                            for(var j=0;j<mydata2[i].subMenus.length;j++)
-                            {
-                            txt+=
-                                "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
-                            }
-
-                             txt += "</select>"+
-                            "</td>"+
-                        "</tr>"
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblActivities").append(txt);
-
-              }
-            }
-        });
-
-
-AddHabitUp();
-
-}
-
-function AddHabitUp()
-{
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllHabits",
-            cache: false,
-           contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(46,jsonString.length - 1);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-var txt = "";
-var txt2 = "";
-var j=0;
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].habitName)
-                 {
-                   if(mydata2[i].groupID == "0")
-                   {
-                            txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].habitName+"</td>"+
-                            "<td>"+ "<select style='width:100%'>"
-                            for(var j=0;j<mydata2[i].subMenus.length;j++)
-                            {
-                            txt+=
-
-                                "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
-                            }
-
-                             txt += "</select>"+
-                            "</td>"+
-                        "</tr>"
-                    }
-
-                    else if(mydata2[i].groupID == "1")
-                   {
-
-                   txt2 += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].habitName+"</td>"+
-                            "<td>"+ "<select style='width:100%'>"
-                            for(var j=0;j<mydata2[i].subMenus.length;j++)
-                            {
-                            txt2+=
-
-                                "<option value='j'>"+mydata2[i].subMenus[j].subMenu +"</option>"
-                            }
-
-                             txt2 += "</select>"+
-                            "</td>"+
-                        "</tr>"
-
-                   }
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblHabitUp").append(txt);
-
-              }
-
-               if(txt2 != "")
-              {
-                        $("#tblHabitDown").append(txt2);
-
-              }
-            }
-        });
-
-AddMedicine();
-}
-function AddMedicine()
-{
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllMedicines",
-            cache: false,
-           contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(52,jsonString.length - 1);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-var txt = "";
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].medicineName)
-                 {
-                  txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].medicineName+"</td>"+
-                            "</td>"+
-                            "</tr>"
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblMedicine").append(txt);
-
-              }
-            }
-        });
-
-        AddMood();
-}
-
-
-function AddMood()
-{
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllMoodConditions",
-            cache: false,
-           contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(62,jsonString.length - 1);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-var txt = "";
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].moodConditionName)
-                 {
-                  txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].moodConditionName+"</td>"+
-                            "</td>"+
-                            "</tr>"
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblMood").append(txt);
-
-              }
-            }
-        });
-        AddLinks();
-}
-
-function AddLinks()
-{
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllLinks",
-            cache: false,
-           contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(44,jsonString.length - 1);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-var txt = "";
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].linkURL)
-                 {
-                  txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].linkHeadLine+"</td>"+
-                            "<td><a target='_blank' href="+mydata2[i].linkURL+">"+mydata2[i].linkURL+"</a></td>"+
-                            "</td>"+
-                            "</tr>"
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblLinks").append(txt);
-
-              }
-            }
-        });
-
-
-        AddSleepQuality();
-}
-
-
-
-function AddSleepQuality()
-{
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllSleepQuality",
-            cache: false,
-            contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(58,jsonString.length - 1);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-var txt = "";
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].sleepQualityName)
-                 {
-                  txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].sleepQualityName+"</td>"+
-                            "</td>"+
-                            "</tr>"
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblSleepQuality").append(txt);
-
-              }
-            }
-        });
-
-        AddSleepDisorders();
-}
-
-function AddSleepDisorders()
-{
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/User/GET/AllSleepDisorders",
-            cache: false,
-            contentType: "application/json;charset=utf-8",
-            complete: function(data) {
-              //  alert('test');
-              var jsonString = data.responseText;
-               jsonStringList =jsonString.substring(62,jsonString.length - 1);
-               var json = JSON.stringify(eval(jsonStringList));
-               var mydata2 = JSON.parse(json);
-               var txt = "";
-              for(var i=0;i<mydata2.length;i++)
-              {
-                 if(mydata2[i].sleepDisorderName)
-                 {
-                  txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
-                            "<td>"+mydata2[i].sleepDisorderName+"</td>"+
-                            "</td>"+
-                            "</tr>"
-                 }
-
-              }
-              if(txt != "")
-              {
-                        $("#tblSleepDisorders").append(txt);
-
-
-              }
-            }
-        });
-
-
-}
-
+// Add sub menu --> Modal PopUp Button event
 function AddSubMenu()
 {
    var txtSubMenu = document.getElementById('txtSubMenu');
-
      $('#ddlSubMenu')
          .append($("<option></option>")
                     .text(txtSubMenu.value));
-
 }
 
+// Cleat Sub Menu list at Popup Modal
 function ClearSubMenu()
 {
    $('#ddlSubMenu')
     .empty();
-
 }
 
-function subMenu () {
-    this.subMenu = String;
-
-}
-
-function Activity() {
-    this.activityName = String;
-    this.subMenus = [];
-}
-
-
-function Habit() {
-    this.habitName = String;
-    this.groupID = String;
-    this.subMenus = [];
-}
-
-
-
-function AddNewItemsToDB()
-{
-
- if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
- {
-   AddNewActivityToDB();
- }
-
-  if($("#HabitsTab")[0].parentElement.classList[0] == "active")
-  {
-   AddNewHabitToDB();
-  }
-
-  if($("#MedicineTab")[0].parentElement.classList[0] == "active")
-   {
-
-   }
-
-   if($("#SleepTab")[0].parentElement.classList[0] == "active")
- {
-
- }
-
-   if($("#MoodTab")[0].parentElement.classList[0] == "active")
- {
-
- }
-
-   if($("#LinksTab")[0].parentElement.classList[0] == "active")
- {
-
- }
-
-
-
-}
-
-
-function AddNewActivityToDB()
-{
-
- var ActivityName =  $("#txtName").val();
-var ac = new Activity();
-ac.activityName = ActivityName;
-
- var SubMenuArr = [];
-$("#ddlSubMenu option").each(function () {
-    SubMenuArr.push($(this).text());
-});
-
-var sm = [new subMenu()];
-   for(var i = 0; i< SubMenuArr.length ;i++ )
-  {
-    sm[i] = new subMenu();
-    sm[i].subMenu = SubMenuArr[i];
-   }
-
-ac.subMenus = sm;
-var myJSON = JSON.stringify(ac);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Activity",
-            cache: false,
-            type: "POST",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-}
-        });
-
- location.reload();
-}
-
-
-
-
-function AddNewHabitToDB()
-{
-var HabitName =  $("#txtName").val();
-var ac = new Habit();
-ac.habitName = HabitName;
-
-  if($("#lblType").text() == 'Up')
-  {
-      ac.groupID = "0";
-  }
-  else
-  {
-      ac.groupID = "1";
-  }
-
-
- var SubMenuArr = [];
-$("#ddlSubMenu option").each(function () {
-    SubMenuArr.push($(this).text());
-});
-
-var sm = [new subMenu()];
-   for(var i = 0; i< SubMenuArr.length ;i++ )
-  {
-    sm[i] = new subMenu();
-    sm[i].subMenu = SubMenuArr[i];
-   }
-
-
-ac.subMenus = sm;
-var myJSON = JSON.stringify(ac);
-var mydata2 = JSON.parse(myJSON);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Habit",
-            cache: false,
-            type: "POST",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-}
-        });
-      //  AddHabitUp();
-location.reload();
-}
 
 // Get the modal
 var modal = document.getElementById('myModal');
-
-// Get the button that opens the modal
-//var btn = document.getElementById("btnAddNewActivity");
+var MedicineModal = document.getElementById('MedicineModal');
+var UpdateModal = document.getElementById('myUpdateModal');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
-function AddNewItemSleepQuality()
-{
-
-   $("#lblHead").text('????? ????');
- modal.style.display = "block";
-
-}
-
-function AddNewItemUp()
-{
-   $("#lblHead").text('????-???');
-   $("#lblType").text('Up');
-     modal.style.display = "block";
-}
-
-function AddNewItemDown()
-{
-   $("#lblHead").text('????-???');
-    $("#lblType").text('Down');
-     modal.style.display = "block";
-}
-
-function AddNewItem()
-{
-
- if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('????????');
- }
-
-  if($("#MedicineTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('??????');
- }
-
-   if($("#SleepTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('?????? ????');
- }
-
-   if($("#MoodTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('???-???');
- }
-
-   if($("#LinksTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('???�??');
- }
-
-
-    modal.style.display = "block";
-
-}
-
-
-function DeleteItem(rowId)
-{
-
- if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
- {
-   var txt;
-    if (confirm("Are you sure you want to delete?") == true) {
-        // OK
-
-        var RowToDelete = rowId;
-        var acToDelete = new Activity();
-        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
-        var myJSON = JSON.stringify(acToDelete);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
-            cache: false,
-            type: "DELETE",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
-        });
-
-        location.reload();
-
-
-    } else {
-        //Cancel
-        //DoNothing
-    }
-
- }
-  if($("#HabitsTab")[0].parentElement.classList[0] == "active")
- {
-
-   var txt;
-    if (confirm("Are you sure you want to delete?") == true) {
-        // OK
-
-        var RowToDelete = rowId;
-        var haToDelete = new Habit();
-        haToDelete.habitName = RowToDelete.parentNode.parentNode.cells[2].innerText;
-        var myJSON = JSON.stringify(haToDelete);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Habit",
-            cache: false,
-            type: "DELETE",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
-        });
-
-        location.reload();
-
-
-    } else {
-        //Cancel
-        //DoNothing
-    }
-
- }
-
-  if($("#MedicineTab")[0].parentElement.classList[0] == "active")
- {
-
-   var txt;
-    if (confirm("Are you sure you want to delete?") == true) {
-        // OK
-
-        var RowToDelete = rowId;
-        var haToDelete = new Habit();
-        haToDelete.habitName = RowToDelete.parentNode.parentNode.cells[2].innerText;
-        var myJSON = JSON.stringify(haToDelete);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Habit",
-            cache: false,
-            type: "DELETE",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
-        });
-
-
-
-
-    } else {
-        //Cancel
-        //DoNothing
-    }
-
- }
-
-   if($("#SleepTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('?????? ????');
-   var txt;
-    if (confirm("Are you sure you want to delete?") == true) {
-        // OK
-
-        var RowToDelete = rowId;
-        var acToDelete = new Activity();
-        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
-        var myJSON = JSON.stringify(acToDelete);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
-            cache: false,
-            type: "DELETE",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
-        });
-
-        location.reload();
-
-
-    } else {
-        //Cancel
-        //DoNothing
-    }
-
- }
-
-   if($("#MoodTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('???-???');
-   var txt;
-    if (confirm("Are you sure you want to delete?") == true) {
-        // OK
-
-        var RowToDelete = rowId;
-        var acToDelete = new Activity();
-        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
-        var myJSON = JSON.stringify(acToDelete);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
-            cache: false,
-            type: "DELETE",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
-        });
-
-        location.reload();
-
-
-    } else {
-        //Cancel
-        //DoNothing
-    }
-
- }
-
-   if($("#LinksTab")[0].parentElement.classList[0] == "active")
- {
-   $("#lblHead").text('???�??');
-   var txt;
-    if (confirm("Are you sure you want to delete?") == true) {
-        // OK
-
-        var RowToDelete = rowId;
-        var acToDelete = new Activity();
-        acToDelete.activityName = RowToDelete.parentNode.parentNode.cells[2].innerText;
-        var myJSON = JSON.stringify(acToDelete);
-
-$.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
-            cache: false,
-            type: "DELETE",
-            data: myJSON,
-            contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
-        });
-
-        location.reload();
-
-
-    } else {
-        //Cancel
-        //DoNothing
-    }
-
- }
-
-
-}
-
-
-
-
-
-
+var spanMedicine = document.getElementsByClassName("closeMedicine")[0];
+var spanUpdate = document.getElementsByClassName("closeUpdate")[0];
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -1318,9 +468,68 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+       if (event.target == MedicineModal) {
+        MedicineModal.style.display = "none";
+    }
+    if (event.target == UpdateModal) {
+        UpdateModal.style.display = "none";
+        }
 }
 
+// When the user clicks on <spanMedicine> (x), close the modal
+spanMedicine.onclick = function() {
+    MedicineModal.style.display = "none";
+}
 
-//ko.applyBindings(new viewModel());
+// When the user clicks on <spanMedicine> (x), close the modal
+spanUpdate.onclick = function() {
+    spanUpdate.style.display = "none";
+}
+
+function UpdateActivityUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+  window.location.replace( new_url + '#activity')
+ //history.pushState(null, '', new_url + '#activity' + Token);
+}
+
+function UpdateHabitUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#habit');
+}
+
+function UpdateMedicineUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#medicine');
+}
+
+function UpdateSleepUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#sleep');
+}
+
+function UpdateMoodUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#mood');
+}
+
+function UpdateLinkUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#link');
+}
+
     </script>
+
+
 </html>

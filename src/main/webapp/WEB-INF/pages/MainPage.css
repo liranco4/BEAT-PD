@@ -28,7 +28,7 @@ a {
   transition: all 0.5s ease;
 }
 a:link, a:visited, a:active {
-  color:#2890E6;
+  color:#47A891;
   text-decoration:none;
 }
 footer a:hover {
@@ -45,7 +45,7 @@ h1:before {
 content: "";
 width: 70px;
 height: 7px;
-background: #2890E6;
+background: #47A891;
 position: absolute;
 bottom: -10px;
 }
@@ -121,7 +121,7 @@ color: #999;
 }
 .psummary progress-value,
 .psummary progress::-webkit-progress-value{
-  background:#2890E6;
+  background:#47A891;
   position: relative;
   border-radius: 30px;
 }
@@ -155,14 +155,14 @@ color: #999;
   position:relative;
   background:white;
   border-radius:5px;
-  border-top: 10px solid #2890E6;
+  border-top: 10px solid #47A891;
   box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.5);
 }
 .pcontent-l .tabs .active {
   background:#333!important;
 }
 .pcontent-l .tabs .active a {
-  color:#2890E6!important;
+  color:#47A891!important;
 }
 .pcontent-l .info .tabs {
   width:100%;
@@ -175,7 +175,7 @@ color: #999;
   text-decoration:none;
 }
 .pcontent-l .info .tabs a:hover {
-  color:#2890E6;
+  color:#47A891;
   text-decoration:none;
 }
 .pcontent-l .info .tabs div {
@@ -195,12 +195,60 @@ color: #999;
   font-size:13px;
 }
 /* CONVERSATION */
-
+.button {
+   height:30px;
+   width:100px;
+   border: 1px solid #0a3c59;
+ background: #47a891;
+   background: -webkit-gradient(linear, left top, left bottom, from(#47a891), to(#47a891));
+   background: -webkit-linear-gradient(top, #47a891, #47a891);
+   background: -moz-linear-gradient(top, #47a891, #47a891);
+   background: -ms-linear-gradient(top, #47a891, #47a891);
+   background: -o-linear-gradient(top, #47a891, #47a891);
+   background-image: -ms-linear-gradient(top, #47a891 0%, #47a891 100%);
+   padding: 0px 21px;
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   border-radius: 6px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 1px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #7ea4bd 0 1px 0;
+   color: #fff;
+   font-size: 12px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: center ;
+   }
+.button:hover {
+   border: 1px solid #0a3c59;
+   text-shadow: #1e4158 0 1px 0;
+   background: #3e779d;
+   background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
+   background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
+   background: -moz-linear-gradient(top, #65a9d7, #3e779d);
+   background: -ms-linear-gradient(top, #65a9d7, #3e779d);
+   background: -o-linear-gradient(top, #65a9d7, #3e779d);
+   background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
+   color: #fff;
+   }
+.button:active {
+   text-shadow: #1e4158 0 1px 0;
+   border: 1px solid #0a3c59;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#3e779d));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+   color: #fff;
+   }
 .pcontent-l .conversation {
   height:200px;
   background:white;
   border-radius:5px;
-  border-top: 10px solid #2890E6;
+  border-top: 10px solid #47A891;
   overflow:hidden;
   box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.5);
 }
@@ -210,7 +258,7 @@ color: #999;
   height:400px;
   background:white;
   border-radius:5px;
-  border-top: 10px solid #2890E6;
+  border-top: 10px solid #47A891;
   overflow:hidden;
   box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.5);
 }
@@ -220,7 +268,7 @@ color: #999;
   height:200px;
   background:white;
   border-radius:5px;
-  border-top: 10px solid #2890E6;
+  border-top: 10px solid #47A891;
   overflow:hidden;
   box-shadow: 0px 0px 3px 0px rgba(50, 50, 50, 0.5);
 }
@@ -229,7 +277,7 @@ footer {
   height:50px;
   background:#333;
   overflow:hidden;
-  border-top: 10px solid #2890E6;
+  border-top: 10px solid #47A891;
 }
 footer > p {
   line-height:40px;
@@ -253,4 +301,21 @@ footer > p {
 .pcontent-l .conversation,.pcontent-l .info,.pcontent-r .history,.pcontent-r .team {
     margin:0 0 10px 0!important;
 }
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: right;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #E8F5E9;
 }
