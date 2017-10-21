@@ -132,7 +132,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in getPatientDetails: %s", e.getStackTrace().toString()));
+            LOGGER.log(Level.INFO, format("error in getAllSleepDisorders: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }

@@ -22,6 +22,7 @@ import java.util.logging.Level;
 
 
 import static com.utils.SingleLogger.LOGGER;
+import static com.utils.Utils.getObjectListAsJsonList;
 import static java.lang.String.format;
 
 /**
@@ -471,6 +472,21 @@ public class AdminController {
         } else {
             response.sendError(500, "Error: File not found!!!!");
             LOGGER.log(Level.INFO,"Error: File not found!!!!");
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllPatients", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity getAllSleepDisorders() {
+        try {
+            return ResponseEntity.ok(format("{success: The following are all patients, patients:%s}", getObjectListAsJsonList(modelGenerics.findAllByClass(Patient.class))));
+        } catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in getAllPatients: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in getAllPatients: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
 
