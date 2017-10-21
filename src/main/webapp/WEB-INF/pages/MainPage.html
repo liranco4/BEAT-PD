@@ -507,6 +507,7 @@ var UpdateMedicineModal = document.getElementById('MedicineUpdateModal');
 var span = document.getElementsByClassName("close")[0];
 var spanMedicine = document.getElementsByClassName("closeMedicine")[0];
 var spanUpdate = document.getElementsByClassName("closeUpdate")[0];
+var spanUpdateMedicine = document.getElementsByClassName("closeModalUpdateMedicine")[0];
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
@@ -532,12 +533,16 @@ window.onclick = function(event) {
 // When the user clicks on <spanMedicine> (x), close the modal
 spanMedicine.onclick = function() {
     MedicineModal.style.display = "none";
-    UpdateMedicineModal.style.display = "none";
 }
 
 // When the user clicks on <spanMedicine> (x), close the modal
 spanUpdate.onclick = function() {
     spanUpdate.style.display = "none";
+}
+
+// When the user clicks on <spanUpdateMedicine> (x), close the modal
+spanUpdateMedicine.onclick = function() {
+    UpdateMedicineModal.style.display = "none";
 }
 
 function UpdateActivityUrl()
