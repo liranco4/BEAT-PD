@@ -196,6 +196,7 @@
                 <div><a href="#sleep" id="SleepTab" onclick="UpdateSleepUrl()">שינה</a></div>
                 <div><a href="#mood"  id="MoodTab" onclick="UpdateMoodUrl()">מצב רוח</a></div>
                 <div><a href="#link" id="LinksTab" onclick="UpdateLinkUrl()">לינקים</a></div>
+                <div><a href="#patient" id="PatientTab" onclick="UpdatePatientUrl()">מטופלים</a></div>
             </div>
             <section id="tab-group" class="tabgroup" style="overflow-y: scroll;height:600px;" onblur="AddNewActivity()">
                 <div id="activity" dir="rtl">
@@ -306,6 +307,19 @@
                             <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right">שם</th>
                             <th style="text-align:right">קישור</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div id="patient" dir="rtl">
+                    <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>מידע על מטופלים</h2>
+                    <div><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button></div>
+                    <table id ="tblPatient" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הורד דוח</th>
+                            <th style="text-align:right">שם פרטי</th>
+                            <th style="text-align:right">שם משפחה</th>
                         </tr>
                     </table>
                 </div>
@@ -586,6 +600,9 @@ function UpdateLinkUrl()
  var old_url = window.location.href;
  var new_url = old_url.substring(0, old_url.indexOf('#'));
  history.pushState(null, '', new_url + '#link');
+}
+function UpdatePatientUrl()
+{
 }
 
     </script>

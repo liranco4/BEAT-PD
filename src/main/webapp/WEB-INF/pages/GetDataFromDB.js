@@ -340,6 +340,21 @@ $.ajax({
 
 }
 
+
+function GetAllPatientReport()
+{
+
+           // window.location = ("http://localhost:8080/BEAT-PD/Admin/GET/PatientsReport","_blank");
+            window.open('http://localhost:8080/BEAT-PD/Admin/GET/PatientsReport', '_blank');
+
+
+
+
+
+}
+
+
+
 ////////////////////////////////////////******************************//////////////////////////////////////////////////
 
 
