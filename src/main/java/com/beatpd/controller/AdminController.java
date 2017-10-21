@@ -493,7 +493,7 @@ public class AdminController {
     @RequestMapping("/GET/PatientsReport")
     public void downloadPatientsReport(HttpServletRequest request, HttpServletResponse response) throws IOException{
         String fileName = format("patients_report_%s.xlsx",CustomDate.getDateFormat().format(new Date()));
-        String downloadFolder = "../BEAT-PD/src/main/resources/reports/";
+        String downloadFolder = format("%s/src/main/resources/reports/",System.getProperty("user.dir"));
         patientRecoedModel.createNewExcelReport(format("%s%s",downloadFolder,fileName), Optional.empty());
         LOGGER.log(Level.INFO,format("Downloading file :- %s",fileName));
         Path file = Paths.get(downloadFolder, fileName);
