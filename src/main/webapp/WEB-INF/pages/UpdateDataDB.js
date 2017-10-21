@@ -22,10 +22,8 @@ function PrepareUpdateModals(rowId)
    $("#txtUpdateMedicineName").val(details[3].innerText);
    $("#txtUpdateMedicineLimitation").val(details[4].innerText);
    $("#txtUpdateMedicineInfo").val(details[5].innerText);
-  //$("#txtMedicineName").prop("readonly", true);
-      //document.getElementById("ModalBody").style.display='block';
-     UpdateMedicineModal.style.display = "block"
-    //UpdateMedicineToDB();
+   $("#txtUpdateMedicineSerial").prop("readonly", true);
+    UpdateMedicineModal.style.display = "block"
    }
 
    if($("#SleepTab")[0].parentElement.classList[0] == "active")
@@ -66,7 +64,7 @@ function UpdateDataToDB(rowId)
 
   if($("#MedicineTab")[0].parentElement.classList[0] == "active")
    {
-    //UpdateMedicineToDB();
+    UpdateMedicineToDB();
    }
 
    if($("#SleepTab")[0].parentElement.classList[0] == "active")
@@ -100,11 +98,10 @@ function PrepareUpdateModal(rowId){
         document.getElementById("ModalUpdateBody").style.display='block';
         UpdateModal.style.display = "block";
 }
+
 //update Activity
 function UpdateActivityToDB()
 {
-
-
    var acToUpdate= new Activity();
    acToUpdate.activityName = $("#txtUpdateName").val();
 
@@ -169,10 +166,37 @@ function UpdateHabitToDB()
                 type: "PUT",
                 data: myJSON,
                 contentType: "application/json;charset=utf-8",
-                complete: function(data) {
-                if(data.status != 200 ) alert('Error in updating data to DB:' + data);
+                complete: function(response) {
+                if(response.status != 200 ) alert('Error in updating data to DB:' + response);
                 }
         });
 location.reload();
 
 }
+
+
+//update Medicine
+function UpdateMedicineToDB()
+{
+
+   var medicineObject = new Medicine();
+   medicineObject.medicineName = $("#txtUpdateMedicineName").val();
+   medicineObject.medicineSerialNumber = $("#txtUpdateMedicineSerial").val();
+   medicineObject.medicineLimitation = $("#txtUpdateMedicineLimitation").val();
+   medicineObject.info = $("#txtUpdateMedicineInfo").val();
+
+var myJSON = JSON.stringify(medicineObject);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Update/Medicine",
+            cache: false,
+            type: "PUT",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function(response){
+            if(response.status != 200 ) alert('Error in updating data to DB:' + response);
+            }
+                   });
+           location.reload();
+
+           }
