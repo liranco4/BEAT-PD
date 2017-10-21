@@ -126,11 +126,46 @@
             </div>
         </div>
         <div class="modalUpdate-footer" dir="ltr">
-            <div><button type="button" id="btnUpdateActivity" class="button" onclick="UpdateActivityToDB(this)">עדכן</button></div>
+            <div><button type="button" id="btnUpdate" class="button" onclick="UpdateDataToDB(this)">עדכן</button></div>
         </div>
     </div>
 </div>
 
+<!--Modal For Update Medicine-->
+<div id="MedicineUpdateModal" class="modalUpdateMedicine">
+    <!-- Modal content -->
+    <div class="modalUpdateMedicine-content" dir="rtl">
+        <div class="modalUpdateMedicine-header">
+            <span class="closeModalUpdateMedicine">&times;</span>
+            <center><h2 id="lblHeadUpdateModalMedicine">תרופות</h2></center>
+        </div>
+        <div class="modalUpdateMedicine-body">
+            <div>
+
+                <div>
+                    <label for="txtUpdateMedicineName">שם תרופה:</label>
+                    <input type="text" id="txtUpdateMedicineName" name="mname"  style="width:80px">
+                    <label for="txtMedicineSerial">מספר סידורי:</label>
+                    <input type="text" id="txtUpdateMedicineSerial" name="name" style="width:40px">
+                </div>
+
+                <div>
+                    <label for="txtUpdateMedicineLimitation">הגבלות:</label>
+                    <input type="text" id="txtUpdateMedicineLimitation" name="mlimitation" style="width:229px;">
+                </div>
+
+                <div>
+                    <label for="txtUpdateMedicineInfo">מידע נוסף:</label>
+                    <input type="text" id="txtUpdateMedicineInfo" name="minfo" style="width:213px;">
+                </div>
+            </div>
+
+        </div>
+        <div class="modalUpdateMedicine-footer" dir="ltr">
+            <div><button type="button" onclick="UpdateMedicineToDB()" class="button" >עדכן</button></div>
+        </div>
+    </div>
+</div>
 
 <div class="wrapper" id="MainDiv" style="display:none">
     <input type='image' src='hit.png' style='width:120px;height:75px;float:right;padding-bottom:0px'>
@@ -466,6 +501,7 @@ function DeleteSelectedSubMenuInUpdateModal(){
 var modal = document.getElementById('myModal');
 var MedicineModal = document.getElementById('MedicineModal');
 var UpdateModal = document.getElementById('myUpdateModal');
+var UpdateMedicineModal = document.getElementById('MedicineUpdateModal');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
@@ -488,11 +524,15 @@ window.onclick = function(event) {
     if (event.target == UpdateModal) {
         UpdateModal.style.display = "none";
         }
+    if (event.target == UpdateMedicineModal) {
+        UpdateMedicineModal.style.display = "none";
+    }
 }
 
 // When the user clicks on <spanMedicine> (x), close the modal
 spanMedicine.onclick = function() {
     MedicineModal.style.display = "none";
+    UpdateMedicineModal.style.display = "none";
 }
 
 // When the user clicks on <spanMedicine> (x), close the modal

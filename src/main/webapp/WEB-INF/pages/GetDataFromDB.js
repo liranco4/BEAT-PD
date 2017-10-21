@@ -27,7 +27,7 @@ var j=0;
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Edit' onclick = 'UpdateItemsToDB(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Edit' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].activityName+"</td>"+
                             "<td>"+ "<select style='width:100%' id='ddlMainGeneral'>"
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
@@ -87,7 +87,7 @@ var j=0;
                    {
                             txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Edit1' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
@@ -107,7 +107,7 @@ var j=0;
 
                    txt2 += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Edit2' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
@@ -162,7 +162,7 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='Edit' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                               "<td>"+mydata2[i].medicineSerialNumber+"</td>"+
                               "<td>"+mydata2[i].medicineName+"</td>"+
                               "<td>"+mydata2[i].medicineLimitation+"</td>"+
@@ -204,7 +204,7 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].moodConditionName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -241,7 +241,7 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].linkHeadLine+"</td>"+
                             "<td><a target='_blank' href="+mydata2[i].linkURL+">"+mydata2[i].linkURL+"</a></td>"+
                             "</td>"+
@@ -283,7 +283,7 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteSleepQualityItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].sleepQualityName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -321,7 +321,7 @@ $.ajax({
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteSleepDisorderItem(this)'style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Submit' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].sleepDisorderName+"</td>"+
                             "</td>"+
                             "</tr>"
