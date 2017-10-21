@@ -121,12 +121,12 @@
                 <input type="text" id="txtUpdateSubMenu" name="submenu">
                 <select id="ddlUpdateSubMenu">
                 </select>
-                <button type="button" id="btnAddNewSubInUpdate" onclick="AddSubMenu()">הוסף תת-תפריט</button>
-                <button type="button" id="btnDeleteNewSubMenu" onclick="DeleteSubMenu()">מחק</button>
+                <button type="button" id="btnAddNewSubInUpdate" onclick="AddSubMenuToUpdateModal()">הוסף תת-תפריט</button>
+                <button type="button" id="btnDeleteNewSubMenu" onclick="DeleteSelectedSubMenuInUpdateModal()">מחק</button>
             </div>
         </div>
         <div class="modalUpdate-footer" dir="ltr">
-            <div><button type="button" id="btnUpdateActivity" class="button" onclick="UpdateItemsToDB()">עדכן</button></div>
+            <div><button type="button" id="btnUpdateActivity" class="button" onclick="UpdateActivityToDB(this)">עדכן</button></div>
         </div>
     </div>
 </div>
@@ -447,6 +447,20 @@ function ClearSubMenu()
     .empty();
 }
 
+// Add sub menu --> UpdateModal PopUp Button event
+function AddSubMenuToUpdateModal()
+{
+   var txtSubMenu = document.getElementById('txtSubMenu');
+     $('#ddlUpdateSubMenu')
+         .append($("<option></option>")
+                    .text(txtUpdateSubMenu.value));
+    txtUpdateSubMenu.value =""
+}
+
+//Delete selected sub menu in update modal
+function DeleteSelectedSubMenuInUpdateModal(){
+    $('#ddlUpdateSubMenu :selected').remove();
+}
 
 // Get the modal
 var modal = document.getElementById('myModal');
