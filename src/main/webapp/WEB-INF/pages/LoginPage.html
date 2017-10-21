@@ -30,11 +30,11 @@
         </button>
     </div>
     <div class="forms">
-        <form class="login-form login-button-active" action="MainPage.html"  data-action="animated"  data-action="animated">
+        <form class="login-form login-button-active"  onsubmit="return checkBeforeSubmit()" action="ValidationPage.html" data-action="animated"  data-action="animated">
             <fieldset>
                 <legend>Please, enter your email and password for login.</legend>
                 <label for="login-email">E-mail</label>
-                <input id="login-email" type="email" name="email" required>
+                <input id="login-email" type="text" name="email" required>
                 <label for="login-password">Password</label>
                 <input id="login-password" type="password" name="password" required>
             </fieldset>
@@ -67,6 +67,7 @@ var activeElements = document.querySelectorAll('[data-action="animated"]');
 
 buttons.addEventListener('click', switcher);
 
+//window switch between Login\SignUp
 function switcher(e) {
   if(e.target == loginButton) {
     for (var i = 0; i < activeElements.length; i++) {
@@ -89,6 +90,10 @@ var activeElements = document.getElementsByName('animated');
 var activeLogin = document.querySelector('.log-link');
 
 function OnLoginClick(){
+
+//var old_url = window.location.href;
+//var new_url = old_url.substring(0, old_url.indexOf('?'));
+
   location.href = "MainPage.html";
   for (var i = 0; i < activeElements.length; i++) {
     activeElements[i].classList.remove('signup-button-active');
@@ -103,6 +108,24 @@ activeLogin.onclick = function() {
     activeElements[i].classList.add('signup-button-active');
   }
 }*/
+
+
+
+    function checkBeforeSubmit(){
+      if(CheckValidation()) {
+      return true;
+      }
+
+      return false;
+    }
+
+
+    function CheckValidation()
+    {
+       var usr = $("#login-email").val();
+       var pass = $("#login-password").val();
+       return 1;
+    }
 
 
     </script>
