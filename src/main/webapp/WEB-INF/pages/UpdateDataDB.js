@@ -44,7 +44,7 @@ function PrepareUpdateModals(rowId)
 
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
-    //UpdateLinkToDB();
+    PrepareUpdateModal(rowId);
  }
 
 }
@@ -85,17 +85,27 @@ function UpdateDataToDB(rowId)
 
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
-    //UpdateLinkToDB();
+   UpdateLinkToDB();
  }
 
 }
 
 function PrepareUpdateModal(rowId){
+        var ppRow = rowId.parentNode.parentNode;
         $("#txtUpdateName").prop("readonly", true);
-        var ActivityNameToUpdate =  rowId.parentNode.parentNode.cells[2].innerText;
+        var ActivityNameToUpdate =  ppRow.cells[2].innerText;
         $("#txtUpdateName").val(ActivityNameToUpdate);
-        $("#ddlUpdateSubMenu").append( rowId.parentNode.parentNode.childNodes[3].children[0].options );
-        document.getElementById("ModalUpdateBody").style.display='block';
+
+        if(rowId.alt == "EditLinks"){
+           document.getElementById("divForLinksUrlUpdate").style.display='block';
+           document.getElementById("ModalUpdateBody").style.display='none';
+          $("#txtLinkUrlUpdate").val(ppRow.cells[3].innerText);
+        }
+        else{
+            document.getElementById("divForLinksUrlUpdate").style.display='none';
+            document.getElementById("ModalUpdateBody").style.display='block';
+            $("#ddlUpdateSubMenu").append(ppRow.childNodes[3].children[0].options );
+        }
         UpdateModal.style.display = "block";
 }
 
@@ -200,3 +210,28 @@ $.ajax({
            location.reload();
 
            }
+
+//update Link
+function UpdateLinkToDB()
+{
+/*
+ this.linkHeadLine = String;
+    this.linkURL = String;
+*/
+   var linkToUpdate= new Link();
+   linkToUpdate.linkHeadLine = $("#txtUpdateName").val();
+   linkToUpdate.linkURL = $("#txtLinkUrlUpdate").val();
+   var myJSON = JSON.stringify(linkToUpdate);
+      $.ajax({
+                  url: "http://localhost:8080/BEAT-PD/Admin/Update/Link",
+                  cache: false,
+                  type: "PUT",
+                  data: myJSON,
+                  contentType: "application/json;charset=utf-8",
+                  complete: function(data) {
+                     if(data.status != 200 ) alert('Error in updating data to DB:' + data);
+                   }
+              });
+
+              location.reload();
+}

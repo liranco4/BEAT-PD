@@ -241,7 +241,7 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='EditLinks' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].linkHeadLine+"</td>"+
                             "<td><a target='_blank' href="+mydata2[i].linkURL+">"+mydata2[i].linkURL+"</a></td>"+
                             "</td>"+
