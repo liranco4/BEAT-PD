@@ -1,5 +1,7 @@
 all activities creation: https://www.getpostman.com/collections/0cd4488e9c90f388aed2
-add new patient: https://www.getpostman.com/collections/451aea9eeca2e289e14a
+
+operation on patient: https://www.getpostman.com/collections/9aea95a998c9752c0283
+
 update patient: https://www.getpostman.com/collections/8422f493220727631d24
 Report for updated patient: https://www.getpostman.com/collections/bddac544be9cda08c9ea
 Add MoodCondition: https://www.getpostman.com/collections/d9cef1caae77e355183c

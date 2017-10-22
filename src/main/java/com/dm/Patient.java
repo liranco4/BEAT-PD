@@ -17,7 +17,7 @@ public class Patient {
     @Column(name = "LAST_NAME")
     private String patientLastName;
 
-    @Column(name = "STATUS") //TODO ENUM FOR ALL STATUS
+    @Column(name = "STATUS")
     private String patientStatus;
 
     @Column(name = "AGE")
