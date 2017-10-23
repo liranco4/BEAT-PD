@@ -47,13 +47,5 @@ public class PatientModel{
                 session.close();
         }
     }
-//    private String buildReport(List<PatientRecord> i_PatientRecords){
-//        StringBuilder buildPatientFile = new StringBuilder();
-//        buildPatientFile.append(format("***********************************************Start-Report-FOR-The-Following-Patient ID: %s ***********************************************\n",i_PatientID));
-//        buildPatientFile.append(format("%s\n",i_PatientRecords.toString()));
-//        buildPatientFile.append(format("%s\n",getObjectListAsJsonList(i_PatientRecords)));
-//        buildPatientFile.append(format("***********************************************End-Report-FOR-The-Following-Patient ID: %s *************************************************\n",i_PatientID));
-//        return buildPatientFile.toString();
-//    }
 
 }
