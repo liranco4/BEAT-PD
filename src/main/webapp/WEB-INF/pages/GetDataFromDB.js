@@ -204,7 +204,6 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].moodConditionName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -283,7 +282,6 @@ var txt = "";
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteSleepQualityItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].sleepQualityName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -321,7 +319,6 @@ $.ajax({
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteSleepDisorderItem(this)'style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].sleepDisorderName+"</td>"+
                             "</td>"+
                             "</tr>"

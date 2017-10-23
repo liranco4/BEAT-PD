@@ -16,6 +16,7 @@ function PrepareUpdateModals(rowId)
 
   if($("#MedicineTab")[0].parentElement.classList[0] == "active")
    {
+   $("#lblUpdateHead").text("עדכן תרופות");
    var details = rowId.parentNode.parentNode.cells
 
    $("#txtUpdateMedicineSerial").val(details[2].innerText);
@@ -44,6 +45,7 @@ function PrepareUpdateModals(rowId)
 
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
+    $("#lblUpdateHead").text("עדכן לינקים");
     PrepareUpdateModal(rowId);
  }
 
@@ -117,7 +119,9 @@ function UpdateActivityToDB()
 
    var SubMenuArr = [];
    $("#ddlUpdateSubMenu option").each(function () {
-   SubMenuArr.push($(this).text());
+   if($(this).text() != ""){
+      SubMenuArr.push($(this).text());
+    }
    });
 
    var sm = [new subMenu()];
@@ -155,7 +159,9 @@ function UpdateHabitToDB()
         { ac.groupID = 1;}
     var SubMenuArr = [];
     $("#ddlUpdateSubMenu option").each(function () {
-        SubMenuArr.push($(this).text());
+        if($(this).text() != ""){
+              SubMenuArr.push($(this).text());
+            }
     });
 
     var sm = [new subMenu()];
@@ -214,10 +220,6 @@ $.ajax({
 //update Link
 function UpdateLinkToDB()
 {
-/*
- this.linkHeadLine = String;
-    this.linkURL = String;
-*/
    var linkToUpdate= new Link();
    linkToUpdate.linkHeadLine = $("#txtUpdateName").val();
    linkToUpdate.linkURL = $("#txtLinkUrlUpdate").val();

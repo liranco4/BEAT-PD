@@ -271,7 +271,6 @@
                     <table id ="tblSleepQuality" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right">שם</th>
                         </tr>
                     </table>
@@ -281,7 +280,6 @@
                     <table id ="tblSleepDisorders" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right">שם</th>
                         </tr>
                     </table>
@@ -294,7 +292,6 @@
                     <table id ="tblMood" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">הסר</th>
-                            <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right">שם</th>
                         </tr>
                     </table>
@@ -541,11 +538,6 @@ var spanMedicine = document.getElementsByClassName("closeMedicine")[0];
 var spanUpdate = document.getElementsByClassName("closeUpdate")[0];
 var spanUpdateMedicine = document.getElementsByClassName("closeModalUpdateMedicine")[0];
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -564,6 +556,11 @@ window.onclick = function(event) {
     //$("#btnSavePatientFromEdit").css({ 'display': "none" });
 }
 
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
 // When the user clicks on <spanMedicine> (x), close the modal
 spanMedicine.onclick = function() {
     MedicineModal.style.display = "none";
@@ -571,7 +568,7 @@ spanMedicine.onclick = function() {
 
 // When the user clicks on <spanMedicine> (x), close the modal
 spanUpdate.onclick = function() {
-    spanUpdate.style.display = "none";
+    UpdateModal.style.display = "none";
 }
 
 // When the user clicks on <spanUpdateMedicine> (x), close the modal
