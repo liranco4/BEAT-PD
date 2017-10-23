@@ -42,6 +42,13 @@ function MoodCondition() {
     this.moodConditionName = String;
 }
 
+function Patient(){
+    this.patientID = String;
+    this.patientFirstName = String;
+    this.patientLastName = String;
+    this.patientStatus = String;
+    this.patientAge = String;
+}
 
 
 //////////////////////////////////**********************************************///////////////////////////////////////

@@ -48,8 +48,16 @@
             <center><h2 id="lblHead"></h2></center>
         </div>
         <div class="modal-body">
-            <label for="txtName">שם</label>
+            <label for="txtName">שם:</label>
             <input type="text" id="txtName" name="name"><br>
+            <div id="divForPatient">
+                <label for="txtLastPatient">שם משפחה:</label>
+                <input type="text" id="txtLastPatient" name="PatientLastName">
+                <label for="txtIDPatient">תעודת זהות:</label>
+                <input type="text" id="txtIDPatient" name="PatientID">
+                <label for="txtAgePatient">גיל:</label>
+                <input type="text" id="txtAgePatient" name="PatientAge">
+            </div>
             <div id="divForLinksUrl">
                 <label for="txtLinkUrl">כתובת אתר:</label>
                 <input type="text" id="txtLinkUrl" name="Url">
@@ -315,7 +323,7 @@
                     <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>מידע על מטופלים</h2>
                     <div><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button>
-                        <button type="button" id="AddNewPatient" class='button' >הוסף מטופל חדש</button>
+                        <button type="button" id="AddNewPatient" class='button' onclick="AddNewItem()">הוסף מטופל חדש</button>
                         <button type="button" id="btnSavePatientFromEdit" class='button' style="display: none" >שמור שינויים</button></div>
                     <table id ="tblPatient" dir="rtl" align="right">
                         <tr>

@@ -38,6 +38,10 @@ function AddNewItemsToDB()
     insertNewLinkToDB();
  }
 
+  if($("#PatientTab")[0].parentElement.classList[0] == "active")
+ {
+    InsertNewPatientToDB();
+ }
 
 
 
@@ -274,6 +278,25 @@ location.reload();
 
 }
 
+function InsertNewPatientToDB(){
+    var patient = new Patient();
+    patient.patientID = $("#txtIDPatient").val();
+    patient.patientFirstName = $("#txtName").val();
+    patient.patientLastName = $("#txtLastPatient").val();
+    patient.patientAge = $("#txtAgePatient").val();
+    var jsonToSend = JSON.stringify(patient);
+    $.ajax({
+                url: "http://localhost:8080/BEAT-PD/Admin/Add/Patient",
+                cache: false,
+                type: "POST",
+                data: jsonToSend,
+                contentType: "application/json;charset=utf-8",
+                complete: function(response) {
+                 if(response.status != 200 ) alert('Error in adding data to DB:' + response);
+    }
+    });
+ location.reload();
+}
 
 //////////////////////////////////////////////*******************************//////////////////////////////////////////
 
@@ -353,8 +376,17 @@ function AddNewItem()
      document.getElementById("divForLinksUrl").style.display='block';
     modal.style.display = "block";
  }
+if($("#PatientTab")[0].parentElement.classList[0] == "active")
+ {
+ $("#lblHead").text('מטופלים');
+ document.getElementById("divForPatient").style.display='block';
+ document.getElementById("ModalBody").style.display='none';
+ document.getElementById("divForLinksUrl").style.display='none';
+ modal.style.display = "block";
+ }
 
 
 }
+
 
 /////////////////////////////////////////////////****************************//////////////////////////////////////////
