@@ -317,12 +317,17 @@
                 <div id="patient" dir="rtl">
                     <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>מידע על מטופלים</h2>
-                    <div><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button></div>
+                    <div><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button>
+                        <button type="button" id="AddNewPatient" class='button' >הוסף מטופל חדש</button>
+                        <button type="button" id="btnSavePatientFromEdit" class='button' style="display: none" >שמור שינויים</button></div>
                     <table id ="tblPatient" dir="rtl" align="right">
                         <tr>
-                            <th style="text-align:right;width:20px">הורד דוח</th>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">דוח</th>
+                            <th style="text-align:right;width:20px">ID</th>
                             <th style="text-align:right">שם פרטי</th>
                             <th style="text-align:right">שם משפחה</th>
+                            <th style="text-align:right">גיל</th>
                         </tr>
                     </table>
                 </div>
@@ -445,8 +450,17 @@ var TabToGoBack = old_url.substring(old_url.indexOf('#'), old_url.lenght );
         $this.parent().addClass('active');
         $(tabgroup).children('div').hide();
         $(target).show();
-
-
+    break;
+        case '#patient':
+            var $this = $("#PatientTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+     break;
    }
 
   $('.tabs' + activeTab ).show().siblings().hide();
@@ -459,6 +473,7 @@ AddHabitUp();
 AddMedicine();
 AddMood();
 AddLinks();
+AddPatient();
 AddSleepQuality();
 AddSleepDisorders();
 
@@ -545,6 +560,8 @@ window.onclick = function(event) {
     if (event.target == UpdateMedicineModal) {
         UpdateMedicineModal.style.display = "none";
     }
+
+    //$("#btnSavePatientFromEdit").css({ 'display': "none" });
 }
 
 // When the user clicks on <spanMedicine> (x), close the modal

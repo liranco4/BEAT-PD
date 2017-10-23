@@ -340,6 +340,47 @@ $.ajax({
 
 }
 
+function AddPatient()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin//GET/AllPatients",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(51,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].patientID)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='remove1.png' id='remove' alt='Submit'  style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='report1.png' alt='report' onclick = 'GetPatientReportById(this)' style='width:20px;hight:20px'></td>"+
+                               "<td>"+mydata2[i].patientID+"</td>"+
+                              "<td contenteditable='true' onclick = 'EditPatientRow(this)'>"+mydata2[i].patientFirstName+"</td>"+
+                              "<td contenteditable='true' onclick = 'EditPatientRow(this)'>"+mydata2[i].patientLastName+"</td>"+
+                              "<td contenteditable='true' onclick = 'EditPatientRow(this)'>"+mydata2[i].patientAge+"</td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblPatient").append(txt);
+
+              }
+            }
+        });
+
+
+}
+
 
 function GetAllPatientReport()
 {
