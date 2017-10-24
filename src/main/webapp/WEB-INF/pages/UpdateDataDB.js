@@ -48,7 +48,24 @@ function PrepareUpdateModals(rowId)
     $("#lblUpdateHead").text("עדכן לינקים");
     PrepareUpdateModal(rowId);
  }
+  if($("#PatientTab")[0].parentElement.classList[0] == "active")
+ {
+ btnAddNewActivity1
+  $("#btnAddNewActivity1").val('עדכן');
+  var rowCells = rowId.parentNode.parentNode.cells;
+   $("#txtIDPatient").val(rowCells[3].innerText);
+   $("#txtPrivateNamePatient").val(rowCells[4].innerText);
+   $("#txtLastPatient").val(rowCells[5].innerText);
+   $("#txtAgePatient").val(rowCells[6].innerText);
+   $("#txtStatusPatient").val(rowCells[7].innerText);
 
+   $("#lblHead").text('מטופלים');
+    document.getElementById("divForPatient").style.display='block';
+    document.getElementById("ModalBody").style.display='none';
+     document.getElementById("txtNameGeneral").style.display='none';
+    document.getElementById("divForLinksUrl").style.display='none';
+    modal.style.display = "block";
+ }
 }
 
 function UpdateDataToDB(rowId)
@@ -88,6 +105,10 @@ function UpdateDataToDB(rowId)
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
    UpdateLinkToDB();
+ }
+   if($("#PatientTab")[0].parentElement.classList[0] == "active")
+ {
+   UpdatePatients();
  }
 
 }
@@ -237,3 +258,7 @@ function UpdateLinkToDB()
 
               location.reload();
 }
+
+
+function UpdatePatients()
+{}

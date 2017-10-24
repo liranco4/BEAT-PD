@@ -228,5 +228,41 @@ $.ajax({
 
  }
 
+    if($("#PatientTab")[0].parentElement.classList[0] == "active")
+  {
+    $("#lblHead").text('מטופלים');
+    var txt;
+     if (confirm("Are you sure you want to delete?") == true) {
+         // OK
+
+         var RowToDelete = rowId;
+         var patientToDelete = new Patient();
+         patientToDelete.patientID = RowToDelete.parentNode.parentNode.cells[3].innerText;
+           patientToDelete.patientFirstName = RowToDelete.parentNode.parentNode.cells[4].innerText;
+             patientToDelete.patientLastName = RowToDelete.parentNode.parentNode.cells[5].innerText;
+                   patientToDelete.patientAge = RowToDelete.parentNode.parentNode.cells[6].innerText;
+                     patientToDelete.patientStatus = RowToDelete.parentNode.parentNode.cells[7].innerText;
+         var myJSON = JSON.stringify(patientToDelete);
+
+ $.ajax({
+             url: "http://localhost:8080/BEAT-PD/Admin/Delete/Patient",
+             cache: false,
+             type: "DELETE",
+             data: myJSON,
+             contentType: "application/json;charset=utf-8",
+             complete: function() {
+       }
+         });
+
+         location.reload();
+
+
+     } else {
+         //Cancel
+         //DoNothing
+     }
+
+  }
+
 }
 ///////////////////////////////*************************************//////////////////////////////////////////////////

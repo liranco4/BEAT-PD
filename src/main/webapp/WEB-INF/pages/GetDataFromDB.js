@@ -356,12 +356,14 @@ var txt = "";
                  if(mydata2[i].patientID)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' id='remove' alt='Submit'  style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='remove1.png' id='remove' alt='Delete' onclick = 'DeleteItem(this)'  style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='Edit1.ico' alt='EditPatient' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td><input type='image' src='report1.png' alt='report' onclick = 'GetPatientReportById(this)' style='width:20px;hight:20px'></td>"+
                                "<td>"+mydata2[i].patientID+"</td>"+
-                              "<td contenteditable='true' onclick = 'EditPatientRow(this)'>"+mydata2[i].patientFirstName+"</td>"+
-                              "<td contenteditable='true' onclick = 'EditPatientRow(this)'>"+mydata2[i].patientLastName+"</td>"+
-                              "<td contenteditable='true' onclick = 'EditPatientRow(this)'>"+mydata2[i].patientAge+"</td>"+
+                              "<td>"+mydata2[i].patientFirstName+"</td>"+
+                              "<td>"+mydata2[i].patientLastName+"</td>"+
+                              "<td>"+mydata2[i].patientAge+"</td>"+
+                              "<td>"+mydata2[i].patientStatus+"</td>"+
                             "</td>"+
                             "</tr>"
                  }
@@ -384,7 +386,12 @@ function GetAllPatientReport()
     window.open('http://localhost:8080/BEAT-PD/Admin/GET/PatientsReport', '_blank');
 }
 
+function GetPatientReportById(Row)
+{
+   var PatientId = Row.parentNode.parentNode.cells[2].innerText;
+ window.open('http://localhost:8080/BEAT-PD/Admin/GET/PatientReportByID/'+PatientId, '_blank');
 
+}
 
 ////////////////////////////////////////******************************//////////////////////////////////////////////////
 

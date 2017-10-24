@@ -48,23 +48,27 @@
             <center><h2 id="lblHead"></h2></center>
         </div>
         <div class="modal-body">
-            <label for="txtName">שם:</label>
-            <input type="text" id="txtName" name="name"><br>
+            <div id="txtNameGeneral"><label for="txtName">שם:</label>
+            <input type="text" id="txtName" name="name"></div>
             <div id="divForPatient">
+                <div><label for="txtPrivateNamePatient">שם פרטי:</label>
+                <input type="text" id="txtPrivateNamePatient" name="PatientPrivateName" style="width:140px">
                 <label for="txtLastPatient">שם משפחה:</label>
-                <input type="text" id="txtLastPatient" name="PatientLastName">
-                <label for="txtIDPatient">תעודת זהות:</label>
-                <input type="text" id="txtIDPatient" name="PatientID">
+                <input type="text" id="txtLastPatient" name="PatientLastName"></div>
+                <div><label for="txtIDPatient">תעודת זהות:</label>
+                <input type="text" id="txtIDPatient" name="PatientID" style="width:120px">
                 <label for="txtAgePatient">גיל:</label>
-                <input type="text" id="txtAgePatient" name="PatientAge">
+                    <input type="text" id="txtAgePatient" name="PatientAge" style="width:40px">
+                <label for="txtStatusPatient">סטטוס:</label>
+                <input type="text" id="txtStatusPatient" name="PatientStatus" style="width:135px"></div>
             </div>
             <div id="divForLinksUrl">
                 <label for="txtLinkUrl">כתובת אתר:</label>
                 <input type="text" id="txtLinkUrl" name="Url">
             </div>
             <div id="ModalBody">
-                         <label for="txtSubMenu">תת-תפריט</label>
-                         <input type="text" id="txtSubMenu" name="submenu">
+                <label for="txtSubMenu">תת-תפריט</label>
+                <input type="text" id="txtSubMenu" name="submenu">
                 <select id="ddlSubMenu">
                 </select>
                 <button type="button" id="btnAddNewSubMenu" onclick="AddSubMenu()">הוסף תת-תפריט</button>
@@ -77,41 +81,41 @@
     </div>
 
 </div>
-    <!--Modal For Medicine-->
-    <div id="MedicineModal" class="modalMedicine">
-        <!-- Modal content -->
-        <div class="modalMedicine-content" dir="rtl">
-            <div class="modalMedicine-header">
-                <span class="closeMedicine">&times;</span>
-                <center><h2 id="lblHeadMedicine">תרופות</h2></center>
-            </div>
-            <div class="modalMedicine-body">
+<!--Modal For Medicine-->
+<div id="MedicineModal" class="modalMedicine">
+    <!-- Modal content -->
+    <div class="modalMedicine-content" dir="rtl">
+        <div class="modalMedicine-header">
+            <span class="closeMedicine">&times;</span>
+            <center><h2 id="lblHeadMedicine">תרופות</h2></center>
+        </div>
+        <div class="modalMedicine-body">
+            <div>
+
                 <div>
-
-                    <div>
-                        <label for="txtMedicineName">שם תרופה:</label>
-                        <input type="text" id="txtMedicineName" name="mname"  style="width:80px">
-                        <label for="txtMedicineSerial">מספר סידורי:</label>
-                        <input type="text" id="txtMedicineSerial" name="name" style="width:40px">
-                    </div>
-
-                    <div>
-                        <label for="txtMedicineLimitation">הגבלות:</label>
-                        <input type="text" id="txtMedicineLimitation" name="mlimitation" style="width:229px;">
-                    </div>
-
-                    <div>
-                        <label for="txtMedicineInfo">מידע נוסף:</label>
-                        <input type="text" id="txtMedicineInfo" name="minfo" style="width:213px;">
-                    </div>
+                    <label for="txtMedicineName">שם תרופה:</label>
+                    <input type="text" id="txtMedicineName" name="mname"  style="width:80px">
+                    <label for="txtMedicineSerial">מספר סידורי:</label>
+                    <input type="text" id="txtMedicineSerial" name="name" style="width:40px">
                 </div>
 
+                <div>
+                    <label for="txtMedicineLimitation">הגבלות:</label>
+                    <input type="text" id="txtMedicineLimitation" name="mlimitation" style="width:229px;">
+                </div>
+
+                <div>
+                    <label for="txtMedicineInfo">מידע נוסף:</label>
+                    <input type="text" id="txtMedicineInfo" name="minfo" style="width:213px;">
+                </div>
             </div>
-            <div class="modalMedicine-footer" dir="ltr">
-                <div><button type="button" onclick="AddNewMedicineToDB()" class="button" >הוסף</button></div>
-            </div>
+
+        </div>
+        <div class="modalMedicine-footer" dir="ltr">
+            <div><button type="button" onclick="AddNewMedicineToDB()" class="button" >הוסף</button></div>
+        </div>
     </div>
-    </div>
+</div>
 
 
 <div id="myUpdateModal" class="modalUpdate">
@@ -322,17 +326,24 @@
                 <div id="patient" dir="rtl">
                     <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>מידע על מטופלים</h2>
-                    <div><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button>
-                        <button type="button" id="AddNewPatient" class='button' onclick="AddNewItem()">הוסף מטופל חדש</button>
-                        <button type="button" id="btnSavePatientFromEdit" class='button' style="display: none" >שמור שינויים</button></div>
+                    <table style="width:5%" id="tblPatients">
+                        <tr>
+                            <td style="width:50px"><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button></td>
+                            <td style="width:50px"><button type="button" id="AddNewPatient"  onclick="AddNewItem()" class='button' >הוסף מטופל חדש</button></td>
+                            <td style="width:50px;border:0px"><button type="button" id="btnSavePatientFromEdit"onclick="UpdateDataToDB(this)" class='button' style="display: none; background: #3399ff" >שמור שינויים</button></td>
+                            <td style="width:50px;border:0px"><button type="button" id="btnCancelPatientFromEdit" onclick="CancelEditPatient()" class='button' style="display: none; background: #3399ff" >ביטול</button></td>
+                        </tr>
+                    </table>
                     <table id ="tblPatient" dir="rtl" align="right">
                         <tr>
                             <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right;width:20px">דוח</th>
                             <th style="text-align:right;width:20px">ID</th>
                             <th style="text-align:right">שם פרטי</th>
                             <th style="text-align:right">שם משפחה</th>
                             <th style="text-align:right">גיל</th>
+                            <th style="text-align:right">סטטוס</th>
                         </tr>
                     </table>
                 </div>
@@ -377,7 +388,7 @@ $('.tabs a').click(function(e){
 })
 
   var Token = "";
-
+ var arrOfRows = [];
 // MainPage OnLoad
 window.onload = function() {
 
@@ -628,7 +639,15 @@ function UpdateLinkUrl()
 }
 function UpdatePatientUrl()
 {
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#patient');
 }
+function CancelEditPatient()
+{
+  location.reload();
+}
+
 
     </script>
 
