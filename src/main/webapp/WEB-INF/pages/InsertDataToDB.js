@@ -41,6 +41,7 @@ function AddNewItemsToDB()
   if($("#PatientTab")[0].parentElement.classList[0] == "active")
  {
     InsertNewPatientToDB();
+
  }
 
 
@@ -296,6 +297,7 @@ function InsertNewPatientToDB(){
                  if(response.status != 200 ) alert('Error in adding data to DB:' + response);
     }
     });
+
  location.reload();
 }
 
@@ -306,7 +308,8 @@ function InsertNewPatientToDB(){
 ///////////////////////////////////////////************Control The Models PopUp Visibility**********///////////////////
 function AddNewItemSleepQuality()
 {
-
+document.getElementById("divForPatient").style.display='none';
+   document.getElementById("txtNameGeneral").style.display='block';
  $("#lblHead").text('איכות שינה');
  document.getElementById("ModalBody").style.display='none';
     document.getElementById("divForLinksUrl").style.display='none';
@@ -316,6 +319,8 @@ function AddNewItemSleepQuality()
 
 function AddNewItemUp()
 {
+document.getElementById("divForPatient").style.display='none';
+   document.getElementById("txtNameGeneral").style.display='block';
    $("#lblHead").text('ביום-יום');
    $("#lblType").text('Up');
     document.getElementById("divForLinksUrl").style.display='none';
@@ -326,6 +331,8 @@ function AddNewItemUp()
 
 function AddNewItemDown()
 {
+document.getElementById("divForPatient").style.display='none';
+   document.getElementById("txtNameGeneral").style.display='block';
    $("#lblHead").text('ביום-יום');
     $("#lblType").text('Down');
      document.getElementById("divForLinksUrl").style.display='none';
@@ -340,7 +347,11 @@ function AddNewItem()
  if($("#ActivitiesTab")[0].parentElement.classList[0] == "active")
  {
    $("#lblHead").text('פעילויות');
+   document.getElementById("divForPatient").style.display='none';
+   document.getElementById("txtNameGeneral").style.display='block';
     document.getElementById("ModalBody").style.display='block';
+      document.getElementById("btnAddNewActivity1").style.display='block';
+         document.getElementById("btnUpdatePatient").style.display='none'
         document.getElementById("divForLinksUrl").style.display='none';
     modal.style.display = "block";
  }
@@ -349,6 +360,8 @@ function AddNewItem()
  {
    $("#lblHead").text('תרופות');
     document.getElementById("ModalBody").style.display='block';
+       document.getElementById("btnAddNewActivity1").style.display='block'
+          document.getElementById("btnUpdatePatient").style.display='none'
     document.getElementById("divForLinksUrl").style.display='none';
     MedicineModal.style.display = "block";
  }
@@ -356,7 +369,11 @@ function AddNewItem()
    if($("#SleepTab")[0].parentElement.classList[0] == "active")
  {
    $("#lblHead").text('הפרעות שינה');
+   document.getElementById("divForPatient").style.display='none';
+      document.getElementById("txtNameGeneral").style.display='block';
       document.getElementById("ModalBody").style.display='none';
+         document.getElementById("btnAddNewActivity1").style.display='block'
+            document.getElementById("btnUpdatePatient").style.display='none'
       document.getElementById("divForLinksUrl").style.display='none';
 
     modal.style.display = "block";
@@ -365,7 +382,11 @@ function AddNewItem()
    if($("#MoodTab")[0].parentElement.classList[0] == "active")
  {
    $("#lblHead").text('מצב-רוח');
+   document.getElementById("divForPatient").style.display='none';
+      document.getElementById("txtNameGeneral").style.display='block';
     document.getElementById("ModalBody").style.display='none';
+      document.getElementById("btnAddNewActivity1").style.display='block'
+     document.getElementById("btnUpdatePatient").style.display='none'
      document.getElementById("divForLinksUrl").style.display='none';
     modal.style.display = "block";
  }
@@ -373,7 +394,11 @@ function AddNewItem()
    if($("#LinksTab")[0].parentElement.classList[0] == "active")
  {
    $("#lblHead").text('לינקים');
+   document.getElementById("divForPatient").style.display='none';
+      document.getElementById("txtNameGeneral").style.display='block';
     document.getElementById("ModalBody").style.display='none';
+       document.getElementById("btnAddNewActivity1").style.display='block'
+          document.getElementById("btnUpdatePatient").style.display='none'
      document.getElementById("divForLinksUrl").style.display='block';
     modal.style.display = "block";
  }
@@ -381,11 +406,22 @@ if($("#PatientTab")[0].parentElement.classList[0] == "active")
  {
  $("#lblHead").text('מטופלים');
 
+document.getElementById("txtIDPatient").disabled = false;
+   $("#txtIDPatient").val("");
+   $("#txtPrivateNamePatient").val("");
+   $("#txtLastPatient").val("");
+   $("#txtAgePatient").val("");
+   $("#txtStatusPatient").val("");
+
  document.getElementById("divForPatient").style.display='block';
  document.getElementById("ModalBody").style.display='none';
+    document.getElementById("btnAddNewActivity1").style.display='block'
+     document.getElementById("btnUpdatePatient").style.display='none'
   document.getElementById("txtNameGeneral").style.display='none';
  document.getElementById("divForLinksUrl").style.display='none';
  modal.style.display = "block";
+
+
  }
 
 

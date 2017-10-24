@@ -77,6 +77,7 @@
         </div>
         <div class="modal-footer" dir="ltr">
             <div><button type="button" id="btnAddNewActivity1" class="button" onclick="AddNewItemsToDB()">הוסף</button></div>
+            <div><button type="button" id="btnUpdatePatient" class="button" onclick="UpdateDataToDB()" style="display:none">עדכן</button></div>
         </div>
     </div>
 
@@ -572,7 +573,6 @@ window.onclick = function(event) {
         UpdateMedicineModal.style.display = "none";
     }
 
-    //$("#btnSavePatientFromEdit").css({ 'display': "none" });
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -583,6 +583,7 @@ span.onclick = function() {
 // When the user clicks on <spanMedicine> (x), close the modal
 spanMedicine.onclick = function() {
     MedicineModal.style.display = "none";
+
 }
 
 // When the user clicks on <spanMedicine> (x), close the modal

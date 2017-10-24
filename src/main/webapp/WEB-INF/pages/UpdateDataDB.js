@@ -50,8 +50,7 @@ function PrepareUpdateModals(rowId)
  }
   if($("#PatientTab")[0].parentElement.classList[0] == "active")
  {
- btnAddNewActivity1
-  $("#btnAddNewActivity1").val('עדכן');
+ document.getElementById("txtIDPatient").disabled = true;
   var rowCells = rowId.parentNode.parentNode.cells;
    $("#txtIDPatient").val(rowCells[3].innerText);
    $("#txtPrivateNamePatient").val(rowCells[4].innerText);
@@ -59,11 +58,15 @@ function PrepareUpdateModals(rowId)
    $("#txtAgePatient").val(rowCells[6].innerText);
    $("#txtStatusPatient").val(rowCells[7].innerText);
 
-   $("#lblHead").text('מטופלים');
+    $("#lblHead").text('מטופלים');
     document.getElementById("divForPatient").style.display='block';
     document.getElementById("ModalBody").style.display='none';
-     document.getElementById("txtNameGeneral").style.display='none';
+    document.getElementById("txtNameGeneral").style.display='none';
     document.getElementById("divForLinksUrl").style.display='none';
+
+     document.getElementById("btnAddNewActivity1").style.display='none';
+      document.getElementById("btnUpdatePatient").style.display='block';
+
     modal.style.display = "block";
  }
 }
@@ -261,4 +264,27 @@ function UpdateLinkToDB()
 
 
 function UpdatePatients()
-{}
+{
+
+ var PatientObject = new Patient();
+   PatientObject.patientID = $("#txtIDPatient").val();
+   PatientObject.patientFirstName = $("#txtPrivateNamePatient").val();
+   PatientObject.patientLastName = $("#txtLastPatient").val();
+   PatientObject.patientAge = $("#txtAgePatient").val();
+   PatientObject.patientStatus = $("#txtStatusPatient").val();
+
+var myJSON = JSON.stringify(PatientObject);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Update/Patient",
+            cache: false,
+            type: "PUT",
+            data: myJSON,
+            contentType: "application/json;charset=utf-8",
+            complete: function(response){
+            if(response.status != 200 ) alert('Error in updating data to DB:' + response);
+            }
+                   });
+           location.reload();
+
+}
