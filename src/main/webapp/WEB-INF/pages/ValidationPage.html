@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <html lang="en">
-
-
-
-
 <head>
+
 </head>
 <body>
 </body>
@@ -14,25 +11,12 @@
  //OnLoad
 window.onload = function() {
 
-
         var old_url = window.location.href;
         var urlForEncod = old_url.substring(0 , old_url.indexOf('/'));
-        var new_url = old_url.substring(old_url.indexOf('?') +1 , old_url.lenght);
 
-        var usrtmp = new_url.substring(new_url.indexOf('=') +1, new_url.indexOf('&') );
-        var user = usrtmp;
-
-        var psstmp = new_url.substring(new_url.indexOf('&') +1, new_url.lenght);
-        var pass = psstmp.substring(psstmp.indexOf('=') +1, psstmp.lenght );;
-
-
-
-
-
-       var myUrl = urlForEncod + 'MainPage.html' + '#activity' + '25SD365SDF';
-
+       var Token =  localStorage.getItem("uuid");
+       var myUrl = urlForEncod + 'MainPage.html' + '#activity' + Token;
        location.href = myUrl;
-
 }
 
 </script>

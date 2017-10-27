@@ -14,6 +14,8 @@
             integrity="sha256-ivk71nXhz9nsyFDoYoGf2sbjrR9ddh+XDkCcfZxjvcM="
             crossorigin="anonymous"></script>
 
+
+
 </head>
 
 <body>
@@ -60,11 +62,19 @@
 </body>
 <script>
 
+
+function User(){
+     this.userID = String;
+    this.userName = String;
+    this.userPassword = String;
+    this.userRole = String;
+}
+
+
 var buttons = document.querySelector('.buttons');
 var loginButton = document.querySelector('.log-link');
 var signupButton = document.querySelector('.sign-link');
 var activeElements = document.querySelectorAll('[data-action="animated"]');
-
 buttons.addEventListener('click', switcher);
 
 //window switch between Login\SignUp
@@ -115,8 +125,9 @@ activeLogin.onclick = function() {
       if(CheckValidation()) {
       return true;
       }
-
+      else{
       return false;
+      }
     }
 
 
@@ -124,7 +135,45 @@ activeLogin.onclick = function() {
     {
        var usr = $("#login-email").val();
        var pass = $("#login-password").val();
-       return 1;
+
+
+       //ajax call with user&pass to server , if user&pass true:
+       //return true
+
+       var userObject = new User();
+       userObject.userID = "0";
+       userObject.userName= usr;
+       userObject.userPassword = pass;
+       userObject.userRole = "Admin";
+       var resultFlag= "";
+       var jsonToSend = JSON.stringify(userObject);
+          $.ajax({
+            url: "http://localhost:8080/BEAT-PD/Login",
+            cache: false,
+            type: "POST",
+            data: jsonToSend,
+            contentType: "application/json;charset=utf-8",
+            async: false,
+            timeout: 30000,
+            complete: function(data)
+            {
+               if(data.status != 200 )
+                {
+                alert('Wrong UserName or Password!!!');
+                resultFlag = 0;
+
+                }
+            else{
+                 MyToken = 12345;
+                 localStorage.setItem("uuid",MyToken);
+                 resultFlag = 1;
+
+                }
+           }
+        });
+
+ return resultFlag;
+
     }
 
 
