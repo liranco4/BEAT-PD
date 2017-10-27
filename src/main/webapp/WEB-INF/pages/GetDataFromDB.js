@@ -388,7 +388,7 @@ function GetAllPatientReport()
 
 function GetPatientReportById(Row)
 {
-   var PatientId = Row.parentNode.parentNode.cells[2].innerText;
+   var PatientId = Row.parentNode.parentNode.cells[3].innerText;
  window.open('http://localhost:8080/BEAT-PD/Admin/GET/PatientReportByID/'+PatientId, '_blank');
 
 }
