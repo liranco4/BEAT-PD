@@ -4,8 +4,9 @@ import com.Security.AuthEnc;
 import com.Security.RSAUtils;
 import com.dao.UserModel;
 import com.dm.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jackson.map.ObjectMapper;
+
 import org.hibernate.HibernateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
