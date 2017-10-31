@@ -156,14 +156,17 @@ function encryptUserByServerKey(userObject){
     var serverResult=false;
 
     if(publickKeyDownload) {
-        var encrypt = new JSEncrypt();
-        encrypt.setPublicKey(publicKey);
+        var serverEncrypt = new JSEncrypt();
+        serverEncrypt.setPublicKey(publicKey);
 
         var json = JSON.stringify(userObject);
-        var encryptedUserObj = encrypt.encrypt(json);
+        var encryptedUserObj = serverEncrypt.encrypt(json);
+
+        var clientEncrypt = GenerateRSAKeys();
 
         var valueToSend = new AuthEnc();
         valueToSend.i = encryptedUserObj;
+        valueToSend.p=clientEncrypt.getPublicKey().split("-----BEGIN PUBLIC KEY-----")[1].split("-----END PUBLIC KEY-----")[0].replace(/\n/g,"");
 
         $.ajax({
             type: "POST",
@@ -178,6 +181,8 @@ function encryptUserByServerKey(userObject){
             },
             success: function (result) {
                 console.log("successful" + result);
+                var encryptedResponse = JSON.parse(result).success;
+                var response = clientEncrypt.decrypt(encryptedResponse);
                 serverResult = true;
             },
             error: function (result) {
@@ -191,7 +196,6 @@ function encryptUserByServerKey(userObject){
     {
        var usr = $("#login-email").val();
        var pass = $("#login-password").val();
-
        //ajax call with user&pass to server , if user&pass true:
        //return true
 
@@ -203,6 +207,17 @@ function encryptUserByServerKey(userObject){
        return s;
     }
 
+function GenerateRSAKeys() {
+    crypt = new JSEncrypt({
+        default_key_size: 2048
+    });
+    var dt = new Date();
+    var time = -(dt.getTime());
+    crypt.getKey();
+    dt = new Date();
+    time += (dt.getTime());
+    return crypt;
+}
 
     </script>
 </html>

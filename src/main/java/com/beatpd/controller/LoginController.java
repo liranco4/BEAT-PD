@@ -20,6 +20,7 @@ import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.security.*;
+import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -85,10 +86,11 @@ public class LoginController {
             ObjectMapper mapper = new ObjectMapper();
             User user = mapper.readValue(decryptedMsg, User.class);
             try {
-                if (getUserModelInstance().checkCredentials(user))
-                    return ResponseEntity.ok("{success}");
+                if (getUserModelInstance().checkCredentials(user)){
+                    return ResponseEntity.ok(format("{\"success\":\"%s\"}",RSAUtils.encryptAsString("OK",encryptedData.p)));
+                }
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error: Wrong Credentials!!!}"));
-            }catch(HibernateException | NoResultException e){
+            }catch(HibernateException | NoResultException | InvalidKeySpecException e){
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error: Wrong Credentials!!!}"));
             }
