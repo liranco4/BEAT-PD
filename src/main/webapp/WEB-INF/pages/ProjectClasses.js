@@ -50,5 +50,14 @@ function Patient(){
     this.patientAge = String;
 }
 
+function User(){
+    this.ID = String;
+    this.name = String;
+    this.pass = String;
+    this.role = String;
+}
 
+function AuthEnc(){
+    this.i=String;
+}
 //////////////////////////////////**********************************************///////////////////////////////////////

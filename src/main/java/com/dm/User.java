@@ -16,65 +16,65 @@ import static java.lang.String.format;
 public class User {
     @Id
     @Column(name = "ID")
-    private String userID;
+    private String ID;
 
     @Column(name = "USER_NAME")
-    private String userName;
+    private String name;
 
     @Column(name = "PASSWORD")
-    private String userPassword;
+    private String pass;
 
     @Column(name = "ROLE")
-    private String userRole;
+    private String role;
 
     @Column(name = "LAST_LOGIN")
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     @Type(type = "date")
-    private Date userLastLogin;
+    private Date lastLogin;
 
     @Override
     public String toString(){
-        return format("{userID:\"%s\",userName:\"%s\",userPassword:\"%s\",userRole:\"%s\",userLastLogin:\"%s\"}",userID, userName, userPassword, userRole, userLastLogin);
+        return format("{ID:\"%s\",name:\"%s\",pass:\"%s\",role:\"%s\",lastLogin:\"%s\"}",ID, name, pass, role, lastLogin);
     }
     public User(){}
 
     public String getUserID() {
-        return userID;
+        return ID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setUserID(String ID) {
+        this.ID = ID;
     }
 
     public String getUserName() {
-        return userName;
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String Name) {
+        this.name = Name;
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return pass;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setUserPassword(String Pass) {
+        this.pass = Pass;
     }
 
     public String getUserRole() {
-        return userRole;
+        return role;
     }
 
     public void setUserRole(String userRole) {
-        this.userRole = userRole;
+        this.role = userRole;
     }
 
     public Date getUserLastLogin() {
-        return userLastLogin;
+        return lastLogin;
     }
 
     public void setUserLastLogin(Date userLastLogin) {
-        this.userLastLogin = userLastLogin;
+        this.lastLogin = userLastLogin;
     }
 }

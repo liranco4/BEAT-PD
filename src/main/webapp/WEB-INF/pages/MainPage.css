@@ -14,7 +14,7 @@
 * {
   box-sizing:border-box;
 }
-.tabs div! > .active {
+.tabs div> .active {
   background:red!important;
 }
 html, body {

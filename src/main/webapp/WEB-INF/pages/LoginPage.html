@@ -5,19 +5,6 @@
     <title>LoginPage</title>
 
     <link rel="stylesheet" type="text/css" href="LoginPage.css" />
-    <script type="text/javascript" src="core-min.js"></script>
-    <script type="text/javascript" src="core.js"></script>
-
-
-
-    <script type="text/javascript" src="cipher-core.js"></script>
-    <script type="text/javascript" src="cipher-core-min.js"></script>
-
-    <script type="text/javascript" src="enc-base64.js"></script>
-    <script type="text/javascript" src="enc-base64-min.js"></script>
-    <script type="text/javascript" src="aes-min.js"></script>
-    <script type="text/javascript" src="aes.js"></script>
-    <script type="text/javascript" src="../pages/rollup/aes.js"></script>
     <script
             src="https://code.jquery.com/jquery-2.1.3.js"
             integrity="sha256-goy7ystDD5xbXSf+kwL4eV6zOPJCEBD1FBiCElIm+U8="
@@ -27,9 +14,8 @@
             src="https://code.jquery.com/jquery-2.1.3.min.js"
             integrity="sha256-ivk71nXhz9nsyFDoYoGf2sbjrR9ddh+XDkCcfZxjvcM="
             crossorigin="anonymous"></script>
-    <script src="https://code.google.com/archive/p/crypto-js"></script>
-
-
+    <script type="text/javascript" src="jquery.jcryption.3.1.0.js"></script>
+    <script type="text/javascript" src="ProjectClasses.js"></script>
 
 </head>
 
@@ -78,12 +64,6 @@
 <script>
 
 
-function User(){
-     this.userID = String;
-    this.userName = String;
-    this.userPassword = String;
-    this.userRole = String;
-}
 
 
 var buttons = document.querySelector('.buttons');
@@ -145,112 +125,82 @@ activeLogin.onclick = function() {
       }
     }
 
-    function testEncrypt(){
-        var result;
-        $.ajax({
-            url: "http://localhost:8080/BEAT-PD/publicKey",
-            cache: false,
+
+function encryptUserByServerKey(userObject){
+    var publicKeyUrl = "http://localhost:8080/BEAT-PD/encryption-parameters";
+    var encryptUrl = "http://localhost:8080/BEAT-PD/encryption-data";
+    var publicKey ="";
+    var publickKeyDownload="";
+    $.ajax({
+            url: publicKeyUrl,
+        cache: false,
+        async: false,
+        timeout: 30000,
             type: "GET",
-            contentType: "application/json;charset=utf-8",
-            async: false,
-            timeout: 30000,
-            complete: function(data)
-            {
-                if(data.status != 200 )
-                {
-                    alert('Wrong UserName or Password!!!');
-                    result = "";
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (result) {
 
+                if (result["publicKey"] != null && result["publicKey"] != "") {
+                    publicKey = result["publicKey"];
+                    publickKeyDownload = true;
                 }
-                else{
-                    result = data.responseText;
-
-                }
+            },
+            error: function () {
+                alert("Error server not available");
+                publickKeyDownload = false;
             }
         });
-        if(result!="") {
-            var HexKey = result.split("success:")[1].split("}")[0].split(" ")[1];
-            CryptoJS.pad.NoPadding = {
-                pad: function () {
-                }, unpad: function () {
-                }
-            };
-            var key = CryptoJS.enc.Hex.parse(HexKey);
-            var encrypted = CryptoJS.AES.encrypt("HELLO", key, {
-                iv: CryptoJS.lib.WordArray.random(1024),
-                padding: CryptoJS.pad.NoPadding
-            });
-            var encryptedBas64 = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
 
+    var serverResult=false;
 
-            $.ajax({
-                url: "http://localhost:8080/BEAT-PD/decrypt/"+encryptedBas64,
-                cache: false,
-                type: "POST",
-                contentType: "application/json;charset=utf-8",
-                async: false,
-                timeout: 30000,
-                complete: function(data)
-                {
-                    if(data.status != 200 )
-                    {
-                        alert('Wrong UserName or Password!!!');
-                        result = "";
+    if(publickKeyDownload) {
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey(publicKey);
 
-                    }
-                    else{
-                        result = data.responseText;
+        var json = JSON.stringify(userObject);
+        var encryptedUserObj = encrypt.encrypt(json);
 
-                    }
-                }
-            });
-        }
+        var valueToSend = new AuthEnc();
+        valueToSend.i = encryptedUserObj;
+
+        $.ajax({
+            type: "POST",
+            url: encryptUrl,
+            cache: false,
+            async: false,
+            timeout: 30000,
+            contentType: "application/json",
+            data: JSON.stringify(valueToSend),
+            xhrFields: {
+                withCredentials: true
+            },
+            success: function (result) {
+                console.log("successful" + result);
+                serverResult = true;
+            },
+            error: function (result) {
+                alert(result.responseText);
+            }
+        });
     }
-
+    return serverResult;
+}
     function CheckValidation()
     {
-        testEncrypt();
        var usr = $("#login-email").val();
        var pass = $("#login-password").val();
-
 
        //ajax call with user&pass to server , if user&pass true:
        //return true
 
        var userObject = new User();
        userObject.userID = usr;
-       userObject.userName= usr;
        userObject.userPassword = pass;
        userObject.userRole = "Admin";
-       var resultFlag= "";
-       var jsonToSend = JSON.stringify(userObject);
-          $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Login",
-            cache: false,
-            type: "POST",
-            data: jsonToSend,
-            contentType: "application/json;charset=utf-8",
-            async: false,
-            timeout: 30000,
-            complete: function(data)
-            {
-               if(data.status != 200 )
-                {
-                alert('Wrong UserName or Password!!!');
-                resultFlag = 0;
-
-                }
-            else{
-                 MyToken = 12345;
-                 localStorage.setItem("uuid",MyToken);
-                 resultFlag = 1;
-
-                }
-           }
-        });
-
- return resultFlag;
-
+       var s = encryptUserByServerKey(userObject);
+       return s;
     }
 
 
