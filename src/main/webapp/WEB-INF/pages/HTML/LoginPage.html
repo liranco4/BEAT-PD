@@ -164,9 +164,11 @@ function encryptUserByServerKey(userObject){
 
         var clientEncrypt = GenerateRSAKeys();
 
+        var s = GenerateRSAKeys();
         var valueToSend = new AuthEnc();
         valueToSend.i = encryptedUserObj;
         valueToSend.p=clientEncrypt.getPublicKey();
+
 
         $.ajax({
             type: "POST",
@@ -180,10 +182,14 @@ function encryptUserByServerKey(userObject){
                 withCredentials: true
             },
             success: function (result) {
-                console.log("successful" + result);
                 var encryptedResponse = JSON.parse(result).success;
                 var response = clientEncrypt.decrypt(encryptedResponse);
-                serverResult = true;
+                if(response==="OK")
+                    serverResult = true;
+                else {
+                    serverResult = false;
+                    alert("Error: malicious attack!!!");
+                }
             },
             error: function (result) {
                 alert(result.responseText);
@@ -210,12 +216,16 @@ function GenerateRSAKeys() {
     crypt = new JSEncrypt({
         default_key_size: 2048
     });
-    var dt = new Date();
+    var dt = randomDate(new Date(2012, 0, 1), new Date());
     var time = -(dt.getTime());
     crypt.getKey();
     dt = new Date();
     time += (dt.getTime());
     return crypt;
+}
+
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
     </script>
