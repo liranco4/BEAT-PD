@@ -135,7 +135,7 @@ function encryptUserByServerKey(userObject){
         url: publicKeyUrl,
         cache: false,
         async: false,
-        timeout: 30000,
+        timeout: 1000,
             type: "GET",
             xhrFields: {
                 withCredentials: true
@@ -166,14 +166,14 @@ function encryptUserByServerKey(userObject){
 
         var valueToSend = new AuthEnc();
         valueToSend.i = encryptedUserObj;
-        valueToSend.p=clientEncrypt.getPublicKey().split("-----BEGIN PUBLIC KEY-----")[1].split("-----END PUBLIC KEY-----")[0].replace(/\n/g,"");
+        valueToSend.p=clientEncrypt.getPublicKey();
 
         $.ajax({
             type: "POST",
             url: encryptUrl,
             cache: false,
             async: false,
-            timeout: 30000,
+            timeout: 1000,
             contentType: "application/json",
             data: JSON.stringify(valueToSend),
             xhrFields: {
@@ -202,7 +202,6 @@ function encryptUserByServerKey(userObject){
        var userObject = new User();
        userObject.userID = usr;
        userObject.userPassword = pass;
-       userObject.userRole = "Admin";
        var s = encryptUserByServerKey(userObject);
        return s;
     }

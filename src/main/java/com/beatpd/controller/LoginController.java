@@ -87,7 +87,8 @@ public class LoginController {
             User user = mapper.readValue(decryptedMsg, User.class);
             try {
                 if (getUserModelInstance().checkCredentials(user)){
-                    return ResponseEntity.ok(format("{\"success\":\"%s\"}",RSAUtils.encryptAsString("OK",encryptedData.p)));
+                    String key = encryptedData.p.replaceAll("(-----BEGIN PUBLIC KEY-----)|(-----END PUBLIC KEY-----)|(\n)","");
+                    return ResponseEntity.ok(format("{\"success\":\"%s\"}",RSAUtils.encryptAsString("OK",key)));
                 }
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error: Wrong Credentials!!!}"));
             }catch(HibernateException | NoResultException | InvalidKeySpecException e){

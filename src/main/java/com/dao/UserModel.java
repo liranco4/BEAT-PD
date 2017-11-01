@@ -2,6 +2,8 @@ package com.dao;
 
 import com.dm.User;
 
+import java.util.Date;
+
 import static java.lang.String.format;
 
 /**
@@ -24,6 +26,6 @@ public class UserModel extends ModelGenerics {
 
     public Boolean checkCredentials(User user) {
         User userFromDB = (User) modelGenerics.retrieveObjectFromDBbyID(User.class, user.getUserID());
-        return (userFromDB.getUserPassword().equals(user.getUserPassword()) && user.getUserRole().equals(userFromDB.getUserRole()));
+        return (userFromDB.getUserPassword().equals(user.getUserPassword()) && "Admin".equals(userFromDB.getUserRole()));
     }
 }
