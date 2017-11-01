@@ -7,16 +7,16 @@
 
 
     <title>MainPage</title>
-    <link rel="stylesheet" type="text/css" href="MainPage.css" />
-    <link rel="stylesheet" type="text/css" href="ModalStyle.css" />
+    <link rel="stylesheet" type="text/css" href="../CSS/MainPage.css" />
+    <link rel="stylesheet" type="text/css" href="../CSS/ModalStyle.css" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://ticket-compare.com/wp-content/themes/ticket-compare/js/jquery.canvasjs.min.js"></script>
-    <script type="text/javascript" src="InsertDataToDB.js"></script>
-    <script type="text/javascript" src="DeleteDataFromDB.js"></script>
-    <script type="text/javascript" src="UpdateDataDB.js"></script>
-    <script type="text/javascript" src="GetDataFromDB.js"></script>
-    <script type="text/javascript" src="ProjectClasses.js"></script>
+    <script type="text/javascript" src="../JSPages/InsertDataToDB.js"></script>
+    <script type="text/javascript" src="../JSPages/DeleteDataFromDB.js"></script>
+    <script type="text/javascript" src="../JSPages/UpdateDataDB.js"></script>
+    <script type="text/javascript" src="../JSPages/GetDataFromDB.js"></script>
+    <script type="text/javascript" src="../JSPages/ProjectClasses.js"></script>
 
     <script
             src="https://code.jquery.com/jquery-2.1.3.js"
@@ -184,8 +184,8 @@
 </div>
 
 <div class="wrapper" id="MainDiv" style="display:none">
-    <input type='image' src='hit.png' style='width:120px;height:75px;float:right;padding-bottom:0px'>
-    <input type='image' src='soraski.jpg' style='width:200px;float:right;padding-up:0px'>
+    <input type='image' src='../resources/hit.png' style='width:120px;height:75px;float:right;padding-bottom:0px'>
+    <input type='image' src='../resources/soraski.jpg' style='width:200px;float:right;padding-up:0px'>
     <h1>BEAT-PD<span>
     </span></h1>
     <section class="psummary">
@@ -216,7 +216,7 @@
             </div>
             <section id="tab-group" class="tabgroup" style="overflow-y: scroll;height:600px;" onblur="AddNewActivity()">
                 <div id="activity" dir="rtl">
-                    <input type='image' src='Activities.png' style='width:110px;height:65px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/Activities.png' style='width:110px;height:65px;float:left;padding-bottom:0px'>
                     <h2 id="lblSectionActivities">רשימת פעילויות</h2>
                     <div><button type="button" class='button' id="btnAddNewActivity" onclick="AddNewItem()">הוסף חדש</button></div>
                     <table id ="tblActivities" dir="rtl" align="right">
@@ -232,7 +232,7 @@
                 </div>
 
                 <div id="habit" dir="rtl">
-                    <input type='image' src='hergelim.png' style='width:80px;height:70px;float:left;padding-bottom:27px'>
+                    <input type='image' src='../resources/hergelim.png' style='width:80px;height:70px;float:left;padding-bottom:27px'>
                     <h2 id="lblSectionHergelim">ביום-יום</h2>
                     <h3>האם שתית היום?</h3>
                     <div><h6 style="display:none" id="lblType"></h6></div>
@@ -260,7 +260,7 @@
 
 
                 <div id="medicine" dir="rtl">
-                    <input type='image' src='medicines2.png' style='width:70px;height:60px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/medicines2.png' style='width:70px;height:60px;float:left;padding-bottom:0px'>
                     <h2>תרופות</h2>
                     <div><button type="button" id="btnAddNewMedicine" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
                     <table id ="tblMedicine" dir="rtl" align="right">
@@ -278,7 +278,7 @@
 
 
                 <div id="sleep" dir="rtl">
-                    <input type='image' src='sleep1.png' style='width:70px;height:70px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/sleep1.png' style='width:70px;height:70px;float:left;padding-bottom:0px'>
                     <h2>איכות שינה</h2>
                     <div><button type="button" id="btnAddNewSleepQuality" class='button' onclick="AddNewItemSleepQuality()">הוסף חדש </button></div>
                     <table id ="tblSleepQuality" dir="rtl" align="right">
@@ -299,7 +299,7 @@
                 </div>
 
                 <div id="mood" dir="rtl">
-                    <input type='image' src='naughty.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/naughty.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>מצב-רוח</h2>
                     <div><button type="button" id="btnAddMood" class='button' onclick="AddNewItem()">הוסף חדש </button></div>
                     <table id ="tblMood" dir="rtl" align="right">
@@ -311,7 +311,7 @@
                 </div>
 
                 <div id="link" dir="rtl">
-                    <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>לינקים</h2>
                     <div><button type="button" id="btnAddLinks" class='button' onclick="AddNewItem()">הוסף חדש</button></div>
                     <table id ="tblLinks" dir="rtl" align="right">
@@ -325,7 +325,7 @@
                 </div>
 
                 <div id="patient" dir="rtl">
-                    <input type='image' src='information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>מידע על מטופלים</h2>
                     <table style="width:5%" id="tblPatients">
                         <tr>

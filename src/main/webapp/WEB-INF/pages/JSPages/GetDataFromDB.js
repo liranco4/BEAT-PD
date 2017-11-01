@@ -26,8 +26,8 @@ var j=0;
                  if(mydata2[i].activityName)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Edit' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='Edit' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].activityName+"</td>"+
                             "<td>"+ "<select style='width:100%' id='ddlMainGeneral'>"
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
@@ -86,8 +86,8 @@ var j=0;
                    if(mydata2[i].groupID == "0")
                    {
                             txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Edit1' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='Edit1' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
@@ -106,8 +106,8 @@ var j=0;
                    {
 
                    txt2 += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Edit2' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='Edit2' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].habitName+"</td>"+
                             "<td>"+ "<select style='width:100%'>"
                             for(var j=0;j<mydata2[i].subMenus.length;j++)
@@ -161,8 +161,8 @@ var txt = "";
                  if(mydata2[i].medicineName)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='Edit' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='Edit' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                               "<td>"+mydata2[i].medicineSerialNumber+"</td>"+
                               "<td>"+mydata2[i].medicineName+"</td>"+
                               "<td>"+mydata2[i].medicineLimitation+"</td>"+
@@ -203,7 +203,7 @@ var txt = "";
                  if(mydata2[i].moodConditionName)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].moodConditionName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -239,8 +239,8 @@ var txt = "";
                  if(mydata2[i].linkURL)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='EditLinks' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='EditLinks' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].linkHeadLine+"</td>"+
                             "<td><a target='_blank' href="+mydata2[i].linkURL+">"+mydata2[i].linkURL+"</a></td>"+
                             "</td>"+
@@ -281,7 +281,7 @@ var txt = "";
                  if(mydata2[i].sleepQualityName)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteSleepQualityItem(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteSleepQualityItem(this)' style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].sleepQualityName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -318,7 +318,7 @@ $.ajax({
                  if(mydata2[i].sleepDisorderName)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' alt='Submit' onclick = 'DeleteSleepDisorderItem(this)'style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' alt='Submit' onclick = 'DeleteSleepDisorderItem(this)'style='width:20px;hight:20px'></td>"+
                             "<td>"+mydata2[i].sleepDisorderName+"</td>"+
                             "</td>"+
                             "</tr>"
@@ -356,9 +356,9 @@ var txt = "";
                  if(mydata2[i].patientID)
                  {
                   txt += "<tr>"+
-                            "<td><input type='image' src='remove1.png' id='remove' alt='Delete' onclick = 'DeleteItem(this)'  style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='Edit1.ico' alt='EditPatient' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='report1.png' alt='report' onclick = 'GetPatientReportById(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/remove1.png' id='remove' alt='Delete' onclick = 'DeleteItem(this)'  style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='EditPatient' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/report1.png' alt='report' onclick = 'GetPatientReportById(this)' style='width:20px;hight:20px'></td>"+
                                "<td>"+mydata2[i].patientID+"</td>"+
                               "<td>"+mydata2[i].patientFirstName+"</td>"+
                               "<td>"+mydata2[i].patientLastName+"</td>"+

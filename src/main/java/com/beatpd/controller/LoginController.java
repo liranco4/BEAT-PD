@@ -57,7 +57,7 @@ public class LoginController {
 
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public String Login() {
-        return "redirect:/pages/LoginPage.html";
+        return "redirect:/pages/HTML/LoginPage.html";
     }
 
     @RequestMapping(value = "/encryption-parameters", method = RequestMethod.GET)
