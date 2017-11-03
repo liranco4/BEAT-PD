@@ -48,4 +48,9 @@ public class PatientModel{
         }
     }
 
+    public Boolean checkCredentials(Patient patient){
+        Patient patientDB = (Patient) modelGenerics.retrieveObjectFromDBbyID(Patient.class, patient.getPatientID());
+        return patient.getPatientPass().equals(patientDB.getPatientPass());
+    }
+
 }

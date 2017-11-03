@@ -104,9 +104,18 @@ public class PatientRecordModel {
 
     private List<PatientRecord> getAllPatientUpdates(){
         List<PatientRecord> patientRecords = new ArrayList<>();
-        Collection<Patient> patients =  modelGenerics.findAllByClass(Patient.class);
-        patients.forEach(p -> patientRecords.addAll(getAllUpdatesByPatientID(p.getPatientID())));
-        return patientRecords;
+        Session session = null;
+        try {
+            session = modelGenerics.getSessionFactory().openSession();
+            Transaction transaction = session.beginTransaction();
+            List<String> patientIDRecorded = session.createQuery(format("select p.patientID from PATIENT_RECORD as p group by p.patientID")).getResultList();
+            transaction.commit();
+            patientIDRecorded.forEach(p -> patientRecords.addAll(getAllUpdatesByPatientID(p)));
+            return patientRecords;
+        }finally {
+            if(session!=null)
+                session.close();
+        }
     }
 
     private List<PatientRecord> getAllUpdatesByPatientID(String i_PatientID) throws HibernateException{

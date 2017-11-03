@@ -23,24 +23,33 @@ public class Patient {
     @Column(name = "AGE")
     private String patientAge;
 
+    @Column(name = "PASSWORD")
+    private String patientPass;
+
+
     @Override
     public String toString(){
-        return String.format("{patientID:\"%s\",patientFirstName:\"%s\",patientLastName:\"%s\",patientStatus:\"%s\",patientAge:\"%s\"}", patientID, patientFirstName, patientLastName, patientStatus, patientAge);
+        return String.format("{patientID:\"%s\",patientFirstName:\"%s\",patientLastName:\"%s\",patientStatus:\"%s\",patientAge:\"%s\",patientPass:\"%s\"}", patientID, patientFirstName, patientLastName, patientStatus, patientAge,patientPass);
     }
 
     public Patient(){
     }
 
-    public Patient(String patientID, String patientFirstName, String patientLastName, String patientStatus, String patientAge) {
+    public Patient(String patientID, String patientFirstName, String patientLastName, String patientStatus, String patientAge, String patientPass) {
         this.patientID = patientID;
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.patientStatus = patientStatus;
         this.patientAge = patientAge;
+        this.patientPass = patientPass;
     }
 
     public String getPatientID() {
         return patientID;
+    }
+
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
     }
 
     public String getPatientFirstName() {
@@ -73,5 +82,13 @@ public class Patient {
 
     public void setPatientAge(String patientAge) {
         this.patientAge = patientAge;
+    }
+
+    public String getPatientPass() {
+        return patientPass;
+    }
+
+    public void setPatientPass(String patientPass) {
+        this.patientPass = patientPass;
     }
 }

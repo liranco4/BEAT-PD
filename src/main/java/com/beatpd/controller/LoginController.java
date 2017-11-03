@@ -2,7 +2,9 @@ package com.beatpd.controller;
 
 import com.Security.AuthEnc;
 import com.Security.RSAUtils;
+import com.dao.PatientModel;
 import com.dao.UserModel;
+import com.dm.Patient;
 import com.dm.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.binary.Base64;
@@ -25,10 +27,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
+import static com.dao.PatientModel.getPatientModelInstance;
 import static com.dao.UserModel.getUserModelInstance;
 import static com.utils.SingleLogger.LOGGER;
 import static java.lang.String.format;
-import static java.lang.String.valueOf;
 
 /**
  * Created by liran on 15/08/17.
@@ -38,6 +40,7 @@ import static java.lang.String.valueOf;
 public class LoginController {
 
     private UserModel userModel = getUserModelInstance();
+    private PatientModel patientModel = getPatientModelInstance();
 
     @RequestMapping(value = "/Login", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
@@ -62,7 +65,7 @@ public class LoginController {
 
     @RequestMapping(value = "/encryption-parameters", method = RequestMethod.GET)
     public ResponseEntity<?> getEncryptionPublicKey(HttpServletRequest request) {
-        KeyPair keyPair = null;
+        KeyPair keyPair;
         try {
             keyPair = RSAUtils.generateKeyPair();
         } catch (NoSuchAlgorithmException e) {
@@ -98,6 +101,22 @@ public class LoginController {
             } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Patient/Login", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity loginPatient(@RequestBody Patient patient) {
+        try {
+            if (patientModel.checkCredentials(patient))
+                return ResponseEntity.ok("{success: patient logged-in}");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{error:not found}");
+        } catch (HibernateException e) {
+            LOGGER.log(Level.INFO, format("error in login: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        } catch (Exception e) {
+            LOGGER.log(Level.INFO, format("error in login: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
 }

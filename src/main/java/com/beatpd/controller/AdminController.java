@@ -35,6 +35,7 @@ public class AdminController {
     private PatientModel patientModel = PatientModel.getPatientModelInstance();
     private ModelGenerics modelGenerics = ModelGenerics.getModelGenericsInstance();
     private PatientRecordModel patientRecoedModel = PatientRecordModel.getPatientRecordModelInstance();
+
     @RequestMapping(value = "/Add/User", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
     public ResponseEntity addUser(@RequestBody User user) {
@@ -379,6 +380,7 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
+
 
     @RequestMapping(value = "/Add/Patient", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody

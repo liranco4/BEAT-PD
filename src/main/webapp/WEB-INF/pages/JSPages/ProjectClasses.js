@@ -48,13 +48,15 @@ function Patient(){
     this.patientLastName = String;
     this.patientStatus = String;
     this.patientAge = String;
+    this.patientPass = String;
 }
 
 function User(){
-    this.ID = String;
+    this.id = String;
     this.name = String;
     this.pass = String;
     this.role = String;
+    this.lastLogin = String;
 }
 
 function AuthEnc(){

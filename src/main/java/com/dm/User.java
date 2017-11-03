@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Date;
 
-import static java.lang.String.format;
 
 /**
  * Created by liran on 5/4/17.
@@ -16,7 +15,7 @@ import static java.lang.String.format;
 public class User {
     @Id
     @Column(name = "ID")
-    private String ID;
+    private String id;
 
     @Column(name = "USER_NAME")
     private String name;
@@ -34,47 +33,55 @@ public class User {
 
     @Override
     public String toString(){
-        return format("{ID:\"%s\",name:\"%s\",pass:\"%s\",role:\"%s\",lastLogin:\"%s\"}",ID, name, pass, role, lastLogin);
+        return String.format("{id:\"%s\",name:\"%s\",pass:\"%s\",role:\"%s\",lastLogin:\"%s\"}",id, name, pass, role, lastLogin);
     }
     public User(){}
 
-    public String getUserID() {
-        return ID;
+    public User(String id, String name, String pass, String role, Date lastLogin) {
+        this.id = id;
+        this.name = name;
+        this.pass = pass;
+        this.role = role;
+        this.lastLogin = lastLogin;
     }
 
-    public void setUserID(String ID) {
-        this.ID = ID;
+    public String getID() {
+        return id;
     }
 
-    public String getUserName() {
+    public void setID(String ID) {
+        this.id = ID;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setUserName(String Name) {
-        this.name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserPassword() {
+    public String getPass() {
         return pass;
     }
 
-    public void setUserPassword(String Pass) {
-        this.pass = Pass;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
-    public String getUserRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setUserRole(String userRole) {
-        this.role = userRole;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public Date getUserLastLogin() {
+    public Date getLastLogin() {
         return lastLogin;
     }
 
-    public void setUserLastLogin(Date userLastLogin) {
-        this.lastLogin = userLastLogin;
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 }

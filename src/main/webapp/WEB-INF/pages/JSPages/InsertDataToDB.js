@@ -76,8 +76,12 @@ $.ajax({
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -128,8 +132,12 @@ $.ajax({
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -153,15 +161,18 @@ function AddNewMedicineToDB()
 
 
 var myJSON = JSON.stringify(medicineObject);
-//var mydata2 = JSON.parse(myJSON);
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Add/Medicine",
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -180,15 +191,18 @@ function InsertNewSleepQualityToDB()
    SleepQualityObject.sleepQualityName = $("#txtName").val();
 
 var myJSON = JSON.stringify(SleepQualityObject);
-//var mydata2 = JSON.parse(myJSON);
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Add/SleepQuality",
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -205,16 +219,19 @@ function InsertNewSleepDisorderToDB()
 
    var SleepDisorderObject = new SleepDisorder();
    SleepDisorderObject.sleepDisorderName = $("#txtName").val();
-var myJSON = JSON.stringify(SleepDisorderObject);
-//var mydata2 = JSON.parse(myJSON);
+   var myJSON = JSON.stringify(SleepDisorderObject);
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Add/SleepDisorder",
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -232,15 +249,18 @@ function InsertMoodToDB()
    var MoodConditionObject = new MoodCondition();
    MoodConditionObject.moodConditionName = $("#txtName").val();
    var myJSON = JSON.stringify(MoodConditionObject);
-//var mydata2 = JSON.parse(myJSON);
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Add/MoodCondition",
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -255,19 +275,23 @@ location.reload();
 function insertNewLinkToDB()
 {
 
-   var LinkObject = new Link();
+    var LinkObject = new Link();
       LinkObject.linkHeadLine = $("#txtName").val();
       LinkObject.linkURL = $("#txtLinkUrl").val();
-   var myJSON = JSON.stringify(LinkObject);
-//var mydata2 = JSON.parse(myJSON);
+      var myJSON = JSON.stringify(LinkObject);
+
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Add/Link",
             cache: false,
             type: "POST",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function() {
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
 }
         });
 
@@ -281,24 +305,28 @@ location.reload();
 
 function InsertNewPatientToDB(){
     var patient = new Patient();
-    patient.patientID = $("#txtIDPatient").val();
+    patient.patientPass = patient.patientID = $("#txtIDPatient").val();
     patient.patientFirstName = $("#txtPrivateNamePatient").val();
     patient.patientLastName = $("#txtLastPatient").val();
     patient.patientAge = $("#txtAgePatient").val();
     patient.patientStatus = $("#txtStatusPatient").val();
+
     var jsonToSend = JSON.stringify(patient);
     $.ajax({
-                url: "http://localhost:8080/BEAT-PD/Admin/Add/Patient",
-                cache: false,
-                type: "POST",
-                data: jsonToSend,
-                contentType: "application/json;charset=utf-8",
-                complete: function(response) {
-                 if(response.status != 200 ) alert('Error in adding data to DB:' + response);
-    }
+            url: "http://localhost:8080/BEAT-PD/Admin/Add/Patient",
+            cache: false,
+            type: "POST",
+            data: jsonToSend,
+            async:false,
+            contentType: "application/json;charset=utf-8",
+            complete: function(response){
+            if(response.status!==200){
+                alert('Error from server:' + response.status)
+            }
+        }
     });
 
- location.reload();
+    location.reload();
 }
 
 //////////////////////////////////////////////*******************************//////////////////////////////////////////
@@ -414,14 +442,13 @@ document.getElementById("txtIDPatient").disabled = false;
    $("#txtStatusPatient").val("");
 
  document.getElementById("divForPatient").style.display='block';
+ document.getElementById("divForPatientPass").style.display='none';
  document.getElementById("ModalBody").style.display='none';
     document.getElementById("btnAddNewActivity1").style.display='block'
      document.getElementById("btnUpdatePatient").style.display='none'
   document.getElementById("txtNameGeneral").style.display='none';
  document.getElementById("divForLinksUrl").style.display='none';
  modal.style.display = "block";
-
-
  }
 
 

@@ -60,12 +60,13 @@ function PrepareUpdateModals(rowId)
 
     $("#lblHead").text('מטופלים');
     document.getElementById("divForPatient").style.display='block';
+     document.getElementById("divForPatientPass").style.display='block';
     document.getElementById("ModalBody").style.display='none';
     document.getElementById("txtNameGeneral").style.display='none';
     document.getElementById("divForLinksUrl").style.display='none';
+    document.getElementById("btnAddNewActivity1").style.display='none';
+    document.getElementById("btnUpdatePatient").style.display='block';
 
-     document.getElementById("btnAddNewActivity1").style.display='none';
-      document.getElementById("btnUpdatePatient").style.display='block';
 
     modal.style.display = "block";
  }
@@ -162,9 +163,12 @@ function UpdateActivityToDB()
                   cache: false,
                   type: "PUT",
                   data: myJSON,
+                  async:false,
                   contentType: "application/json;charset=utf-8",
                   complete: function(data) {
-                     if(data.status != 200 ) alert('Error in updating data to DB:' + data);
+                      if(response.status!==200){
+                          alert('Error from server:' + response.status)
+                      }
                    }
               });
 
@@ -205,9 +209,12 @@ function UpdateHabitToDB()
                 cache: false,
                 type: "PUT",
                 data: myJSON,
+                async:false,
                 contentType: "application/json;charset=utf-8",
                 complete: function(response) {
-                if(response.status != 200 ) alert('Error in updating data to DB:' + response);
+                    if(response.status!==200){
+                        alert('Error from server:' + response.status)
+                    }
                 }
         });
 location.reload();
@@ -232,9 +239,12 @@ $.ajax({
             cache: false,
             type: "PUT",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function(response){
-            if(response.status != 200 ) alert('Error in updating data to DB:' + response);
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
             }
                    });
            location.reload();
@@ -253,9 +263,12 @@ function UpdateLinkToDB()
                   cache: false,
                   type: "PUT",
                   data: myJSON,
+                  async:false,
                   contentType: "application/json;charset=utf-8",
                   complete: function(data) {
-                     if(data.status != 200 ) alert('Error in updating data to DB:' + data);
+                      if(response.status!==200){
+                          alert('Error from server:' + response.status)
+                      }
                    }
               });
 
@@ -272,6 +285,10 @@ function UpdatePatients()
    PatientObject.patientLastName = $("#txtLastPatient").val();
    PatientObject.patientAge = $("#txtAgePatient").val();
    PatientObject.patientStatus = $("#txtStatusPatient").val();
+   var pass = $("#txtPassPatient").val();
+   if(pass!==""){
+       PatientObject.patientPass = pass;
+   }
 
 var myJSON = JSON.stringify(PatientObject);
 
@@ -280,9 +297,12 @@ $.ajax({
             cache: false,
             type: "PUT",
             data: myJSON,
+            async:false,
             contentType: "application/json;charset=utf-8",
             complete: function(response){
-            if(response.status != 200 ) alert('Error in updating data to DB:' + response);
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
             }
                    });
            location.reload();

@@ -126,7 +126,7 @@ activeLogin.onclick = function() {
     }
 
 
-function encryptUserByServerKey(userObject){
+function loginToServer(userObject){
     var publicKeyUrl = "http://localhost:8080/BEAT-PD/encryption-parameters";
     var encryptUrl = "http://localhost:8080/BEAT-PD/encryption-data";
     var publicKey ="";
@@ -205,10 +205,9 @@ function encryptUserByServerKey(userObject){
        //return true
 
        var userObject = new User();
-       userObject.userID = usr;
-       userObject.userPassword = pass;
-       var s = encryptUserByServerKey(userObject);
-       return s;
+       userObject.id = usr;
+       userObject.pass = pass;
+       return loginToServer(userObject);
     }
 
 function GenerateRSAKeys() {
