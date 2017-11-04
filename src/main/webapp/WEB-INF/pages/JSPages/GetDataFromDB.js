@@ -388,8 +388,24 @@ function GetAllPatientReport()
 
 function GetPatientReportById(Row)
 {
-   var PatientId = Row.parentNode.parentNode.cells[3].innerText;
- window.open('http://localhost:8080/BEAT-PD/Admin/GET/PatientReportByID/'+PatientId, '_blank');
+    var PatientId = Row.parentNode.parentNode.cells[3].innerText;
+
+    $.ajax({
+        url: 'http://localhost:8080/BEAT-PD/Admin/GET/PatientReportByID/'+PatientId,
+        cache: false,
+        type: "GET",
+        async:false,
+        contentType: "application/json;charset=utf-8",
+        complete: function(response){
+            if(response.status!==200){
+                alert(response.statusText)
+            }
+            else{
+                var s = response;
+                window.open('http://localhost:8080/BEAT-PD/Admin/GET/PatientReportByID/'+PatientId, '_blank');
+            }
+        }
+    });
 
 }
 

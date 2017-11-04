@@ -123,9 +123,10 @@ public class PatientRecordModel {
         try {
             session = modelGenerics.getSessionFactory().openSession();
             Transaction transaction = session.beginTransaction();
-            List<PatientRecord> patientRecords = session.createQuery(format("select p from PATIENT_RECORD as p where p.patientID=%s",i_PatientID)).list();
+            List<PatientRecord> patientRecords = session.createQuery(format("select p from PATIENT_RECORD as p where p.patientID=%s", i_PatientID)).getResultList();
             transaction.commit();
             return patientRecords;
+
         } finally {
             if(session!=null)
                 session.close();
@@ -137,7 +138,7 @@ public class PatientRecordModel {
         xsl.createNewExcelReport(filePath,patientID);
     }
 
-    private class XSL{
+    private class XSL {
         private List<PatientRecord> patientRecordList;
         private Workbook workbook;
         private Sheet sheet;
@@ -145,18 +146,22 @@ public class PatientRecordModel {
         private int colNum = 0;
         private int firstDataLine;
 
-        private XSL(){}
-
-        private Boolean isRowNumberAlreadyCreated(int rowNumber){
-            return (sheet.getRow(rowNumber)==null);
+        private XSL() {
         }
 
-        private void createNewExcelReport(String filePath,Optional<String> patientID) {
+        private Boolean isRowNumberAlreadyCreated(int rowNumber) {
+            return (sheet.getRow(rowNumber) == null);
+        }
+
+        private void createNewExcelReport(String filePath, Optional<String> patientID) {
 
             try {
-               if(patientID.isPresent())
-                patientRecordList = PatientRecordModel.getPatientRecordModelInstance().getAllUpdatesByPatientID(patientID.get());
-               else
+               if(patientID.isPresent()) {
+                   String patientIDStr = patientID.get();
+                   patientRecordList =  PatientRecordModel.getPatientRecordModelInstance().getAllUpdatesByPatientID(patientIDStr);
+                   if(patientRecordList.isEmpty())
+                       throw new IllegalArgumentException(format("Error the following patient: %s has not updates in the system",patientIDStr));
+               }else
                  patientRecordList =  PatientRecordModel.getPatientRecordModelInstance().getAllPatientUpdates();
                 workbook = new HSSFWorkbook();
                 sheet = workbook.createSheet(CustomDate.getDateFormat().format(new Date()));
