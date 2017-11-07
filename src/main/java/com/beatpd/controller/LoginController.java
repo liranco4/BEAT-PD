@@ -106,17 +106,28 @@ public class LoginController {
 
     @RequestMapping(value = "/Patient/Login", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
-    public ResponseEntity loginPatient(@RequestBody Patient patient) {
-        try {
-            if (patientModel.checkCredentials(patient))
-                return ResponseEntity.ok("{success: patient logged-in}");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{error:not found}");
-        } catch (HibernateException e) {
-            LOGGER.log(Level.INFO, format("error in login: %s", e.getStackTrace().toString()));
+    public ResponseEntity<?> patientLogin(HttpServletRequest request, @RequestBody AuthEnc encryptedData) {
+        try{
+            PrivateKey privateKey = (PrivateKey) request.getSession().getAttribute("_private_key");
+            String decryptedMsg = RSAUtils.decrypt(encryptedData.i, privateKey);
+            LOGGER.log(Level.INFO,format("Decrypt data = {%s}",decryptedMsg));
+            ObjectMapper mapper = new ObjectMapper();
+            Patient patient = mapper.readValue(decryptedMsg, Patient.class);
+            try {
+                if (patientModel.checkCredentials(patient)) {
+                    return ResponseEntity.ok(format("{\"success\":\"%s\"}",RSAUtils.encryptAsString("OK",encryptedData.p)));
+                }
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("{error:not found}");
+            } catch (HibernateException e) {
+                LOGGER.log(Level.INFO, format("error in login: %s", e.getStackTrace().toString()));
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+            } catch (Exception e) {
+                LOGGER.log(Level.INFO, format("error in login: %s", e.getStackTrace().toString()));
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+            }
+        }catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException | IOException e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
-        } catch (Exception e) {
-            LOGGER.log(Level.INFO, format("error in login: %s", e.getStackTrace().toString()));
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
 }
