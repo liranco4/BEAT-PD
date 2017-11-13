@@ -140,7 +140,7 @@ $.ajax({
 
         var RowToDelete = rowId;
         var medicineToDelete = new Medicine();
-        medicineToDelete.medicineName = RowToDelete.parentNode.parentNode.cells[3].innerText;
+        medicineToDelete.medicineSerialNumber = RowToDelete.parentNode.parentNode.cells[2].innerText;
         var myJSON = JSON.stringify(medicineToDelete);
 
 $.ajax({

@@ -88,7 +88,7 @@ public class ModelGenerics {
             Transaction transaction = session.beginTransaction();
             session.delete(i_Object);
             transaction.commit();
-            LOGGER.log(Level.INFO, "update object to DB succeeded");
+            LOGGER.log(Level.INFO, "delete object to DB succeeded");
             return "{success}";
         } finally {
             if (session != null)
