@@ -26,6 +26,11 @@ public class UserModel extends ModelGenerics {
 
     public Boolean checkCredentials(User user) {
         User userFromDB = (User) modelGenerics.retrieveObjectFromDBbyID(User.class, user.getID());
-        return (userFromDB.getPass().equals(user.getPass()) && "Admin".equals(userFromDB.getRole()));
+        if(userFromDB.getPass().equals(user.getPass()) && "Admin".equals(userFromDB.getRole())){
+            userFromDB.setLastLogin(new Date());
+            modelGenerics.updateObjectToDB(userFromDB);
+            return true;
+        }
+        return false;
     }
 }
