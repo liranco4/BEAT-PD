@@ -43,7 +43,35 @@ public class AdminController {
         try {
            return ResponseEntity.ok(modelGenerics.addObjectToDB(user));
         }catch(HibernateException e) {     e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in addUser: %s", e.getStackTrace().toString()));
+            LOGGER.log(Level.INFO, format("error in add User: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Update/User", method = RequestMethod.PUT, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity updateUser(@RequestBody User user) {
+        try {
+            return ResponseEntity.ok(modelGenerics.updateObjectToDB(user));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in update User: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/Delete/User", method = RequestMethod.DELETE, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity deleteUser(@RequestBody User user) {
+        try {
+            return ResponseEntity.ok(modelGenerics.deleteObjectToDB(user));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in delete User: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
         }
         catch (Exception e) {     e.printStackTrace();
@@ -366,21 +394,6 @@ public class AdminController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
         }
     }
-
-    @RequestMapping(value = "/GET/User", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
-    @ResponseBody
-    public ResponseEntity getUserByID(String ID) {
-        try {
-            return ResponseEntity.ok(modelGenerics.retrieveObjectFromDBbyID(User.class,ID));
-        }catch(HibernateException e) {     e.printStackTrace();
-            LOGGER.log(Level.INFO, format("error in getUserByID: %s", e.getStackTrace().toString()));
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
-        }
-        catch (Exception e) {     e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
-        }
-    }
-
 
     @RequestMapping(value = "/Add/Patient", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     @ResponseBody
