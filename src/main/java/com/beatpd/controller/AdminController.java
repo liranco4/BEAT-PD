@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -70,6 +71,22 @@ public class AdminController {
     public ResponseEntity deleteUser(@RequestBody User user) {
         try {
             return ResponseEntity.ok(modelGenerics.deleteObjectToDB(user));
+        }catch(HibernateException e) {     e.printStackTrace();
+            LOGGER.log(Level.INFO, format("error in delete User: %s", e.getStackTrace().toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
+        }
+        catch (Exception e) {     e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(format("{error:%s}", e.getMessage()));
+        }
+    }
+
+    @RequestMapping(value = "/GET/AllUsers", method = RequestMethod.GET, produces = "application/json;charset=UTF-8", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity getAllAdmins() {
+        try {
+            Collection <User> users =  modelGenerics.findAllByClass(User.class);
+            users.forEach(user -> user.setPass(""));
+            return ResponseEntity.ok(format("{success: The following are all Users,users:%s}",getObjectListAsJsonList(users)));
         }catch(HibernateException e) {     e.printStackTrace();
             LOGGER.log(Level.INFO, format("error in delete User: %s", e.getStackTrace().toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(format("{error:%s}", e.getMessage()));
