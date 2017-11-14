@@ -408,6 +408,55 @@ function GetPatientReportById(Row)
     });
 
 }
+function AddNewAdminUsers()
+{
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/GET/AllUsers",
+            cache: false,
+           contentType: "application/json;charset=utf-8",
+            complete: function(data) {
+              //  alert('test');
+              var jsonString = data.responseText;
+               jsonStringList =jsonString.substring(44,jsonString.length - 1);
+               var json = JSON.stringify(eval(jsonStringList));
+               var mydata2 = JSON.parse(json);
+var txt = "";
+
+this.id = String;
+    this.name = String;
+    this.pass = String;
+    this.role = String;
+    this.lastLogin = String;
+
+              for(var i=0;i<mydata2.length;i++)
+              {
+                 if(mydata2[i].id)
+                 {
+                  txt += "<tr>"+
+                            "<td><input type='image' src='../resources/remove1.png' id='remove' alt='Delete' onclick = 'DeleteItem(this)'  style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='EditPatient' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                               "<td>"+mydata2[i].id+"</td>"+
+                              "<td>"+mydata2[i].name+"</td>"+
+                              "<td>"+mydata2[i].pass+"</td>"+
+                              "<td>"+mydata2[i].lastLogin+"</td>"+
+                              "<td>"+mydata2[i].role+"</td>"+
+                            "</td>"+
+                            "</tr>"
+                 }
+
+              }
+              if(txt != "")
+              {
+                        $("#tblAdminUser").append(txt);
+
+              }
+            }
+        });
+
+
+}
+
 
 ////////////////////////////////////////******************************//////////////////////////////////////////////////
 

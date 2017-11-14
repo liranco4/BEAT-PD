@@ -125,7 +125,7 @@ activeLogin.onclick = function() {
       }
     }
 
-
+var p_Token = "";
 function loginToServer(userObject){
     var publicKeyUrl = "http://localhost:8080/BEAT-PD/encryption-parameters";
     var encryptUrl = "http://localhost:8080/BEAT-PD/encryption-data";
@@ -184,7 +184,12 @@ function loginToServer(userObject){
                 var encryptedResponse = JSON.parse(result).success;
                 var response = clientEncrypt.decrypt(encryptedResponse);
                 if(response==="OK")
+                {
+                  p_Token = Math.random();
                     serverResult = true;
+                    localStorage.setItem('u&^u%i$d@L#o$c%a^l',p_Token);
+                    document.cookie = "IsLogedIn=1";
+                }
                 else {
                     serverResult = false;
                     alert("Error: malicious attack!!!");

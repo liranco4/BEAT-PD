@@ -216,6 +216,7 @@
                 <div><a href="#mood"  id="MoodTab" onclick="UpdateMoodUrl()">מצב רוח</a></div>
                 <div><a href="#link" id="LinksTab" onclick="UpdateLinkUrl()">לינקים</a></div>
                 <div><a href="#patient" id="PatientTab" onclick="UpdatePatientUrl()">מטופלים</a></div>
+                <div><a href="#AdminUsers" id="AdminUsersTab" onclick="UpdateAdminUsersUrl()">מנהל מערכת</a></div>
             </div>
             <section id="tab-group" class="tabgroup" style="overflow-y: scroll;height:600px;" onblur="AddNewActivity()">
                 <div id="activity" dir="rtl">
@@ -329,7 +330,7 @@
 
                 <div id="patient" dir="rtl">
                     <input type='image' src='../resources/information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
-                    <h2>מידע על מטופלים</h2>
+                    <h2>מטופלים</h2>
                     <table style="width:5%" id="tblPatients">
                         <tr>
                             <td style="width:50px"><button type="button" id="btngetAllPatient" class='button' onclick="GetAllPatientReport()">הורד דוח כללי</button></td>
@@ -351,6 +352,30 @@
                         </tr>
                     </table>
                 </div>
+
+                <div id="AdminUsers" dir="rtl">
+                    <input type='image' src='../resources/information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <h2>מנהל מערכת</h2>
+                    <table style="width:5%" id="tblAdminUsers">
+                        <tr>
+                            <td style="width:50px"><button type="button" id="AddNewAdminUser"  onclick="AddNewItem()" class='button' >הוסף מנהל חדש</button></td>
+                            <td style="width:50px;border:0px"><button type="button" id="btnSaveAdminUserFromEdit"onclick="UpdateDataToDB(this)" class='button' style="display: none; background: #3399ff" >שמור שינויים</button></td>
+                            <td style="width:50px;border:0px"><button type="button" id="btnCancelAdminUserFromEdit" onclick="CancelEditAdminUser()" class='button' style="display: none; background: #3399ff" >ביטול</button></td>
+                        </tr>
+                    </table>
+                    <table id ="tblAdminUser" dir="rtl" align="right">
+                        <tr>
+                            <th style="text-align:right;width:20px">הסר</th>
+                            <th style="text-align:right;width:20px">ערוך</th>
+                            <th style="text-align:right;width:20px">ID</th>
+                            <th style="text-align:right">שם מנהל</th>
+                            <th style="text-align:right">סיסמא</th>
+                            <th style="text-align:right">כניסה אחרונה</th>
+                            <th style="text-align:right">Role</th>
+                        </tr>
+                    </table>
+                </div>
+
             </section>
         </div>
     </section>
@@ -396,8 +421,6 @@ $('.tabs a').click(function(e){
 // MainPage OnLoad
 window.onload = function() {
 
-        var thisurl =window.location.href;
-        Token = thisurl.substring(thisurl.indexOf('?')+ 1 , thisurl.lenght);
 
     if(CheckTokenValidation())
     {
@@ -481,6 +504,16 @@ var TabToGoBack = old_url.substring(old_url.indexOf('#'), old_url.lenght );
         $(tabgroup).children('div').hide();
         $(target).show();
      break;
+      case '#AdminUsers':
+            var $this = $("#AdminUsersTab"),
+        tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
+        others = $this.closest('div').siblings().children('a'),
+        target = $this.attr('href');
+        others.parent().removeClass('active');
+        $this.parent().addClass('active');
+        $(tabgroup).children('div').hide();
+        $(target).show();
+     break;
    }
 
   $('.tabs' + activeTab ).show().siblings().hide();
@@ -496,6 +529,7 @@ AddLinks();
 AddPatient();
 AddSleepQuality();
 AddSleepDisorders();
+AddNewAdminUsers();
 
 //Fill charts in right window
 ViewProjectChart();
@@ -505,7 +539,7 @@ ViewTeamChart();
 
 else
 {
-   alert('שם משתמש או סיסמא לא תקינים');
+   alert('נא לבצע התחברות למערכת');
     location.href  = 'LoginPage.html';
 }
 
@@ -513,9 +547,18 @@ else
 
 function CheckTokenValidation()
 {
-//check if Token is true
-return 1;
-
+var result = 0;
+        var thisurl =window.location.href;
+        Token = localStorage.getItem("u&^u%i$d@L#o$c%a^l");
+        TokenFromCurrentUrl = thisurl.substring(thisurl.indexOf('@')+ 1 , thisurl.lenght);
+//if(TokenFromCurrentUrl == Token)
+//var session = Session["isUserLoggedIn"];
+//var arr[] = document.cookie;
+//if(Token == TokenFromCurrentUrl)
+//{
+  //result = 1;
+//}
+   return 1;
 }
 
 // Add sub menu --> Modal PopUp Button event
@@ -647,6 +690,14 @@ function UpdatePatientUrl()
  var new_url = old_url.substring(0, old_url.indexOf('#'));
  history.pushState(null, '', new_url + '#patient');
 }
+function UpdateAdminUsersUrl()
+{
+ var old_url = window.location.href;
+ var new_url = old_url.substring(0, old_url.indexOf('#'));
+ history.pushState(null, '', new_url + '#AdminUsers');
+}
+
+
 function CancelEditPatient()
 {
   location.reload();
