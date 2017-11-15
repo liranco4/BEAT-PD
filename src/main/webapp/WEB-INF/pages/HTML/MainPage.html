@@ -121,6 +121,38 @@
     </div>
 </div>
 
+<!--Modal For AdminUsers-->
+<div id="AdminUsersModal" class="modalUpdateAdminUsers">
+    <!-- Modal content -->
+    <div class="modalUpdateAdminUsers-content" dir="rtl">
+        <div class="modalUpdateAdminUsers-header">
+            <span class="closemodalUpdateAdminUsers">&times;</span>
+            <center><h2 id="lblHeadAdminUsers">מנהל מערכת</h2></center>
+        </div>
+        <div class="modalUpdateAdminUsers-body">
+            <div>
+
+                    <div>
+                    <label for="txtAdminUserName">שם מנהל:</label>
+                    <input type="text" id="txtAdminUserName" name="mname"  style="width:80px">
+                        <label for="txtAdminUserId">ID:</label>
+                        <input type="text" id="txtAdminUserId" name="mname"  style="width:80px">
+                    </div>
+
+                    <div id="divUpdateAdminUserPass">
+                    <label for="txtAdminUserPass">סיסמא:</label>
+                    <input type="text" id="txtAdminUserPass" name="mpass"  style="width:80px">
+                    </div>
+
+            </div>
+
+        </div>
+        <div class="modalUpdateAdminUsers-footer" dir="ltr">
+            <div><button type="button" onclick="AddNewAdminUserToDB()" id="btnAddNewAdminUser" class="button" >הוסף</button></div>
+            <div><button type="button" id="btnUpdateAdminUser" class="button" onclick="UpdateDataToDB()" style="display:none">עדכן</button></div>
+        </div>
+    </div>
+</div>
 
 <div id="myUpdateModal" class="modalUpdate">
     <div class="modalUpdate-content" dir="rtl">
@@ -354,7 +386,7 @@
                 </div>
 
                 <div id="AdminUsers" dir="rtl">
-                    <input type='image' src='../resources/information3.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
+                    <input type='image' src='../resources/Admin.png' style='width:60px;height:60px;float:left;padding-bottom:0px'>
                     <h2>מנהל מערכת</h2>
                     <table style="width:5%" id="tblAdminUsers">
                         <tr>
@@ -369,7 +401,6 @@
                             <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right;width:20px">ID</th>
                             <th style="text-align:right">שם מנהל</th>
-                            <th style="text-align:right">סיסמא</th>
                             <th style="text-align:right">כניסה אחרונה</th>
                             <th style="text-align:right">Role</th>
                         </tr>
@@ -547,10 +578,10 @@ else
 
 function CheckTokenValidation()
 {
-var result = 0;
-        var thisurl =window.location.href;
-        Token = localStorage.getItem("u&^u%i$d@L#o$c%a^l");
-        TokenFromCurrentUrl = thisurl.substring(thisurl.indexOf('@')+ 1 , thisurl.lenght);
+//var result = 0;
+      //  var thisurl =window.location.href;
+      //  Token = localStorage.getItem("u&^u%i$d@L#o$c%a^l");
+     //   TokenFromCurrentUrl = thisurl.substring(thisurl.indexOf('@')+ 1 , thisurl.lenght);
 //if(TokenFromCurrentUrl == Token)
 //var session = Session["isUserLoggedIn"];
 //var arr[] = document.cookie;
@@ -594,6 +625,7 @@ function DeleteSelectedSubMenuInUpdateModal(){
 
 // Get the modal
 var modal = document.getElementById('myModal');
+var AdminUsersModal = document.getElementById('AdminUsersModal');
 var MedicineModal = document.getElementById('MedicineModal');
 var UpdateModal = document.getElementById('myUpdateModal');
 var UpdateMedicineModal = document.getElementById('MedicineUpdateModal');
@@ -601,6 +633,7 @@ var UpdateMedicineModal = document.getElementById('MedicineUpdateModal');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 var spanMedicine = document.getElementsByClassName("closeMedicine")[0];
+var spanAdminUsers = document.getElementsByClassName("closemodalUpdateAdminUsers")[0];
 var spanUpdate = document.getElementsByClassName("closeUpdate")[0];
 var spanUpdateMedicine = document.getElementsByClassName("closeModalUpdateMedicine")[0];
 
@@ -617,6 +650,9 @@ window.onclick = function(event) {
         }
     if (event.target == UpdateMedicineModal) {
         UpdateMedicineModal.style.display = "none";
+    }
+     if (event.target == AdminUsersModal) {
+        AdminUsersModal.style.display = "none";
     }
 
 }
@@ -641,6 +677,12 @@ spanUpdate.onclick = function() {
 spanUpdateMedicine.onclick = function() {
     UpdateMedicineModal.style.display = "none";
 }
+
+// When the user clicks on <spanAdminUsers> (x), close the modal
+spanAdminUsers.onclick = function() {
+    spanAdminUsers.style.display = "none";
+}
+
 
 function UpdateActivityUrl()
 {

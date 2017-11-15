@@ -264,5 +264,42 @@ $.ajax({
 
   }
 
+
+  if($("#AdminUsersTab")[0].parentElement.classList[0] == "active")
+  {
+    $("#lblHead").text('מנהל מערכת');
+    var txt;
+     if (confirm("Are you sure you want to delete?") == true) {
+         // OK
+
+         var RowToDelete = rowId;
+         var userToDelete = new User();
+         userToDelete.id = RowToDelete.parentNode.parentNode.cells[2].innerText;
+           userToDelete.name = RowToDelete.parentNode.parentNode.cells[3].innerText;
+             userToDelete.lastLogin = RowToDelete.parentNode.parentNode.cells[4].innerText;
+                   userToDelete.role = "Admin";
+
+         var myJSON = JSON.stringify(userToDelete);
+
+ $.ajax({
+             url: "http://localhost:8080/BEAT-PD/Admin/Delete/User",
+             cache: false,
+             type: "DELETE",
+             data: myJSON,
+             contentType: "application/json;charset=utf-8",
+             complete: function() {
+       }
+         });
+
+         location.reload();
+
+
+     } else {
+         //Cancel
+         //DoNothing
+     }
+
+  }
+
 }
 ///////////////////////////////*************************************//////////////////////////////////////////////////

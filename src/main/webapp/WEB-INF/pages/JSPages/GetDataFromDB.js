@@ -423,11 +423,6 @@ $.ajax({
                var mydata2 = JSON.parse(json);
 var txt = "";
 
-this.id = String;
-    this.name = String;
-    this.pass = String;
-    this.role = String;
-    this.lastLogin = String;
 
               for(var i=0;i<mydata2.length;i++)
               {
@@ -435,10 +430,9 @@ this.id = String;
                  {
                   txt += "<tr>"+
                             "<td><input type='image' src='../resources/remove1.png' id='remove' alt='Delete' onclick = 'DeleteItem(this)'  style='width:20px;hight:20px'></td>"+
-                            "<td><input type='image' src='../resources/Edit1.ico' alt='EditPatient' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
+                            "<td><input type='image' src='../resources/Edit1.ico' alt='EditAdminUser' onclick = 'PrepareUpdateModals(this)' style='width:20px;hight:20px'></td>"+
                                "<td>"+mydata2[i].id+"</td>"+
                               "<td>"+mydata2[i].name+"</td>"+
-                              "<td>"+mydata2[i].pass+"</td>"+
                               "<td>"+mydata2[i].lastLogin+"</td>"+
                               "<td>"+mydata2[i].role+"</td>"+
                             "</td>"+

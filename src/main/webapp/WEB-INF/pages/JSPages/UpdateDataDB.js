@@ -48,6 +48,8 @@ function PrepareUpdateModals(rowId)
     $("#lblUpdateHead").text("עדכן לינקים");
     PrepareUpdateModal(rowId);
  }
+
+
   if($("#PatientTab")[0].parentElement.classList[0] == "active")
  {
  document.getElementById("txtIDPatient").disabled = true;
@@ -70,6 +72,22 @@ function PrepareUpdateModals(rowId)
 
     modal.style.display = "block";
  }
+
+ if($("#AdminUsersTab")[0].parentElement.classList[0] == "active")
+  {
+ var rowCells = rowId.parentNode.parentNode.cells;
+  $("#txtAdminUserId").val(rowCells[2].innerText);
+    $("#txtAdminUserName").val(rowCells[3].innerText);
+
+
+
+    $("#lblHeadAdminUsers").text('עדכון מנהל');
+    document.getElementById("txtAdminUserId").disabled = true;
+    document.getElementById("btnAddNewAdminUser").style.display='none';
+    document.getElementById("btnUpdateAdminUser").style.display='block';
+    AdminUsersModal.style.display = "block";
+
+  }
 }
 
 function UpdateDataToDB(rowId)
@@ -113,6 +131,11 @@ function UpdateDataToDB(rowId)
    if($("#PatientTab")[0].parentElement.classList[0] == "active")
  {
    UpdatePatients();
+ }
+
+ if($("#AdminUsersTab")[0].parentElement.classList[0] == "active")
+ {
+   UpdateAdminUser();
  }
 
 }
@@ -286,14 +309,55 @@ function UpdatePatients()
    PatientObject.patientAge = $("#txtAgePatient").val();
    PatientObject.patientStatus = $("#txtStatusPatient").val();
    var pass = $("#txtPassPatient").val();
-   if(pass!==""){
+   if(pass != ""){
        PatientObject.patientPass = pass;
+   }
+   else
+   {
+    PatientObject.patientPass = PatientObject.patientID;
    }
 
 var myJSON = JSON.stringify(PatientObject);
 
 $.ajax({
             url: "http://localhost:8080/BEAT-PD/Admin/Update/Patient",
+            cache: false,
+            type: "PUT",
+            data: myJSON,
+            async:false,
+            contentType: "application/json;charset=utf-8",
+            complete: function(response){
+                if(response.status!==200){
+                    alert('Error from server:' + response.status)
+                }
+            }
+                   });
+           location.reload();
+
+}
+
+function UpdateAdminUser()
+{
+
+ var user = new User();
+  user.id = $("#txtAdminUserId").val();
+     user.name = $("#txtAdminUserName").val();
+     var pass = $("#txtAdminUserPass").val();
+     user.role = "Admin";
+
+
+   if(pass != ""){
+       user.pass = pass;
+   }
+   else
+   {
+     user.pass =  user.id;
+   }
+
+var myJSON = JSON.stringify(user);
+
+$.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Update/User",
             cache: false,
             type: "PUT",
             data: myJSON,

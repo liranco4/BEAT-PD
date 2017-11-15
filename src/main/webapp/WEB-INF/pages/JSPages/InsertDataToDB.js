@@ -326,7 +326,41 @@ function InsertNewPatientToDB(){
         }
     });
 
+var AdminUsersModal = document.getElementById('AdminUsersModal');
+AdminUsersModal.style.display = "none";
     location.reload();
+}
+
+function AddNewAdminUserToDB()
+{
+
+   var user = new User();
+    user.id = $("#txtAdminUserId").val();
+    user.name = $("#txtAdminUserName").val();
+    user.pass = $("#txtAdminUserId").val();
+    user.role = "Admin";
+
+
+    var jsonToSend = JSON.stringify(user);
+    $.ajax({
+            url: "http://localhost:8080/BEAT-PD/Admin/Add/User",
+            cache: false,
+            type: "POST",
+            data: jsonToSend,
+            async:false,
+            contentType: "application/json;charset=utf-8",
+            complete: function(response){
+            if(response.status!==200){
+                alert('Error from server:' + response.status)
+            }
+        }
+    });
+
+    location.reload();
+
+
+
+
 }
 
 //////////////////////////////////////////////*******************************//////////////////////////////////////////
@@ -450,6 +484,19 @@ document.getElementById("txtIDPatient").disabled = false;
  document.getElementById("divForLinksUrl").style.display='none';
  modal.style.display = "block";
  }
+
+ if($("#AdminUsersTab")[0].parentElement.classList[0] == "active")
+  {
+   $("#txtAdminUserId").val("");
+   $("#txtAdminUserName").val("");
+
+      $("#lblHeadAdminUsers").text('הוספת מנהל חדש');
+      document.getElementById("txtAdminUserId").disabled = false;
+      document.getElementById("btnAddNewAdminUser").style.display='block';
+      document.getElementById("btnUpdateAdminUser").style.display='none';
+      document.getElementById("divUpdateAdminUserPass").style.display='none';
+      AdminUsersModal.style.display = "block";
+  }
 
 
 }
