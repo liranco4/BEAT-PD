@@ -135,7 +135,7 @@
                     <div>
                     <label for="txtAdminUserName">שם מנהל:</label>
                     <input type="text" id="txtAdminUserName" name="mname"  style="width:80px">
-                        <label for="txtAdminUserId">ID:</label>
+                        <label for="txtAdminUserId">תעודת זהות:</label>
                         <input type="text" id="txtAdminUserId" name="mname"  style="width:80px">
                     </div>
 
@@ -376,7 +376,7 @@
                             <th style="text-align:right;width:20px">הסר</th>
                             <th style="text-align:right;width:20px">ערוך</th>
                             <th style="text-align:right;width:20px">דוח</th>
-                            <th style="text-align:right;width:20px">ID</th>
+                            <th style="text-align:right;width:20px">תעודת זהות</th>
                             <th style="text-align:right">שם פרטי</th>
                             <th style="text-align:right">שם משפחה</th>
                             <th style="text-align:right">גיל</th>
@@ -680,7 +680,7 @@ spanUpdateMedicine.onclick = function() {
 
 // When the user clicks on <spanAdminUsers> (x), close the modal
 spanAdminUsers.onclick = function() {
-    spanAdminUsers.style.display = "none";
+    AdminUsersModal.style.display = "none";
 }
 
 
