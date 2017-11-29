@@ -360,41 +360,41 @@ public class PatientRecordModel {
                 rowItr = firstDataLine;
                 Iterator<? extends UpdateDM> dmIterator = dmList.iterator();
                 while(rowItr<rowNum && dmIterator.hasNext()){
-                    row = sheet.getRow(rowItr++);
                     UpdateDM updateDm = dmIterator.next();
-                    if (updateDm.getFirstDetail() instanceof String) {
-                        row.createCell(firstCol).setCellValue((String)updateDm.getFirstDetail());
-                    }
-                    else if(updateDm.getFirstDetail() instanceof Long){
-                        row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
-                    }
-                    if(updateDm instanceof UpdateDMProxy){
-                        UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
-                        if (updateDMProxy.getSecondDetail() instanceof String) {
-                            row.createCell(secondCol).setCellValue((String)updateDMProxy.getSecondDetail());
+                    if(updateDm!=null) {
+                        row = sheet.getRow(rowItr++);
+                        if (updateDm.getFirstDetail() instanceof String) {
+                            row.createCell(firstCol).setCellValue((String) updateDm.getFirstDetail());
+                        } else if (updateDm.getFirstDetail() instanceof Long) {
+                            row.createCell(firstCol).setCellValue((Long) updateDm.getFirstDetail());
                         }
-                        else if(updateDMProxy.getSecondDetail() instanceof Long){
-                            row.createCell(secondCol).setCellValue((Long)updateDMProxy.getSecondDetail());
+                        if (updateDm instanceof UpdateDMProxy) {
+                            UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
+                            if (updateDMProxy.getSecondDetail() instanceof String) {
+                                row.createCell(secondCol).setCellValue((String) updateDMProxy.getSecondDetail());
+                            } else if (updateDMProxy.getSecondDetail() instanceof Long) {
+                                row.createCell(secondCol).setCellValue((Long) updateDMProxy.getSecondDetail());
+                            }
                         }
                     }
-
                 }
                 while(dmIterator.hasNext()){
-                    row = sheet.createRow(rowNum++);
+
                     UpdateDM updateDm = dmIterator.next();
-                    if (updateDm.getFirstDetail() instanceof String) {
-                        row.createCell(firstCol).setCellValue((String)updateDm.getFirstDetail());
-                    }
-                    else if(updateDm.getFirstDetail() instanceof Long){
-                        row.createCell(firstCol).setCellValue((Long)updateDm.getFirstDetail());
-                    }
-                    if(updateDm instanceof UpdateDMProxy){
-                        UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
-                        if (updateDMProxy.getSecondDetail() instanceof String) {
-                            row.createCell(secondCol).setCellValue((String)updateDMProxy.getSecondDetail());
+                    if(updateDm!=null) {
+                        row = sheet.createRow(rowNum++);
+                        if (updateDm.getFirstDetail() instanceof String) {
+                            row.createCell(firstCol).setCellValue((String) updateDm.getFirstDetail());
+                        } else if (updateDm.getFirstDetail() instanceof Long) {
+                            row.createCell(firstCol).setCellValue((Long) updateDm.getFirstDetail());
                         }
-                        else if(updateDMProxy.getSecondDetail() instanceof Long){
-                            row.createCell(secondCol).setCellValue((Long)updateDMProxy.getSecondDetail());
+                        if (updateDm instanceof UpdateDMProxy) {
+                            UpdateDMProxy updateDMProxy = ((UpdateDMProxy) updateDm);
+                            if (updateDMProxy.getSecondDetail() instanceof String) {
+                                row.createCell(secondCol).setCellValue((String) updateDMProxy.getSecondDetail());
+                            } else if (updateDMProxy.getSecondDetail() instanceof Long) {
+                                row.createCell(secondCol).setCellValue((Long) updateDMProxy.getSecondDetail());
+                            }
                         }
                     }
 
