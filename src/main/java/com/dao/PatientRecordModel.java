@@ -176,12 +176,13 @@ public class PatientRecordModel {
                     createAndInsertDmCell(p.getListOfActivityUpdate());
                     createAndInsertDmCell(p.getListOfHabitUpdate());
                     createAndInsertDmCell(p.getListOfMedicineUpdate());
-                    createAndInsertDmCell(Collections.singletonList(p.getSleepConditionUpdate()));
+                    SleepConditionUpdate sleepConditionUpdate = p.getSleepConditionUpdate();
+                    if(sleepConditionUpdate != null)
+                        createAndInsertDmCell(Collections.singletonList(sleepConditionUpdate));
                     createAndInsertDmCell(p.getSleepDisorderUpdate());
-
-                    Row row = sheet.getRow(rowNum-1);
+                    Row row = sheet.createRow(rowNum++);
                     row.setRowStyle(underlineStyle);
-                    row.getCell(row.getLastCellNum()-1).setCellStyle(underlineStyle);
+                    //row.getCell(row.getLastCellNum()-1).setCellStyle(underlineStyle);
 
                     firstDataLine = rowNum;
                 });
@@ -206,7 +207,7 @@ public class PatientRecordModel {
         }
 
         private void createHeadLines(){
-            int colAmount = 15;
+            int colAmount = 12;
             int rowAmount = 2;
             Row row;
             CellStyle style;
@@ -220,6 +221,8 @@ public class PatientRecordModel {
             style.setAlignment(HorizontalAlignment.CENTER);
             // Setting font to style
             style.setFont(font);
+            style.setFillBackgroundColor(IndexedColors.AQUA.getIndex());
+            style.setFillPattern(FillPatternType.BIG_SPOTS);
 
 
             while(rowNum < rowAmount){
@@ -361,7 +364,7 @@ public class PatientRecordModel {
                 Iterator<? extends UpdateDM> dmIterator = dmList.iterator();
                 while(rowItr<rowNum && dmIterator.hasNext()){
                     UpdateDM updateDm = dmIterator.next();
-                    if(updateDm!=null) {
+                    //if(updateDm!=null) {
                         row = sheet.getRow(rowItr++);
                         if (updateDm.getFirstDetail() instanceof String) {
                             row.createCell(firstCol).setCellValue((String) updateDm.getFirstDetail());
@@ -376,12 +379,12 @@ public class PatientRecordModel {
                                 row.createCell(secondCol).setCellValue((Long) updateDMProxy.getSecondDetail());
                             }
                         }
-                    }
+                    //}
                 }
                 while(dmIterator.hasNext()){
 
                     UpdateDM updateDm = dmIterator.next();
-                    if(updateDm!=null) {
+                    //if(updateDm!=null) {
                         row = sheet.createRow(rowNum++);
                         if (updateDm.getFirstDetail() instanceof String) {
                             row.createCell(firstCol).setCellValue((String) updateDm.getFirstDetail());
@@ -396,7 +399,7 @@ public class PatientRecordModel {
                                 row.createCell(secondCol).setCellValue((Long) updateDMProxy.getSecondDetail());
                             }
                         }
-                    }
+                    //}
 
                 }
             }
