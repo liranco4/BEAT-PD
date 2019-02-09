@@ -1,6 +1,6 @@
 
 //////////////////////////////////***********Insert New Item To Data-Base***********////////////////////////////////////////
-
+var BaseURL = "http://localhost:8080/BEAT-PD/Admin/Add";
 function AddNewItemsToDB()
 {
 
@@ -72,7 +72,7 @@ ac.subMenus = sm;
 var myJSON = JSON.stringify(ac);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Activity",
+            url: BaseURL + "/Activity",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -128,7 +128,7 @@ var myJSON = JSON.stringify(ac);
 var mydata2 = JSON.parse(myJSON);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Habit",
+            url: BaseURL + "/Habit",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -163,7 +163,7 @@ function AddNewMedicineToDB()
 var myJSON = JSON.stringify(medicineObject);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Medicine",
+            url: BaseURL + "/Medicine",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -193,7 +193,7 @@ function InsertNewSleepQualityToDB()
 var myJSON = JSON.stringify(SleepQualityObject);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/SleepQuality",
+            url: BaseURL + "/SleepQuality",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -222,7 +222,7 @@ function InsertNewSleepDisorderToDB()
    var myJSON = JSON.stringify(SleepDisorderObject);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/SleepDisorder",
+            url: BaseURL + "/SleepDisorder",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -251,7 +251,7 @@ function InsertMoodToDB()
    var myJSON = JSON.stringify(MoodConditionObject);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/MoodCondition",
+            url: BaseURL + "/MoodCondition",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -282,7 +282,7 @@ function insertNewLinkToDB()
 
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Link",
+            url: BaseURL + "/Link",
             cache: false,
             type: "POST",
             data: myJSON,
@@ -313,7 +313,7 @@ function InsertNewPatientToDB(){
 
     var jsonToSend = JSON.stringify(patient);
     $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/Patient",
+            url: BaseURL + "/Patient",
             cache: false,
             type: "POST",
             data: jsonToSend,
@@ -343,7 +343,7 @@ function AddNewAdminUserToDB()
 
     var jsonToSend = JSON.stringify(user);
     $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Add/User",
+            url: BaseURL + "/User",
             cache: false,
             type: "POST",
             data: jsonToSend,

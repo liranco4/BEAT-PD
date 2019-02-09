@@ -1,6 +1,6 @@
 
 /////////////////////////////****************Get All Tables From Data-Base*************/////////////////////////////////
-
+var BaseURL = "http://localhost:8080/BEAT-PD/Admin/GET";
 function AddNewActivity()
 {
 
@@ -412,7 +412,7 @@ function GetAllAdminUsers()
 {
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/GET/AllUsers",
+            url: BaseURL + "/AllUsers",
             cache: false,
             type:"GET",
            contentType: "application/json;charset=utf-8",

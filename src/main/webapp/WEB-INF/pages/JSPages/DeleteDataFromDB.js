@@ -1,6 +1,6 @@
 
 //////////////////////////////////////*************DELETE Item From Data-Base************///////////////////////////////
-
+var BaseURL = "http://localhost:8080/BEAT-PD/Admin/Delete";
 
 function DeleteSleepDisorderItem(rowId)
 {
@@ -13,7 +13,7 @@ function DeleteSleepDisorderItem(rowId)
         var myJSON = JSON.stringify(sdToDelete);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/SleepDisorder",
+            url: BaseURL+"/SleepDisorder",
             cache: false,
             type: "DELETE",
             data: myJSON,
@@ -44,7 +44,7 @@ function DeleteSleepQualityItem(rowId)
         var myJSON = JSON.stringify(sqToDelete);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/SleepQuality",
+            url: BaseURL+"/SleepQuality",
             cache: false,
             type: "DELETE",
             data: myJSON,
@@ -81,7 +81,7 @@ function DeleteItem(rowId)
         var myJSON = JSON.stringify(acToDelete);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Activity",
+            url: BaseURL+"/Activity",
             cache: false,
             type: "DELETE",
             data: myJSON,
@@ -112,7 +112,7 @@ $.ajax({
         var myJSON = JSON.stringify(haToDelete);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Habit",
+            url: BaseURL+"/Habit",
             cache: false,
             type: "DELETE",
             data: myJSON,
@@ -144,7 +144,7 @@ $.ajax({
         var myJSON = JSON.stringify(medicineToDelete);
 
 $.ajax({
-            url: " http://localhost:8080/BEAT-PD/Admin/Delete/Medicine",
+            url: " BaseURL"+"/Medicine",
             cache: false,
             type: "DELETE",
             data: myJSON,
@@ -173,17 +173,18 @@ $.ajax({
 
         var RowToDelete = rowId;
         var mcToDelete = new MoodCondition();
-        mcToDelete.moodConditionName = RowToDelete.parentNode.parentNode.cells[2].innerText;
+        mcToDelete.moodConditionName = RowToDelete.parentNode.parentNode.cells[1].innerText;
         var myJSON = JSON.stringify(mcToDelete);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/MoodCondition",
+            url: BaseURL+"/MoodCondition",
             cache: false,
             type: "DELETE",
             data: myJSON,
             contentType: "application/json;charset=utf-8",
-            complete: function() {
-      }
+            complete: function(data) {
+                if(data.status != 200 ) alert('Error in getting data from DB:' + data);
+            }
         });
 
         location.reload();
@@ -209,7 +210,7 @@ $.ajax({
         var myJSON = JSON.stringify(lnkToDelete);
 
 $.ajax({
-            url: "http://localhost:8080/BEAT-PD/Admin/Delete/Link",
+            url: BaseURL+"/Link",
             cache: false,
             type: "DELETE",
             data: myJSON,
@@ -245,7 +246,7 @@ $.ajax({
          var myJSON = JSON.stringify(patientToDelete);
 
  $.ajax({
-             url: "http://localhost:8080/BEAT-PD/Admin/Delete/Patient",
+             url: BaseURL+"/Patient",
              cache: false,
              type: "DELETE",
              data: myJSON,
@@ -282,7 +283,7 @@ $.ajax({
          var myJSON = JSON.stringify(userToDelete);
 
  $.ajax({
-             url: "http://localhost:8080/BEAT-PD/Admin/Delete/User",
+             url: BaseURL+"/User",
              cache: false,
              type: "DELETE",
              data: myJSON,
