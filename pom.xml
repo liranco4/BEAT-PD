@@ -178,7 +178,6 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>9.4.14.v20181114</version>
 				<configuration>
-                    <jettyXml>src/main/contextXml/jetty.xml,src/main/contextXml/jetty-http.xml,src/main/contextXml/jetty-ssl.xml,src/main/contextXml/jetty-https.xml</jettyXml>
 				<scanIntervalSeconds>10</scanIntervalSeconds>
 				<webApp>
 					<contextPath></contextPath>
